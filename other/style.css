@@ -724,7 +724,7 @@ footer .fcontent .fnav ul li a:hover{
         position: absolute;
     }
     .afoto img{
-        position: relative;
+        position: absolute;
         z-index: 1;
         top: -125px;
         left: 10%;
