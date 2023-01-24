@@ -722,15 +722,13 @@ footer .fcontent .fnav ul li a:hover{
 
     .afoto{
         position: absolute;
+        margin-left: 25px;
     }
     .afoto img{
         position: absolute;
         z-index: 1;
         top: -125px;
-        right: 0;
         transform: scale(0.35);
-        
-
     }
     .atext{
         width: 78%;
