@@ -727,7 +727,6 @@ footer .fcontent .fnav ul li a:hover{
         position: absolute;
         z-index: 1;
         top: -125px;
-        left: 10%;
         right: 0;
         transform: scale(0.35);
         
