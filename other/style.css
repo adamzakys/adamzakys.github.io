@@ -777,19 +777,25 @@ footer .fcontent .fnav ul li a:hover{
         position: relative;
         z-index: 2;
     }
+    .atext h3 {
+        color: rgb(69, 69, 69);
+    }
     .atext h2,
     .porto1 h2,
     .botwrap h2{
         font-size: var(--h2-font-size);
     }
-    .atext h3,
+    
     .hero h3{
         font-size: var(--h3-font-size);
         width: 90%;
     }
     .atext p {
+        margin-top: 30px;
         font-size: var(--normal-font-size);
-        line-height: 17px;
+        font-family: 'Raleway', sans-serif;
+        font-weight: 600;
+        color: #333;
     }
     .porto1 h3,
     .porto2 h3 {
