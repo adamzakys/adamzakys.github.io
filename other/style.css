@@ -10,6 +10,19 @@
     from {opacity: 0}
     to {opacity: 1}}
  
+
+:root{
+    --big-font-size: 2rem;
+    --h1-font-size: 1.5rem;
+    --h2-font-size: 1.25rem;
+    --h3-font-size: 1.125rem;
+    --normal-font-size: 0.938rem;
+    --small-font-size: 0.813rem;
+    --smaller-font-size: 0.75rem;
+}
+    
+
+
 * {
     margin: 0;
     scroll-behavior: smooth;
@@ -46,7 +59,7 @@ header{
     width: 100%;
     position: fixed;
     z-index: 3;
-    height: 80px;
+    height: 65px;
 
 }
 
@@ -119,7 +132,7 @@ nav ul li a:hover{
     width: 28px;
     height: 3px;
     transition: all 1s;
-    background-color: #333;
+    background-color: #252525;
     border-radius: 3px;
 }
 
@@ -191,13 +204,15 @@ nav ul li a:hover{
 }
 
 .texth h3 {
-    color: #333;
+    color: #252525;
+    font-size: var(--h3-font-size);
 }
 .texth h1{
+    font-size: var(--big-font-size);
     width: 390px;
     margin-top: 10px;
     font-weight: 600;
-    color: #333;
+    color: #252525;
     line-height: 40px;
     font-family: 'Poppins', sans-serif;
     position: relative;
@@ -207,6 +222,7 @@ nav ul li a:hover{
     width: 520px;
     font-family: 'Raleway', sans-serif;
     font-weight: 600;
+    font-size: var(--normal-font-size);
 }
 .texth ul{
     display: flex;
@@ -265,6 +281,7 @@ nav ul li a:hover{
     
 }
 .atext h2{
+    font-size: var(--h2-font-size);
     font-weight: bold;
     font-family: 'Poppins', sans-serif;
     color: #1687A7;
@@ -272,15 +289,16 @@ nav ul li a:hover{
 .atext h3{
     font-weight: bold;
     font-family: 'Poppins', sans-serif;
-    font-size: 21px;
+    font-size: var(--h3-font-size);
     margin-top: 20px;
-    color: #333;
+    color: #252525;
 }
 .atext P{
     margin-top: 10px;
     line-height: 27px;
-    font-size: 19px;
-    color: #333;
+    font-family: 'Poppins', sans-serif;
+    font-size: var(--normal-font-size);
+    color: #252525;
 }
 
 
@@ -299,17 +317,18 @@ nav ul li a:hover{
 .porto1 {
     text-align: center;
     padding: 50px 0px;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid #252525;
 }
 .porto h2{
     font-weight: bold;
     font-family: 'Poppins', sans-serif;
     color: #1687A7;
+    font-size: var(--h2-font-size);
 }
 .porto h3{
     font-weight: bold;
     font-family: 'Poppins', sans-serif;
-    font-size: 21px;
+    font-size: var(--h3-font-size);
     text-align: center;
     margin-top: 20px;
 }
@@ -407,12 +426,10 @@ opacity: 0;
     background-color: rgba(128, 128, 128, 0.489);
 }
 .wrapslide2 .box img:hover{
-    filter: blur(2.5px);
+    filter: blur(1.5px);
     transform: scale(1.1);
 }
 .box{
-    
-
     position: relative;
     padding: 20px 0px 50px 0px;
     margin: 0px 20px;
@@ -426,13 +443,17 @@ opacity: 0;
     position: relative;font-weight: 600;
     text-align: center;
     bottom: 200px;
-    color: #333;
+    color: #252525;
 }
 .box:nth-child(4) img{
     filter: blur(0px);
 }
 .box:nth-child(4) img:hover{
     filter: blur(0px);
+}
+
+.box:nth-child(3) img:hover{
+    filter: blur(1px);
 }
 
 
@@ -455,6 +476,7 @@ opacity: 0;
     color: #1687A7;
     font-weight: bold;
     margin-bottom: 50px;
+    font-size: var(--h2-font-size);
     font-family: 'Poppins', sans-serif;
 }
 
@@ -478,6 +500,7 @@ opacity: 0;
 .rowb h3{
     color: #276678;
     margin-left: 30px;
+    font-size: var(--h3-font-size);
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -574,6 +597,7 @@ footer .fcontent{
 }
 .fcontent h2{
     margin-bottom: 8px;
+    font-size: var(--h2-font-size);
 }
 .fsosmed ul{
     width: 350px;
@@ -720,7 +744,7 @@ footer .fcontent .fnav ul li a:hover{
     .texth h1{
         width: 300px;
         line-height: 30px;
-        font-size: 22px;
+        font-size: var(--h1-font-size);
     }
     .texth p{
         margin-top: 5px;
@@ -749,23 +773,22 @@ footer .fcontent .fnav ul li a:hover{
         transform: scale(0.35);
     }
     .atext{
-        width: 78%;
+        width: 76%;
         position: relative;
         z-index: 2;
     }
     .atext h2,
     .porto1 h2,
     .botwrap h2{
-        font-size: 17px;
+        font-size: var(--h2-font-size);
     }
     .atext h3,
     .hero h3{
-        font-size: 15px;
+        font-size: var(--h3-font-size);
         width: 90%;
     }
     .atext p {
-        
-        font-size: 13px;
+        font-size: var(--normal-font-size);
         line-height: 17px;
     }
     .porto1 h3,
@@ -790,6 +813,15 @@ footer .fcontent .fnav ul li a:hover{
     #s3:checked ~ #slide1 {
         transform: translate3d(-30%, 0, -350px);
     }
+    .wrapslide2 .box img {
+        height: 150px;
+        width: 240px;
+    }
+
+
+
+
+
     #contact {
         flex-direction: column;
         align-items: baseline;
@@ -831,7 +863,7 @@ footer .fcontent .fnav ul li a:hover{
         width: 90%;
     }
     .fcontent h2{
-        font-size: 17px;
+        font-size: var(--h2-font-size);
     }
     .fcontent p{
         font-size: 12px;
@@ -871,11 +903,6 @@ footer .fcontent .fnav ul li a:hover{
         padding: 20px 0px 50px 0px;
         margin: 0px 20px;
     }
-    .wrapslide2 .box img{
-        width: 410px;
-        filter: blur(3px);
-        height: 280px;
-    }
     .afoto img {
         width: 290px;
         margin-left: 100px;
@@ -896,6 +923,6 @@ footer .fcontent .fnav ul li a:hover{
         width: 133%;
     }
     .atext h3{
-        font-size: 18px;
+        font-size: var(--h3-font-size);
     }
 }
