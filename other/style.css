@@ -636,25 +636,64 @@ footer .fcontent .fnav ul li a:hover{
 
 
 /* responsive */
-/* tablet */
-@media screen and (max-width:768px){
+
+
+
+
+@media screen and (max-width:1367px){
+    nav {
+        width: 70%;
+    }
+    .container{
+        width: 70%;
+    }
+    .hero {
+        margin-left: 15%;
+    }
     nav ul{
-        width: 50%;
+        width: 55%;
+    }
+    .topwrapper{
+        height: 820px;
+    }
+    
+    .box{
+        width: fit-content;
+        height: fit-content;
+        position: relative;
+        padding: 20px 0px 50px 0px;
+        margin: 0px 20px;
+    }
+    .afoto img {
+        width: 290px;
+        margin-left: 100px;
+    }
+}
+
+
+
+
+
+
+
+
+@media screen and (max-width:1153px){
+    nav {
+        width: 80%;
+    }
+    .hero {
+        margin-left: 10%;
+    }
+    .atext p{
+        position: relative;
+        width: 100%;
     }
     .container {
-        width: 90%;
-    }
-    #slider{
         width: 80%;
-        height: 44vw;
     }
-    nav{
-        width: 100%;
-        justify-content: space-between;
-        padding: 0px 5%;
-    }
-    .headc {
-        height: 70px;
+
+    .atext h3{
+        font-size: var(--h3-font-size);
     }
 }
 
@@ -662,6 +701,9 @@ footer .fcontent .fnav ul li a:hover{
 @media screen and (max-width:900px) {
     .hero {
         margin-left: 5%;
+    }
+    nav {
+        width: 100%;
     }
     nav ul{
         width: 50%;
@@ -684,7 +726,27 @@ footer .fcontent .fnav ul li a:hover{
 }
 
 
-/* mobile */
+@media screen and (max-width:768px){
+    nav ul{
+        width: 50%;
+    }
+    .container {
+        width: 90%;
+    }
+    #slider{
+        width: 80%;
+        height: 44vw;
+    }
+    nav{
+        width: 100%;
+        justify-content: space-between;
+        padding: 0px 5%;
+    }
+    .headc {
+        height: 70px;
+    }
+}
+
 @media screen and (max-width:576px){
     html, body {
         overflow-x: hidden;
@@ -892,62 +954,4 @@ footer .fcontent .fnav ul li a:hover{
         
     }
 
-}
-
-@media screen and (max-width:1367px){
-     nav {
-        width: 70%;
-    }
-    .container{
-        width: 70%;
-    }
-    .hero {
-        margin-left: 15%;
-    }
-    nav ul{
-        width: 55%;
-    }
-    .topwrapper{
-        height: 820px;
-    }
-    
-    .box{
-        width: fit-content;
-        height: fit-content;
-        position: relative;
-        padding: 20px 0px 50px 0px;
-        margin: 0px 20px;
-    }
-    .afoto img {
-        width: 290px;
-        margin-left: 100px;
-    }
-}
-
-
-
-
-
-
-
-
-
-@media screen and (max-width:1153px){
-    nav {
-        width: 80%;
-    }
-    .hero {
-        margin-left: 10%;
-    }
-    .atext p{
-        position: relative;
-        width: 100%;
-    }
-    .container {
-        width: 80%;
-    }
-
-    .atext h3{
-        font-size: var(--h3-font-size);
-    }
 }
