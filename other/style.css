@@ -895,6 +895,15 @@ footer .fcontent .fnav ul li a:hover{
 }
 
 @media screen and (max-width:1367px){
+     nav {
+        width: 70%;
+    }
+    .container{
+        width: 70%;
+    }
+    .hero {
+        margin-left: 15%;
+    }
     nav ul{
         width: 55%;
     }
@@ -924,10 +933,20 @@ footer .fcontent .fnav ul li a:hover{
 
 
 @media screen and (max-width:1153px){
+    nav {
+        width: 80%;
+    }
+    .hero {
+        margin-left: 10%;
+    }
     .atext p{
         position: relative;
-        width: 133%;
+        width: 100%;
     }
+    .container {
+        width: 80%;
+    }
+
     .atext h3{
         font-size: var(--h3-font-size);
     }
