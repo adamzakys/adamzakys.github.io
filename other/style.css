@@ -206,6 +206,7 @@ nav ul li a:hover{
 .texth h3 {
     color: #252525;
     font-size: var(--h3-font-size);
+    font-weight: 600;
 }
 .texth h1{
     font-size: var(--big-font-size);
@@ -287,11 +288,17 @@ nav ul li a:hover{
     color: #1687A7;
 }
 .atext h3{
-    font-weight: bold;
+    font-weight: 600;
     font-family: 'Poppins', sans-serif;
     font-size: var(--h3-font-size);
     margin-top: 20px;
     color: #252525;
+    width: 80%;
+    font-style: italic;
+}
+.atext h3 span{
+    color: #1687A7;
+    font-style: normal;
 }
 .atext P{
     margin-top: 10px;
@@ -326,11 +333,17 @@ nav ul li a:hover{
     font-size: var(--h2-font-size);
 }
 .porto h3{
-    font-weight: bold;
+    font-weight: 600;
     font-family: 'Poppins', sans-serif;
     font-size: var(--h3-font-size);
     text-align: center;
     margin-top: 20px;
+}
+.porto h4{
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+    font-weight: 600;
+    color: #252525c9;
 }
 
 
@@ -415,6 +428,10 @@ opacity: 0;
     justify-content: space-between;
     overflow-x: scroll;
 }
+.ct{
+    position: relative;
+    bottom: 200px;
+}
 .wrapslide2 .box img{
     width: 350px;
     height: 250px;
@@ -439,12 +456,7 @@ opacity: 0;
 .wrapslide2::-webkit-scrollbar{
     border: none;
 }
-.porto2 p{
-    position: relative;font-weight: 600;
-    text-align: center;
-    bottom: 200px;
-    color: #252525;
-}
+
 .box:nth-child(4) img{
     filter: blur(0px);
 }
@@ -856,9 +868,9 @@ footer .fcontent .fnav ul li a:hover{
         margin-top: 30px;
         font-size: var(--normal-font-size);
         font-family: 'Raleway', sans-serif;
+        width: 133%;
         font-weight: 600;
         color: #333;
-        width: 133%;
     }
     .porto1 h3,
     .porto2 h3 {
@@ -907,6 +919,9 @@ footer .fcontent .fnav ul li a:hover{
         margin-left: 20px;
         font-size: 15px;
     }
+    .ct {
+        bottom: 130px;
+    } 
 
 
 
