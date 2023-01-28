@@ -304,7 +304,7 @@ nav ul li a:hover{
     margin-top: 10px;
     line-height: 27px;
     font-family: 'Poppins', sans-serif;
-    font-size: var(--normal-font-size);
+    font-size: var(--h4-font-size);
     color: #252525;
 }
 
@@ -654,35 +654,8 @@ footer .fcontent .fnav ul li a:hover{
 
 
 @media screen and (max-width:1367px){
-    img{
-        transform: scale(0.8);
-    }
-    .headc {
-        height: 45px;
-    }
-    nav {
-        width: 70%;
-        height: 40px;
-    }
-    .container{
-        width: 70%;
-    }
-    .hero {
-        margin-left: 15%;
-    }
     nav ul{
         width: 55%;
-        
-    }
-    nav ul li a{
-        font-size: var(--small-font-size);
-        
-    }
-    nav .logo h2{
-        font-size: var(--h3-font-size);
-    }
-    .hero {
-        height: 90%;
     }
     .topwrapper{
         height: 820px;
@@ -698,25 +671,6 @@ footer .fcontent .fnav ul li a:hover{
     .afoto img {
         width: 290px;
         margin-left: 100px;
-    }
-    #slider {
-        width: 55%;
-    }
-    #slider img{
-        transform: scale(1);
-    }
-    #contact, 
-    .texth,
-    .aboutm,
-    .porto{
-        transform: scale(0.9);
-    }
-    .fcontent{
-        transform: scale(0.9);
-    }
-    footer{
-        padding-top: 30px;
-        padding-bottom: 30px;
     }
 }
 
@@ -776,7 +730,7 @@ footer .fcontent .fnav ul li a:hover{
 }
 
 
-@media screen and (max-width:768px){
+/* @media screen and (max-width:768px){
     nav ul{
         width: 50%;
     }
@@ -795,9 +749,9 @@ footer .fcontent .fnav ul li a:hover{
     .headc {
         height: 70px;
     }
-}
+} */
 
-@media screen and (max-width:576px){
+@media screen and (max-width:765px){
     html, body {
         overflow-x: hidden;
     }
@@ -872,17 +826,16 @@ footer .fcontent .fnav ul li a:hover{
     .texth ul li img{
         width: 30px;
     }
-
-
     .afoto{
         position: absolute;
+        z-index: 1;
         margin-left: 25px;
     }
     .afoto img{
         position: absolute;
-        z-index: 1;
-        top: -125px;
+        top: -110px;
         transform: scale(0.35);
+        opacity: 0.8;
     }
     .atext{
         width: 76%;
