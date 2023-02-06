@@ -168,15 +168,7 @@ nav ul li a:hover{
 
 
 /* hero */
-.midwrapper{
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url(asset/wave.svg);
-    background-position: bottom;
-    background-repeat: no-repeat;
-    padding-bottom: 80px;
-}
+
 .container{
     width: 60%;
 }
@@ -259,12 +251,25 @@ nav ul li a:hover{
 
 
 /* Tentang saya */
+.midwrapper{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    padding-bottom: 80px;
+    height: 1800px;
+    background-image: url(asset/wave.svg);
+    background-position: bottom;
+    background-repeat: no-repeat;
+}
+
 .aboutm {
-    margin: 125px 0px;
+    margin-top: 125px;
+    margin-bottom: 90px;
     display: flex;
     justify-content: space-between;
     justify-items: center;
-
     width: 100%;
 }
 .afoto img{
@@ -308,6 +313,100 @@ nav ul li a:hover{
     color: #252525;
 }
 
+.riwayat {
+    margin-top: 60px;
+    align-items: center;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    position: relative;
+}
+.rphotos{
+    width: 65%;
+    height: 100%;
+}
+.rphotos img {
+    background-color: gray;
+    width: 100%;
+    border-radius: 10px;
+    height: 450px;
+}
+.timeline {
+    width: 25%;
+    padding-top: 20px;
+    border-left: 3px solid #1687A7;
+    padding-left: 25px;
+}
+.boxline {
+    color: #1687A7;
+    border-radius: 10px;
+    position: relative;
+    margin-bottom: 35px;
+}
+
+.boxline::before{
+    content: '';
+    display: block;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    border: 2px solid #1687A7;
+    background-color: whitesmoke;
+    position: absolute;
+    top: -3px;
+    left: -37px;
+}
+
+
+.boxline h3{
+    margin: 0;
+    text-transform: uppercase;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -345,6 +444,20 @@ nav ul li a:hover{
     font-weight: 600;
     color: #252525c9;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -845,6 +958,30 @@ footer .fcontent .fnav ul li a:hover{
     .atext h3 {
         color: rgb(69, 69, 69);
     }
+
+    .riwayat{
+        flex-direction: column;
+        justify-content: center;
+    }
+    .timeline {
+        align-self: flex-start;
+        width: 100%;
+    }
+    .rphotos{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .rphotos img{
+        height: 200px;
+    }
+
+
+
+
+
+
+
+
     .atext h2,
     .porto1 h2,
     .botwrap h2{
