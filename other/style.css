@@ -258,7 +258,7 @@ nav ul li a:hover{
     position: relative;
     z-index: 1;
     padding-bottom: 80px;
-    height: 1800px;
+    height: 1500px;
     background-image: url(asset/wave.svg);
     background-position: bottom;
     background-repeat: no-repeat;
@@ -948,7 +948,6 @@ footer .fcontent .fnav ul li a:hover{
         position: absolute;
         top: -110px;
         transform: scale(0.35);
-        opacity: 0.8;
     }
     .atext{
         width: 76%;
