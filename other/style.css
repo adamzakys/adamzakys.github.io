@@ -89,6 +89,7 @@ nav ul{
     width: 40%;
     justify-content: space-between;
 }
+
 nav ul li a{
     color: #213e46;
     font-size: 18px;
@@ -319,6 +320,7 @@ nav ul li a:hover{
     display: flex;
     width: 100%;
     justify-content: space-between;
+    z-index: 1;
     position: relative;
 }
 .rphotos{
@@ -336,11 +338,33 @@ nav ul li a:hover{
     padding-top: 20px;
     border-left: 3px solid #1687A7;
     padding-left: 25px;
+    height: 550px;
+    overflow-y: scroll;
+    position: relative;
+}
+.timeline::-webkit-scrollbar{
+    width: 0px;
+    height: 0px;
+    position: absolute;
+}
+.time {
+    color: #D3E0EA;
+    background-color: #1688a7d4;
+    font-weight: 600;
+    font-family: 'Raleway', sans-serif;
+    width: fit-content;
+    padding: 3px;
+    position: relative;
+    left: -10px;
+    padding: 3px 10px;
+    border-bottom-left-radius: 13px;
+    border-top-right-radius: 5px;
 }
 .boxline {
     color: #1687A7;
     border-radius: 10px;
     position: relative;
+    font-family: 'Poppins', sans-serif;
     margin-bottom: 35px;
 }
 
@@ -882,24 +906,35 @@ footer .fcontent .fnav ul li a:hover{
         overflow-x: hidden;
     }
     nav ul{
+        width: 100%;
+        padding-top: 70px;
         position: absolute;
         right: 0;
-        border-bottom-left-radius: 20px;
         top: 0;
-        height: 500px;
-        justify-content: space-evenly;
-        background-color: #d3e0eabc;
+        height: fit-content;
+        justify-content: flex-start; 
+        /* evenly */
+        background-color: #d3e0eaa6;
         backdrop-filter: blur(3px);
         align-items: center;
         flex-direction: column;
+        box-shadow: 0px 0px 15px #1687A7 ;
         transform: translateX(100%);
         transition: all 1s;
         opacity: 0;
         
     }
+    nav ul li {
+        margin-bottom: 30px;
+        transition: 0.5s ease;
+    }
+    nav ul li:hover{
+        transform: scale(1.2);
+    }
     nav ul li a{
         color: #276678;
     }
+
     .headc{
         height: 50px;
     }
@@ -927,7 +962,7 @@ footer .fcontent .fnav ul li a:hover{
     }
     .texth p{
         margin-top: 5px;
-        width: 100%;
+        width: 95%;
         font-size: 13px;
         line-height: 22px;
         letter-spacing: 1px;
@@ -948,6 +983,7 @@ footer .fcontent .fnav ul li a:hover{
         position: absolute;
         top: -110px;
         transform: scale(0.35);
+        opacity: 0.8;
     }
     .atext{
         width: 76%;
@@ -973,6 +1009,7 @@ footer .fcontent .fnav ul li a:hover{
     .rphotos img{
         height: 200px;
     }
+
 
 
 
