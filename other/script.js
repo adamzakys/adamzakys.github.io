@@ -12,5 +12,5 @@ menuHamburger.addEventListener('click', function (){
 
 
 
-alert('Halloo');
+alert('Haii');
 alert('Website dibuat manual dengan HTML CSS JS');
