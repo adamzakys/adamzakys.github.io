@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Muhammad Adam Zaky - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Raleway:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="icon" href="other/asset/SQUARE.jpg" />
+    <style>
+      :root {
+        /* Light Mode Colors */
+        --bg-color-light: linear-gradient(135deg, #d3e0ea 0%, #1687a7 100%);
+        --text-color-light: #1a202c; /* Darker text for better contrast */
+        --heading-color-light: #276678;
+        --section-bg-light: #f8faff; /* Lighter background for sections */
+        --card-bg-light: rgba(255, 255, 255, 0.95); /* More opaque */
+        --glass-bg-light: rgba(255, 255, 255, 0.4); /* Stronger glass effect */
+        --glass-border-light: rgba(255, 255, 255, 0.6);
+        --navbar-initial-text-light: #ffffff;
+        --navbar-scrolled-text-light: #1a202c;
+        --navbar-scrolled-bg-light: rgba(255, 255, 255, 0.8); /* Slightly less opaque */
+        --btn-main-bg-light: linear-gradient(90deg, #1687a7 0%, #276678 100%);
+        --btn-main-text-light: #ffffff;
+        --border-color-light: #cbd5e1; /* Gray-300 for subtle borders */
+        --gradient-text-light: linear-gradient(90deg, #276678 0%, #1687a7 100%);
+        --footer-text-light: #d3e0ea;
+
+        /* Dark Mode Colors */
+        --bg-color-dark: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        --text-color-dark: #e2e8f0;
+        --heading-color-dark: #93c5fd; /* light blue */
+        --section-bg-dark: #1f2937; /* dark slate gray */
+        --card-bg-dark: rgba(31, 41, 55, 0.9); /* More opaque */
+        --glass-bg-dark: rgba(31, 41, 55, 0.6); /* Stronger glass effect */
+        --glass-border-dark: rgba(75, 85, 99, 0.6);
+        --navbar-initial-text-dark: #e2e8f0;
+        --navbar-scrolled-text-dark: #e2e8f0;
+        --navbar-scrolled-bg-dark: rgba(31, 41, 55, 0.8); /* Slightly less opaque */
+        --btn-main-bg-dark: linear-gradient(90deg, #3b82f6 0%, #60a5fa 100%); /* brighter blue */
+        --btn-main-text-dark: #ffffff;
+        --border-color-dark: #4b5563; /* Gray-600 for subtle borders */
+        --gradient-text-dark: linear-gradient(90deg, #93c5fd 0%, #bfdbfe 100%);
+        --footer-text-dark: #93c5fd;
+      }
+
+      body {
+        font-family: "Raleway", sans-serif;
+        overflow-x: hidden;
+        background: var(--bg-color-light);
+        color: var(--text-color-light);
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: "Poppins", sans-serif;
+        color: var(--heading-color-light); /* Default heading color */
+      }
+
+      body.dark {
+        background: var(--bg-color-dark);
+        color: var(--text-color-dark);
+      }
+
+      body.dark h1,
+      body.dark h2,
+      body.dark h3,
+      body.dark h4,
+      body.dark h5,
+      body.dark h6 {
+        color: var(--heading-color-dark);
+      }
+
+      .section-bg-light {
+        background-color: var(--section-bg-light);
+      }
+      body.dark .section-bg-light {
+        background-color: var(--section-bg-dark);
+      }
+
+      .glassmorphism {
+        background: var(--glass-bg-light);
+        backdrop-filter: blur(20px); /* Increased blur */
+        border: 1px solid var(--glass-border-light);
+        transition: background 0.3s ease, border 0.3s ease;
+      }
+      body.dark .glassmorphism {
+        background: var(--glass-bg-dark);
+        border: 1px solid var(--glass-border-dark);
+      }
+
+      .floating {
+        animation: floating 6s ease-in-out infinite;
+      }
+
+      @keyframes floating {
+        0% {
+          transform: translate(0, 0px);
+        }
+        50% {
+          transform: translate(0, -20px);
+        }
+        100% {
+          transform: translate(0, 0px);
+        }
+      }
+
+      .skill-card {
+        transition: all 0.3s ease;
+        background: var(--card-bg-light);
+        backdrop-filter: blur(15px); /* Slightly less blur than navbar */
+        color: var(--text-color-light);
+        border: 1px solid var(--glass-border-light); /* Added border for definition */
+      }
+      body.dark .skill-card {
+        background: var(--card-bg-dark);
+        color: var(--text-color-dark);
+        border: 1px solid var(--glass-border-dark);
+      }
+
+      .skill-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(22, 135, 167, 0.2);
+      }
+      body.dark .skill-card:hover {
+        box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+      }
+
+      .tab-button {
+        transition: all 0.3s ease;
+        color: var(--navbar-initial-text-light); /* Default color for tabs in light glassmorphism */
+      }
+      body.dark .tab-button {
+        color: var(--navbar-initial-text-dark);
+      }
+
+      .tab-button.active {
+        background: var(--btn-main-bg-light);
+        color: var(--btn-main-text-light);
+        transform: translateY(-2px);
+      }
+      body.dark .tab-button.active {
+        background: var(--btn-main-bg-dark);
+        color: var(--btn-main-text-dark);
+      }
+
+      .gradient-text {
+        background: var(--gradient-text-light);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      body.dark .gradient-text {
+        background: var(--gradient-text-dark);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .pattern-bg {
+        background: linear-gradient(135deg, #d3e0ea 0%, rgba(22, 135, 167, 0.8) 100%);
+        background-image: radial-gradient(circle at 20% 50%, rgba(22, 135, 167, 0.3) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(39, 102, 120, 0.3) 0%, transparent 50%);
+        transition: background-image 0.3s ease;
+      }
+      body.dark .pattern-bg {
+        background: linear-gradient(135deg, #1f2937 0%, rgba(31, 41, 55, 0.8) 100%);
+        background-image: radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.2) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(96, 165, 250, 0.2) 0%, transparent 50%);
+      }
+
+      .wave-bg {
+        background: linear-gradient(-45deg, #1687a7, #276678, #d3e0ea, #1687a7);
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
+        transition: background 0.3s ease;
+      }
+      body.dark .wave-bg {
+        background: linear-gradient(-45deg, #1e3a8a, #1d4ed8, #3b82f6, #1e3a8a);
+        background-size: 400% 400%;
+      }
+
+      @keyframes gradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .card-title {
+        color: var(--heading-color-light);
+        font-weight: 700;
+      }
+      body.dark .card-title {
+        color: var(--heading-color-dark);
+      }
+      .card-desc {
+        color: var(--text-color-light);
+        font-weight: 500;
+      }
+      body.dark .card-desc {
+        color: var(--text-color-dark);
+      }
+      .badge {
+        background: rgba(211, 224, 234, 0.6); /* Lighter, more translucent */
+        color: #276678; /* Specific text color for badges in light mode */
+        font-weight: 700;
+        border: 1px solid rgba(22, 135, 167, 0.2); /* Lighter border */
+      }
+      body.dark .badge {
+        background: rgba(55, 65, 81, 0.6); /* Darker, more translucent */
+        color: #bfdbfe;
+        border: 1px solid rgba(96, 165, 250, 0.2);
+      }
+      .btn-main {
+        background: var(--btn-main-bg-light);
+        color: var(--btn-main-text-light) !important;
+        font-weight: 700;
+        box-shadow: 0 4px 15px rgba(22, 135, 167, 0.3);
+      }
+      body.dark .btn-main {
+        background: var(--btn-main-bg-dark);
+        color: var(--btn-main-text-dark) !important;
+        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+      }
+      .section-sub {
+        color: var(--heading-color-light);
+      }
+      body.dark .section-sub {
+        color: var(--heading-color-dark);
+      }
+
+      /* Enhanced text contrast (general) */
+      .text-contrast {
+        color: var(--text-color-light) !important;
+        font-weight: 600;
+      }
+      body.dark .text-contrast {
+        color: var(--text-color-dark) !important;
+      }
+
+      .glassmorphism .text-gray-600,
+      .glassmorphism .text-gray-700,
+      .glassmorphism .text-gray-800 {
+        color: var(--text-color-light) !important;
+        font-weight: 500;
+      }
+      body.dark .glassmorphism .text-gray-600,
+      body.dark .glassmorphism .text-gray-700,
+      body.dark .glassmorphism .text-gray-800 {
+        color: var(--text-color-dark) !important;
+      }
+
+      /* Navbar specific styles */
+      #nav-menu a {
+        color: var(--navbar-initial-text-light); /* Initial navbar link color */
+      }
+      body.dark #nav-menu a {
+        color: var(--navbar-initial-text-dark);
+      }
+      #nav-menu a:hover {
+        color: #fcd34d; /* yellow-300 */
+      }
+      body.dark #nav-menu a:hover {
+        color: #93c5fd; /* light blue */
+      }
+
+      .navbar-scrolled {
+        background: var(--navbar-scrolled-bg-light) !important;
+        backdrop-filter: blur(25px) !important; /* Increased blur for navbar */
+        border-bottom-left-radius: 20px; /* Rounded bottom-left */
+        border-bottom-right-radius: 20px; /* Rounded bottom-right */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid var(--glass-border-light); /* Subtle border for definition */
+        transition: all 0.3s ease-in-out;
+      }
+      body.dark .navbar-scrolled {
+        background: var(--navbar-scrolled-bg-dark) !important;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        border-bottom: 1px solid var(--glass-border-dark);
+      }
+      .navbar-scrolled #nav-menu a {
+        color: var(--navbar-scrolled-text-light); /* Scrolled navbar link color */
+      }
+      body.dark .navbar-scrolled #nav-menu a {
+        color: var(--navbar-scrolled-text-dark);
+      }
+      .navbar-scrolled .logo h2 {
+        color: var(--navbar-scrolled-text-light);
+      }
+      body.dark .navbar-scrolled .logo h2 {
+        color: var(--navbar-scrolled-text-dark);
+      }
+
+      /* Hamburger menu lines */
+      #menu-hamburger span {
+        background-color: var(--navbar-initial-text-light);
+      }
+      body.dark #menu-hamburger span {
+        background-color: var(--navbar-initial-text-dark);
+      }
+      .navbar-scrolled #menu-hamburger span {
+        background-color: var(--navbar-scrolled-text-light);
+      }
+      body.dark .navbar-scrolled #menu-hamburger span {
+        background-color: var(--navbar-scrolled-text-dark);
+      }
+
+      /* Mobile Experience Timeline Fix */
+      @media (max-width: 768px) {
+        .mobile-timeline {
+          display: block !important;
+          padding-left: 0 !important;
+        }
+        .mobile-timeline .timeline-line {
+          display: none;
+        }
+        .mobile-timeline .timeline-item {
+          width: 100% !important;
+          margin-bottom: 2rem;
+          padding: 0 !important;
+          text-align: left !important;
+        }
+        .mobile-timeline .timeline-dot {
+          display: none;
+        }
+        .mobile-timeline .timeline-emoji {
+          display: none;
+        }
+        /* Hero section padding for mobile navbar */
+        #hero {
+          padding-top: 80px;
+        }
+
+        /* Mobile nav menu styling (when open) */
+        #nav-menu {
+          background: var(--navbar-scrolled-bg-light); /* Use scrolled background for consistency */
+          backdrop-filter: blur(25px);
+          border-left: 1px solid var(--glass-border-light);
+        }
+        body.dark #nav-menu {
+          background: var(--navbar-scrolled-bg-dark);
+          border-left: 1px solid var(--glass-border-dark);
+        }
+        #nav-menu a {
+          color: var(--navbar-scrolled-text-light);
+        }
+        body.dark #nav-menu a {
+          color: var(--navbar-scrolled-text-dark);
+        }
+      }
+
+      /* Dark Mode Toggle styling */
+      .dark-mode-toggle {
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        transition: background 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+      .dark-mode-toggle:hover {
+        background: rgba(255, 255, 255, 0.4);
+      }
+      body.dark .dark-mode-toggle {
+        background: rgba(31, 41, 55, 0.5);
+        border: 1px solid rgba(75, 85, 99, 0.5);
+      }
+      body.dark .dark-mode-toggle:hover {
+        background: rgba(31, 41, 55, 0.8);
+      }
+      .dark-mode-toggle img {
+        width: 24px;
+        height: 24px;
+      }
+
+      /* Decorative Blobs & Shapes */
+      .blob-1 {
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        background: linear-gradient(135deg, #ff6b6b, #ffe66d);
+        border-radius: 50%;
+        filter: blur(60px);
+        opacity: 0.5;
+        animation: floatBlob 15s infinite alternate ease-in-out;
+        z-index: 0;
+      }
+      .blob-2 {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background: linear-gradient(135deg, #1abc9c, #2ecc71);
+        border-radius: 50%;
+        filter: blur(50px);
+        opacity: 0.4;
+        animation: floatBlob 12s infinite alternate-reverse ease-in-out;
+        z-index: 0;
+      }
+      .blob-3 {
+        position: absolute;
+        width: 180px;
+        height: 180px;
+        background: linear-gradient(135deg, #9b59b6, #e74c3c);
+        border-radius: 50%;
+        filter: blur(70px);
+        opacity: 0.6;
+        animation: floatBlob 18s infinite alternate ease-in-out;
+        z-index: 0;
+      }
+
+      @keyframes floatBlob {
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+        25% {
+          transform: translate(20px, -30px) scale(1.05);
+        }
+        50% {
+          transform: translate(-20px, 40px) scale(0.95);
+        }
+        75% {
+          transform: translate(30px, -10px) scale(1.02);
+        }
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+      }
+
+      /* Specific adjustments for section background patterns */
+      #about {
+        position: relative;
+        overflow: hidden;
+      }
+      #about::before,
+      #about::after {
+        content: "";
+        position: absolute;
+        background-color: rgba(22, 135, 167, 0.1); /* Light mode accent */
+        border-radius: 50%;
+        filter: blur(30px);
+        z-index: 0;
+        transition: background-color 0.3s ease;
+      }
+      body.dark #about::before,
+      body.dark #about::after {
+        background-color: rgba(59, 130, 246, 0.1); /* Dark mode accent */
+      }
+      #about::before {
+        width: 120px;
+        height: 120px;
+        top: 10%;
+        left: 5%;
+      }
+      #about::after {
+        width: 150px;
+        height: 150px;
+        bottom: 15%;
+        right: 8%;
+      }
+
+      /* Project Cards specific styles for better contrast */
+      .tab-content .skill-card .card-title {
+        color: var(--heading-color-light); /* Ensure title is clear */
+      }
+      body.dark .tab-content .skill-card .card-title {
+        color: var(--heading-color-dark);
+      }
+      .tab-content .skill-card .card-desc {
+        color: var(--text-color-light); /* Ensure description is clear */
+      }
+      body.dark .tab-content .skill-card .card-desc {
+        color: var(--text-color-dark);
+      }
+
+      /* Contact form inputs specific styles */
+      #contact input,
+      #contact textarea {
+        background-color: rgba(255, 255, 255, 0.7); /* Slightly more opaque background for inputs */
+        color: var(--text-color-light); /* Ensure text is dark in light mode */
+      }
+      body.dark #contact input,
+      body.dark #contact textarea {
+        background-color: rgba(31, 41, 55, 0.7);
+        color: var(--text-color-dark); /* Ensure text is light in dark mode */
+      }
+    </style>
+  </head>
+  <body>
+    <header class="fixed w-full z-50">
+      <nav class="glassmorphism flex justify-between items-center max-w-[1200px] w-full mx-auto px-4 sm:px-6 lg:px-8 h-[65px] transition-all duration-300">
+        <div class="logo">
+          <h2 class="text-xl font-bold text-white transition-colors duration-300">Adam Zaky's</h2>
+        </div>
+        <ul
+          id="nav-menu"
+          class="fixed md:relative top-0 right-0 w-3/4 md:w-auto h-screen md:h-auto bg-white/30 backdrop-blur-lg md:bg-transparent flex flex-col md:flex-row items-center justify-center md:justify-between space-y-8 md:space-y-0 md:space-x-8 transform translate-x-full md:transform-none transition-transform duration-300 ease-in-out z-40"
+        >
+          <li><a href="#hero" class="text-lg font-semibold hover:text-yellow-300 transition-colors">Beranda</a></li>
+          <li><a href="#about" class="text-lg font-semibold hover:text-yellow-300 transition-colors">Tentang Saya</a></li>
+          <li><a href="#skills" class="text-lg font-semibold hover:text-yellow-300 transition-colors">Keahlian</a></li>
+          <li><a href="#experience" class="text-lg font-semibold hover:text-yellow-300 transition-colors">Pengalaman</a></li>
+          <li><a href="#education" class="text-lg font-semibold hover:text-yellow-300 transition-colors">Pendidikan</a></li>
+          <li><a href="#portfolio" class="text-lg font-semibold hover:text-yellow-300 transition-colors">Portofolio</a></li>
+          <li><a href="#contact" class="text-lg font-semibold hover:text-yellow-300 transition-colors">Contact</a></li>
+          <li class="md:hidden">
+            <button id="dark-mode-toggle-mobile" class="dark-mode-toggle flex items-center justify-center">
+              <img id="dark-mode-icon-mobile" src="other/asset/sun.png" alt="Light Mode" />
+            </button>
+          </li>
+        </ul>
+        <div class="flex items-center space-x-4">
+          <button id="dark-mode-toggle-desktop" class="dark-mode-toggle hidden md:flex items-center justify-center">
+            <img id="dark-mode-icon-desktop" src="other/asset/sun.png" alt="Light Mode" />
+          </button>
+          <button id="menu-hamburger" class="md:hidden flex flex-col justify-between h-5 cursor-pointer z-50">
+            <span class="block w-7 h-0.5 transition-all duration-300"></span>
+            <span class="block w-7 h-0.5 transition-all duration-300"></span>
+            <span class="block w-7 h-0.5 transition-all duration-300"></span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <section id="hero" class="topwrapper relative min-h-screen flex items-center bg-cover bg-center md:bg-right">
+      <div class="absolute inset-0 z-0">
+        <div class="blob-1 top-10 left-10"></div>
+        <div class="blob-2 bottom-20 right-20"></div>
+        <div class="blob-3 top-1/2 left-1/4"></div>
+      </div>
+      <div class="max-w-[1200px] w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="flex flex-col md:flex-row items-center justify-between">
+          <div class="text-left w-full md:w-1/2 mb-8 md:mb-0" data-aos="fade-up" data-aos-duration="1000">
+            <h3 class="text-lg font-semibold text-white mb-4">Welcome to My Portfolio</h3>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">Hi, I'm Muhammad <span class="text-yellow-300">Adam Zaky</span> Jiddyansah</h1>
+            <p class="text-xl text-gray-200 mb-8 leading-relaxed">
+              Fresh Graduate in Computer Science specializing in Data Science, Full-Stack Web Development, and Network Infrastructure. Passionate about creating innovative technology solutions.
+            </p>
+            <div class="flex flex-wrap items-center gap-6">
+              <a href="#contact">
+                <button class="px-8 py-3 text-lg font-semibold rounded-full hover:shadow-2xl transform hover:scale-105 transition-all duration-300 btn-main">Let's Connect</button>
+              </a>
+              <a
+                href="other/asset/CV_Muhammad Adam Zaky Jiddyansah vbumn.pdf"
+                download
+                class="inline-block px-8 py-3 text-lg font-semibold text-white border-2 border-white rounded-full hover:bg-white hover:text-gray-800 transform hover:-translate-y-1 transition-all duration-300 shadow-lg"
+              >
+                Unduh CV
+              </a>
+              <div class="flex space-x-4 border-l-2 border-white/30 pl-6">
+                <a href="https://github.com/adamzakys" target="_blank" class="glassmorphism p-3 rounded-full hover:scale-110 transition-transform"><img src="other/asset/github-white.png" alt="GitHub" class="w-6 h-6" /></a>
+                <a href="https://www.linkedin.com/in/adamzaky/" target="_blank" class="glassmorphism p-3 rounded-full hover:scale-110 transition-transform"><img src="other/asset/linkedin-white.png" alt="LinkedIn" class="w-6 h-6" /></a>
+                <a href="mailto:adamzaky.dy@gmail.com" target="_blank" class="glassmorphism p-3 rounded-full hover:scale-110 transition-transform"><img src="other/asset/gmail-white.png" alt="Email" class="w-6 h-6" /></a>
+              </div>
+            </div>
+          </div>
+          <div class="w-full md:w-auto floating" data-aos="fade-left" data-aos-duration="1500">
+            <div class="relative">
+              <div class="absolute inset-0 bg-gradient-to-r from-pink-400 to-violet-400 rounded-3xl blur-xl opacity-30"></div>
+              <img src="other/asset/profile.png" class="relative w-[350px] h-[450px] rounded-3xl shadow-2xl object-cover" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="py-20 relative overflow-hidden section-bg-light">
+      <div class="max-w-[1200px] mx-auto px-4 relative z-10">
+        <div class="text-center mb-16" data-aos="fade-up">
+          <h2 class="text-4xl font-bold gradient-text mb-4">TENTANG SAYA</h2>
+          <div class="w-24 h-1 bg-gradient-to-r from-pink-500 to-violet-500 mx-auto"></div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-16">
+          <div class="lg:w-1/2" data-aos="fade-right" data-aos-duration="1500">
+            <h3 class="text-2xl font-semibold italic mb-6 text-contrast">"The most difficult thing in life is to know yourself."<br /><span class="gradient-text not-italic">~ Thales of Melitus</span></h3>
+            <p class="leading-8 text-lg text-contrast">
+              Saya adalah seorang lulusan baru Sarjana Teknik Informatika dengan spesialisasi di bidang Data Science, Full-Stack Web Development, dan Infrastruktur Jaringan. Melalui pengalaman proyek yang relevan, saya terampil dalam
+              menganalisis data kompleks menggunakan machine learning dan membangun aplikasi web dari sisi front-end hingga back-end. Saya bersemangat untuk menerapkan kemampuan analitis dan teknis saya untuk berkontribusi dalam
+              pengembangan solusi teknologi inovatif di lingkungan kerja yang profesional.
+            </p>
+          </div>
+          <div class="lg:w-1/2 flex justify-center" data-aos="fade-left" data-aos-duration="1500">
+            <div class="grid grid-cols-2 gap-6">
+              <div class="glassmorphism p-6 rounded-2xl text-center skill-card">
+                <div class="text-3xl mb-2">🎓</div>
+                <h4 class="font-semibold text-contrast mb-2">Education</h4>
+                <p class="text-sm text-contrast">S1 Teknik Informatika</p>
+              </div>
+              <div class="glassmorphism p-6 rounded-2xl text-center skill-card">
+                <div class="text-3xl mb-2">💼</div>
+                <h4 class="font-semibold text-contrast mb-2">Experience</h4>
+                <p class="text-sm text-contrast">3+ Years</p>
+              </div>
+              <div class="glassmorphism p-6 rounded-2xl text-center skill-card">
+                <div class="text-3xl mb-2">🏆</div>
+                <h4 class="font-semibold text-contrast mb-2">Certifications</h4>
+                <p class="text-sm text-contrast">5+ Professional</p>
+              </div>
+              <div class="glassmorphism p-6 rounded-2xl text-center skill-card">
+                <div class="text-3xl mb-2">🚀</div>
+                <h4 class="font-semibold text-contrast mb-2">Projects</h4>
+                <p class="text-sm text-contrast">10+ Completed</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="py-20 pattern-bg relative overflow-hidden">
+      <div class="absolute inset-0 z-0">
+        <div class="blob-1 top-5 left-1/4" style="width: 180px; height: 180px; animation-delay: 2s; background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(22, 135, 167, 0.3))"></div>
+        <div class="blob-2 bottom-10 right-1/4" style="width: 120px; height: 120px; animation-delay: 5s; background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(39, 102, 120, 0.3))"></div>
+      </div>
+      <div class="max-w-[1200px] mx-auto px-4 relative z-10">
+        <div class="text-center mb-16" data-aos="fade-up">
+          <h2 class="text-4xl font-bold text-white mb-4">KETERAMPILAN & KEAHLIAN</h2>
+          <div class="w-24 h-1 mx-auto mb-6" style="background: linear-gradient(90deg, #1687a7 0%, #276678 100%)"></div>
+          <p class="text-gray-200 text-lg">Kemampuan teknis yang saya kuasai dalam berbagai bidang teknologi</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          <div class="skill-card rounded-2xl p-8" data-aos="fade-up" data-aos-delay="100">
+            <div class="text-center mb-6">
+              <div class="text-5xl mb-4">💻</div>
+              <h3 class="text-2xl font-bold gradient-text mb-4">Hard Skills</h3>
+            </div>
+            <ul class="space-y-3">
+              <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-3" style="background-color: #1687a7"></span>Data Analysis & Data Visualization</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-3" style="background-color: #1687a7"></span>Machine Learning/Forecasting</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-3" style="background-color: #1687a7"></span>Clustering & Classification</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-3" style="background-color: #1687a7"></span>Python Programming</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-3" style="background-color: #1687a7"></span>Tableau & PowerBI</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-3" style="background-color: #1687a7"></span>Excel & Data Analysis Tools</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-3" style="background-color: #1687a7"></span>Microsoft Office Suite</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-3" style="background-color: #1687a7"></span>Tools Kolaborasi (Slack, Teams)</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-3" style="background-color: #1687a7"></span>Administrator Basis Data</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-3" style="background-color: #1687a7"></span>Penambangan Data (Data Mining)</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-3" style="background-color: #1687a7"></span>Manajemen Proyek IT</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-3" style="background-color: #1687a7"></span>Keterampilan Dasar Jaringan</li>
+            </ul>
+          </div>
+
+          <div class="skill-card rounded-2xl p-8" data-aos="fade-up" data-aos-delay="200">
+            <div class="text-center mb-6">
+              <div class="text-5xl mb-4">🧠</div>
+              <h3 class="text-2xl font-bold gradient-text mb-4">Soft Skills</h3>
+            </div>
+            <ul class="space-y-3">
+              <li class="flex items-center"><span class="w-2 h-2 bg-green-400 rounded-full mr-3"></span>Adaptabilitas</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-green-400 rounded-full mr-3"></span>Problem-solving</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-green-400 rounded-full mr-3"></span>Decision-making</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-green-400 rounded-full mr-3"></span>Komunikasi Visual</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-green-400 rounded-full mr-3"></span>Kemampuan Interpersonal</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-green-400 rounded-full mr-3"></span>Multitasking</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="skill-card rounded-2xl p-6 text-center" data-aos="fade-up" data-aos-delay="300">
+            <div class="text-4xl mb-3">📊</div>
+            <h4 class="text-lg font-bold gradient-text mb-3">Data & Analytics</h4>
+            <div class="flex flex-wrap gap-2 justify-center">
+              <span class="badge px-2 py-1 text-xs rounded-full">Tableau</span>
+              <span class="badge px-2 py-1 text-xs rounded-full">PowerBI</span>
+              <span class="badge px-2 py-1 text-xs rounded-full">Excel</span>
+              <span class="badge px-2 py-1 text-xs rounded-full">SQL</span>
+            </div>
+          </div>
+
+          <div class="skill-card rounded-2xl p-6 text-center" data-aos="fade-up" data-aos-delay="400">
+            <div class="text-4xl mb-3">🌐</div>
+            <h4 class="text-lg font-bold gradient-text mb-3">Web Development</h4>
+            <div class="flex flex-wrap gap-2 justify-center">
+              <span class="badge px-2 py-1 text-xs rounded-full">Laravel</span>
+              <span class="badge px-2 py-1 text-xs rounded-full">PHP</span>
+              <span class="badge px-2 py-1 text-xs rounded-full">HTML5</span>
+              <span class="badge px-2 py-1 text-xs rounded-full">CSS</span>
+              <span class="badge px-2 py-1 text-xs rounded-full">JavaScript</span>
+            </div>
+          </div>
+
+          <div class="skill-card rounded-2xl p-6 text-center" data-aos="fade-up" data-aos-delay="500">
+            <div class="text-4xl mb-3">🛠️</div>
+            <h4 class="text-lg font-bold gradient-text mb-3">Database & Network</h4>
+            <div class="flex flex-wrap gap-2 justify-center">
+              <span class="badge px-2 py-1 text-xs rounded-full">SQL Server</span>
+              <span class="badge px-2 py-1 text-xs rounded-full">Azure</span>
+              <span class="badge px-2 py-1 text-xs rounded-full">Mikrotik</span>
+              <span class="badge px-2 py-1 text-xs rounded-full">Cisco</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="py-20 relative overflow-hidden section-bg-light">
+      <div class="absolute inset-0 z-0">
+        <div class="blob-3 top-10 right-10" style="width: 160px; height: 160px; animation-delay: 3s; background: linear-gradient(135deg, rgba(255, 107, 107, 0.3), rgba(255, 230, 109, 0.3))"></div>
+        <div class="blob-1 bottom-5 left-5" style="width: 110px; height: 110px; animation-delay: 6s; background: linear-gradient(135deg, rgba(26, 188, 156, 0.3), rgba(46, 204, 113, 0.3))"></div>
+      </div>
+      <div class="max-w-[1200px] mx-auto px-4 relative z-10">
+        <div class="text-center mb-16" data-aos="fade-up">
+          <h2 class="text-4xl font-bold gradient-text mb-4">PENGALAMAN KERJA</h2>
+          <div class="w-24 h-1 mx-auto mb-6" style="background: linear-gradient(90deg, #1687a7 0%, #276678 100%)"></div>
+          <p class="text-lg text-contrast">Perjalanan karir profesional saya</p>
+        </div>
+
+        <div class="relative mobile-timeline">
+          <div class="timeline-line absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-blue-400 to-blue-600" style="background: linear-gradient(to bottom, #1687a7, #276678)"></div>
+
+          <div class="timeline-item relative flex flex-col md:flex-row items-start md:items-center mb-16" data-aos="fade-right">
+            <div class="w-full md:w-1/2 pr-0 md:pr-8 text-left md:text-right mb-4 md:mb-0">
+              <div class="glassmorphism p-6 rounded-2xl skill-card">
+                <span class="inline-block bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold mb-4 btn-main">Des 2023 - Mei 2024</span>
+                <h3 class="text-2xl font-bold gradient-text mb-2">Web Developer</h3>
+                <h4 class="text-lg font-semibold text-contrast mb-3">PT. Mitra Alam Persada • Magang</h4>
+                <p class="text-contrast">
+                  Merancang dan mengembangkan halaman arahan dinamis untuk PT Mitra Alam Persada, yang meningkatkan visibilitas perusahaan dan keterlibatan pemangku kepentingan. Membuat kerangka kerja untuk laporan produksi real-time
+                  (tahunan, bulanan, harian) menggunakan Laravel 11, PHP 8, SQL Server 2022, Azure Data Studio, dan SQL Server Management Studio 2022.
+                </p>
+              </div>
+            </div>
+            <div class="timeline-dot absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full border-4 border-white" style="background: linear-gradient(90deg, #1687a7, #276678)"></div>
+            <div class="timeline-emoji w-full md:w-1/2 pl-0 md:pl-8">
+              <div class="text-6xl">💼</div>
+            </div>
+          </div>
+
+          <div class="timeline-item relative flex flex-col md:flex-row items-start md:items-center mb-16" data-aos="fade-left">
+            <div class="timeline-emoji w-full md:w-1/2 pr-0 md:pr-8 text-left md:text-right mb-4 md:mb-0">
+              <div class="text-6xl">👨‍🏫</div>
+            </div>
+            <div class="timeline-dot absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full border-4 border-white" style="background: linear-gradient(90deg, #276678, #1687a7)"></div>
+            <div class="w-full md:w-1/2 pl-0 md:pl-8">
+              <div class="glassmorphism p-6 rounded-2xl skill-card">
+                <span class="inline-block bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold mb-4 btn-main">Feb 2022 - Jun 2024</span>
+                <h3 class="text-2xl font-bold gradient-text mb-2">Asisten Praktikum</h3>
+                <h4 class="text-lg font-semibold text-contrast mb-3">Prodi Teknik Informatika Universitas Trunojoyo • Part Time</h4>
+                <p class="text-contrast">
+                  Sebagai asisten praktikum, saya mengajar dan mengawasi praktikum berdasarkan materi yang diberikan dosen, memastikan mahasiswa memahami materi sepenuhnya. Saya juga bertanggung jawab menjaga ketertiban di laboratorium dan
+                  menciptakan lingkungan belajar yang kondusif.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item relative flex flex-col md:flex-row items-start md:items-center" data-aos="fade-right">
+            <div class="w-full md:w-1/2 pr-0 md:pr-8 text-left md:text-right mb-4 md:mb-0">
+              <div class="glassmorphism p-6 rounded-2xl skill-card">
+                <span class="inline-block bg-gradient-to-r from-green-500 to-teal-500 px-4 py-2 rounded-full text-sm font-semibold mb-4" style="background: linear-gradient(90deg, #1687a7, #d3e0ea); color: #276678">Apr - Jul 2019</span>
+                <h3 class="text-2xl font-bold gradient-text mb-2">IT Staff</h3>
+                <h4 class="text-lg font-semibold text-contrast mb-3">Dinas Pendidikan • Magang</h4>
+                <p class="text-contrast">
+                  Sebagai pekerja magang, saya bertugas sebagai dukungan TI, membantu entri data dan tugas lainnya, menangani perangkat komputer, dan memberikan dukungan teknis di Dinas Pendidikan Kabupaten Gresik.
+                </p>
+              </div>
+            </div>
+            <div class="timeline-dot absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-r from-green-500 to-teal-500 rounded-full border-4 border-white" style="background: linear-gradient(90deg, #d3e0ea, #1687a7)"></div>
+            <div class="timeline-emoji w-full md:w-1/2 pl-0 md:pl-8">
+              <div class="text-6xl">🛠️</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="education" class="py-20 wave-bg relative overflow-hidden">
+      <div class="absolute inset-0 z-0">
+        <div class="blob-2 top-1/4 left-5" style="width: 140px; height: 140px; animation-delay: 1s; background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(211, 224, 234, 0.3))"></div>
+        <div class="blob-1 bottom-1/4 right-5" style="width: 160px; height: 160px; animation-delay: 4s; background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(39, 102, 120, 0.3))"></div>
+      </div>
+      <div class="max-w-[1200px] mx-auto px-4 relative z-10">
+        <div class="text-center mb-16" data-aos="fade-up">
+          <h2 class="text-4xl font-bold text-white mb-4">PENDIDIKAN</h2>
+          <div class="w-24 h-1 bg-blue-400 mx-auto mb-6" style="background: linear-gradient(90deg, #d3e0ea, #1687a7)"></div>
+          <p class="text-gray-200 text-lg">Perjalanan pendidikan formal saya</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div class="glassmorphism p-8 rounded-3xl skill-card" data-aos="zoom-in" data-aos-delay="100">
+            <div class="text-center mb-6">
+              <div class="text-6xl mb-4">🎓</div>
+              <h3 class="text-2xl font-bold text-white mb-2">Sarjana Teknik Informatika</h3>
+              <h4 class="text-xl text-blue-200 mb-4" style="color: #d3e0ea">Universitas Trunojoyo Madura</h4>
+              <span class="bg-blue-200 text-blue-800 px-4 py-2 rounded-full font-semibold" style="background: #d3e0ea; color: #276678">2021 - 2025</span>
+            </div>
+            <div class="space-y-3 text-gray-200">
+              <p>✨ IPK: 3.51</p>
+              <p>✨ Spesialisasi: Ilmu Data, Pengembangan Web, Infrastruktur Jaringan</p>
+              <p>✨ Focus Area: Machine Learning, Database Systems, Transformasi Digital</p>
+              <p>✨ Relevant Skills: Data Analysis, Web Development, Network Management</p>
+            </div>
+          </div>
+
+          <div class="glassmorphism p-8 rounded-3xl skill-card" data-aos="zoom-in" data-aos-delay="200">
+            <div class="text-center mb-6">
+              <div class="text-6xl mb-4">🏫</div>
+              <h3 class="text-2xl font-bold text-white mb-2">Teknik Komputer & Jaringan</h3>
+              <h4 class="text-xl text-blue-200 mb-4" style="color: #d3e0ea">SMKN 1 CERME GRESIK</h4>
+              <span class="bg-blue-200 text-blue-800 px-4 py-2 rounded-full font-semibold" style="background: #d3e0ea; color: #276678">2018 - Jun 2021</span>
+            </div>
+            <div class="space-y-3 text-gray-200">
+              <p>⚡ Nilai Rata-rata: 84</p>
+              <p>⚡ Network Configuration & Management</p>
+              <p>⚡ Computer Hardware & Software</p>
+              <p>⚡ Network Security Fundamentals</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 relative overflow-hidden section-bg-light">
+      <div class="absolute inset-0 z-0">
+        <div class="blob-1 top-20 left-0" style="width: 100px; height: 100px; animation-delay: 8s; background: linear-gradient(135deg, rgba(245, 101, 101, 0.3), rgba(239, 68, 68, 0.3))"></div>
+        <div class="blob-2 bottom-40 right-10" style="width: 130px; height: 130px; animation-delay: 10s; background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(124, 58, 237, 0.3))"></div>
+      </div>
+      <div class="max-w-[1200px] mx-auto px-4 relative z-10">
+        <div class="text-center mb-16" data-aos="fade-up">
+          <h2 class="text-4xl font-bold gradient-text mb-4">SERTIFIKASI & PELATIHAN</h2>
+          <div class="w-24 h-1 mx-auto mb-6" style="background: linear-gradient(90deg, #1687a7 0%, #276678 100%)"></div>
+          <p class="text-lg text-contrast">Sertifikasi profesional yang telah saya raih</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="glassmorphism rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 skill-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="h-48 overflow-hidden">
+              <img src="other/asset/Sertifikat/Google Cloud Computing Foundations Certificate.png" alt="Google Cloud Certificate" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-6">
+              <h3 class="font-bold text-lg gradient-text mb-2">Google Cloud Computing Foundations Certificate</h3>
+              <p class="text-sm font-semibold mb-2 text-contrast">Google</p>
+              <span class="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-semibold mb-3">Juni 2024</span>
+              <div class="text-xs space-y-1 text-contrast">
+                <p><strong>ID:</strong> 9c4780c1-d1ec-4635-a304-a696c419ea33</p>
+                <p><strong>Skills:</strong> Cloud Computing</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="glassmorphism rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 skill-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="h-48 overflow-hidden">
+              <img src="other/asset/Sertifikat/Certificate of Competence.jpeg" alt="BNSP Certificate" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-6">
+              <h3 class="font-bold text-lg gradient-text mb-2">Certificate of Competence</h3>
+              <p class="text-sm font-semibold mb-2 text-contrast">Badan Nasional Sertifikasi Profesi (BNSP)</p>
+              <span class="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-semibold mb-3">Agustus 2023</span>
+              <div class="text-xs space-y-1 text-contrast">
+                <p><strong>ID:</strong> TIK.002.1861.001105.2023</p>
+                <p><strong>Skills:</strong> Computer Networking</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="glassmorphism rounded-2xl p-6 hover:shadow-2xl transition-all duration-300 skill-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="text-center mb-4">
+              <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span class="text-white text-2xl">🐧</span>
+              </div>
+              <h3 class="font-bold text-lg gradient-text mb-2">NDG Linux Essentials</h3>
+              <p class="text-sm font-semibold mb-2 text-contrast">Cisco Networking Academy</p>
+              <span class="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-semibold">Juli 2023</span>
+            </div>
+            <div class="text-xs space-y-1 text-contrast">
+              <p><strong>Skills:</strong> Linux, Open Source</p>
+              <p><strong>Platform:</strong> Cisco NetAcad</p>
+            </div>
+          </div>
+
+          <div class="glassmorphism rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 skill-card" data-aos="fade-up" data-aos-delay="400">
+            <div class="h-48 overflow-hidden">
+              <img src="other/asset/Sertifikat/Networking Essentials.jpeg" alt="Cisco Networking Certificate" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-6">
+              <h3 class="font-bold text-lg gradient-text mb-2">Networking Essentials</h3>
+              <p class="text-sm font-semibold mb-2 text-contrast">Cisco Networking Academy</p>
+              <span class="inline-block bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-xs font-semibold mb-3">Desember 2022</span>
+              <div class="text-xs space-y-1 text-contrast">
+                <p><strong>Skills:</strong> Networking</p>
+                <p><strong>Platform:</strong> Cisco NetAcad</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="glassmorphism rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 skill-card" data-aos="fade-up" data-aos-delay="500">
+            <div class="h-48 overflow-hidden">
+              <img src="other/asset/Sertifikat/CERTIFICATE OF COMPETENCY ASSESSMENT.jpg" alt="Competency Assessment Certificate" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-6">
+              <h3 class="font-bold text-lg gradient-text mb-2">CERTIFICATE OF COMPETENCY ASSESSMENT</h3>
+              <p class="text-sm font-semibold mb-2 text-contrast">Lembaga Sertifikasi Profesi</p>
+              <span class="inline-block bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs font-semibold mb-3">Juni 2021</span>
+              <div class="text-xs space-y-1 text-contrast">
+                <p><strong>ID:</strong> 2021.10-0101-8855-9.408-4</p>
+                <p><strong>Skills:</strong> Troubleshooting Keamanan Jaringan WAN</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="glassmorphism rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 skill-card" data-aos="fade-up" data-aos-delay="600">
+            <div class="h-48 overflow-hidden">
+              <img src="other/asset/Sertifikat/Pelatihan Coding Daring Ready, Set Code! Angkatan II.jpg" alt="Progate Certificate" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-6">
+              <h3 class="font-bold text-lg gradient-text mb-2">Pelatihan Coding Daring Ready, Set Code! Angkatan II</h3>
+              <p class="text-sm font-semibold mb-2 text-contrast">BAKTI KOMDIGI</p>
+              <span class="inline-block bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-xs font-semibold mb-3">November 2020</span>
+              <div class="text-xs space-y-1 text-contrast">
+                <p><strong>ID:</strong> 4153/D4/PP/2020ID</p>
+                <p><strong>Skills:</strong> HTML5, CSS, JavaScript</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio" class="py-20 pattern-bg relative overflow-hidden">
+      <div class="absolute inset-0 z-0">
+        <div class="blob-3 top-1/2 left-20" style="width: 170px; height: 170px; animation-delay: 5s; background: linear-gradient(135deg, rgba(155, 89, 182, 0.3), rgba(231, 76, 60, 0.3))"></div>
+        <div class="blob-1 bottom-10 right-0" style="width: 140px; height: 140px; animation-delay: 2s; background: linear-gradient(135deg, rgba(255, 107, 107, 0.3), rgba(255, 230, 109, 0.3))"></div>
+      </div>
+      <div class="max-w-[1200px] mx-auto px-4 relative z-10">
+        <div class="text-center mb-16" data-aos="fade-up">
+          <h2 class="text-4xl font-bold text-white mb-4">PORTOFOLIO</h2>
+          <div class="w-24 h-1 mx-auto mb-6" style="background: linear-gradient(90deg, #1687a7 0%, #276678 100%)"></div>
+          <p class="text-gray-200 text-lg">Project dan karya yang telah saya kerjakan</p>
+        </div>
+
+        <div class="flex justify-center mb-12" data-aos="fade-up">
+          <div class="glassmorphism rounded-full p-2">
+            <div class="flex space-x-2">
+              <button class="tab-button active px-6 py-3 rounded-full font-semibold transition-all" data-tab="data-science">📊 Data Science</button>
+              <button class="tab-button px-6 py-3 rounded-full font-semibold hover:bg-white/10 transition-all" data-tab="web-dev">💻 Web Development</button>
+              <button class="tab-button px-6 py-3 rounded-full font-semibold hover:bg-white/10 transition-all" data-tab="networking">🌐 Networking</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="data-science">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="glassmorphism rounded-2xl p-6 hover:scale-105 transition-transform skill-card" data-aos="zoom-in" data-aos-delay="100">
+              <div class="text-center mb-4">
+                <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <span class="text-white text-2xl">💰</span>
+                </div>
+                <h3 class="text-xl font-bold card-title mb-2">Bitcoin Price Prediction</h3>
+                <p class="card-desc text-sm mb-4">Multivariate LSTM dengan integrasi indikator makroekonomi untuk prediksi harga Bitcoin</p>
+                <div class="flex flex-wrap gap-2 justify-center mb-4">
+                  <span class="badge px-2 py-1 text-xs rounded-full">LSTM</span>
+                  <span class="badge px-2 py-1 text-xs rounded-full">Python</span>
+                  <span class="badge px-2 py-1 text-xs rounded-full">TensorFlow</span>
+                </div>
+                <a href="#" class="inline-block btn-main px-4 py-2 rounded-full text-sm hover:shadow-lg transition-all"> View Project → </a>
+              </div>
+            </div>
+
+            <div class="glassmorphism rounded-2xl p-6 hover:scale-105 transition-transform skill-card" data-aos="zoom-in" data-aos-delay="200">
+              <div class="text-center mb-4">
+                <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-teal-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <span class="text-white text-2xl">📊</span>
+                </div>
+                <h3 class="text-xl font-bold card-title mb-2">Data Visualization Dashboard</h3>
+                <p class="card-desc text-sm mb-4">Interactive dashboard untuk analisis data bisnis menggunakan Plotly dan Dash</p>
+                <div class="flex flex-wrap gap-2 justify-center mb-4">
+                  <span class="badge px-2 py-1 text-xs rounded-full">Plotly</span>
+                  <span class="badge px-2 py-1 text-xs rounded-full">Dash</span>
+                  <span class="badge px-2 py-1 text-xs rounded-full">Analytics</span>
+                </div>
+                <a href="#" class="inline-block btn-main px-4 py-2 rounded-full text-sm hover:shadow-lg transition-all"> View Project → </a>
+              </div>
+            </div>
+
+            <div class="glassmorphism rounded-2xl p-6 hover:scale-105 transition-transform skill-card" data-aos="zoom-in" data-aos-delay="300">
+              <div class="text-center mb-4">
+                <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <span class="text-white text-2xl">🌐</span>
+                </div>
+                <h3 class="text-xl font-bold card-title mb-2">Web Scraping & Data Crawling</h3>
+                <p class="card-desc text-sm mb-4">Sistem otomatis untuk pengumpulan dan ekstraksi data dari berbagai sumber web</p>
+                <div class="flex flex-wrap gap-2 justify-center mb-4">
+                  <span class="badge px-2 py-1 text-xs rounded-full">Python</span>
+                  <span class="badge px-2 py-1 text-xs rounded-full">BeautifulSoup</span>
+                  <span class="badge px-2 py-1 text-xs rounded-full">Selenium</span>
+                </div>
+                <a href="#" class="inline-block btn-main px-4 py-2 rounded-full text-sm hover:shadow-lg transition-all"> View Project → </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center mt-12" data-aos="fade-up" data-aos-delay="400">
+            <div class="glassmorphism rounded-2xl p-8 max-w-2xl mx-auto skill-card">
+              <h3 class="text-2xl font-bold text-white mb-4">Lihat Semua Proyek Data Science</h3>
+              <p class="text-gray-200 mb-6">Kunjungi blog saya untuk melihat proyek-proyek data science lainnya dengan penjelasan detail dan implementasi lengkap</p>
+              <a href="#" class="inline-block px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl btn-main"> 📝 Kunjungi Blog Data Science → </a>
+              <p class="text-sm text-gray-300 mt-3 italic">(Blog sedang dalam pengembangan)</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content hidden" id="web-dev">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="glassmorphism rounded-2xl overflow-hidden hover:scale-105 transition-transform skill-card" data-aos="zoom-in" data-aos-delay="100">
+              <img src="other/asset/antero.png" class="w-full h-48 object-cover" alt="Digital Banking Platform" />
+              <div class="p-6">
+                <h3 class="text-xl font-bold card-title mb-2">Digital Banking Platform</h3>
+                <p class="card-desc text-sm mb-4">Platform perbankan digital modern dengan fitur transaksi, monitoring, dan dashboard analitik</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <span class="badge px-2 py-1 text-xs rounded-full">Laravel</span>
+                  <span class="badge px-2 py-1 text-xs rounded-full">PHP</span>
+                  <span class="badge px-2 py-1 text-xs rounded-full">SQL Server</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="glassmorphism rounded-2xl overflow-hidden hover:scale-105 transition-transform skill-card" data-aos="zoom-in" data-aos-delay="200">
+              <img src="other/asset/wisata.png" class="w-full h-48 object-cover" alt="Wisata Website" />
+              <div class="p-6">
+                <h3 class="text-xl font-bold card-title mb-2">Website Wisata Tretan</h3>
+                <p class="card-desc text-sm mb-4">Website promosi wisata dengan design modern dan responsive</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <span class="badge px-2 py-1 text-xs rounded-full">HTML5</span>
+                  <span class="badge px-2 py-1 text-xs rounded-full">CSS3</span>
+                  <span class="badge px-2 py-1 text-xs rounded-full">JavaScript</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="glassmorphism rounded-2xl overflow-hidden hover:scale-105 transition-transform skill-card" data-aos="zoom-in" data-aos-delay="300">
+              <img src="other/asset/itechhire.png" class="w-full h-48 object-cover" alt="iTechHire Platform" />
+              <div class="p-6">
+                <h3 class="text-xl font-bold card-title mb-2">iTechHire Platform</h3>
+                <p class="card-desc text-sm mb-4">Platform recruitment khusus untuk IT professionals dengan fitur lengkap</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <span class="badge px-2 py-1 text-xs rounded-full">React</span>
+                  <span class="badge px-2 py-1 text-xs rounded-full">Node.js</span>
+                  <span class="badge px-2 py-1 text-xs rounded-full">Database</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="glassmorphism rounded-2xl overflow-hidden hover:scale-105 transition-transform skill-card" data-aos="zoom-in" data-aos-delay="400">
+              <div class="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                <span class="text-white text-6xl">🏠</span>
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-bold card-title mb-2">Sistem Manajemen Asrama UTM</h3>
+                <p class="card-desc text-sm mb-4">Platform digital untuk pengelolaan asrama mahasiswa dengan fitur booking, monitoring, dan administrasi</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <span class="badge px-2 py-1 text-xs rounded-full">PHP</span>
+                  <span class="badge px-2 py-1 text-xs rounded-full">MySQL</span>
+                  <span class="badge px-2 py-1 text-xs rounded-full">Bootstrap</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content hidden" id="networking">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="glassmorphism rounded-2xl p-8 hover:scale-105 transition-transform skill-card" data-aos="zoom-in" data-aos-delay="100">
+              <div class="flex items-start space-x-6">
+                <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                  <span class="text-white text-2xl">🔧</span>
+                </div>
+                <div>
+                  <h3 class="text-2xl font-bold text-white mb-3">Network Configuration & Management</h3>
+                  <p class="text-gray-300 mb-4">Implementasi konfigurasi jaringan enterprise dengan focus pada troubleshooting keamanan jaringan WAN, VLAN management, dan network optimization sesuai sertifikat BNSP.</p>
+                  <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="px-3 py-1 bg-blue-500/20 text-blue-300 text-sm rounded-full">BNSP Certified</span>
+                    <span class="px-3 py-1 bg-green-500/20 text-green-300 text-sm rounded-full">Mikrotik</span>
+                    <span class="px-3 py-1 bg-purple-500/20 text-purple-300 text-sm rounded-full">WAN Security</span>
+                  </div>
+                  <ul class="text-gray-300 space-y-2">
+                    <li>• WAN network troubleshooting dan security implementation</li>
+                    <li>• Mikrotik router configuration dan management</li>
+                    <li>• Network performance optimization</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="glassmorphism rounded-2xl p-8 hover:scale-105 transition-transform skill-card" data-aos="zoom-in" data-aos-delay="200">
+              <div class="flex items-start space-x-6">
+                <div class="w-16 h-16 bg-gradient-to-r from-red-500 to-orange-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                  <span class="text-white text-2xl">🛡️</span>
+                </div>
+                <div>
+                  <h3 class="text-2xl font-bold text-white mb-3">Linux System Administration</h3>
+                  <p class="text-gray-300 mb-4">Administrasi sistem Linux dengan focus pada network services, system security, dan server management berdasarkan sertifikat Cisco NDG Linux Essentials.</p>
+                  <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="px-3 py-1 bg-red-500/20 text-red-300 text-sm rounded-full">Linux</span>
+                    <span class="px-3 py-1 bg-yellow-500/20 text-yellow-300 text-sm rounded-full">Cisco NDG</span>
+                    <span class="px-3 py-1 bg-gray-500/20 text-gray-300 text-sm rounded-full">Open Source</span>
+                  </div>
+                  <ul class="text-gray-300 space-y-2">
+                    <li>• Linux system installation dan configuration</li>
+                    <li>• Network services management (DNS, DHCP, Web)</li>
+                    <li>• System security hardening dan monitoring</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="py-20 relative overflow-hidden section-bg-light">
+      <div class="absolute inset-0 z-0">
+        <div class="blob-2 top-10 right-10" style="width: 150px; height: 150px; animation-delay: 3s; background: linear-gradient(135deg, rgba(22, 135, 167, 0.3), rgba(39, 102, 120, 0.3))"></div>
+        <div class="blob-1 bottom-20 left-20" style="width: 120px; height: 120px; animation-delay: 7s; background: linear-gradient(135deg, rgba(211, 224, 234, 0.3), rgba(22, 135, 167, 0.3))"></div>
+      </div>
+      <div class="max-w-[1200px] mx-auto px-4 relative z-10">
+        <div class="text-center mb-16" data-aos="fade-up">
+          <h2 class="text-4xl font-bold gradient-text mb-4">HUBUNGI SAYA</h2>
+          <div class="w-24 h-1 mx-auto mb-6" style="background: linear-gradient(90deg, #1687a7 0%, #276678 100%)"></div>
+          <p class="text-lg text-contrast">Mari berdiskusi tentang proyek atau peluang kolaborasi</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+          <div class="space-y-8" data-aos="fade-right">
+            <div class="flex items-center space-x-4">
+              <div class="w-14 h-14 bg-gradient-to-r from-blue-400 to-blue-500 rounded-2xl flex items-center justify-center" style="background: linear-gradient(90deg, #1687a7, #276678)">
+                <img src="other/asset/wa-green.png" alt="WhatsApp" class="w-6 h-6" />
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold gradient-text">WhatsApp</h3>
+                <p class="text-contrast">+62 831-2993-9682</p>
+              </div>
+            </div>
+
+            <div class="flex items-center space-x-4">
+              <div class="w-14 h-14 bg-gradient-to-r from-blue-400 to-blue-500 rounded-2xl flex items-center justify-center" style="background: linear-gradient(90deg, #276678, #1687a7)">
+                <img src="other/asset/gmail-green.png" alt="Email" class="w-6 h-6" />
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold gradient-text">Email</h3>
+                <p class="text-contrast">adamzaky.dy@gmail.com</p>
+              </div>
+            </div>
+
+            <div class="flex items-center space-x-4">
+              <div class="w-14 h-14 bg-gradient-to-r from-blue-400 to-blue-500 rounded-2xl flex items-center justify-center" style="background: linear-gradient(90deg, #1687a7, #d3e0ea)">
+                <img src="other/asset/linkedin-green.png" alt="LinkedIn" class="w-6 h-6" />
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold gradient-text">LinkedIn</h3>
+                <p class="text-contrast">linkedin.com/in/adamzaky</p>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-4">
+              <div class="w-14 h-14 bg-gradient-to-r from-blue-400 to-blue-500 rounded-2xl flex items-center justify-center mt-1" style="background: linear-gradient(90deg, #d3e0ea, #276678)">
+                <img src="other/asset/maps-green.png" alt="Location" class="w-6 h-6" />
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold gradient-text">Lokasi</h3>
+                <p class="text-contrast">Cerme, Gresik, Jawa Timur, Indonesia</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="glassmorphism rounded-3xl p-8 skill-card">
+            <form action="https://formsubmit.co/adamzaky.dy@gmail.com" method="POST" class="space-y-6">
+              <div>
+                <label class="block text-sm font-semibold text-contrast mb-2">Nama Anda</label>
+                <input
+                  type="text"
+                  name="name"
+                  class="w-full p-4 border-2 rounded-xl focus:outline-none transition-colors"
+                  style="border-color: var(--border-color-light)"
+                  onfocus="this.style.borderColor='var(--btn-main-bg-light)'"
+                  onblur="this.style.borderColor='var(--border-color-light)'"
+                  placeholder="Masukkan nama lengkap"
+                />
+              </div>
+
+              <div>
+                <label class="block text-sm font-semibold text-contrast mb-2">Email Anda</label>
+                <input
+                  type="email"
+                  name="email"
+                  class="w-full p-4 border-2 rounded-xl focus:outline-none transition-colors"
+                  style="border-color: var(--border-color-light)"
+                  onfocus="this.style.borderColor='var(--btn-main-bg-light)'"
+                  onblur="this.style.borderColor='var(--border-color-light)'"
+                  placeholder="nama@email.com"
+                />
+              </div>
+
+              <div>
+                <label class="block text-sm font-semibold text-contrast mb-2">Pesan Anda</label>
+                <textarea
+                  name="message"
+                  rows="6"
+                  required
+                  class="w-full p-4 border-2 rounded-xl focus:outline-none transition-colors resize-none"
+                  style="border-color: var(--border-color-light)"
+                  onfocus="this.style.borderColor='var(--btn-main-bg-light)'"
+                  onblur="this.style.borderColor='var(--border-color-light)'"
+                  placeholder="Tulis pesan Anda di sini..."
+                ></textarea>
+              </div>
+
+              <button type="submit" class="w-full py-4 rounded-xl hover:shadow-2xl transform hover:scale-[1.02] transition-all duration-300 btn-main">Kirim Pesan 🚀</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="wave-bg py-16">
+      <div class="max-w-[1200px] mx-auto px-4 text-center">
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold text-white mb-2">Muhammad Adam Zaky Jiddyansah</h2>
+          <p class="text-gray-200 mb-4">Fresh Graduate Computer Science | Data Science | Full-Stack Developer | Network Specialist</p>
+          <p class="text-gray-300 text-sm">Passionate about creating innovative technology solutions that make a difference</p>
+        </div>
+
+        <div class="flex justify-center space-x-6 mb-8">
+          <a href="https://github.com/adamzakys" target="_blank" class="glassmorphism p-4 rounded-full hover:scale-110 transition-transform">
+            <img src="other/asset/github-white.png" alt="GitHub" class="w-6 h-6" />
+          </a>
+          <a href="https://www.linkedin.com/in/adamzaky/" target="_blank" class="glassmorphism p-4 rounded-full hover:scale-110 transition-transform">
+            <img src="other/asset/linkedin-white.png" alt="LinkedIn" class="w-6 h-6" />
+          </a>
+          <a href="https://www.instagram.com/adamzaky_j/" target="_blank" class="glassmorphism p-4 rounded-full hover:scale-110 transition-transform">
+            <img src="other/asset/instagram-white.png" alt="Instagram" class="w-6 h-6" />
+          </a>
+          <a href="http://wa.me/6283129939682" target="_blank" class="glassmorphism p-4 rounded-full hover:scale-110 transition-transform">
+            <img src="other/asset/whatsapp-white.png" alt="WhatsApp" class="w-6 h-6" />
+          </a>
+          <a href="mailto:adamzaky.dy@gmail.com" target="_blank" class="glassmorphism p-4 rounded-full hover:scale-110 transition-transform">
+            <img src="other/asset/gmail-white.png" alt="Email" class="w-6 h-6" />
+          </a>
+        </div>
+
+        <div class="flex flex-wrap justify-center space-x-8 mb-8 text-sm text-gray-300">
+          <a href="#hero" class="hover:text-white transition-colors">Beranda</a>
+          <a href="#about" class="hover:text-white transition-colors">Tentang Saya</a>
+          <a href="#skills" class="hover:text-white transition-colors">Keahlian</a>
+          <a href="#experience" class="hover:text-white transition-colors">Pengalaman</a>
+          <a href="#portfolio" class="hover:text-white transition-colors">Portofolio</a>
+          <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+        </div>
+
+        <div class="pt-8 border-t border-white/10">
+          <p class="text-sm text-gray-300">© 2024 Muhammad Adam Zaky Jiddyansah. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        once: true,
+        duration: 1000,
+      });
+
+      // Hamburger Menu
+      const menuHamburger = document.getElementById("menu-hamburger");
+      const navMenu = document.getElementById("nav-menu");
+
+      menuHamburger.addEventListener("click", () => {
+        menuHamburger.classList.toggle("active");
+        navMenu.classList.toggle("translate-x-full");
+      });
+
+      // Close menu when clicking on nav links
+      document.querySelectorAll("#nav-menu a").forEach((link) => {
+        link.addEventListener("click", () => {
+          menuHamburger.classList.remove("active");
+          navMenu.classList.add("translate-x-full");
+        });
+      });
+
+      const style = document.createElement("style");
+      style.innerHTML = `
+        #menu-hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        #menu-hamburger.active span:nth-child(2) { opacity: 0; }
+        #menu-hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+      `;
+      document.head.appendChild(style);
+
+      // Tab functionality for portfolio
+      const tabButtons = document.querySelectorAll(".tab-button");
+      const tabContents = document.querySelectorAll(".tab-content");
+
+      tabButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const tabId = button.getAttribute("data-tab");
+
+          // Remove active class from all buttons and contents
+          tabButtons.forEach((btn) => {
+            btn.classList.remove("active");
+            // Also reset text color for inactive buttons in light mode if needed
+            if (!document.body.classList.contains("dark")) {
+              btn.style.color = "var(--navbar-initial-text-light)";
+            } else {
+              btn.style.color = "var(--navbar-initial-text-dark)";
+            }
+            btn.style.background = "transparent";
+          });
+          tabContents.forEach((content) => content.classList.add("hidden"));
+
+          // Add active class to clicked button and show corresponding content
+          button.classList.add("active");
+          document.getElementById(tabId).classList.remove("hidden");
+        });
+      });
+
+      // Navbar scroll effect
+      const headerNav = document.querySelector("header nav");
+      const navLinks = document.querySelectorAll("#nav-menu a");
+      const logoText = document.querySelector(".logo h2");
+      const hamburgerSpans = document.querySelectorAll("#menu-hamburger span");
+
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          headerNav.classList.add("navbar-scrolled");
+        } else {
+          headerNav.classList.remove("navbar-scrolled");
+        }
+      });
+
+      // Smooth scroll for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Dark Mode Functionality
+      const darkModeToggleDesktop = document.getElementById("dark-mode-toggle-desktop");
+      const darkModeToggleMobile = document.getElementById("dark-mode-toggle-mobile");
+      const darkModeIconDesktop = document.getElementById("dark-mode-icon-desktop");
+      const darkModeIconMobile = document.getElementById("dark-mode-icon-mobile");
+
+      function setDarkMode(isDark) {
+        if (isDark) {
+          document.body.classList.add("dark");
+          darkModeIconDesktop.src = "other/asset/moon.png";
+          darkModeIconDesktop.alt = "Dark Mode";
+          darkModeIconMobile.src = "other/asset/moon.png";
+          darkModeIconMobile.alt = "Dark Mode";
+          localStorage.setItem("theme", "dark");
+        } else {
+          document.body.classList.remove("dark");
+          darkModeIconDesktop.src = "other/asset/sun.png";
+          darkModeIconDesktop.alt = "Light Mode";
+          darkModeIconMobile.src = "other/asset/sun.png";
+          darkModeIconMobile.alt = "Light Mode";
+          localStorage.setItem("theme", "light");
+        }
+        // Re-apply active tab styling for correct colors in dark mode
+        const activeTabButton = document.querySelector(".tab-button.active");
+        if (activeTabButton) {
+          activeTabButton.style.background = isDark ? "var(--btn-main-bg-dark)" : "var(--btn-main-bg-light)";
+          activeTabButton.style.color = isDark ? "var(--btn-main-text-dark)" : "var(--btn-main-text-light)";
+        }
+
+        // Update input border colors based on new theme
+        document.querySelectorAll("#contact input, #contact textarea").forEach((input) => {
+          input.style.borderColor = isDark ? "var(--border-color-dark)" : "var(--border-color-light)";
+          input.style.backgroundColor = isDark ? "rgba(31, 41, 55, 0.7)" : "rgba(255, 255, 255, 0.7)";
+          input.style.color = isDark ? "var(--text-color-dark)" : "var(--text-color-light)";
+        });
+      }
+
+      darkModeToggleDesktop.addEventListener("click", () => {
+        setDarkMode(!document.body.classList.contains("dark"));
+      });
+      darkModeToggleMobile.addEventListener("click", () => {
+        setDarkMode(!document.body.classList.contains("dark"));
+      });
+
+      // Check for saved theme preference
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "dark") {
+        setDarkMode(true);
+      } else {
+        setDarkMode(false); // Default to light mode if no preference or 'light'
+      }
+
+      // Dynamic styling for form inputs based on theme
+      document.querySelectorAll("#contact input, #contact textarea").forEach((input) => {
+        input.addEventListener("focus", () => {
+          input.style.borderColor = document.body.classList.contains("dark") ? "#3b82f6" : "#1687A7";
+        });
+        input.addEventListener("blur", () => {
+          input.style.borderColor = document.body.classList.contains("dark") ? "var(--border-color-dark)" : "var(--border-color-light)";
+        });
+        // Set initial border color and background based on current theme
+        input.style.borderColor = document.body.classList.contains("dark") ? "var(--border-color-dark)" : "var(--border-color-light)";
+        input.style.backgroundColor = document.body.classList.contains("dark") ? "rgba(31, 41, 55, 0.7)" : "rgba(255, 255, 255, 0.7)";
+        input.style.color = document.body.classList.contains("dark") ? "var(--text-color-dark)" : "var(--text-color-light)";
+      });
+
+      // Apply initial styling for tab buttons based on current theme
+      tabButtons.forEach((button) => {
+        if (!button.classList.contains("active")) {
+          button.style.color = document.body.classList.contains("dark") ? "var(--navbar-initial-text-dark)" : "var(--navbar-initial-text-light)";
+          button.style.background = "transparent";
+        }
+      });
+    </script>
+  </body>
+</html>
