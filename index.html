@@ -15,7 +15,7 @@
       :root {
         /* Light Mode Colors */
         --bg-color-light: linear-gradient(135deg, #d3e0ea 0%, #1687a7 100%);
-        --text-color-light: #1a202c; /* Darker text for better contrast */
+        --text-color-light: #1f2937; /* Darker text for better contrast */
         --heading-color-light: #276678;
         --section-bg-light: #f8faff; /* Lighter background for sections */
         --card-bg-light: rgba(255, 255, 255, 0.95); /* More opaque */
@@ -241,7 +241,6 @@
         color: var(--heading-color-dark);
       }
 
-      /* Enhanced text contrast (general) */
       .text-contrast {
         color: var(--text-color-light) !important;
         font-weight: 600;
@@ -250,39 +249,27 @@
         color: var(--text-color-dark) !important;
       }
 
-      .glassmorphism .text-gray-600,
-      .glassmorphism .text-gray-700,
-      .glassmorphism .text-gray-800 {
-        color: var(--text-color-light) !important;
-        font-weight: 500;
-      }
-      body.dark .glassmorphism .text-gray-600,
-      body.dark .glassmorphism .text-gray-700,
-      body.dark .glassmorphism .text-gray-800 {
-        color: var(--text-color-dark) !important;
-      }
-
       /* Navbar specific styles */
       #nav-menu a {
-        color: var(--navbar-initial-text-light); /* Initial navbar link color */
+        color: var(--navbar-initial-text-light);
       }
       body.dark #nav-menu a {
         color: var(--navbar-initial-text-dark);
       }
       #nav-menu a:hover {
-        color: #fcd34d; /* yellow-300 */
+        color: #fcd34d;
       }
       body.dark #nav-menu a:hover {
-        color: #93c5fd; /* light blue */
+        color: #93c5fd;
       }
 
       .navbar-scrolled {
         background: var(--navbar-scrolled-bg-light) !important;
         backdrop-filter: blur(25px) !important; /* Increased blur for navbar */
-        border-bottom-left-radius: 20px; /* Rounded bottom-left */
-        border-bottom-right-radius: 20px; /* Rounded bottom-right */
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        border-bottom: 1px solid var(--glass-border-light); /* Subtle border for definition */
+        border-bottom: 1px solid var(--glass-border-light);
         transition: all 0.3s ease-in-out;
       }
       body.dark .navbar-scrolled {
@@ -291,7 +278,7 @@
         border-bottom: 1px solid var(--glass-border-dark);
       }
       .navbar-scrolled #nav-menu a {
-        color: var(--navbar-scrolled-text-light); /* Scrolled navbar link color */
+        color: var(--navbar-scrolled-text-light);
       }
       body.dark .navbar-scrolled #nav-menu a {
         color: var(--navbar-scrolled-text-dark);
@@ -303,7 +290,6 @@
         color: var(--navbar-scrolled-text-dark);
       }
 
-      /* Hamburger menu lines */
       #menu-hamburger span {
         background-color: var(--navbar-initial-text-light);
       }
@@ -317,7 +303,6 @@
         background-color: var(--navbar-scrolled-text-dark);
       }
 
-      /* Mobile Experience Timeline Fix */
       @media (max-width: 768px) {
         .mobile-timeline {
           display: block !important;
@@ -338,14 +323,11 @@
         .mobile-timeline .timeline-emoji {
           display: none;
         }
-        /* Hero section padding for mobile navbar */
         #hero {
           padding-top: 80px;
         }
-
-        /* Mobile nav menu styling (when open) */
         #nav-menu {
-          background: var(--navbar-scrolled-bg-light); /* Use scrolled background for consistency */
+          background: var(--navbar-scrolled-bg-light);
           backdrop-filter: blur(25px);
           border-left: 1px solid var(--glass-border-light);
         }
@@ -361,32 +343,34 @@
         }
       }
 
-      /* Dark Mode Toggle styling */
       .dark-mode-toggle {
         cursor: pointer;
         padding: 0.5rem;
         border-radius: 50%;
         background: rgba(255, 255, 255, 0.2);
         backdrop-filter: blur(10px);
-        transition: background 0.3s ease;
+        transition: background 0.3s ease, color 0.3s ease;
         border: 1px solid rgba(255, 255, 255, 0.3);
+        color: var(--navbar-initial-text-light);
       }
       .dark-mode-toggle:hover {
         background: rgba(255, 255, 255, 0.4);
       }
+      .navbar-scrolled .dark-mode-toggle {
+        color: var(--navbar-scrolled-text-light);
+      }
       body.dark .dark-mode-toggle {
         background: rgba(31, 41, 55, 0.5);
         border: 1px solid rgba(75, 85, 99, 0.5);
+        color: var(--navbar-initial-text-dark);
       }
       body.dark .dark-mode-toggle:hover {
         background: rgba(31, 41, 55, 0.8);
       }
-      .dark-mode-toggle img {
-        width: 24px;
-        height: 24px;
+      body.dark .navbar-scrolled .dark-mode-toggle {
+        color: var(--navbar-scrolled-text-dark);
       }
 
-      /* Decorative Blobs & Shapes */
       .blob-1 {
         position: absolute;
         width: 150px;
@@ -420,7 +404,6 @@
         animation: floatBlob 18s infinite alternate ease-in-out;
         z-index: 0;
       }
-
       @keyframes floatBlob {
         0% {
           transform: translate(0, 0) scale(1);
@@ -439,62 +422,195 @@
         }
       }
 
-      /* Specific adjustments for section background patterns */
-      #about {
-        position: relative;
-        overflow: hidden;
-      }
       #about::before,
-      #about::after {
+      #about::after,
+      #contact::before,
+      #contact::after {
         content: "";
         position: absolute;
-        background-color: rgba(22, 135, 167, 0.1); /* Light mode accent */
+        background-color: rgba(22, 135, 167, 0.1);
         border-radius: 50%;
         filter: blur(30px);
         z-index: 0;
         transition: background-color 0.3s ease;
       }
       body.dark #about::before,
-      body.dark #about::after {
-        background-color: rgba(59, 130, 246, 0.1); /* Dark mode accent */
+      body.dark #about::after,
+      body.dark #contact::before,
+      body.dark #contact::after {
+        background-color: rgba(59, 130, 246, 0.1);
       }
-      #about::before {
+      #about::before,
+      #contact::before {
         width: 120px;
         height: 120px;
         top: 10%;
         left: 5%;
       }
-      #about::after {
+      #about::after,
+      #contact::after {
         width: 150px;
         height: 150px;
         bottom: 15%;
         right: 8%;
       }
 
-      /* Project Cards specific styles for better contrast */
-      .tab-content .skill-card .card-title {
-        color: var(--heading-color-light); /* Ensure title is clear */
+      /* === TEXT CONTRAST FIXES FOR LIGHT MODE === */
+      body:not(.dark) #education .skill-card,
+      body:not(.dark) #portfolio #networking .skill-card {
+        color: var(--text-color-light) !important;
       }
-      body.dark .tab-content .skill-card .card-title {
-        color: var(--heading-color-dark);
+      body:not(.dark) #education .skill-card *,
+      body:not(.dark) #portfolio #networking .skill-card * {
+        color: inherit !important;
       }
-      .tab-content .skill-card .card-desc {
-        color: var(--text-color-light); /* Ensure description is clear */
+      body:not(.dark) #education .skill-card span[class*="bg-blue-200"] {
+        background: #dbeafe !important;
+        color: #1e40af !important;
       }
-      body.dark .tab-content .skill-card .card-desc {
+      body:not(.dark) #portfolio #networking .skill-card span[class*="bg-"] {
+        background-color: rgba(22, 135, 167, 0.1) !important;
+        color: var(--heading-color-light) !important;
+      }
+
+      /* Hero section text styling */
+      .hero-subtitle {
+        color: #ffffff;
+      }
+      body:not(.dark) .hero-subtitle {
+        color: var(--text-color-light);
+        font-weight: 600;
+      }
+
+      .hero-title {
+        color: #ffffff;
+      }
+      body:not(.dark) .hero-title {
+        color: var(--text-color-light);
+      }
+
+      .hero-description {
+        color: #e5e7eb;
+      }
+      body:not(.dark) .hero-description {
+        color: var(--text-color-light);
+        opacity: 0.8;
+      }
+
+      .hero-cv-btn {
+        color: #ffffff;
+        border-color: #ffffff;
+      }
+      body:not(.dark) .hero-cv-btn {
+        color: var(--text-color-light);
+        border-color: var(--text-color-light);
+      }
+      body:not(.dark) .hero-cv-btn:hover {
+        background-color: var(--text-color-light);
+        color: #ffffff;
+      }
+      body.dark .hero-cv-btn:hover {
+        background-color: #ffffff;
         color: var(--text-color-dark);
       }
 
-      /* Contact form inputs specific styles */
-      #contact input,
-      #contact textarea {
-        background-color: rgba(255, 255, 255, 0.7); /* Slightly more opaque background for inputs */
-        color: var(--text-color-light); /* Ensure text is dark in light mode */
+      /* Data Science section text styling */
+      .data-science-title {
+        color: #ffffff;
       }
-      body.dark #contact input,
-      body.dark #contact textarea {
-        background-color: rgba(31, 41, 55, 0.7);
-        color: var(--text-color-dark); /* Ensure text is light in dark mode */
+      body:not(.dark) .data-science-title {
+        color: var(--text-color-light);
+        font-weight: 700;
+      }
+
+      .data-science-desc {
+        color: #e5e7eb;
+      }
+      body:not(.dark) .data-science-desc {
+        color: var(--text-color-light);
+        opacity: 0.8;
+      }
+
+      .data-science-note {
+        color: #d1d5db;
+      }
+      body:not(.dark) .data-science-note {
+        color: var(--text-color-light);
+        opacity: 0.7;
+      }
+
+      /* Pulse animation for CTA button */
+      .pulse-animation {
+        animation: pulse-glow 2s infinite;
+      }
+
+      @keyframes pulse-glow {
+        0%,
+        100% {
+          box-shadow: 0 4px 15px rgba(22, 135, 167, 0.3);
+        }
+        50% {
+          box-shadow: 0 8px 30px rgba(22, 135, 167, 0.5);
+        }
+      }
+
+      body.dark .pulse-animation {
+        animation: pulse-glow-dark 2s infinite;
+      }
+
+      @keyframes pulse-glow-dark {
+        0%,
+        100% {
+          box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+        50% {
+          box-shadow: 0 8px 30px rgba(59, 130, 246, 0.5);
+        }
+      }
+
+      /* Contact form styling */
+      .contact-input {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(22, 135, 167, 0.3);
+        color: var(--text-color-light);
+        backdrop-filter: blur(10px);
+      }
+
+      body.dark .contact-input {
+        background: rgba(31, 41, 55, 0.2);
+        border-color: rgba(59, 130, 246, 0.3);
+        color: var(--text-color-dark);
+      }
+
+      .contact-input:focus {
+        border-color: #1687a7;
+        box-shadow: 0 0 0 3px rgba(22, 135, 167, 0.1);
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      body.dark .contact-input:focus {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        background: rgba(31, 41, 55, 0.3);
+      }
+
+      .contact-input::placeholder {
+        color: var(--text-color-light);
+        opacity: 0.6;
+      }
+
+      body.dark .contact-input::placeholder {
+        color: var(--text-color-dark);
+        opacity: 0.6;
+      }
+
+      .contact-item:hover {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(25px);
+      }
+
+      body.dark .contact-item:hover {
+        background: rgba(31, 41, 55, 0.4);
       }
     </style>
   </head>
@@ -506,7 +622,7 @@
         </div>
         <ul
           id="nav-menu"
-          class="fixed md:relative top-0 right-0 w-3/4 md:w-auto h-screen md:h-auto bg-white/30 backdrop-blur-lg md:bg-transparent flex flex-col md:flex-row items-center justify-center md:justify-between space-y-8 md:space-y-0 md:space-x-8 transform translate-x-full md:transform-none transition-transform duration-300 ease-in-out z-40"
+          class="fixed md:relative top-0 right-0 w-3/4 md:w-auto h-screen md:h-auto md:bg-transparent flex flex-col md:flex-row items-center justify-center md:justify-between space-y-8 md:space-y-0 md:space-x-8 transform translate-x-full md:transform-none transition-transform duration-300 ease-in-out z-40"
         >
           <li><a href="#hero" class="text-lg font-semibold hover:text-yellow-300 transition-colors">Beranda</a></li>
           <li><a href="#about" class="text-lg font-semibold hover:text-yellow-300 transition-colors">Tentang Saya</a></li>
@@ -517,13 +633,29 @@
           <li><a href="#contact" class="text-lg font-semibold hover:text-yellow-300 transition-colors">Contact</a></li>
           <li class="md:hidden">
             <button id="dark-mode-toggle-mobile" class="dark-mode-toggle flex items-center justify-center">
-              <img id="dark-mode-icon-mobile" src="other/asset/sun.png" alt="Light Mode" />
+              <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6">
+                <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8V16Z" fill="currentColor" />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM12 4V8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16V20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4Z"
+                  fill="currentColor"
+                />
+              </svg>
             </button>
           </li>
         </ul>
         <div class="flex items-center space-x-4">
           <button id="dark-mode-toggle-desktop" class="dark-mode-toggle hidden md:flex items-center justify-center">
-            <img id="dark-mode-icon-desktop" src="other/asset/sun.png" alt="Light Mode" />
+            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6">
+              <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8V16Z" fill="currentColor" />
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM12 4V8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16V20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4Z"
+                fill="currentColor"
+              />
+            </svg>
           </button>
           <button id="menu-hamburger" class="md:hidden flex flex-col justify-between h-5 cursor-pointer z-50">
             <span class="block w-7 h-0.5 transition-all duration-300"></span>
@@ -534,7 +666,7 @@
       </nav>
     </header>
 
-    <section id="hero" class="topwrapper relative min-h-screen flex items-center bg-cover bg-center md:bg-right">
+    <section id="hero" class="topwrapper relative min-h-screen flex items-center bg-cover bg-center md:bg-right overflow-hidden">
       <div class="absolute inset-0 z-0">
         <div class="blob-1 top-10 left-10"></div>
         <div class="blob-2 bottom-20 right-20"></div>
@@ -587,9 +719,10 @@
           <div class="lg:w-1/2" data-aos="fade-right" data-aos-duration="1500">
             <h3 class="text-2xl font-semibold italic mb-6 text-contrast">"The most difficult thing in life is to know yourself."<br /><span class="gradient-text not-italic">~ Thales of Melitus</span></h3>
             <p class="leading-8 text-lg text-contrast">
-              Saya adalah seorang lulusan baru Sarjana Teknik Informatika dengan spesialisasi di bidang Data Science, Full-Stack Web Development, dan Infrastruktur Jaringan. Melalui pengalaman proyek yang relevan, saya terampil dalam
-              menganalisis data kompleks menggunakan machine learning dan membangun aplikasi web dari sisi front-end hingga back-end. Saya bersemangat untuk menerapkan kemampuan analitis dan teknis saya untuk berkontribusi dalam
-              pengembangan solusi teknologi inovatif di lingkungan kerja yang profesional.
+              Perjalanan pendidikan saya dari Sekolah Kejuruan TKJ hingga Sarjana Teknik Informatika telah membekali saya dengan keahlian di beberapa bidang teknologi yang berbeda. Di bidang Infrastruktur Jaringan, saya memiliki pemahaman
+              mendasar yang saya bangun sejak SMK. Selama di bangku kuliah, saya kemudian memperluas kompetensi saya secara signifikan di bidang Data Science, dengan fokus pada analisis data menggunakan machine learning. Selain kedua bidang
+              tersebut, saya juga memiliki keterampilan dalam Basic Web Development untuk membangun aplikasi. Penguasaan di kategori-kategori yang berbeda ini memberi saya fleksibilitas untuk mendekati masalah teknis dari berbagai sudut
+              pandang.
             </p>
           </div>
           <div class="lg:w-1/2 flex justify-center" data-aos="fade-left" data-aos-duration="1500">
@@ -640,10 +773,8 @@
             </div>
             <ul class="space-y-3">
               <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-3" style="background-color: #1687a7"></span>Data Analysis & Data Visualization</li>
-              <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-3" style="background-color: #1687a7"></span>Machine Learning/Forecasting</li>
-              <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-3" style="background-color: #1687a7"></span>Clustering & Classification</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-3" style="background-color: #1687a7"></span>ML/DL(Forecasting, Clustering, Classification)</li>
               <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-3" style="background-color: #1687a7"></span>Python Programming</li>
-              <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-3" style="background-color: #1687a7"></span>Tableau & PowerBI</li>
               <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-3" style="background-color: #1687a7"></span>Excel & Data Analysis Tools</li>
               <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-3" style="background-color: #1687a7"></span>Microsoft Office Suite</li>
               <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-3" style="background-color: #1687a7"></span>Tools Kolaborasi (Slack, Teams)</li>
@@ -795,11 +926,11 @@
           <div class="glassmorphism p-8 rounded-3xl skill-card" data-aos="zoom-in" data-aos-delay="100">
             <div class="text-center mb-6">
               <div class="text-6xl mb-4">🎓</div>
-              <h3 class="text-2xl font-bold text-white mb-2">Sarjana Teknik Informatika</h3>
-              <h4 class="text-xl text-blue-200 mb-4" style="color: #d3e0ea">Universitas Trunojoyo Madura</h4>
-              <span class="bg-blue-200 text-blue-800 px-4 py-2 rounded-full font-semibold" style="background: #d3e0ea; color: #276678">2021 - 2025</span>
+              <h3 class="text-2xl font-bold mb-2">Sarjana Teknik Informatika</h3>
+              <h4 class="text-xl mb-4">Universitas Trunojoyo Madura</h4>
+              <span class="px-4 py-2 rounded-full font-semibold">2021 - 2025</span>
             </div>
-            <div class="space-y-3 text-gray-200">
+            <div class="space-y-3">
               <p>✨ IPK: 3.51</p>
               <p>✨ Spesialisasi: Ilmu Data, Pengembangan Web, Infrastruktur Jaringan</p>
               <p>✨ Focus Area: Machine Learning, Database Systems, Transformasi Digital</p>
@@ -810,11 +941,11 @@
           <div class="glassmorphism p-8 rounded-3xl skill-card" data-aos="zoom-in" data-aos-delay="200">
             <div class="text-center mb-6">
               <div class="text-6xl mb-4">🏫</div>
-              <h3 class="text-2xl font-bold text-white mb-2">Teknik Komputer & Jaringan</h3>
-              <h4 class="text-xl text-blue-200 mb-4" style="color: #d3e0ea">SMKN 1 CERME GRESIK</h4>
-              <span class="bg-blue-200 text-blue-800 px-4 py-2 rounded-full font-semibold" style="background: #d3e0ea; color: #276678">2018 - Jun 2021</span>
+              <h3 class="text-2xl font-bold mb-2">Teknik Komputer & Jaringan</h3>
+              <h4 class="text-xl mb-4">SMKN 1 CERME GRESIK</h4>
+              <span class="px-4 py-2 rounded-full font-semibold">2018 - Jun 2021</span>
             </div>
-            <div class="space-y-3 text-gray-200">
+            <div class="space-y-3">
               <p>⚡ Nilai Rata-rata: 84</p>
               <p>⚡ Network Configuration & Management</p>
               <p>⚡ Computer Hardware & Software</p>
@@ -1080,14 +1211,14 @@
                   <span class="text-white text-2xl">🔧</span>
                 </div>
                 <div>
-                  <h3 class="text-2xl font-bold text-white mb-3">Network Configuration & Management</h3>
-                  <p class="text-gray-300 mb-4">Implementasi konfigurasi jaringan enterprise dengan focus pada troubleshooting keamanan jaringan WAN, VLAN management, dan network optimization sesuai sertifikat BNSP.</p>
+                  <h3 class="text-2xl font-bold mb-3">Network Configuration & Management</h3>
+                  <p class="mb-4">Implementasi konfigurasi jaringan enterprise dengan focus pada troubleshooting keamanan jaringan WAN, VLAN management, dan network optimization sesuai sertifikat BNSP.</p>
                   <div class="flex flex-wrap gap-2 mb-4">
-                    <span class="px-3 py-1 bg-blue-500/20 text-blue-300 text-sm rounded-full">BNSP Certified</span>
-                    <span class="px-3 py-1 bg-green-500/20 text-green-300 text-sm rounded-full">Mikrotik</span>
-                    <span class="px-3 py-1 bg-purple-500/20 text-purple-300 text-sm rounded-full">WAN Security</span>
+                    <span class="px-3 py-1 text-sm rounded-full">BNSP Certified</span>
+                    <span class="px-3 py-1 text-sm rounded-full">Mikrotik</span>
+                    <span class="px-3 py-1 text-sm rounded-full">WAN Security</span>
                   </div>
-                  <ul class="text-gray-300 space-y-2">
+                  <ul class="space-y-2">
                     <li>• WAN network troubleshooting dan security implementation</li>
                     <li>• Mikrotik router configuration dan management</li>
                     <li>• Network performance optimization</li>
@@ -1102,14 +1233,14 @@
                   <span class="text-white text-2xl">🛡️</span>
                 </div>
                 <div>
-                  <h3 class="text-2xl font-bold text-white mb-3">Linux System Administration</h3>
-                  <p class="text-gray-300 mb-4">Administrasi sistem Linux dengan focus pada network services, system security, dan server management berdasarkan sertifikat Cisco NDG Linux Essentials.</p>
+                  <h3 class="text-2xl font-bold mb-3">Linux System Administration</h3>
+                  <p class="mb-4">Administrasi sistem Linux dengan focus pada network services, system security, dan server management berdasarkan sertifikat Cisco NDG Linux Essentials.</p>
                   <div class="flex flex-wrap gap-2 mb-4">
-                    <span class="px-3 py-1 bg-red-500/20 text-red-300 text-sm rounded-full">Linux</span>
-                    <span class="px-3 py-1 bg-yellow-500/20 text-yellow-300 text-sm rounded-full">Cisco NDG</span>
-                    <span class="px-3 py-1 bg-gray-500/20 text-gray-300 text-sm rounded-full">Open Source</span>
+                    <span class="px-3 py-1 text-sm rounded-full">Linux</span>
+                    <span class="px-3 py-1 text-sm rounded-full">Cisco NDG</span>
+                    <span class="px-3 py-1 text-sm rounded-full">Open Source</span>
                   </div>
-                  <ul class="text-gray-300 space-y-2">
+                  <ul class="space-y-2">
                     <li>• Linux system installation dan configuration</li>
                     <li>• Network services management (DNS, DHCP, Web)</li>
                     <li>• System security hardening dan monitoring</li>
@@ -1123,15 +1254,16 @@
     </section>
 
     <section id="contact" class="py-20 relative overflow-hidden section-bg-light">
-      <div class="absolute inset-0 z-0">
-        <div class="blob-2 top-10 right-10" style="width: 150px; height: 150px; animation-delay: 3s; background: linear-gradient(135deg, rgba(22, 135, 167, 0.3), rgba(39, 102, 120, 0.3))"></div>
-        <div class="blob-1 bottom-20 left-20" style="width: 120px; height: 120px; animation-delay: 7s; background: linear-gradient(135deg, rgba(211, 224, 234, 0.3), rgba(22, 135, 167, 0.3))"></div>
+      <div class="absolute top-0 left-0 w-full h-full opacity-5">
+        <div class="absolute top-10 right-10 w-32 h-32 bg-purple-400 rounded-full"></div>
+        <div class="absolute bottom-20 left-10 w-24 h-24 bg-pink-400 rounded-full"></div>
+        <div class="absolute top-1/2 left-1/2 w-16 h-16 bg-blue-400 rounded-full"></div>
       </div>
       <div class="max-w-[1200px] mx-auto px-4 relative z-10">
         <div class="text-center mb-16" data-aos="fade-up">
           <h2 class="text-4xl font-bold gradient-text mb-4">HUBUNGI SAYA</h2>
           <div class="w-24 h-1 mx-auto mb-6" style="background: linear-gradient(90deg, #1687a7 0%, #276678 100%)"></div>
-          <p class="text-lg text-contrast">Mari berdiskusi tentang proyek atau peluang kolaborasi</p>
+          <p class="text-gray-800 text-lg text-contrast">Mari berdiskusi tentang proyek atau peluang kolaborasi</p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
@@ -1142,7 +1274,7 @@
               </div>
               <div>
                 <h3 class="text-lg font-semibold gradient-text">WhatsApp</h3>
-                <p class="text-contrast">+62 831-2993-9682</p>
+                <p class="text-gray-700 text-contrast">+62 831-2993-9682</p>
               </div>
             </div>
 
@@ -1152,7 +1284,7 @@
               </div>
               <div>
                 <h3 class="text-lg font-semibold gradient-text">Email</h3>
-                <p class="text-contrast">adamzaky.dy@gmail.com</p>
+                <p class="text-gray-700 text-contrast">adamzaky.dy@gmail.com</p>
               </div>
             </div>
 
@@ -1162,7 +1294,7 @@
               </div>
               <div>
                 <h3 class="text-lg font-semibold gradient-text">LinkedIn</h3>
-                <p class="text-contrast">linkedin.com/in/adamzaky</p>
+                <p class="text-gray-700 text-contrast">linkedin.com/in/adamzaky</p>
               </div>
             </div>
 
@@ -1172,15 +1304,15 @@
               </div>
               <div>
                 <h3 class="text-lg font-semibold gradient-text">Lokasi</h3>
-                <p class="text-contrast">Cerme, Gresik, Jawa Timur, Indonesia</p>
+                <p class="text-gray-700 text-contrast">Cerme, Gresik, Jawa Timur, Indonesia</p>
               </div>
             </div>
           </div>
 
-          <div class="glassmorphism rounded-3xl p-8 skill-card">
+          <div class="glassmorphism rounded-3xl p-8 skill-card" data-aos="fade-left">
             <form action="https://formsubmit.co/adamzaky.dy@gmail.com" method="POST" class="space-y-6">
               <div>
-                <label class="block text-sm font-semibold text-contrast mb-2">Nama Anda</label>
+                <label class="block text-sm font-semibold text-gray-700 mb-2 text-contrast">Nama Anda</label>
                 <input
                   type="text"
                   name="name"
@@ -1193,7 +1325,7 @@
               </div>
 
               <div>
-                <label class="block text-sm font-semibold text-contrast mb-2">Email Anda</label>
+                <label class="block text-sm font-semibold text-gray-700 mb-2 text-contrast">Email Anda</label>
                 <input
                   type="email"
                   name="email"
@@ -1206,7 +1338,7 @@
               </div>
 
               <div>
-                <label class="block text-sm font-semibold text-contrast mb-2">Pesan Anda</label>
+                <label class="block text-sm font-semibold text-gray-700 mb-2 text-contrast">Pesan Anda</label>
                 <textarea
                   name="message"
                   rows="6"
@@ -1225,53 +1357,88 @@
         </div>
       </div>
     </section>
+    <footer class="wave-bg py-20 relative overflow-hidden">
+      <div class="absolute inset-0 z-0">
+        <div class="blob-1 top-10 left-10" style="width: 200px; height: 200px; background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(147, 197, 253, 0.1)); animation-delay: 3s"></div>
+        <div class="blob-2 bottom-20 right-20" style="width: 150px; height: 150px; background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(16, 185, 129, 0.1)); animation-delay: 6s"></div>
+        <div class="blob-3 top-1/2 left-1/2" style="width: 120px; height: 120px; background: linear-gradient(135deg, rgba(251, 146, 60, 0.1), rgba(245, 101, 101, 0.1)); animation-delay: 9s"></div>
+      </div>
 
-    <footer class="wave-bg py-16">
-      <div class="max-w-[1200px] mx-auto px-4 text-center">
-        <div class="mb-8">
-          <h2 class="text-2xl font-bold text-white mb-2">Muhammad Adam Zaky Jiddyansah</h2>
-          <p class="text-gray-200 mb-4">Fresh Graduate Computer Science | Data Science | Full-Stack Developer | Network Specialist</p>
-          <p class="text-gray-300 text-sm">Passionate about creating innovative technology solutions that make a difference</p>
+      <div class="max-w-[1200px] mx-auto px-4 relative z-10">
+        <div class="text-center mb-16">
+          <div class="mb-8">
+            <h2 class="text-3xl font-bold text-white mb-4">Muhammad Adam Zaky Jiddyansah</h2>
+            <div class="w-20 h-1 bg-gradient-to-r from-blue-400 to-purple-400 mx-auto mb-6 rounded-full"></div>
+            <p class="text-gray-200 text-lg mb-4 max-w-2xl mx-auto leading-relaxed">Fresh Graduate Computer Science | Data Science Enthusiast | Full-Stack Developer | Network Infrastructure Specialist</p>
+            <p class="text-gray-300 text-sm italic max-w-lg mx-auto">"Passionate about creating innovative technology solutions that make a positive impact on people's lives"</p>
+          </div>
         </div>
 
-        <div class="flex justify-center space-x-6 mb-8">
-          <a href="https://github.com/adamzakys" target="_blank" class="glassmorphism p-4 rounded-full hover:scale-110 transition-transform">
-            <img src="other/asset/github-white.png" alt="GitHub" class="w-6 h-6" />
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          <div class="glassmorphism rounded-2xl p-6 text-center hover:scale-105 transition-all duration-300">
+            <div class="text-3xl mb-4">🎯</div>
+            <h3 class="text-lg font-bold text-white mb-2">Spesialisasi</h3>
+            <p class="text-gray-300 text-sm">Data Science, Web Development, Network Infrastructure</p>
+          </div>
+
+          <div class="glassmorphism rounded-2xl p-6 text-center hover:scale-105 transition-all duration-300">
+            <div class="text-3xl mb-4">💡</div>
+            <h3 class="text-lg font-bold text-white mb-2">Misi</h3>
+            <p class="text-gray-300 text-sm">Menguasai logika dan ilmu baru setiap hari untuk menjadi versi diri terbaik</p>
+          </div>
+
+          <div class="glassmorphism rounded-2xl p-6 text-center hover:scale-105 transition-all duration-300">
+            <div class="text-3xl mb-4">🌟</div>
+            <h3 class="text-lg font-bold text-white mb-2">Visi</h3>
+            <p class="text-gray-300 text-sm">Menjadi pribadi pembelajar yang terus bertumbuh melalui tantangan</p>
+          </div>
+        </div>
+
+        <div class="flex justify-center space-x-6 mb-12">
+          <a href="https://github.com/adamzakys" target="_blank" class="glassmorphism p-4 rounded-full hover:scale-110 transition-all duration-300 group">
+            <img src="other/asset/github-white.png" alt="GitHub" class="w-6 h-6 group-hover:scale-110 transition-transform" />
           </a>
-          <a href="https://www.linkedin.com/in/adamzaky/" target="_blank" class="glassmorphism p-4 rounded-full hover:scale-110 transition-transform">
-            <img src="other/asset/linkedin-white.png" alt="LinkedIn" class="w-6 h-6" />
+          <a href="https://www.linkedin.com/in/adamzaky/" target="_blank" class="glassmorphism p-4 rounded-full hover:scale-110 transition-all duration-300 group">
+            <img src="other/asset/linkedin-white.png" alt="LinkedIn" class="w-6 h-6 group-hover:scale-110 transition-transform" />
           </a>
-          <a href="https://www.instagram.com/adamzaky_j/" target="_blank" class="glassmorphism p-4 rounded-full hover:scale-110 transition-transform">
-            <img src="other/asset/instagram-white.png" alt="Instagram" class="w-6 h-6" />
+          <a href="https://www.instagram.com/adamzaky_j/" target="_blank" class="glassmorphism p-4 rounded-full hover:scale-110 transition-all duration-300 group">
+            <img src="other/asset/instagram-white.png" alt="Instagram" class="w-6 h-6 group-hover:scale-110 transition-transform" />
           </a>
-          <a href="http://wa.me/6283129939682" target="_blank" class="glassmorphism p-4 rounded-full hover:scale-110 transition-transform">
-            <img src="other/asset/whatsapp-white.png" alt="WhatsApp" class="w-6 h-6" />
+          <a href="http://wa.me/6283129939682" target="_blank" class="glassmorphism p-4 rounded-full hover:scale-110 transition-all duration-300 group">
+            <img src="other/asset/whatsapp-white.png" alt="WhatsApp" class="w-6 h-6 group-hover:scale-110 transition-transform" />
           </a>
-          <a href="mailto:adamzaky.dy@gmail.com" target="_blank" class="glassmorphism p-4 rounded-full hover:scale-110 transition-transform">
-            <img src="other/asset/gmail-white.png" alt="Email" class="w-6 h-6" />
+          <a href="mailto:adamzaky.dy@gmail.com" target="_blank" class="glassmorphism p-4 rounded-full hover:scale-110 transition-all duration-300 group">
+            <img src="other/asset/gmail-white.png" alt="Email" class="w-6 h-6 group-hover:scale-110 transition-transform" />
           </a>
         </div>
 
-        <div class="flex flex-wrap justify-center space-x-8 mb-8 text-sm text-gray-300">
-          <a href="#hero" class="hover:text-white transition-colors">Beranda</a>
-          <a href="#about" class="hover:text-white transition-colors">Tentang Saya</a>
-          <a href="#skills" class="hover:text-white transition-colors">Keahlian</a>
-          <a href="#experience" class="hover:text-white transition-colors">Pengalaman</a>
-          <a href="#portfolio" class="hover:text-white transition-colors">Portofolio</a>
-          <a href="#contact" class="hover:text-white transition-colors">Contact</a>
+        <div class="glassmorphism rounded-2xl p-6 mb-8">
+          <div class="grid grid-cols-2 md:grid-cols-6 gap-4 text-center text-sm">
+            <a href="#hero" class="text-gray-300 hover:text-white transition-colors py-2 px-3 rounded-lg hover:bg-white/10">Beranda</a>
+            <a href="#about" class="text-gray-300 hover:text-white transition-colors py-2 px-3 rounded-lg hover:bg-white/10">Tentang</a>
+            <a href="#skills" class="text-gray-300 hover:text-white transition-colors py-2 px-3 rounded-lg hover:bg-white/10">Keahlian</a>
+            <a href="#experience" class="text-gray-300 hover:text-white transition-colors py-2 px-3 rounded-lg hover:bg-white/10">Pengalaman</a>
+            <a href="#portfolio" class="text-gray-300 hover:text-white transition-colors py-2 px-3 rounded-lg hover:bg-white/10">Portfolio</a>
+            <a href="#contact" class="text-gray-300 hover:text-white transition-colors py-2 px-3 rounded-lg hover:bg-white/10">Kontak</a>
+          </div>
         </div>
 
-        <div class="pt-8 border-t border-white/10">
-          <p class="text-sm text-gray-300">© 2024 Muhammad Adam Zaky Jiddyansah. All rights reserved.</p>
+        <div class="pt-8 border-t border-white/10 text-center">
+          <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-sm text-gray-300">© 2024 Muhammad Adam Zaky Jiddyansah. All rights reserved.</p>
+            <div class="flex items-center space-x-4 text-xs text-gray-400"></div>
+          </div>
         </div>
       </div>
     </footer>
-
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
       AOS.init({
         once: true,
         duration: 1000,
+        easing: "ease-out-cubic",
+        offset: 50,
+        delay: 100,
       });
 
       // Hamburger Menu
@@ -1357,23 +1524,13 @@
       // Dark Mode Functionality
       const darkModeToggleDesktop = document.getElementById("dark-mode-toggle-desktop");
       const darkModeToggleMobile = document.getElementById("dark-mode-toggle-mobile");
-      const darkModeIconDesktop = document.getElementById("dark-mode-icon-desktop");
-      const darkModeIconMobile = document.getElementById("dark-mode-icon-mobile");
 
       function setDarkMode(isDark) {
         if (isDark) {
           document.body.classList.add("dark");
-          darkModeIconDesktop.src = "other/asset/moon.png";
-          darkModeIconDesktop.alt = "Dark Mode";
-          darkModeIconMobile.src = "other/asset/moon.png";
-          darkModeIconMobile.alt = "Dark Mode";
           localStorage.setItem("theme", "dark");
         } else {
           document.body.classList.remove("dark");
-          darkModeIconDesktop.src = "other/asset/sun.png";
-          darkModeIconDesktop.alt = "Light Mode";
-          darkModeIconMobile.src = "other/asset/sun.png";
-          darkModeIconMobile.alt = "Light Mode";
           localStorage.setItem("theme", "light");
         }
         // Re-apply active tab styling for correct colors in dark mode
@@ -1406,19 +1563,26 @@
         setDarkMode(false); // Default to light mode if no preference or 'light'
       }
 
-      // Dynamic styling for form inputs based on theme
-      document.querySelectorAll("#contact input, #contact textarea").forEach((input) => {
-        input.addEventListener("focus", () => {
-          input.style.borderColor = document.body.classList.contains("dark") ? "#3b82f6" : "#1687A7";
-        });
-        input.addEventListener("blur", () => {
-          input.style.borderColor = document.body.classList.contains("dark") ? "var(--border-color-dark)" : "var(--border-color-light)";
-        });
-        // Set initial border color and background based on current theme
-        input.style.borderColor = document.body.classList.contains("dark") ? "var(--border-color-dark)" : "var(--border-color-light)";
-        input.style.backgroundColor = document.body.classList.contains("dark") ? "rgba(31, 41, 55, 0.7)" : "rgba(255, 255, 255, 0.7)";
-        input.style.color = document.body.classList.contains("dark") ? "var(--text-color-dark)" : "var(--text-color-light)";
-      });
+      // Success message for form submission
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get("success") === "true") {
+        // Show success notification
+        const notification = document.createElement("div");
+        notification.innerHTML = `
+      <div class="fixed top-20 right-4 bg-green-500 text-white px-6 py-4 rounded-lg shadow-lg z-50 animate-bounce">
+          <div class="flex items-center space-x-2">
+            <span>✅</span>
+            <span>Pesan berhasil dikirim! Terima kasih.</span>
+          </div>
+        </div>
+        `;
+        document.body.appendChild(notification);
+
+        // Remove notification after 5 seconds
+        setTimeout(() => {
+          notification.remove();
+        }, 5000);
+      }
 
       // Apply initial styling for tab buttons based on current theme
       tabButtons.forEach((button) => {
@@ -1426,6 +1590,25 @@
           button.style.color = document.body.classList.contains("dark") ? "var(--navbar-initial-text-dark)" : "var(--navbar-initial-text-light)";
           button.style.background = "transparent";
         }
+      });
+
+      // Smooth scroll enhancement
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "-20% 0px -20% 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-in");
+          }
+        });
+      }, observerOptions);
+
+      // Observe all sections for animations
+      document.querySelectorAll("section").forEach((section) => {
+        observer.observe(section);
       });
     </script>
   </body>
