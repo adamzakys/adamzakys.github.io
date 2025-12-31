@@ -1,586 +1,1615 @@
 <!DOCTYPE html>
-<html lang="id" class="bg-slate-50 selection:bg-orange-100">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>BMS Asset Ops</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Muhammad Adam Zaky - Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
-    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="BMS Asset" />
-    <link rel="manifest" id="dynamic-manifest" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="theme-color" content="#2596be" />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="icon" type="image/x-icon" href="Berlian-Manyar-Sejahtera-New-Thumbnail.jpg" />
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              primary: "#2596be", // Biru BMS
-              accent: "#ff6600", // Oranye BMS
-              secondary: "#e0f2fe",
-            },
-            animation: { "bounce-short": "bounce 0.5s infinite" },
-          },
-        },
-      };
-    </script>
-    <script>
-      window.onload = function () {
-        // 1. Definisi Data Manifest
-        var manifest = {
-          name: "BMS Asset Ops",
-          short_name: "BMS Asset",
-          start_url: window.location.href, // URL Web App saat ini
-          display: "standalone", // INI KUNCINYA (Hapus Address Bar)
-          background_color: "#ffffff",
-          theme_color: "#2596be",
-          orientation: "portrait",
-          icons: [
-            {
-              src: "/Berlian-Manyar-Sejahtera-New-Thumbnail.webp",
-              sizes: "192x192",
-              type: "image/png",
-            },
-          ],
-        };
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Raleway:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="icon" href="other/asset/SQUARE.jpg" />
+    <style>
+      :root {
+        /* Light Mode Colors */
+        --bg-color-light: linear-gradient(135deg, #d3e0ea 0%, #1687a7 100%);
+        --text-color-light: #1f2937; /* Darker text for better contrast */
+        --heading-color-light: #276678;
+        --section-bg-light: #f8faff; /* Lighter background for sections */
+        --card-bg-light: rgba(255, 255, 255, 0.95); /* More opaque */
+        --glass-bg-light: rgba(255, 255, 255, 0.4); /* Stronger glass effect */
+        --glass-border-light: rgba(255, 255, 255, 0.6);
+        --navbar-initial-text-light: #ffffff;
+        --navbar-scrolled-text-light: #1a202c;
+        --navbar-scrolled-bg-light: rgba(255, 255, 255, 0.8); /* Slightly less opaque */
+        --btn-main-bg-light: linear-gradient(90deg, #1687a7 0%, #276678 100%);
+        --btn-main-text-light: #ffffff;
+        --border-color-light: #cbd5e1; /* Gray-300 for subtle borders */
+        --gradient-text-light: linear-gradient(90deg, #276678 0%, #1687a7 100%);
+        --footer-text-light: #d3e0ea;
 
-        // 2. Ubah JSON jadi File Blob (File Virtual)
-        var stringManifest = JSON.stringify(manifest);
-        var blob = new Blob([stringManifest], { type: "application/manifest+json" });
-        var manifestURL = URL.createObjectURL(blob);
+        /* Dark Mode Colors */
+        --bg-color-dark: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        --text-color-dark: #e2e8f0;
+        --heading-color-dark: #93c5fd; /* light blue */
+        --section-bg-dark: #1f2937; /* dark slate gray */
+        --card-bg-dark: rgba(31, 41, 55, 0.9); /* More opaque */
+        --glass-bg-dark: rgba(31, 41, 55, 0.6); /* Stronger glass effect */
+        --glass-border-dark: rgba(75, 85, 99, 0.6);
+        --navbar-initial-text-dark: #e2e8f0;
+        --navbar-scrolled-text-dark: #e2e8f0;
+        --navbar-scrolled-bg-dark: rgba(31, 41, 55, 0.8); /* Slightly less opaque */
+        --btn-main-bg-dark: linear-gradient(90deg, #3b82f6 0%, #60a5fa 100%); /* brighter blue */
+        --btn-main-text-dark: #ffffff;
+        --border-color-dark: #4b5563; /* Gray-600 for subtle borders */
+        --gradient-text-dark: linear-gradient(90deg, #93c5fd 0%, #bfdbfe 100%);
+        --footer-text-dark: #93c5fd;
+      }
 
-        // 3. Suntikkan ke Head
-        document.querySelector("#dynamic-manifest").setAttribute("href", manifestURL);
-      };
-    </script>
+      body {
+        font-family: "Raleway", sans-serif;
+        overflow-x: hidden;
+        background: var(--bg-color-light);
+        color: var(--text-color-light);
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: "Poppins", sans-serif;
+        color: var(--heading-color-light); /* Default heading color */
+      }
+
+      body.dark {
+        background: var(--bg-color-dark);
+        color: var(--text-color-dark);
+      }
+
+      body.dark h1,
+      body.dark h2,
+      body.dark h3,
+      body.dark h4,
+      body.dark h5,
+      body.dark h6 {
+        color: var(--heading-color-dark);
+      }
+
+      .section-bg-light {
+        background-color: var(--section-bg-light);
+      }
+      body.dark .section-bg-light {
+        background-color: var(--section-bg-dark);
+      }
+
+      .glassmorphism {
+        background: var(--glass-bg-light);
+        backdrop-filter: blur(20px); /* Increased blur */
+        border: 1px solid var(--glass-border-light);
+        transition: background 0.3s ease, border 0.3s ease;
+      }
+      body.dark .glassmorphism {
+        background: var(--glass-bg-dark);
+        border: 1px solid var(--glass-border-dark);
+      }
+
+      .floating {
+        animation: floating 6s ease-in-out infinite;
+      }
+
+      @keyframes floating {
+        0% {
+          transform: translate(0, 0px);
+        }
+        50% {
+          transform: translate(0, -20px);
+        }
+        100% {
+          transform: translate(0, 0px);
+        }
+      }
+
+      .skill-card {
+        transition: all 0.3s ease;
+        background: var(--card-bg-light);
+        backdrop-filter: blur(15px); /* Slightly less blur than navbar */
+        color: var(--text-color-light);
+        border: 1px solid var(--glass-border-light); /* Added border for definition */
+      }
+      body.dark .skill-card {
+        background: var(--card-bg-dark);
+        color: var(--text-color-dark);
+        border: 1px solid var(--glass-border-dark);
+      }
+
+      .skill-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(22, 135, 167, 0.2);
+      }
+      body.dark .skill-card:hover {
+        box-shadow: 0 20px 40px rgba(59, 130, 246, 0.2);
+      }
+
+      .tab-button {
+        transition: all 0.3s ease;
+        color: var(--navbar-initial-text-light); /* Default color for tabs in light glassmorphism */
+      }
+      body.dark .tab-button {
+        color: var(--navbar-initial-text-dark);
+      }
+
+      .tab-button.active {
+        background: var(--btn-main-bg-light);
+        color: var(--btn-main-text-light);
+        transform: translateY(-2px);
+      }
+      body.dark .tab-button.active {
+        background: var(--btn-main-bg-dark);
+        color: var(--btn-main-text-dark);
+      }
+
+      .gradient-text {
+        background: var(--gradient-text-light);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      body.dark .gradient-text {
+        background: var(--gradient-text-dark);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .pattern-bg {
+        background: linear-gradient(135deg, #d3e0ea 0%, rgba(22, 135, 167, 0.8) 100%);
+        background-image: radial-gradient(circle at 20% 50%, rgba(22, 135, 167, 0.3) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(39, 102, 120, 0.3) 0%, transparent 50%);
+        transition: background-image 0.3s ease;
+      }
+      body.dark .pattern-bg {
+        background: linear-gradient(135deg, #1f2937 0%, rgba(31, 41, 55, 0.8) 100%);
+        background-image: radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.2) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(96, 165, 250, 0.2) 0%, transparent 50%);
+      }
+
+      .wave-bg {
+        background: linear-gradient(-45deg, #1687a7, #276678, #d3e0ea, #1687a7);
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
+        transition: background 0.3s ease;
+      }
+      body.dark .wave-bg {
+        background: linear-gradient(-45deg, #1e3a8a, #1d4ed8, #3b82f6, #1e3a8a);
+        background-size: 400% 400%;
+      }
+
+      @keyframes gradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .card-title {
+        color: var(--heading-color-light);
+        font-weight: 700;
+      }
+      body.dark .card-title {
+        color: var(--heading-color-dark);
+      }
+      .card-desc {
+        color: var(--text-color-light);
+        font-weight: 500;
+      }
+      body.dark .card-desc {
+        color: var(--text-color-dark);
+      }
+      .badge {
+        background: rgba(211, 224, 234, 0.6); /* Lighter, more translucent */
+        color: #276678; /* Specific text color for badges in light mode */
+        font-weight: 700;
+        border: 1px solid rgba(22, 135, 167, 0.2); /* Lighter border */
+      }
+      body.dark .badge {
+        background: rgba(55, 65, 81, 0.6); /* Darker, more translucent */
+        color: #bfdbfe;
+        border: 1px solid rgba(96, 165, 250, 0.2);
+      }
+      .btn-main {
+        background: var(--btn-main-bg-light);
+        color: var(--btn-main-text-light) !important;
+        font-weight: 700;
+        box-shadow: 0 4px 15px rgba(22, 135, 167, 0.3);
+      }
+      body.dark .btn-main {
+        background: var(--btn-main-bg-dark);
+        color: var(--btn-main-text-dark) !important;
+        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+      }
+      .section-sub {
+        color: var(--heading-color-light);
+      }
+      body.dark .section-sub {
+        color: var(--heading-color-dark);
+      }
+
+      .text-contrast {
+        color: var(--text-color-light) !important;
+        font-weight: 600;
+      }
+      body.dark .text-contrast {
+        color: var(--text-color-dark) !important;
+      }
+
+      /* Navbar specific styles */
+      #nav-menu a {
+        color: var(--navbar-initial-text-light);
+      }
+      body.dark #nav-menu a {
+        color: var(--navbar-initial-text-dark);
+      }
+      #nav-menu a:hover {
+        color: #fcd34d;
+      }
+      body.dark #nav-menu a:hover {
+        color: #93c5fd;
+      }
+
+      .navbar-scrolled {
+        background: var(--navbar-scrolled-bg-light) !important;
+        backdrop-filter: blur(25px) !important; /* Increased blur for navbar */
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-bottom: 1px solid var(--glass-border-light);
+        transition: all 0.3s ease-in-out;
+      }
+      body.dark .navbar-scrolled {
+        background: var(--navbar-scrolled-bg-dark) !important;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        border-bottom: 1px solid var(--glass-border-dark);
+      }
+      .navbar-scrolled #nav-menu a {
+        color: var(--navbar-scrolled-text-light);
+      }
+      body.dark .navbar-scrolled #nav-menu a {
+        color: var(--navbar-scrolled-text-dark);
+      }
+      .navbar-scrolled .logo h2 {
+        color: var(--navbar-scrolled-text-light);
+      }
+      body.dark .navbar-scrolled .logo h2 {
+        color: var(--navbar-scrolled-text-dark);
+      }
+
+      #menu-hamburger span {
+        background-color: var(--navbar-initial-text-light);
+      }
+      body.dark #menu-hamburger span {
+        background-color: var(--navbar-initial-text-dark);
+      }
+      .navbar-scrolled #menu-hamburger span {
+        background-color: var(--navbar-scrolled-text-light);
+      }
+      body.dark .navbar-scrolled #menu-hamburger span {
+        background-color: var(--navbar-scrolled-text-dark);
+      }
+
+      @media (max-width: 768px) {
+        .mobile-timeline {
+          display: block !important;
+          padding-left: 0 !important;
+        }
+        .mobile-timeline .timeline-line {
+          display: none;
+        }
+        .mobile-timeline .timeline-item {
+          width: 100% !important;
+          margin-bottom: 2rem;
+          padding: 0 !important;
+          text-align: left !important;
+        }
+        .mobile-timeline .timeline-dot {
+          display: none;
+        }
+        .mobile-timeline .timeline-emoji {
+          display: none;
+        }
+        #hero {
+          padding-top: 80px;
+        }
+        #nav-menu {
+          background: var(--navbar-scrolled-bg-light);
+          backdrop-filter: blur(25px);
+          border-left: 1px solid var(--glass-border-light);
+        }
+        body.dark #nav-menu {
+          background: var(--navbar-scrolled-bg-dark);
+          border-left: 1px solid var(--glass-border-dark);
+        }
+        #nav-menu a {
+          color: var(--navbar-scrolled-text-light);
+        }
+        body.dark #nav-menu a {
+          color: var(--navbar-scrolled-text-dark);
+        }
+      }
+
+      .dark-mode-toggle {
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        transition: background 0.3s ease, color 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: var(--navbar-initial-text-light);
+      }
+      .dark-mode-toggle:hover {
+        background: rgba(255, 255, 255, 0.4);
+      }
+      .navbar-scrolled .dark-mode-toggle {
+        color: var(--navbar-scrolled-text-light);
+      }
+      body.dark .dark-mode-toggle {
+        background: rgba(31, 41, 55, 0.5);
+        border: 1px solid rgba(75, 85, 99, 0.5);
+        color: var(--navbar-initial-text-dark);
+      }
+      body.dark .dark-mode-toggle:hover {
+        background: rgba(31, 41, 55, 0.8);
+      }
+      body.dark .navbar-scrolled .dark-mode-toggle {
+        color: var(--navbar-scrolled-text-dark);
+      }
+
+      .blob-1 {
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        background: linear-gradient(135deg, #ff6b6b, #ffe66d);
+        border-radius: 50%;
+        filter: blur(60px);
+        opacity: 0.5;
+        animation: floatBlob 15s infinite alternate ease-in-out;
+        z-index: 0;
+      }
+      .blob-2 {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background: linear-gradient(135deg, #1abc9c, #2ecc71);
+        border-radius: 50%;
+        filter: blur(50px);
+        opacity: 0.4;
+        animation: floatBlob 12s infinite alternate-reverse ease-in-out;
+        z-index: 0;
+      }
+      .blob-3 {
+        position: absolute;
+        width: 180px;
+        height: 180px;
+        background: linear-gradient(135deg, #9b59b6, #e74c3c);
+        border-radius: 50%;
+        filter: blur(70px);
+        opacity: 0.6;
+        animation: floatBlob 18s infinite alternate ease-in-out;
+        z-index: 0;
+      }
+      @keyframes floatBlob {
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+        25% {
+          transform: translate(20px, -30px) scale(1.05);
+        }
+        50% {
+          transform: translate(-20px, 40px) scale(0.95);
+        }
+        75% {
+          transform: translate(30px, -10px) scale(1.02);
+        }
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+      }
+
+      #about::before,
+      #about::after,
+      #contact::before,
+      #contact::after {
+        content: "";
+        position: absolute;
+        background-color: rgba(22, 135, 167, 0.1);
+        border-radius: 50%;
+        filter: blur(30px);
+        z-index: 0;
+        transition: background-color 0.3s ease;
+      }
+      body.dark #about::before,
+      body.dark #about::after,
+      body.dark #contact::before,
+      body.dark #contact::after {
+        background-color: rgba(59, 130, 246, 0.1);
+      }
+      #about::before,
+      #contact::before {
+        width: 120px;
+        height: 120px;
+        top: 10%;
+        left: 5%;
+      }
+      #about::after,
+      #contact::after {
+        width: 150px;
+        height: 150px;
+        bottom: 15%;
+        right: 8%;
+      }
+
+      /* === TEXT CONTRAST FIXES FOR LIGHT MODE === */
+      body:not(.dark) #education .skill-card,
+      body:not(.dark) #portfolio #networking .skill-card {
+        color: var(--text-color-light) !important;
+      }
+      body:not(.dark) #education .skill-card *,
+      body:not(.dark) #portfolio #networking .skill-card * {
+        color: inherit !important;
+      }
+      body:not(.dark) #education .skill-card span[class*="bg-blue-200"] {
+        background: #dbeafe !important;
+        color: #1e40af !important;
+      }
+      body:not(.dark) #portfolio #networking .skill-card span[class*="bg-"] {
+        background-color: rgba(22, 135, 167, 0.1) !important;
+        color: var(--heading-color-light) !important;
+      }
+
+      /* Hero section text styling */
+      .hero-subtitle {
+        color: #ffffff;
+      }
+      body:not(.dark) .hero-subtitle {
+        color: var(--text-color-light);
+        font-weight: 600;
+      }
+
+      .hero-title {
+        color: #ffffff;
+      }
+      body:not(.dark) .hero-title {
+        color: var(--text-color-light);
+      }
+
+      .hero-description {
+        color: #e5e7eb;
+      }
+      body:not(.dark) .hero-description {
+        color: var(--text-color-light);
+        opacity: 0.8;
+      }
+
+      .hero-cv-btn {
+        color: #ffffff;
+        border-color: #ffffff;
+      }
+      body:not(.dark) .hero-cv-btn {
+        color: var(--text-color-light);
+        border-color: var(--text-color-light);
+      }
+      body:not(.dark) .hero-cv-btn:hover {
+        background-color: var(--text-color-light);
+        color: #ffffff;
+      }
+      body.dark .hero-cv-btn:hover {
+        background-color: #ffffff;
+        color: var(--text-color-dark);
+      }
+
+      /* Data Science section text styling */
+      .data-science-title {
+        color: #ffffff;
+      }
+      body:not(.dark) .data-science-title {
+        color: var(--text-color-light);
+        font-weight: 700;
+      }
+
+      .data-science-desc {
+        color: #e5e7eb;
+      }
+      body:not(.dark) .data-science-desc {
+        color: var(--text-color-light);
+        opacity: 0.8;
+      }
+
+      .data-science-note {
+        color: #d1d5db;
+      }
+      body:not(.dark) .data-science-note {
+        color: var(--text-color-light);
+        opacity: 0.7;
+      }
+
+      /* Pulse animation for CTA button */
+      .pulse-animation {
+        animation: pulse-glow 2s infinite;
+      }
+
+      @keyframes pulse-glow {
+        0%,
+        100% {
+          box-shadow: 0 4px 15px rgba(22, 135, 167, 0.3);
+        }
+        50% {
+          box-shadow: 0 8px 30px rgba(22, 135, 167, 0.5);
+        }
+      }
+
+      body.dark .pulse-animation {
+        animation: pulse-glow-dark 2s infinite;
+      }
+
+      @keyframes pulse-glow-dark {
+        0%,
+        100% {
+          box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+        50% {
+          box-shadow: 0 8px 30px rgba(59, 130, 246, 0.5);
+        }
+      }
+
+      /* Contact form styling */
+      .contact-input {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(22, 135, 167, 0.3);
+        color: var(--text-color-light);
+        backdrop-filter: blur(10px);
+      }
+
+      body.dark .contact-input {
+        background: rgba(31, 41, 55, 0.2);
+        border-color: rgba(59, 130, 246, 0.3);
+        color: var(--text-color-dark);
+      }
+
+      .contact-input:focus {
+        border-color: #1687a7;
+        box-shadow: 0 0 0 3px rgba(22, 135, 167, 0.1);
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      body.dark .contact-input:focus {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        background: rgba(31, 41, 55, 0.3);
+      }
+
+      .contact-input::placeholder {
+        color: var(--text-color-light);
+        opacity: 0.6;
+      }
+
+      body.dark .contact-input::placeholder {
+        color: var(--text-color-dark);
+        opacity: 0.6;
+      }
+
+      .contact-item:hover {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(25px);
+      }
+
+      body.dark .contact-item:hover {
+        background: rgba(31, 41, 55, 0.4);
+      }
+    </style>
   </head>
-  <body class="text-slate-800 antialiased pb-28 select-none touch-manipulation">
-    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b-2 border-accent px-4 py-3 flex justify-between items-center shadow-md">
-      <div class="flex items-center gap-3">
-        <img src="Berlian-Manyar-Sejahtera-New-Thumbnail.jpg" alt="BMS Logo" class="w-14 h-auto object-contain" />
-        <div>
-          <h1 class="text-lg font-bold text-primary tracking-tight leading-none" id="headerTitle">Beranda</h1>
-          <p class="text-[10px] text-accent uppercase tracking-widest font-bold mt-1">Asset Management</p>
+  <body>
+    <header class="fixed w-full z-50">
+      <nav class="glassmorphism flex justify-between items-center max-w-[1200px] w-full mx-auto px-4 sm:px-6 lg:px-8 h-[65px] transition-all duration-300">
+        <div class="logo">
+          <h2 class="text-xl font-bold text-contrast transition-colors duration-300">Adam Zaky's</h2>
         </div>
-      </div>
+        <ul
+          id="nav-menu"
+          class="fixed md:relative top-0 right-0 w-3/4 md:w-auto h-screen md:h-auto md:bg-transparent flex flex-col md:flex-row items-center justify-center md:justify-between space-y-8 md:space-y-0 md:space-x-8 transform translate-x-full md:transform-none transition-transform duration-300 ease-in-out z-40"
+        >
+          <li><a href="#hero" class="text-lg font-semibold text-contrast hover:text-yellow-300 transition-colors">Beranda</a></li>
+          <li><a href="#about" class="text-lg font-semibold text-contrast hover:text-yellow-300 transition-colors">Tentang Saya</a></li>
+          <li><a href="#skills" class="text-lg font-semibold text-contrast hover:text-yellow-300 transition-colors">Keahlian</a></li>
+          <li><a href="#experience" class="text-lg font-semibold text-contrast hover:text-yellow-300 transition-colors">Pengalaman</a></li>
+          <li><a href="#education" class="text-lg font-semibold text-contrast hover:text-yellow-300 transition-colors">Pendidikan</a></li>
+          <li><a href="#portfolio" class="text-lg font-semibold text-contrast hover:text-yellow-300 transition-colors">Portofolio</a></li>
+          <li><a href="#contact" class="text-lg font-semibold text-contrast hover:text-yellow-300 transition-colors">Contact</a></li>
+          <li class="md:hidden">
+            <button id="dark-mode-toggle-mobile" class="dark-mode-toggle flex items-center justify-center">
+              <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6">
+                <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8V16Z" fill="currentColor" />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM12 4V8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16V20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </button>
+          </li>
+        </ul>
+        <div class="flex items-center space-x-4">
+          <button id="dark-mode-toggle-desktop" class="dark-mode-toggle hidden md:flex items-center justify-center">
+            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6">
+              <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8V16Z" fill="currentColor" />
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM12 4V8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16V20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4Z"
+                fill="currentColor"
+              />
+            </svg>
+          </button>
+          <button id="menu-hamburger" class="md:hidden flex flex-col justify-between h-5 cursor-pointer z-50">
+            <span class="block w-7 h-0.5 transition-all duration-300"></span>
+            <span class="block w-7 h-0.5 transition-all duration-300"></span>
+            <span class="block w-7 h-0.5 transition-all duration-300"></span>
+          </button>
+        </div>
+      </nav>
     </header>
 
-    <main class="max-w-md mx-auto p-4 min-h-[80vh]">
-      <section id="tab-home" class="tab-section active space-y-6">
-        <div class="bg-primary text-white p-5 rounded-3xl shadow-sm border border-slate-100 relative overflow-hidden group">
-          <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-10 -mt-10 blur-2xl group-hover:bg-white/20 transition-all duration-700"></div>
-          <div class="relative z-10">
-            <div class="flex justify-between items-start">
-              <div class="flex items-center gap-3">
-                <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center border border-white/30 shadow-inner">
-                  <span class="material-icons-round text-2xl">person</span>
+    <section id="hero" class="topwrapper relative min-h-screen flex items-center bg-cover bg-center md:bg-right overflow-hidden">
+      <div class="absolute inset-0 z-0">
+        <div class="blob-1 top-10 left-10"></div>
+        <div class="blob-2 bottom-20 right-20"></div>
+        <div class="blob-3 top-1/2 left-1/4"></div>
+      </div>
+      <div class="max-w-[1200px] w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="flex flex-col md:flex-row items-center justify-between">
+          <div class="text-left w-full md:w-1/2 mb-8 md:mb-0" data-aos="fade-up" data-aos-duration="1000">
+            <h3 class="text-lg font-semibold text-contrast mb-4">Welcome to My Portfolio</h3>
+            <h1 class="text-4xl md:text-5xl font-bold text-contrast mb-6 leading-tight">Hi, I'm Muhammad <span class="text-blue-800">Adam Zaky</span> Jiddyansah</h1>
+            <p class="text-xl text-contrast mb-8 leading-relaxed">
+              Fresh Graduate in Computer Science specializing in Data Science, Full-Stack Web Development, and Network Infrastructure. Passionate about creating innovative technology solutions.
+            </p>
+            <div class="flex flex-wrap items-center gap-6">
+              <a href="#contact">
+                <button class="px-8 py-3 text-lg font-semibold rounded-full hover:shadow-2xl transform hover:scale-105 transition-all duration-300 btn-main">Let's Connect</button>
+              </a>
+              <a
+                href="other/asset/CV_Muhammad Adam Zaky Jiddyansah vbumn.pdf"
+                download
+                class="inline-block px-8 py-3 text-lg font-semibold text-contrast border-2 border-white rounded-full hover:bg-white hover:text-gray-800 transform hover:-translate-y-1 transition-all duration-300 shadow-lg"
+              >
+                Unduh CV
+              </a>
+              <div class="flex space-x-4 border-l-2 border-white/30 pl-6">
+                <a href="https://github.com/adamzakys" target="_blank" class="glassmorphism p-3 rounded-full hover:scale-110 transition-transform"><img src="other/asset/github-white.png" alt="GitHub" class="w-6 h-6" /></a>
+                <a href="https://www.linkedin.com/in/adamzaky/" target="_blank" class="glassmorphism p-3 rounded-full hover:scale-110 transition-transform"><img src="other/asset/linkedin-white.png" alt="LinkedIn" class="w-6 h-6" /></a>
+                <a href="mailto:adamzaky.dy@gmail.com" target="_blank" class="glassmorphism p-3 rounded-full hover:scale-110 transition-transform"><img src="other/asset/gmail-white.png" alt="Email" class="w-6 h-6" /></a>
+              </div>
+            </div>
+          </div>
+          <div class="w-full md:w-auto floating" data-aos="fade-left" data-aos-duration="1500">
+            <div class="relative">
+              <div class="absolute inset-0 bg-gradient-to-r from-pink-400 to-violet-400 rounded-3xl blur-xl opacity-30"></div>
+              <img src="other/asset/profile.png" class="relative w-[350px] h-[450px] rounded-3xl shadow-2xl object-cover" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="py-20 relative overflow-hidden section-bg-light">
+      <div class="max-w-[1200px] mx-auto px-4 relative z-10">
+        <div class="text-center mb-16" data-aos="fade-up">
+          <h2 class="text-4xl font-bold gradient-text mb-4">TENTANG SAYA</h2>
+          <div class="w-24 h-1 bg-gradient-to-r from-pink-500 to-violet-500 mx-auto"></div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-16">
+          <div class="lg:w-1/2" data-aos="fade-right" data-aos-duration="1500">
+            <h3 class="text-2xl font-semibold italic mb-6 text-contrast">"The most difficult thing in life is to know yourself."<br /><span class="gradient-text not-italic">~ Thales of Melitus</span></h3>
+            <p class="leading-8 text-lg text-contrast">
+              Perjalanan pendidikan saya dari Sekolah Kejuruan TKJ hingga Sarjana Teknik Informatika telah membekali saya dengan keahlian di beberapa bidang teknologi yang berbeda. Di bidang Infrastruktur Jaringan, saya memiliki pemahaman
+              mendasar yang saya bangun sejak SMK. Selama di bangku kuliah, saya kemudian memperluas kompetensi saya secara signifikan di bidang Data Science, dengan fokus pada analisis data menggunakan machine learning. Selain kedua bidang
+              tersebut, saya juga memiliki keterampilan dalam Basic Web Development untuk membangun aplikasi. Penguasaan di kategori-kategori yang berbeda ini memberi saya fleksibilitas untuk mendekati masalah teknis dari berbagai sudut
+              pandang.
+            </p>
+          </div>
+          <div class="lg:w-1/2 flex justify-center" data-aos="fade-left" data-aos-duration="1500">
+            <div class="grid grid-cols-2 gap-6">
+              <div class="glassmorphism p-6 rounded-2xl text-center skill-card">
+                <div class="text-3xl mb-2">🎓</div>
+                <h4 class="font-semibold text-contrast mb-2">Education</h4>
+                <p class="text-sm text-contrast">S1 Teknik Informatika</p>
+              </div>
+              <div class="glassmorphism p-6 rounded-2xl text-center skill-card">
+                <div class="text-3xl mb-2">💼</div>
+                <h4 class="font-semibold text-contrast mb-2">Experience</h4>
+                <p class="text-sm text-contrast">3+ Years</p>
+              </div>
+              <div class="glassmorphism p-6 rounded-2xl text-center skill-card">
+                <div class="text-3xl mb-2">🏆</div>
+                <h4 class="font-semibold text-contrast mb-2">Certifications</h4>
+                <p class="text-sm text-contrast">5+ Professional</p>
+              </div>
+              <div class="glassmorphism p-6 rounded-2xl text-center skill-card">
+                <div class="text-3xl mb-2">🚀</div>
+                <h4 class="font-semibold text-contrast mb-2">Projects</h4>
+                <p class="text-sm text-contrast">10+ Completed</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="py-20 pattern-bg relative overflow-hidden">
+      <div class="absolute inset-0 z-0">
+        <div class="blob-1 top-5 left-1/4" style="width: 180px; height: 180px; animation-delay: 2s; background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(22, 135, 167, 0.3))"></div>
+        <div class="blob-2 bottom-10 right-1/4" style="width: 120px; height: 120px; animation-delay: 5s; background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(39, 102, 120, 0.3))"></div>
+      </div>
+      <div class="max-w-[1200px] mx-auto px-4 relative z-10">
+        <div class="text-center mb-16" data-aos="fade-up">
+          <h2 class="text-4xl font-bold text-white mb-4">KETERAMPILAN & KEAHLIAN</h2>
+          <div class="w-24 h-1 mx-auto mb-6" style="background: linear-gradient(90deg, #1687a7 0%, #276678 100%)"></div>
+          <p class="text-gray-200 text-lg">Kemampuan teknis yang saya kuasai dalam berbagai bidang teknologi</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          <div class="skill-card rounded-2xl p-8" data-aos="fade-up" data-aos-delay="100">
+            <div class="text-center mb-6">
+              <div class="text-5xl mb-4">💻</div>
+              <h3 class="text-2xl font-bold gradient-text mb-4">Hard Skills</h3>
+            </div>
+            <ul class="space-y-3">
+              <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-3" style="background-color: #1687a7"></span>Data Analysis & Data Visualization</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-3" style="background-color: #1687a7"></span>ML/DL(Forecasting, Clustering, Classification)</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-3" style="background-color: #1687a7"></span>Python Programming</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-3" style="background-color: #1687a7"></span>Excel & Data Analysis Tools</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-3" style="background-color: #1687a7"></span>Microsoft Office Suite</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-3" style="background-color: #1687a7"></span>Tools Kolaborasi (Slack, Teams)</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-3" style="background-color: #1687a7"></span>Administrator Basis Data</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-3" style="background-color: #1687a7"></span>Penambangan Data (Data Mining)</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-3" style="background-color: #1687a7"></span>Manajemen Proyek IT</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-blue-400 rounded-full mr-3" style="background-color: #1687a7"></span>Keterampilan Dasar Jaringan</li>
+            </ul>
+          </div>
+
+          <div class="skill-card rounded-2xl p-8" data-aos="fade-up" data-aos-delay="200">
+            <div class="text-center mb-6">
+              <div class="text-5xl mb-4">🧠</div>
+              <h3 class="text-2xl font-bold gradient-text mb-4">Soft Skills</h3>
+            </div>
+            <ul class="space-y-3">
+              <li class="flex items-center"><span class="w-2 h-2 bg-green-400 rounded-full mr-3"></span>Adaptabilitas</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-green-400 rounded-full mr-3"></span>Problem-solving</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-green-400 rounded-full mr-3"></span>Decision-making</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-green-400 rounded-full mr-3"></span>Komunikasi Visual</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-green-400 rounded-full mr-3"></span>Kemampuan Interpersonal</li>
+              <li class="flex items-center"><span class="w-2 h-2 bg-green-400 rounded-full mr-3"></span>Multitasking</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="skill-card rounded-2xl p-6 text-center" data-aos="fade-up" data-aos-delay="300">
+            <div class="text-4xl mb-3">📊</div>
+            <h4 class="text-lg font-bold gradient-text mb-3">Data & Analytics</h4>
+            <div class="flex flex-wrap gap-2 justify-center">
+              <span class="badge px-2 py-1 text-xs rounded-full">Tableau</span>
+              <span class="badge px-2 py-1 text-xs rounded-full">PowerBI</span>
+              <span class="badge px-2 py-1 text-xs rounded-full">Excel</span>
+              <span class="badge px-2 py-1 text-xs rounded-full">SQL</span>
+            </div>
+          </div>
+
+          <div class="skill-card rounded-2xl p-6 text-center" data-aos="fade-up" data-aos-delay="400">
+            <div class="text-4xl mb-3">🌐</div>
+            <h4 class="text-lg font-bold gradient-text mb-3">Web Development</h4>
+            <div class="flex flex-wrap gap-2 justify-center">
+              <span class="badge px-2 py-1 text-xs rounded-full">Laravel</span>
+              <span class="badge px-2 py-1 text-xs rounded-full">PHP</span>
+              <span class="badge px-2 py-1 text-xs rounded-full">HTML5</span>
+              <span class="badge px-2 py-1 text-xs rounded-full">CSS</span>
+              <span class="badge px-2 py-1 text-xs rounded-full">JavaScript</span>
+            </div>
+          </div>
+
+          <div class="skill-card rounded-2xl p-6 text-center" data-aos="fade-up" data-aos-delay="500">
+            <div class="text-4xl mb-3">🛠️</div>
+            <h4 class="text-lg font-bold gradient-text mb-3">Database & Network</h4>
+            <div class="flex flex-wrap gap-2 justify-center">
+              <span class="badge px-2 py-1 text-xs rounded-full">SQL Server</span>
+              <span class="badge px-2 py-1 text-xs rounded-full">Azure</span>
+              <span class="badge px-2 py-1 text-xs rounded-full">Mikrotik</span>
+              <span class="badge px-2 py-1 text-xs rounded-full">Cisco</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="py-20 relative overflow-hidden section-bg-light">
+      <div class="absolute inset-0 z-0">
+        <div class="blob-3 top-10 right-10" style="width: 160px; height: 160px; animation-delay: 3s; background: linear-gradient(135deg, rgba(255, 107, 107, 0.3), rgba(255, 230, 109, 0.3))"></div>
+        <div class="blob-1 bottom-5 left-5" style="width: 110px; height: 110px; animation-delay: 6s; background: linear-gradient(135deg, rgba(26, 188, 156, 0.3), rgba(46, 204, 113, 0.3))"></div>
+      </div>
+      <div class="max-w-[1200px] mx-auto px-4 relative z-10">
+        <div class="text-center mb-16" data-aos="fade-up">
+          <h2 class="text-4xl font-bold gradient-text mb-4">PENGALAMAN KERJA</h2>
+          <div class="w-24 h-1 mx-auto mb-6" style="background: linear-gradient(90deg, #1687a7 0%, #276678 100%)"></div>
+          <p class="text-lg text-contrast">Perjalanan karir profesional saya</p>
+        </div>
+
+        <div class="relative mobile-timeline">
+          <div class="timeline-line absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-blue-400 to-blue-600" style="background: linear-gradient(to bottom, #1687a7, #276678)"></div>
+
+          <div class="timeline-item relative flex flex-col md:flex-row items-start md:items-center mb-16" data-aos="fade-right">
+            <div class="w-full md:w-1/2 pr-0 md:pr-8 text-left md:text-right mb-4 md:mb-0">
+              <div class="glassmorphism p-6 rounded-2xl skill-card">
+                <span class="inline-block bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold mb-4 btn-main">Des 2023 - Mei 2024</span>
+                <h3 class="text-2xl font-bold gradient-text mb-2">Web Developer</h3>
+                <h4 class="text-lg font-semibold text-contrast mb-3">PT. Mitra Alam Persada • Magang</h4>
+                <p class="text-contrast">
+                  Merancang dan mengembangkan halaman arahan dinamis untuk PT Mitra Alam Persada, yang meningkatkan visibilitas perusahaan dan keterlibatan pemangku kepentingan. Membuat kerangka kerja untuk laporan produksi real-time
+                  (tahunan, bulanan, harian) menggunakan Laravel 11, PHP 8, SQL Server 2022, Azure Data Studio, dan SQL Server Management Studio 2022.
+                </p>
+              </div>
+            </div>
+            <div class="timeline-dot absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full border-4 border-white" style="background: linear-gradient(90deg, #1687a7, #276678)"></div>
+            <div class="timeline-emoji w-full md:w-1/2 pl-0 md:pl-8">
+              <div class="text-6xl">💼</div>
+            </div>
+          </div>
+
+          <div class="timeline-item relative flex flex-col md:flex-row items-start md:items-center mb-16" data-aos="fade-left">
+            <div class="timeline-emoji w-full md:w-1/2 pr-0 md:pr-8 text-left md:text-right mb-4 md:mb-0">
+              <div class="text-6xl">👨‍🏫</div>
+            </div>
+            <div class="timeline-dot absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full border-4 border-white" style="background: linear-gradient(90deg, #276678, #1687a7)"></div>
+            <div class="w-full md:w-1/2 pl-0 md:pl-8">
+              <div class="glassmorphism p-6 rounded-2xl skill-card">
+                <span class="inline-block bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold mb-4 btn-main">Feb 2022 - Jun 2024</span>
+                <h3 class="text-2xl font-bold gradient-text mb-2">Asisten Praktikum</h3>
+                <h4 class="text-lg font-semibold text-contrast mb-3">Prodi Teknik Informatika Universitas Trunojoyo • Part Time</h4>
+                <p class="text-contrast">
+                  Sebagai asisten praktikum, saya mengajar dan mengawasi praktikum berdasarkan materi yang diberikan dosen, memastikan mahasiswa memahami materi sepenuhnya. Saya juga bertanggung jawab menjaga ketertiban di laboratorium dan
+                  menciptakan lingkungan belajar yang kondusif.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item relative flex flex-col md:flex-row items-start md:items-center" data-aos="fade-right">
+            <div class="w-full md:w-1/2 pr-0 md:pr-8 text-left md:text-right mb-4 md:mb-0">
+              <div class="glassmorphism p-6 rounded-2xl skill-card">
+                <span class="inline-block bg-gradient-to-r from-green-500 to-teal-500 px-4 py-2 rounded-full text-sm font-semibold mb-4" style="background: linear-gradient(90deg, #1687a7, #d3e0ea); color: #276678">Apr - Jul 2019</span>
+                <h3 class="text-2xl font-bold gradient-text mb-2">IT Staff</h3>
+                <h4 class="text-lg font-semibold text-contrast mb-3">Dinas Pendidikan • Magang</h4>
+                <p class="text-contrast">
+                  Sebagai pekerja magang, saya bertugas sebagai dukungan TI, membantu entri data dan tugas lainnya, menangani perangkat komputer, dan memberikan dukungan teknis di Dinas Pendidikan Kabupaten Gresik.
+                </p>
+              </div>
+            </div>
+            <div class="timeline-dot absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-r from-green-500 to-teal-500 rounded-full border-4 border-white" style="background: linear-gradient(90deg, #d3e0ea, #1687a7)"></div>
+            <div class="timeline-emoji w-full md:w-1/2 pl-0 md:pl-8">
+              <div class="text-6xl">🛠️</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="education" class="py-20 wave-bg relative overflow-hidden">
+      <div class="absolute inset-0 z-0">
+        <div class="blob-2 top-1/4 left-5" style="width: 140px; height: 140px; animation-delay: 1s; background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(211, 224, 234, 0.3))"></div>
+        <div class="blob-1 bottom-1/4 right-5" style="width: 160px; height: 160px; animation-delay: 4s; background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(39, 102, 120, 0.3))"></div>
+      </div>
+      <div class="max-w-[1200px] mx-auto px-4 relative z-10">
+        <div class="text-center mb-16" data-aos="fade-up">
+          <h2 class="text-4xl font-bold text-white mb-4">PENDIDIKAN</h2>
+          <div class="w-24 h-1 bg-blue-400 mx-auto mb-6" style="background: linear-gradient(90deg, #d3e0ea, #1687a7)"></div>
+          <p class="text-gray-200 text-lg">Perjalanan pendidikan formal saya</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div class="glassmorphism p-8 rounded-3xl skill-card" data-aos="zoom-in" data-aos-delay="100">
+            <div class="text-center mb-6">
+              <div class="text-6xl mb-4">🎓</div>
+              <h3 class="text-2xl font-bold mb-2">Sarjana Teknik Informatika</h3>
+              <h4 class="text-xl mb-4">Universitas Trunojoyo Madura</h4>
+              <span class="px-4 py-2 rounded-full font-semibold">2021 - 2025</span>
+            </div>
+            <div class="space-y-3">
+              <p>✨ IPK: 3.51</p>
+              <p>✨ Spesialisasi: Ilmu Data, Pengembangan Web, Infrastruktur Jaringan</p>
+              <p>✨ Focus Area: Machine Learning, Database Systems, Transformasi Digital</p>
+              <p>✨ Relevant Skills: Data Analysis, Web Development, Network Management</p>
+            </div>
+          </div>
+
+          <div class="glassmorphism p-8 rounded-3xl skill-card" data-aos="zoom-in" data-aos-delay="200">
+            <div class="text-center mb-6">
+              <div class="text-6xl mb-4">🏫</div>
+              <h3 class="text-2xl font-bold mb-2">Teknik Komputer & Jaringan</h3>
+              <h4 class="text-xl mb-4">SMKN 1 CERME GRESIK</h4>
+              <span class="px-4 py-2 rounded-full font-semibold">2018 - Jun 2021</span>
+            </div>
+            <div class="space-y-3">
+              <p>⚡ Nilai Rata-rata: 84</p>
+              <p>⚡ Network Configuration & Management</p>
+              <p>⚡ Computer Hardware & Software</p>
+              <p>⚡ Network Security Fundamentals</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 relative overflow-hidden section-bg-light">
+      <div class="absolute inset-0 z-0">
+        <div class="blob-1 top-20 left-0" style="width: 100px; height: 100px; animation-delay: 8s; background: linear-gradient(135deg, rgba(245, 101, 101, 0.3), rgba(239, 68, 68, 0.3))"></div>
+        <div class="blob-2 bottom-40 right-10" style="width: 130px; height: 130px; animation-delay: 10s; background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(124, 58, 237, 0.3))"></div>
+      </div>
+      <div class="max-w-[1200px] mx-auto px-4 relative z-10">
+        <div class="text-center mb-16" data-aos="fade-up">
+          <h2 class="text-4xl font-bold gradient-text mb-4">SERTIFIKASI & PELATIHAN</h2>
+          <div class="w-24 h-1 mx-auto mb-6" style="background: linear-gradient(90deg, #1687a7 0%, #276678 100%)"></div>
+          <p class="text-lg text-contrast">Sertifikasi profesional yang telah saya raih</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="glassmorphism rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 skill-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="h-48 overflow-hidden">
+              <img src="other/asset/Sertifikat/Google Cloud Computing Foundations Certificate.png" alt="Google Cloud Certificate" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-6">
+              <h3 class="font-bold text-lg gradient-text mb-2">Google Cloud Computing Foundations Certificate</h3>
+              <p class="text-sm font-semibold mb-2 text-contrast">Google</p>
+              <span class="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-semibold mb-3">Juni 2024</span>
+              <div class="text-xs space-y-1 text-contrast">
+                <p><strong>ID:</strong> 9c4780c1-d1ec-4635-a304-a696c419ea33</p>
+                <p><strong>Skills:</strong> Cloud Computing</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="glassmorphism rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 skill-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="h-48 overflow-hidden">
+              <img src="other/asset/Sertifikat/Certificate of Competence.jpeg" alt="BNSP Certificate" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-6">
+              <h3 class="font-bold text-lg gradient-text mb-2">Certificate of Competence</h3>
+              <p class="text-sm font-semibold mb-2 text-contrast">Badan Nasional Sertifikasi Profesi (BNSP)</p>
+              <span class="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-semibold mb-3">Agustus 2023</span>
+              <div class="text-xs space-y-1 text-contrast">
+                <p><strong>ID:</strong> TIK.002.1861.001105.2023</p>
+                <p><strong>Skills:</strong> Computer Networking</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="glassmorphism rounded-2xl p-6 hover:shadow-2xl transition-all duration-300 skill-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="text-center mb-4">
+              <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span class="text-white text-2xl">🐧</span>
+              </div>
+              <h3 class="font-bold text-lg gradient-text mb-2">NDG Linux Essentials</h3>
+              <p class="text-sm font-semibold mb-2 text-contrast">Cisco Networking Academy</p>
+              <span class="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-semibold">Juli 2023</span>
+            </div>
+            <div class="text-xs space-y-1 text-contrast">
+              <p><strong>Skills:</strong> Linux, Open Source</p>
+              <p><strong>Platform:</strong> Cisco NetAcad</p>
+            </div>
+          </div>
+
+          <div class="glassmorphism rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 skill-card" data-aos="fade-up" data-aos-delay="400">
+            <div class="h-48 overflow-hidden">
+              <img src="other/asset/Sertifikat/Networking Essentials.jpeg" alt="Cisco Networking Certificate" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-6">
+              <h3 class="font-bold text-lg gradient-text mb-2">Networking Essentials</h3>
+              <p class="text-sm font-semibold mb-2 text-contrast">Cisco Networking Academy</p>
+              <span class="inline-block bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-xs font-semibold mb-3">Desember 2022</span>
+              <div class="text-xs space-y-1 text-contrast">
+                <p><strong>Skills:</strong> Networking</p>
+                <p><strong>Platform:</strong> Cisco NetAcad</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="glassmorphism rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 skill-card" data-aos="fade-up" data-aos-delay="500">
+            <div class="h-48 overflow-hidden">
+              <img src="other/asset/Sertifikat/CERTIFICATE OF COMPETENCY ASSESSMENT.jpg" alt="Competency Assessment Certificate" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-6">
+              <h3 class="font-bold text-lg gradient-text mb-2">CERTIFICATE OF COMPETENCY ASSESSMENT</h3>
+              <p class="text-sm font-semibold mb-2 text-contrast">Lembaga Sertifikasi Profesi</p>
+              <span class="inline-block bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs font-semibold mb-3">Juni 2021</span>
+              <div class="text-xs space-y-1 text-contrast">
+                <p><strong>ID:</strong> 2021.10-0101-8855-9.408-4</p>
+                <p><strong>Skills:</strong> Troubleshooting Keamanan Jaringan WAN</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="glassmorphism rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 skill-card" data-aos="fade-up" data-aos-delay="600">
+            <div class="h-48 overflow-hidden">
+              <img src="other/asset/Sertifikat/Pelatihan Coding Daring Ready, Set Code! Angkatan II.jpg" alt="Progate Certificate" class="w-full h-full object-cover" />
+            </div>
+            <div class="p-6">
+              <h3 class="font-bold text-lg gradient-text mb-2">Pelatihan Coding Daring Ready, Set Code! Angkatan II</h3>
+              <p class="text-sm font-semibold mb-2 text-contrast">BAKTI KOMDIGI</p>
+              <span class="inline-block bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-xs font-semibold mb-3">November 2020</span>
+              <div class="text-xs space-y-1 text-contrast">
+                <p><strong>ID:</strong> 4153/D4/PP/2020ID</p>
+                <p><strong>Skills:</strong> HTML5, CSS, JavaScript</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio" class="py-20 pattern-bg relative overflow-hidden">
+      <div class="absolute inset-0 z-0">
+        <div class="blob-3 top-1/2 left-20" style="width: 170px; height: 170px; animation-delay: 5s; background: linear-gradient(135deg, rgba(155, 89, 182, 0.3), rgba(231, 76, 60, 0.3))"></div>
+        <div class="blob-1 bottom-10 right-0" style="width: 140px; height: 140px; animation-delay: 2s; background: linear-gradient(135deg, rgba(255, 107, 107, 0.3), rgba(255, 230, 109, 0.3))"></div>
+      </div>
+      <div class="max-w-[1200px] mx-auto px-4 relative z-10">
+        <div class="text-center mb-16" data-aos="fade-up">
+          <h2 class="text-4xl font-bold text-white mb-4">PORTOFOLIO</h2>
+          <div class="w-24 h-1 mx-auto mb-6" style="background: linear-gradient(90deg, #1687a7 0%, #276678 100%)"></div>
+          <p class="text-gray-200 text-lg">Project dan karya yang telah saya kerjakan</p>
+        </div>
+
+        <div class="flex justify-center mb-12" data-aos="fade-up">
+          <div class="glassmorphism rounded-full p-2">
+            <div class="flex space-x-2">
+              <button class="tab-button active px-6 py-3 rounded-full font-semibold transition-all" data-tab="data-science">📊 Data Science</button>
+              <button class="tab-button px-6 py-3 rounded-full font-semibold hover:bg-white/10 transition-all" data-tab="web-dev">💻 Web Development</button>
+              <button class="tab-button px-6 py-3 rounded-full font-semibold hover:bg-white/10 transition-all" data-tab="networking">🌐 Networking</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="data-science">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="glassmorphism rounded-2xl p-6 hover:scale-105 transition-transform skill-card" data-aos="zoom-in" data-aos-delay="100">
+              <div class="text-center mb-4">
+                <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <span class="text-white text-2xl">💰</span>
+                </div>
+                <h3 class="text-xl font-bold card-title mb-2">Bitcoin Price Prediction</h3>
+                <p class="card-desc text-sm mb-4">Multivariate LSTM dengan integrasi indikator makroekonomi untuk prediksi harga Bitcoin</p>
+                <div class="flex flex-wrap gap-2 justify-center mb-4">
+                  <span class="badge px-2 py-1 text-xs rounded-full">LSTM</span>
+                  <span class="badge px-2 py-1 text-xs rounded-full">Python</span>
+                  <span class="badge px-2 py-1 text-xs rounded-full">TensorFlow</span>
+                </div>
+                <a href="#" class="inline-block btn-main px-4 py-2 rounded-full text-sm hover:shadow-lg transition-all"> View Project → </a>
+              </div>
+            </div>
+
+            <div class="glassmorphism rounded-2xl p-6 hover:scale-105 transition-transform skill-card" data-aos="zoom-in" data-aos-delay="200">
+              <div class="text-center mb-4">
+                <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-teal-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <span class="text-white text-2xl">📊</span>
+                </div>
+                <h3 class="text-xl font-bold card-title mb-2">Data Visualization Dashboard</h3>
+                <p class="card-desc text-sm mb-4">Interactive dashboard untuk analisis data bisnis menggunakan Plotly dan Dash</p>
+                <div class="flex flex-wrap gap-2 justify-center mb-4">
+                  <span class="badge px-2 py-1 text-xs rounded-full">Plotly</span>
+                  <span class="badge px-2 py-1 text-xs rounded-full">Dash</span>
+                  <span class="badge px-2 py-1 text-xs rounded-full">Analytics</span>
+                </div>
+                <a href="#" class="inline-block btn-main px-4 py-2 rounded-full text-sm hover:shadow-lg transition-all"> View Project → </a>
+              </div>
+            </div>
+
+            <div class="glassmorphism rounded-2xl p-6 hover:scale-105 transition-transform skill-card" data-aos="zoom-in" data-aos-delay="300">
+              <div class="text-center mb-4">
+                <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <span class="text-white text-2xl">🌐</span>
+                </div>
+                <h3 class="text-xl font-bold card-title mb-2">Web Scraping & Data Crawling</h3>
+                <p class="card-desc text-sm mb-4">Sistem otomatis untuk pengumpulan dan ekstraksi data dari berbagai sumber web</p>
+                <div class="flex flex-wrap gap-2 justify-center mb-4">
+                  <span class="badge px-2 py-1 text-xs rounded-full">Python</span>
+                  <span class="badge px-2 py-1 text-xs rounded-full">BeautifulSoup</span>
+                  <span class="badge px-2 py-1 text-xs rounded-full">Selenium</span>
+                </div>
+                <a href="#" class="inline-block btn-main px-4 py-2 rounded-full text-sm hover:shadow-lg transition-all"> View Project → </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center mt-12" data-aos="fade-up" data-aos-delay="400">
+            <div class="glassmorphism rounded-2xl p-8 max-w-2xl mx-auto skill-card">
+              <h3 class="text-2xl font-bold text-contrast mb-4">Lihat Semua Proyek Data Science</h3>
+              <p class="text-contrast mb-6">Kunjungi blog saya untuk melihat proyek-proyek data science lainnya dengan penjelasan detail dan implementasi lengkap</p>
+              <a href="#" class="inline-block px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl btn-main"> 📝 Kunjungi Blog Data Science → </a>
+              <p class="text-sm text-red-300 mt-3 italic">(Blog sedang dalam pengembangan)</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content hidden" id="web-dev">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="glassmorphism rounded-2xl overflow-hidden hover:scale-105 transition-transform skill-card" data-aos="zoom-in" data-aos-delay="100">
+              <img src="other/asset/antero.png" class="w-full h-48 object-cover" alt="Digital Banking Platform" />
+              <div class="p-6">
+                <h3 class="text-xl font-bold card-title mb-2">Digital Banking Platform</h3>
+                <p class="card-desc text-sm mb-4">Platform perbankan digital modern dengan fitur transaksi, monitoring, dan dashboard analitik</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <span class="badge px-2 py-1 text-xs rounded-full">Laravel</span>
+                  <span class="badge px-2 py-1 text-xs rounded-full">PHP</span>
+                  <span class="badge px-2 py-1 text-xs rounded-full">SQL Server</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="glassmorphism rounded-2xl overflow-hidden hover:scale-105 transition-transform skill-card" data-aos="zoom-in" data-aos-delay="200">
+              <img src="other/asset/wisata.png" class="w-full h-48 object-cover" alt="Wisata Website" />
+              <div class="p-6">
+                <h3 class="text-xl font-bold card-title mb-2">Website Wisata Tretan</h3>
+                <p class="card-desc text-sm mb-4">Website promosi wisata dengan design modern dan responsive</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <span class="badge px-2 py-1 text-xs rounded-full">HTML5</span>
+                  <span class="badge px-2 py-1 text-xs rounded-full">CSS3</span>
+                  <span class="badge px-2 py-1 text-xs rounded-full">JavaScript</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="glassmorphism rounded-2xl overflow-hidden hover:scale-105 transition-transform skill-card" data-aos="zoom-in" data-aos-delay="300">
+              <img src="other/asset/itechhire.png" class="w-full h-48 object-cover" alt="iTechHire Platform" />
+              <div class="p-6">
+                <h3 class="text-xl font-bold card-title mb-2">iTechHire Platform</h3>
+                <p class="card-desc text-sm mb-4">Platform recruitment khusus untuk IT professionals dengan fitur lengkap</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <span class="badge px-2 py-1 text-xs rounded-full">React</span>
+                  <span class="badge px-2 py-1 text-xs rounded-full">Node.js</span>
+                  <span class="badge px-2 py-1 text-xs rounded-full">Database</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="glassmorphism rounded-2xl overflow-hidden hover:scale-105 transition-transform skill-card" data-aos="zoom-in" data-aos-delay="400">
+              <div class="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                <span class="text-white text-6xl">🏠</span>
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-bold card-title mb-2">Sistem Manajemen Asrama UTM</h3>
+                <p class="card-desc text-sm mb-4">Platform digital untuk pengelolaan asrama mahasiswa dengan fitur booking, monitoring, dan administrasi</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <span class="badge px-2 py-1 text-xs rounded-full">PHP</span>
+                  <span class="badge px-2 py-1 text-xs rounded-full">MySQL</span>
+                  <span class="badge px-2 py-1 text-xs rounded-full">Bootstrap</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-content hidden" id="networking">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="glassmorphism rounded-2xl p-8 hover:scale-105 transition-transform skill-card" data-aos="zoom-in" data-aos-delay="100">
+              <div class="flex items-start space-x-6">
+                <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                  <span class="text-white text-2xl">🔧</span>
                 </div>
                 <div>
-                  <p class="text-[10px] text-blue-100 uppercase tracking-wider font-bold">Officer on Duty</p>
-                  <h2 class="text-xl font-bold leading-none" id="userNameDisplay">Memuat...</h2>
+                  <h3 class="text-2xl font-bold mb-3">Network Configuration & Management</h3>
+                  <p class="mb-4">Implementasi konfigurasi jaringan enterprise dengan focus pada troubleshooting keamanan jaringan WAN, VLAN management, dan network optimization sesuai sertifikat BNSP.</p>
+                  <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="px-3 py-1 text-sm rounded-full">BNSP Certified</span>
+                    <span class="px-3 py-1 text-sm rounded-full">Mikrotik</span>
+                    <span class="px-3 py-1 text-sm rounded-full">WAN Security</span>
+                  </div>
+                  <ul class="space-y-2">
+                    <li>• WAN network troubleshooting dan security implementation</li>
+                    <li>• Mikrotik router configuration dan management</li>
+                    <li>• Network performance optimization</li>
+                  </ul>
                 </div>
               </div>
-              <button onclick="ubahNamaUser()" class="bg-white/10 hover:bg-white/20 p-2 rounded-xl backdrop-blur-md border border-white/20 transition-all active:scale-90">
-                <span class="material-icons-round text-sm">edit</span>
-              </button>
             </div>
 
-            <div class="mt-6 flex gap-3">
-              <div class="bg-white/10 backdrop-blur-sm px-4 py-2.5 rounded-xl border border-white/10 flex-1">
-                <span class="block text-2xl font-bold" id="statToday">0</span>
-                <span class="text-[9px] text-blue-100 uppercase font-bold opacity-80">Laporan Hari Ini</span>
-              </div>
-              <div class="bg-white/10 backdrop-blur-sm px-4 py-2.5 rounded-xl border border-white/10 flex-1">
-                <span class="block text-2xl font-bold" id="statPending">0</span>
-                <span class="text-[9px] text-blue-100 uppercase font-bold opacity-80">Perlu Dicek</span>
+            <div class="glassmorphism rounded-2xl p-8 hover:scale-105 transition-transform skill-card" data-aos="zoom-in" data-aos-delay="200">
+              <div class="flex items-start space-x-6">
+                <div class="w-16 h-16 bg-gradient-to-r from-red-500 to-orange-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                  <span class="text-white text-2xl">🛡️</span>
+                </div>
+                <div>
+                  <h3 class="text-2xl font-bold mb-3">Linux System Administration</h3>
+                  <p class="mb-4">Administrasi sistem Linux dengan focus pada network services, system security, dan server management berdasarkan sertifikat Cisco NDG Linux Essentials.</p>
+                  <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="px-3 py-1 text-sm rounded-full">Linux</span>
+                    <span class="px-3 py-1 text-sm rounded-full">Cisco NDG</span>
+                    <span class="px-3 py-1 text-sm rounded-full">Open Source</span>
+                  </div>
+                  <ul class="space-y-2">
+                    <li>• Linux system installation dan configuration</li>
+                    <li>• Network services management (DNS, DHCP, Web)</li>
+                    <li>• System security hardening dan monitoring</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
+    </section>
 
-        <div class="bg-slate-200 p-1 rounded-xl flex relative mb-4">
-          <div id="subTabBg" class="absolute left-1 top-1 bottom-1 w-[calc(50%-4px)] bg-white rounded-lg shadow-sm transition-all duration-300"></div>
-          <button onclick="switchHomeSub('feed')" class="flex-1 relative z-10 py-2 text-xs font-bold text-center transition-colors duration-300 text-primary" id="btnSubFeed">Aktivitas</button>
-          <button onclick="switchHomeSub('stats')" class="flex-1 relative z-10 py-2 text-xs font-bold text-center transition-colors duration-300 text-slate-500" id="btnSubStats">Statistik</button>
+    <section id="contact" class="py-20 relative overflow-hidden section-bg-light">
+      <div class="absolute top-0 left-0 w-full h-full opacity-5">
+        <div class="absolute top-10 right-10 w-32 h-32 bg-purple-400 rounded-full"></div>
+        <div class="absolute bottom-20 left-10 w-24 h-24 bg-pink-400 rounded-full"></div>
+        <div class="absolute top-1/2 left-1/2 w-16 h-16 bg-blue-400 rounded-full"></div>
+      </div>
+      <div class="max-w-[1200px] mx-auto px-4 relative z-10">
+        <div class="text-center mb-16" data-aos="fade-up">
+          <h2 class="text-4xl font-bold gradient-text mb-4">HUBUNGI SAYA</h2>
+          <div class="w-24 h-1 mx-auto mb-6" style="background: linear-gradient(90deg, #1687a7 0%, #276678 100%)"></div>
+          <p class="text-gray-800 text-lg text-contrast">Mari berdiskusi tentang proyek atau peluang kolaborasi</p>
         </div>
 
-        <div id="view-feed" class="animate-fade-in">
-          <div class="mb-3 px-1">
-            <div class="relative mb-3">
-              <span class="material-icons-round absolute left-3 top-2.5 text-slate-400 text-sm">search</span>
-              <input type="text" id="feedSearch" onkeyup="filterFeed()" placeholder="Cari aktivitas..." class="w-full bg-white border border-slate-200 rounded-xl py-2 pl-9 pr-3 text-xs focus:outline-none focus:border-accent shadow-sm" />
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+          <div class="space-y-8" data-aos="fade-right">
+            <div class="flex items-center space-x-4">
+              <div class="w-14 h-14 bg-gradient-to-r from-blue-400 to-blue-500 rounded-2xl flex items-center justify-center" style="background: linear-gradient(90deg, #1687a7, #276678)">
+                <img src="other/asset/wa-green.png" alt="WhatsApp" class="w-6 h-6" />
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold gradient-text">WhatsApp</h3>
+                <p class="text-gray-700 text-contrast">+62 831-2993-9682</p>
+              </div>
             </div>
-            <div class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide" id="feedFilters">
-              <button onclick="setFeedFilter('ALL', this)" class="filter-chip active px-3 py-1.5 rounded-full text-[10px] font-bold border border-slate-200 bg-primary text-white whitespace-nowrap transition-colors">Semua</button>
-              <button onclick="setFeedFilter('LAPOR', this)" class="filter-chip px-3 py-1.5 rounded-full text-[10px] font-bold border border-slate-200 bg-white text-slate-500 whitespace-nowrap transition-colors">Laporan</button>
-              <button onclick="setFeedFilter('JURNAL', this)" class="filter-chip px-3 py-1.5 rounded-full text-[10px] font-bold border border-slate-200 bg-white text-slate-500 whitespace-nowrap transition-colors">Jurnal</button>
-            </div>
-          </div>
-          <div id="unifiedActivityLog" class="space-y-3 pb-4 min-h-[200px]"></div>
-        </div>
 
-        <div id="view-stats" class="hidden animate-fade-in space-y-4">
-          <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100">
-            <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 border-l-4 border-primary pl-2">Ringkasan</h3>
-            <div class="relative h-40 w-full flex justify-center">
-              <canvas id="chartStatus"></canvas>
-              <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                <span class="text-2xl font-bold text-slate-700" id="totalAssetStat">0</span>
-                <span class="text-[9px] text-slate-400 uppercase">Total Unit</span>
+            <div class="flex items-center space-x-4">
+              <div class="w-14 h-14 bg-gradient-to-r from-blue-400 to-blue-500 rounded-2xl flex items-center justify-center" style="background: linear-gradient(90deg, #276678, #1687a7)">
+                <img src="other/asset/gmail-green.png" alt="Email" class="w-6 h-6" />
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold gradient-text">Email</h3>
+                <p class="text-gray-700 text-contrast">adamzaky.dy@gmail.com</p>
+              </div>
+            </div>
+
+            <div class="flex items-center space-x-4">
+              <div class="w-14 h-14 bg-gradient-to-r from-blue-400 to-blue-500 rounded-2xl flex items-center justify-center" style="background: linear-gradient(90deg, #1687a7, #d3e0ea)">
+                <img src="other/asset/linkedin-green.png" alt="LinkedIn" class="w-6 h-6" />
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold gradient-text">LinkedIn</h3>
+                <p class="text-gray-700 text-contrast">linkedin.com/in/adamzaky</p>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-4">
+              <div class="w-14 h-14 bg-gradient-to-r from-blue-400 to-blue-500 rounded-2xl flex items-center justify-center mt-1" style="background: linear-gradient(90deg, #d3e0ea, #276678)">
+                <img src="other/asset/maps-green.png" alt="Location" class="w-6 h-6" />
+              </div>
+              <div>
+                <h3 class="text-lg font-semibold gradient-text">Lokasi</h3>
+                <p class="text-gray-700 text-contrast">Cerme, Gresik, Jawa Timur, Indonesia</p>
               </div>
             </div>
           </div>
-          <div>
-            <div class="grid grid-cols-3 gap-2">
-              <button onclick="renderCategoryList('Normal')" id="btnCatNormal" class="stat-tab active py-2 rounded-xl border border-slate-200 bg-white shadow-sm flex flex-col items-center justify-center transition-all">
-                <span class="text-lg font-bold text-emerald-500" id="countNormal">0</span>
-                <span class="text-[9px] font-bold text-slate-400 uppercase">Normal</span>
-              </button>
-              <button onclick="renderCategoryList('Maintenance')" id="btnCatMaint" class="stat-tab py-2 rounded-xl border border-slate-200 bg-white shadow-sm flex flex-col items-center justify-center transition-all">
-                <span class="text-lg font-bold text-amber-500" id="countMaint">0</span>
-                <span class="text-[9px] font-bold text-slate-400 uppercase">Maint.</span>
-              </button>
-              <button onclick="renderCategoryList('Rusak')" id="btnCatRusak" class="stat-tab py-2 rounded-xl border border-slate-200 bg-white shadow-sm flex flex-col items-center justify-center transition-all">
-                <span class="text-lg font-bold text-red-500" id="countRusak">0</span>
-                <span class="text-[9px] font-bold text-slate-400 uppercase">Rusak</span>
-              </button>
-            </div>
-            <div class="flex gap-2 mb-4 px-4"></div>
-            <div class="px-4 mb-3 animate-fade-in">
-              <div class="relative">
-                <span class="material-icons-round absolute left-3 top-2.5 text-slate-400 text-sm">search</span>
+
+          <div class="glassmorphism rounded-3xl p-8 skill-card" data-aos="fade-left">
+            <form action="https://formsubmit.co/adamzaky.dy@gmail.com" method="POST" class="space-y-6">
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2 text-contrast">Nama Anda</label>
                 <input
                   type="text"
-                  id="statSearchInput"
-                  onkeyup="filterStatList()"
-                  placeholder="Cari ID, Nama, atau Lokasi..."
-                  class="w-full bg-slate-50 border border-slate-200 rounded-xl py-2 pl-9 pr-3 text-xs focus:outline-none focus:border-primary transition-colors shadow-sm"
+                  name="name"
+                  class="w-full p-4 border-2 rounded-xl focus:outline-none transition-colors"
+                  style="border-color: var(--border-color-light)"
+                  onfocus="this.style.borderColor='var(--btn-main-bg-light)'"
+                  onblur="this.style.borderColor='var(--border-color-light)'"
+                  placeholder="Masukkan nama lengkap"
                 />
               </div>
-            </div>
-            <div id="categoryListContainer" class="px-4 pb-20 space-y-2"></div>
-            <div id="categoryListContainer" class="space-y-2 pb-10 min-h-[200px]"></div>
-          </div>
-        </div>
-      </section>
 
-      <section id="tab-patrol" class="tab-section hidden">
-        <div id="patrol-list-view">
-          <div class="flex gap-2 mb-4">
-            <input type="text" id="searchInput" class="flex-1 bg-white border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-accent shadow-sm transition-all" placeholder="🔍 Cari ID / Perangkat..." />
-            <button onclick="doSearch()" class="bg-white text-slate-600 px-3 rounded-xl border border-slate-200 shadow-sm hover:border-accent hover:text-accent transition-colors"><span class="material-icons-round">search</span></button>
-            <button onclick="openModal('modalAddAsset')" class="bg-primary text-white px-3 rounded-xl shadow-lg shadow-primary/20 active:translate-y-1 transition-all flex items-center justify-center">
-              <span class="material-icons-round">add</span>
-            </button>
-          </div>
-          <div id="asset-results" class="space-y-3 pb-20">
-            <div class="text-center p-10 text-slate-300 text-sm flex flex-col items-center animate-pulse">
-              <span class="material-icons-round text-5xl mb-2 text-slate-200">qr_code_scanner</span>
-              Gunakan tombol scan di bawah<br />atau ketik ID aset.
-            </div>
-          </div>
-        </div>
-        <div id="recentScanContainer" class="px-6 mt-6 pb-24 animate-fade-in">
-          <div class="flex justify-between items-end mb-3">
-            <h3 class="font-bold text-slate-400 text-[10px] uppercase tracking-wider flex items-center gap-1"><span class="material-icons-round text-sm">history</span> Riwayat Scan</h3>
-            <button onclick="clearRecentScans()" class="text-[10px] text-red-400 font-bold hover:text-red-500 active:scale-90 transition-transform">HAPUS SEMUA</button>
-          </div>
-
-          <div id="recentList" class="space-y-2"></div>
-        </div>
-        <div id="patrol-form-view" class="hidden bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden animate-scale-up">
-          <div class="bg-primary p-4 flex justify-between items-start text-white">
-            <div>
-              <h3 class="font-bold text-lg leading-tight" id="formAssetName">Nama Perangkat</h3>
-              <p class="text-xs text-blue-100 flex items-center gap-1 mt-1"><span class="material-icons-round text-xs">place</span> <span id="formAssetLoc">Lokasi</span></p>
-            </div>
-            <button onclick="closeForm()" class="bg-white/10 p-1 rounded-full hover:bg-white/20"><span class="material-icons-round">close</span></button>
-          </div>
-          <div class="bg-orange-50 px-4 py-2 border-b border-orange-100 flex justify-between items-center">
-            <span class="text-[10px] font-bold text-accent uppercase">ID Perangkat</span>
-            <span class="text-xs font-mono font-bold text-primary" id="formAssetId">...</span>
-          </div>
-
-          <div class="p-4 space-y-5">
-            <div>
-              <label class="block text-[10px] font-bold text-slate-400 mb-2 uppercase tracking-widest">Kondisi Perangkat</label>
-              <div class="grid grid-cols-3 gap-3">
-                <button onclick="setStatus('Normal', this)" class="status-btn active py-3 rounded-xl border-2 border-transparent bg-slate-50 text-slate-500 text-xs font-bold transition-all duration-200">Normal</button>
-                <button onclick="setStatus('Maintenance', this)" class="status-btn py-3 rounded-xl border-2 border-transparent bg-slate-50 text-slate-500 text-xs font-bold transition-all duration-200">Perlu Cek</button>
-                <button onclick="setStatus('Rusak', this)" class="status-btn py-3 rounded-xl border-2 border-transparent bg-slate-50 text-slate-500 text-xs font-bold transition-all duration-200">Rusak</button>
-              </div>
-              <input type="hidden" id="statusInput" value="Normal" />
-            </div>
-            <div>
-              <label class="block text-[10px] font-bold text-slate-400 mb-2 uppercase tracking-widest">Catatan Officer</label>
-              <textarea id="catatanInput" rows="2" class="w-full bg-slate-50 border-none rounded-xl p-3 text-sm focus:ring-2 focus:ring-accent transition-all" placeholder="Detail kendala..."></textarea>
-            </div>
-            <div class="mt-2">
-              <label class="block text-[10px] font-bold text-slate-400 mb-2 uppercase tracking-widest">Foto Bukti / Kondisi</label>
-              <div class="relative h-48 bg-slate-50 rounded-xl border-2 border-dashed border-slate-200 hover:border-accent flex flex-col items-center justify-center overflow-hidden transition-colors group">
-                <div class="group-hover:scale-110 transition-transform duration-300 flex flex-col items-center">
-                  <span class="material-icons-round text-slate-300 text-3xl group-hover:text-accent">add_a_photo</span>
-                  <span class="text-[10px] text-slate-400 mt-2 font-bold group-hover:text-accent">AMBIL FOTO</span>
-                </div>
-                <img id="prev_img1" class="absolute inset-0 w-full h-full object-cover hidden" />
-                <input type="file" id="file_img1" accept="image/*" capture="environment" class="absolute inset-0 opacity-0 cursor-pointer z-10" onchange="previewImg(this, 'prev_img1')" />
-              </div>
-            </div>
-            <div class="pt-2">
-              <div class="flex justify-between items-center mb-2" onclick="toggleHistory()" style="cursor: pointer">
-                <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest"> Riwayat Perbaikan </label>
-                <span class="material-icons-round text-slate-400 text-sm" id="histIcon">expand_more</span>
-              </div>
-              <div id="histLoading" class="hidden text-center py-2"><span class="material-icons-round animate-spin text-slate-300 text-sm">sync</span></div>
-              <div id="assetHistoryList" class="space-y-2 hidden max-h-40 overflow-y-auto bg-slate-50 p-2 rounded-xl border border-slate-100"></div>
-            </div>
-            <button onclick="submitLaporan()" class="w-full bg-accent hover:bg-orange-600 text-white py-4 rounded-xl font-bold text-sm shadow-xl shadow-accent/20 active:scale-[0.98] transition-all flex justify-center items-center gap-2">
-              <span>KIRIM LAPORAN</span><span class="material-icons-round text-sm">send</span>
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <section id="tab-tools" class="tab-section hidden space-y-4">
-        <div class="flex justify-between items-center mb-2 px-1">
-          <h3 class="font-bold text-slate-600 text-sm uppercase tracking-wider border-l-4 border-accent pl-2">Utility Tools</h3>
-          <div class="flex gap-2">
-            <button onclick="openModal('modalQRGenerator')" class="text-[10px] bg-white border border-slate-200 text-slate-600 px-3 py-1.5 rounded-full font-bold shadow-sm active:scale-95 transition-transform flex items-center gap-1">
-              <span class="material-icons-round text-xs">qr_code_2</span> Label Maker
-            </button>
-            <button onclick="openToolModal()" class="text-[10px] bg-primary text-white px-3 py-1.5 rounded-full font-bold shadow-sm active:scale-95 transition-transform flex items-center gap-1">
-              <span class="material-icons-round text-xs">add</span> Custom
-            </button>
-          </div>
-        </div>
-        <div id="toolsContainer" class="space-y-3 pb-20"></div>
-      </section>
-
-      <section id="tab-jurnal" class="tab-section hidden relative min-h-screen pb-24">
-        <div class="sticky top-0 bg-slate-50 z-20 pb-2 pt-1">
-          <div class="flex justify-between items-center mb-3 px-1">
-            <div>
-              <h3 class="font-bold text-slate-600 text-sm uppercase tracking-wider border-l-4 border-accent pl-2">Daily Activity</h3>
-              <p class="text-[10px] text-slate-400 pl-3">Dokumentasi pekerjaan tim IT</p>
-            </div>
-            <button onclick="openModal('modalJurnal')" class="bg-primary text-white px-4 py-2 rounded-xl shadow-lg shadow-primary/30 active:scale-95 transition-transform flex items-center gap-2">
-              <span class="material-icons-round text-sm">add_a_photo</span>
-              <span class="text-xs font-bold">Post</span>
-            </button>
-          </div>
-
-          <div class="relative px-1 mb-2">
-            <span class="material-icons-round absolute left-4 top-2.5 text-slate-400 text-sm">search</span>
-            <input
-              type="text"
-              id="jurnalSearchInput"
-              onkeyup="renderJurnal()"
-              placeholder="Cari kegiatan..."
-              class="w-full bg-white border border-slate-200 rounded-xl py-2 pl-9 pr-3 text-xs focus:outline-none focus:border-accent shadow-sm"
-            />
-          </div>
-        </div>
-
-        <div
-          id="jurnalContainer"
-          class="space-y-6 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-300 before:to-transparent"
-        ></div>
-
-        <div id="btnLoadMoreJurnal" class="hidden text-center pt-4 pb-8">
-          <button onclick="showOlderJurnal()" class="bg-white border border-slate-200 text-slate-500 px-4 py-2 rounded-full text-xs font-bold shadow-sm active:scale-95">Muat Lebih Banyak...</button>
-        </div>
-      </section>
-
-      <button
-        id="btnBackToTop"
-        onclick="scrollToTop()"
-        class="fixed bottom-24 right-4 z-30 bg-slate-800 text-white w-10 h-10 rounded-full shadow-lg border border-slate-600 flex items-center justify-center active:scale-90 transition-all transform translate-y-20 opacity-0 hidden"
-      >
-        <span class="material-icons-round text-xl">arrow_upward</span>
-      </button>
-
-      <button
-        onclick="openModal('modalAbout')"
-        class="fixed bottom-40 right-4 z-300 bg-white text-primary w-9 h-9 rounded-full shadow-md border border-slate-200 flex items-center justify-center active:scale-90 transition-transform opacity-80 hover:opacity-100"
-      >
-        <span class="material-icons-round text-lg">info</span>
-      </button>
-
-      <section id="tab-log" class="tab-section hidden flex flex-col items-center justify-center h-[60vh] text-center">
-        <div class="bg-slate-100 p-6 rounded-full mb-4"><span class="material-icons-round text-5xl text-slate-300">history_edu</span></div>
-        <h3 class="font-bold text-slate-600">E-Logbook</h3>
-        <p class="text-slate-400 text-xs mt-1">Fitur ini akan segera hadir.</p>
-      </section>
-    </main>
-
-    <nav class="fixed bottom-0 left-0 w-full bg-white/95 backdrop-blur-lg border-t border-slate-200 h-20 pb-4 z-50 shadow-[0_-5px_20px_rgba(0,0,0,0.03)]">
-      <div class="max-w-md mx-auto grid grid-cols-5 h-full relative px-2">
-        <button class="nav-btn active" onclick="switchTab('home', this)"><span class="material-icons-round text-2xl mb-0.5">home</span><span class="text-[9px] font-bold">Beranda</span></button>
-        <button class="nav-btn" onclick="switchTab('patrol', this)"><span class="material-icons-round text-2xl mb-0.5">admin_panel_settings</span><span class="text-[9px] font-bold">Patrol</span></button>
-
-        <div class="relative flex justify-center -top-6 group">
-          <button
-            onclick="startScanner()"
-            class="absolute bg-accent text-white w-14 h-14 rounded-2xl shadow-xl shadow-accent/30 border-4 border-slate-50 flex items-center justify-center active:scale-90 transition-all duration-300 group-hover:-translate-y-1"
-          >
-            <span class="material-icons-round text-3xl">qr_code_scanner</span>
-          </button>
-          <span class="absolute -bottom-2 text-[9px] text-slate-400 font-bold opacity-0 group-hover:opacity-100 transition-opacity">Scan</span>
-        </div>
-
-        <button class="nav-btn" onclick="switchTab('tools', this)"><span class="material-icons-round text-2xl mb-0.5">construction</span><span class="text-[9px] font-bold">Tools</span></button>
-        <button class="nav-btn" onclick="switchTab('jurnal', this)"><span class="material-icons-round text-2xl mb-0.5">assignment</span><span class="text-[9px] font-bold">Jurnal</span></button>
-      </div>
-    </nav>
-
-    <div id="modalScanner" class="fixed inset-0 bg-black z-[100] hidden flex-col animate-fade-in">
-      <div class="flex-1 relative bg-black flex items-center justify-center overflow-hidden">
-        <div id="reader" class="w-full max-w-sm h-auto bg-black"></div>
-        <div class="absolute inset-0 pointer-events-none flex items-center justify-center">
-          <div class="w-64 h-64 border-2 border-white/30 rounded-3xl relative">
-            <div class="absolute top-0 left-0 w-8 h-8 border-t-4 border-l-4 border-accent rounded-tl-xl"></div>
-            <div class="absolute top-0 right-0 w-8 h-8 border-t-4 border-r-4 border-accent rounded-tr-xl"></div>
-            <div class="absolute bottom-0 left-0 w-8 h-8 border-b-4 border-l-4 border-accent rounded-bl-xl"></div>
-            <div class="absolute bottom-0 right-0 w-8 h-8 border-b-4 border-r-4 border-accent rounded-br-xl"></div>
-            <div class="absolute top-0 left-0 w-full h-1 bg-accent/50 shadow-[0_0_15px_rgba(249,115,22,0.8)] animate-[bounce_2s_infinite]"></div>
-          </div>
-        </div>
-      </div>
-      <div class="p-6 bg-black flex justify-between items-center text-white backdrop-blur-sm bg-opacity-80">
-        <p class="text-sm font-medium opacity-90">Arahkan kamera ke QR Code</p>
-        <button onclick="closeModal('modalScanner')" class="text-white text-sm font-bold mt-4 border border-white/30 px-6 py-2 rounded-full">BATAL</button>
-      </div>
-    </div>
-
-    <div id="modalAssetDetail" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] hidden items-end sm:items-center justify-center p-4">
-      <div class="bg-white w-full max-w-sm rounded-3xl p-6 shadow-2xl animate-scale-up">
-        <div class="flex justify-between items-start mb-4">
-          <div>
-            <span id="detailStatusBadge" class="px-2 py-1 rounded text-[10px] font-bold uppercase mb-1 inline-block">STATUS</span>
-            <h3 class="font-bold text-lg text-slate-800 leading-tight" id="detailName">Nama Aset</h3>
-            <p class="text-xs text-slate-400" id="detailDate">Tanggal Lapor</p>
-          </div>
-          <button onclick="closeModal('modalAssetDetail')" class="bg-slate-100 p-1 rounded-full"><span class="material-icons-round text-slate-500">close</span></button>
-        </div>
-
-        <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 mb-4">
-          <p class="text-[10px] font-bold text-slate-400 uppercase mb-1">Catatan / Kendala:</p>
-          <p class="text-sm text-slate-700 italic" id="detailNote">...</p>
-        </div>
-
-        <div id="photoContainer">
-          <button
-            onclick="loadDetailImage()"
-            id="btnLoadImg"
-            class="w-full border-2 border-dashed border-primary/30 text-primary py-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 hover:bg-primary/5 transition-colors"
-          >
-            <span class="material-icons-round">image</span> LIHAT FOTO TERAKHIR
-          </button>
-          <div id="imgWrapper" class="hidden mt-2 relative rounded-xl overflow-hidden bg-slate-100 min-h-[150px]">
-            <img id="detailImgDisplay" class="w-full object-cover" alt="Foto Bukti" />
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="modalAddAsset" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[90] hidden items-end sm:items-center justify-center p-4 transition-all">
-      <div class="bg-white w-full max-w-sm rounded-3xl p-6 shadow-2xl animate-scale-up relative">
-        <h3 class="font-bold text-xl mb-1 text-primary">Tambah Master Aset</h3>
-        <p class="text-xs text-slate-400 mb-5">Input data perangkat baru.</p>
-        <div class="space-y-3">
-          <div class="flex gap-2 items-stretch">
-            <div class="flex-1 relative">
-              <input
-                type="text"
-                id="new_id"
-                placeholder="ID Perangkat"
-                class="w-full h-full border-2 border-slate-100 bg-slate-50 focus:bg-white px-4 rounded-xl text-sm outline-none focus:border-primary font-mono font-bold transition-colors uppercase"
-              />
-            </div>
-            <button onclick="scanForInput('new_id')" class="bg-accent text-white w-12 rounded-xl shadow-md active:scale-95 transition-transform flex items-center justify-center">
-              <span class="material-icons-round">qr_code_scanner</span>
-            </button>
-          </div>
-          <input type="text" id="new_name" placeholder="Nama Perangkat" class="w-full border-2 border-slate-100 bg-slate-50 focus:bg-white p-3 rounded-xl text-sm outline-none focus:border-primary transition-colors" />
-          <input type="text" id="new_loc" placeholder="Lokasi Penempatan" class="w-full border-2 border-slate-100 bg-slate-50 focus:bg-white p-3 rounded-xl text-sm outline-none focus:border-primary transition-colors" />
-          <div class="relative">
-            <span class="absolute left-3 top-3.5 text-slate-400 text-[10px] font-bold z-10">TGL</span>
-            <input type="date" id="new_date" class="w-full border-2 border-slate-100 bg-slate-50 focus:bg-white p-3 pl-10 rounded-xl text-sm outline-none focus:border-primary text-slate-600 transition-colors relative z-0" />
-          </div>
-          <div class="grid grid-cols-2 gap-3 pt-3">
-            <button onclick="closeModal('modalAddAsset')" class="w-full text-slate-500 py-3 rounded-xl font-bold bg-slate-100 hover:bg-slate-200 transition-colors">Batal</button>
-            <button onclick="submitNewAsset()" class="w-full bg-primary text-white py-3 rounded-xl font-bold shadow-lg shadow-primary/20 active:scale-95 transition-transform">Simpan</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="modalInstall" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[200] hidden items-end sm:items-center justify-center p-4 animate-fade-in">
-      <div class="bg-white w-full max-w-sm rounded-3xl p-6 shadow-2xl relative">
-        <div class="text-center mb-6">
-          <div class="w-16 h-16 bg-white rounded-2xl shadow-md mx-auto mb-3 p-2 border border-slate-100">
-            <img src="Berlian-Manyar-Sejahtera-New-Thumbnail.webp" class="w-full h-full object-contain" />
-          </div>
-          <h3 class="font-bold text-lg text-slate-800">Install Aplikasi</h3>
-          <p class="text-xs text-slate-500 px-4">Agar tampilan penuh & lebih nyaman, tambahkan ke layar utama HP Anda.</p>
-        </div>
-
-        <div class="space-y-4 mb-6">
-          <div class="flex items-center gap-3 bg-slate-50 p-3 rounded-xl border border-slate-100">
-            <span class="material-icons-round text-blue-500 text-2xl">ios_share</span>
-            <div class="text-xs text-slate-600">
-              <span class="font-bold block text-slate-800">Pengguna iPhone (iOS)</span>
-              Tekan tombol <span class="font-bold">Share</span> di bawah browser, lalu pilih <span class="font-bold">"Add to Home Screen"</span>.
-            </div>
-          </div>
-
-          <div class="flex items-center gap-3 bg-slate-50 p-3 rounded-xl border border-slate-100">
-            <span class="material-icons-round text-green-600 text-2xl">more_vert</span>
-            <div class="text-xs text-slate-600">
-              <span class="font-bold block text-slate-800">Pengguna Android</span>
-              Tekan titik tiga di pojok kanan atas, lalu pilih <span class="font-bold">"Tambahkan ke Layar Utama"</span>.
-            </div>
-          </div>
-        </div>
-
-        <button onclick="closeInstallGuide()" class="w-full bg-primary text-white py-3 rounded-xl font-bold shadow-lg shadow-primary/20 active:scale-95 transition-transform">Saya Mengerti</button>
-        <button onclick="closeInstallGuide(true)" class="w-full text-slate-400 text-xs font-bold py-3 mt-1">Jangan Tampilkan Lagi</button>
-      </div>
-    </div>
-    <div id="modalQRGenerator" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[90] hidden items-end sm:items-center justify-center p-4">
-      <div class="bg-white w-full max-w-md rounded-3xl p-6 shadow-2xl animate-scale-up max-h-[90vh] overflow-y-auto">
-        <h3 class="font-bold text-lg mb-1 text-primary">Generator Label</h3>
-        <p class="text-xs text-slate-400 mb-5">Buat stiker QR Code Aset.</p>
-        <div class="space-y-4">
-          <label class="flex items-center justify-between bg-slate-50 p-3 rounded-xl border border-slate-100 cursor-pointer">
-            <span class="text-sm font-bold text-slate-600" id="labelModeText">Hanya QR Code</span>
-            <div class="relative inline-flex items-center cursor-pointer">
-              <input type="checkbox" id="toggleLabelMode" class="sr-only peer" onchange="toggleLabelInputs()" />
-              <div
-                class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"
-              ></div>
-            </div>
-          </label>
-          <div>
-            <label class="block text-[10px] font-bold text-slate-400 mb-1 uppercase">ID Aset (Wajib)</label>
-            <input type="text" id="gen_qr_id" placeholder="CTH: PC-IT-01" class="w-full border-2 border-slate-100 bg-slate-50 p-3 rounded-xl text-sm font-bold focus:border-primary outline-none uppercase font-mono" />
-          </div>
-          <div id="extraLabelInputs" class="hidden space-y-3 bg-blue-50/50 p-3 rounded-xl border border-blue-100 animate-fade-in">
-            <div>
-              <label class="block text-[10px] font-bold text-slate-400 mb-1 uppercase">Nama Barang</label>
-              <input type="text" id="gen_label_nama" class="w-full border border-slate-200 p-2 rounded-lg text-sm focus:border-primary outline-none" />
-            </div>
-            <div class="grid grid-cols-2 gap-3">
               <div>
-                <label class="block text-[10px] font-bold text-slate-400 mb-1 uppercase">Tanggal</label>
-                <input type="date" id="gen_label_tgl" class="w-full border border-slate-200 p-2 rounded-lg text-sm focus:border-primary outline-none text-slate-600" />
+                <label class="block text-sm font-semibold text-gray-700 mb-2 text-contrast">Email Anda</label>
+                <input
+                  type="email"
+                  name="email"
+                  class="w-full p-4 border-2 rounded-xl focus:outline-none transition-colors"
+                  style="border-color: var(--border-color-light)"
+                  onfocus="this.style.borderColor='var(--btn-main-bg-light)'"
+                  onblur="this.style.borderColor='var(--border-color-light)'"
+                  placeholder="nama@email.com"
+                />
               </div>
+
               <div>
-                <label class="block text-[10px] font-bold text-slate-400 mb-1 uppercase">Divisi</label>
-                <input type="text" id="gen_label_divisi" class="w-full border border-slate-200 p-2 rounded-lg text-sm focus:border-primary outline-none" />
+                <label class="block text-sm font-semibold text-gray-700 mb-2 text-contrast">Pesan Anda</label>
+                <textarea
+                  name="message"
+                  rows="6"
+                  required
+                  class="w-full p-4 border-2 rounded-xl focus:outline-none transition-colors resize-none"
+                  style="border-color: var(--border-color-light)"
+                  onfocus="this.style.borderColor='var(--btn-main-bg-light)'"
+                  onblur="this.style.borderColor='var(--border-color-light)'"
+                  placeholder="Tulis pesan Anda di sini..."
+                ></textarea>
               </div>
-            </div>
-          </div>
-          <button onclick="generateQR()" class="w-full bg-primary text-white py-3 rounded-xl font-bold shadow-lg shadow-primary/20 active:scale-95 transition-transform flex justify-center items-center gap-2">
-            <span class="material-icons-round">print</span> Generate Label
-          </button>
-          <div id="qrResultArea" class="hidden flex flex-col items-center justify-center bg-slate-100 p-4 rounded-2xl border border-slate-200 mt-2">
-            <div id="qrcode_canvas" class="bg-white p-1 shadow-md rounded mb-3 max-w-full"></div>
-            <div class="flex gap-2 w-full">
-              <button onclick="downloadQRImage()" class="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white py-2 rounded-xl font-bold text-xs shadow-md active:scale-95 transition-transform flex items-center justify-center gap-1">
-                <span class="material-icons-round text-sm">download</span> Simpan
-              </button>
-              <button onclick="closeModal('modalQRGenerator')" class="flex-1 bg-white text-slate-500 border border-slate-200 py-2 rounded-xl font-bold text-xs hover:bg-slate-50">Tutup</button>
-            </div>
-          </div>
-          <button onclick="closeModal('modalQRGenerator')" class="w-full text-slate-400 text-xs py-2 hover:text-slate-600">Batal</button>
-        </div>
-      </div>
-    </div>
-    <div id="temp_qr_holder" style="display: none"></div>
 
-    <div id="modalJurnal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[90] hidden items-end sm:items-center justify-center p-4">
-      <div class="bg-white w-full max-w-sm rounded-3xl p-6 shadow-2xl animate-scale-up max-h-[90vh] overflow-y-auto">
-        <h3 class="font-bold text-lg mb-1 text-primary">Dokumentasi Pekerjaan</h3>
-        <p class="text-xs text-slate-400 mb-5">Catat kegiatan non-rutin/insidental.</p>
-        <div class="space-y-4">
-          <input type="text" id="jurnal_judul" placeholder="Judul Kegiatan (Cth: Relokasi CCTV)" class="w-full border-2 border-slate-100 bg-slate-50 p-3 rounded-xl text-sm font-bold focus:border-accent outline-none" />
-          <input type="text" id="jurnal_lokasi" placeholder="Lokasi Pengerjaan" class="w-full border-2 border-slate-100 bg-slate-50 p-3 rounded-xl text-sm focus:border-accent outline-none" />
-          <textarea id="jurnal_desc" rows="3" placeholder="Deskripsi teknis pekerjaan..." class="w-full border-2 border-slate-100 bg-slate-50 p-3 rounded-xl text-sm focus:border-accent outline-none"></textarea>
-          <div class="relative h-40 bg-slate-50 rounded-xl border-2 border-dashed border-slate-200 hover:border-accent flex flex-col items-center justify-center overflow-hidden transition-colors group">
-            <div class="group-hover:scale-110 transition-transform duration-300 flex flex-col items-center">
-              <span class="material-icons-round text-slate-300 text-3xl group-hover:text-accent">add_a_photo</span>
-              <span class="text-[10px] text-slate-400 mt-2 font-bold group-hover:text-accent">FOTO KEGIATAN</span>
-            </div>
-            <img id="prev_jurnal" class="absolute inset-0 w-full h-full object-cover hidden" />
-            <input type="file" id="file_jurnal" accept="image/*" capture="environment" class="absolute inset-0 opacity-0 cursor-pointer z-10" onchange="previewImg(this, 'prev_jurnal')" />
-          </div>
-          <div class="flex gap-2 pt-2">
-            <button onclick="closeModal('modalJurnal')" class="flex-1 bg-slate-100 text-slate-500 py-3 rounded-xl font-bold">Batal</button>
-            <button onclick="submitJurnal()" class="flex-1 bg-primary text-white py-3 rounded-xl font-bold shadow-lg shadow-primary/20 active:scale-95 transition-transform">Posting</button>
+              <button type="submit" class="w-full py-4 rounded-xl hover:shadow-2xl transform hover:scale-[1.02] transition-all duration-300 btn-main">Kirim Pesan 🚀</button>
+            </form>
           </div>
         </div>
       </div>
-    </div>
+    </section>
+    <footer class="wave-bg py-20 relative overflow-hidden">
+      <div class="absolute inset-0 z-0">
+        <div class="blob-1 top-10 left-10" style="width: 200px; height: 200px; background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(147, 197, 253, 0.1)); animation-delay: 3s"></div>
+        <div class="blob-2 bottom-20 right-20" style="width: 150px; height: 150px; background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(16, 185, 129, 0.1)); animation-delay: 6s"></div>
+        <div class="blob-3 top-1/2 left-1/2" style="width: 120px; height: 120px; background: linear-gradient(135deg, rgba(251, 146, 60, 0.1), rgba(245, 101, 101, 0.1)); animation-delay: 9s"></div>
+      </div>
 
-    <div id="modalTool" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[90] hidden items-end sm:items-center justify-center p-4">
-      <div class="bg-white w-full max-w-sm rounded-3xl p-6 shadow-2xl animate-scale-up max-h-[90vh] overflow-y-auto">
-        <h3 class="font-bold text-lg mb-4 text-primary" id="toolModalTitle">Config Tool</h3>
-        <input type="hidden" id="tool_id" />
-        <div class="space-y-3">
-          <input type="text" id="tool_name" placeholder="Nama Tool" class="w-full bg-slate-50 border-none p-3 rounded-xl text-sm font-bold focus:ring-1 focus:ring-primary" />
-          <input type="text" id="tool_desc" placeholder="Deskripsi pendek" class="w-full border p-3 rounded-xl text-sm focus:border-primary outline-none" />
-          <input type="text" id="tool_icon" placeholder="Icon Material (cth: build)" class="w-full border p-3 rounded-xl text-sm focus:border-primary outline-none" />
-          <textarea id="tool_cmd" rows="3" placeholder="Script Command..." class="w-full border p-3 rounded-xl text-xs font-mono bg-slate-900 text-green-400 focus:border-primary outline-none"></textarea>
-          <div class="flex gap-2 mt-4">
-            <button onclick="closeModal('modalTool')" class="flex-1 bg-slate-100 text-slate-500 py-3 rounded-xl font-bold">Batal</button>
-            <button onclick="saveTool()" class="flex-1 bg-primary text-white py-3 rounded-xl font-bold shadow-sm active:scale-95">Simpan</button>
+      <div class="max-w-[1200px] mx-auto px-4 relative z-10">
+        <div class="text-center mb-16">
+          <div class="mb-8">
+            <h2 class="text-3xl font-bold text-contrast mb-4">Muhammad Adam Zaky Jiddyansah</h2>
+            <div class="w-20 h-1 bg-gradient-to-r from-blue-400 to-purple-400 mx-auto mb-6 rounded-full"></div>
+            <p class="text-contrast text-lg mb-4 max-w-2xl mx-auto leading-relaxed">Fresh Graduate Computer Science | Data Science Enthusiast | Full-Stack Developer | Network Infrastructure Specialist</p>
+            <p class="text-contrast text-sm italic max-w-lg mx-auto">"Passionate about creating innovative technology solutions that make a positive impact on people's lives"</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          <div class="glassmorphism rounded-2xl p-6 text-center hover:scale-105 transition-all duration-300">
+            <div class="text-3xl mb-4">🎯</div>
+            <h3 class="text-lg font-bold text-contrast mb-2">Spesialisasi</h3>
+            <p class="text-contrast text-sm">Data Science, Web Development, Network Infrastructure</p>
+          </div>
+
+          <div class="glassmorphism rounded-2xl p-6 text-center hover:scale-105 transition-all duration-300">
+            <div class="text-3xl mb-4">💡</div>
+            <h3 class="text-lg font-bold text-contrast mb-2">Misi</h3>
+            <p class="text-contrast text-sm">Menguasai logika dan ilmu baru setiap hari untuk menjadi versi diri terbaik</p>
+          </div>
+
+          <div class="glassmorphism rounded-2xl p-6 text-center hover:scale-105 transition-all duration-300">
+            <div class="text-3xl mb-4">🌟</div>
+            <h3 class="text-lg font-bold text-contrast mb-2">Visi</h3>
+            <p class="text-contrast text-sm">Menjadi pribadi pembelajar yang terus bertumbuh melalui tantangan</p>
+          </div>
+        </div>
+
+        <div class="flex justify-center space-x-6 mb-12">
+          <a href="https://github.com/adamzakys" target="_blank" class="glassmorphism p-4 rounded-full hover:scale-110 transition-all duration-300 group">
+            <img src="other/asset/github-white.png" alt="GitHub" class="w-6 h-6 group-hover:scale-110 transition-transform" />
+          </a>
+          <a href="https://www.linkedin.com/in/adamzaky/" target="_blank" class="glassmorphism p-4 rounded-full hover:scale-110 transition-all duration-300 group">
+            <img src="other/asset/linkedin-white.png" alt="LinkedIn" class="w-6 h-6 group-hover:scale-110 transition-transform" />
+          </a>
+          <a href="https://www.instagram.com/adamzaky_j/" target="_blank" class="glassmorphism p-4 rounded-full hover:scale-110 transition-all duration-300 group">
+            <img src="other/asset/instagram-white.png" alt="Instagram" class="w-6 h-6 group-hover:scale-110 transition-transform" />
+          </a>
+          <a href="http://wa.me/6283129939682" target="_blank" class="glassmorphism p-4 rounded-full hover:scale-110 transition-all duration-300 group">
+            <img src="other/asset/whatsapp-white.png" alt="WhatsApp" class="w-6 h-6 group-hover:scale-110 transition-transform" />
+          </a>
+          <a href="mailto:adamzaky.dy@gmail.com" target="_blank" class="glassmorphism p-4 rounded-full hover:scale-110 transition-all duration-300 group">
+            <img src="other/asset/gmail-white.png" alt="Email" class="w-6 h-6 group-hover:scale-110 transition-transform" />
+          </a>
+        </div>
+
+        <div class="glassmorphism rounded-2xl p-6 mb-8">
+          <div class="grid grid-cols-2 md:grid-cols-6 gap-4 text-center text-sm">
+            <a href="#hero" class="text-contrast hover:text-white transition-colors py-2 px-3 rounded-lg hover:bg-white/10">Beranda</a>
+            <a href="#about" class="text-contrast hover:text-white transition-colors py-2 px-3 rounded-lg hover:bg-white/10">Tentang</a>
+            <a href="#skills" class="text-contrast hover:text-white transition-colors py-2 px-3 rounded-lg hover:bg-white/10">Keahlian</a>
+            <a href="#experience" class="text-contrast hover:text-white transition-colors py-2 px-3 rounded-lg hover:bg-white/10">Pengalaman</a>
+            <a href="#portfolio" class="text-contrast hover:text-white transition-colors py-2 px-3 rounded-lg hover:bg-white/10">Portfolio</a>
+            <a href="#contact" class="text-contrast hover:text-white transition-colors py-2 px-3 rounded-lg hover:bg-white/10">Kontak</a>
+          </div>
+        </div>
+
+        <div class="pt-8 border-t border-white/10 text-center">
+          <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-sm text-gray-300">© 2024 Muhammad Adam Zaky Jiddyansah. All rights reserved.</p>
+            <div class="flex items-center space-x-4 text-xs text-gray-400"></div>
           </div>
         </div>
       </div>
-    </div>
+    </footer>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        once: true,
+        duration: 1000,
+        easing: "ease-out-cubic",
+        offset: 50,
+        delay: 100,
+      });
 
-    <div id="modalSuccess" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[120] hidden flex-col items-center justify-center p-6 animate-fade-in">
-      <div class="bg-white w-full max-w-sm rounded-3xl p-6 text-center shadow-2xl relative overflow-hidden">
-        <div class="absolute top-0 left-0 w-full h-2 bg-emerald-500"></div>
-        <div class="mb-4 flex justify-center">
-          <div class="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mb-2 animate-bounce-short"><span class="material-icons-round text-5xl text-emerald-600">check_circle</span></div>
-        </div>
-        <h3 class="text-xl font-bold text-slate-800 mb-2">Terkirim!</h3>
-        <p class="text-sm text-slate-500 mb-6">Laporan berhasil dicatat di server.</p>
-        <div class="space-y-3">
-          <button id="btnShareWA" class="w-full bg-[#25D366] hover:bg-[#128C7E] text-white py-3.5 rounded-xl font-bold shadow-lg shadow-green-500/20 active:scale-95 transition-all flex items-center justify-center gap-2">
-            <span class="material-icons-round">share</span> Kirim Bukti ke WhatsApp
-          </button>
-          <button onclick="closeSuccessModal()" class="w-full bg-slate-100 text-slate-600 py-3 rounded-xl font-bold active:scale-95 transition-transform">Tutup & Kembali</button>
-        </div>
-      </div>
-    </div>
-    <div id="modalLoading" class="fixed inset-0 bg-primary/90 backdrop-blur-sm z-[110] hidden flex-col items-center justify-center animate-fade-in">
-      <div class="w-12 h-12 border-4 border-white/30 rounded-full border-t-accent animate-spin mb-4"></div>
-      <p class="text-white text-sm font-bold tracking-wide animate-pulse" id="loadingText">SINKRONISASI...</p>
-    </div>
-    <div id="modalAbout" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[150] hidden items-center justify-center p-6 animate-fade-in">
-      <div class="bg-white w-full max-w-xs rounded-3xl p-6 shadow-2xl relative text-center overflow-hidden">
-        <div class="absolute top-0 left-0 w-full h-2 bg-primary"></div>
-        <img src="Berlian-Manyar-Sejahtera-New-Thumbnail.jpg" alt="BMS Logo" class="w-20 h-auto mx-auto mb-4 object-contain drop-shadow-sm" />
-        <h3 class="font-bold text-lg text-primary leading-tight">BMS Asset Ops</h3>
-        <p class="text-xs text-accent font-bold mb-4 uppercase tracking-wider">Enterprise Edition v3.0</p>
-        <a
-          id="btnHelpWA"
-          target="_blank"
-          class="w-full bg-[#25D366] hover:bg-[#128C7E] text-white py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-green-500/20 active:scale-95 transition-transform cursor-pointer no-underline"
-          >Hubungi Support IT</a
-        >
-        <button onclick="closeModal('modalAbout')" class="mt-4 text-xs text-slate-400 hover:text-slate-600 font-bold py-2 w-full">TUTUP</button>
-      </div>
-    </div>
+      // Hamburger Menu
+      const menuHamburger = document.getElementById("menu-hamburger");
+      const navMenu = document.getElementById("nav-menu");
 
-    <script src="script.js"></script>
+      menuHamburger.addEventListener("click", () => {
+        menuHamburger.classList.toggle("active");
+        navMenu.classList.toggle("translate-x-full");
+      });
+
+      // Close menu when clicking on nav links
+      document.querySelectorAll("#nav-menu a").forEach((link) => {
+        link.addEventListener("click", () => {
+          menuHamburger.classList.remove("active");
+          navMenu.classList.add("translate-x-full");
+        });
+      });
+
+      const style = document.createElement("style");
+      style.innerHTML = `
+        #menu-hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        #menu-hamburger.active span:nth-child(2) { opacity: 0; }
+        #menu-hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+      `;
+      document.head.appendChild(style);
+
+      // Tab functionality for portfolio
+      const tabButtons = document.querySelectorAll(".tab-button");
+      const tabContents = document.querySelectorAll(".tab-content");
+
+      tabButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const tabId = button.getAttribute("data-tab");
+
+          // Remove active class from all buttons and contents
+          tabButtons.forEach((btn) => {
+            btn.classList.remove("active");
+            // Also reset text color for inactive buttons in light mode if needed
+            if (!document.body.classList.contains("dark")) {
+              btn.style.color = "var(--navbar-initial-text-light)";
+            } else {
+              btn.style.color = "var(--navbar-initial-text-dark)";
+            }
+            btn.style.background = "transparent";
+          });
+          tabContents.forEach((content) => content.classList.add("hidden"));
+
+          // Add active class to clicked button and show corresponding content
+          button.classList.add("active");
+          document.getElementById(tabId).classList.remove("hidden");
+        });
+      });
+
+      // Navbar scroll effect
+      const headerNav = document.querySelector("header nav");
+      const navLinks = document.querySelectorAll("#nav-menu a");
+      const logoText = document.querySelector(".logo h2");
+      const hamburgerSpans = document.querySelectorAll("#menu-hamburger span");
+
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          headerNav.classList.add("navbar-scrolled");
+        } else {
+          headerNav.classList.remove("navbar-scrolled");
+        }
+      });
+
+      // Smooth scroll for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Dark Mode Functionality
+      const darkModeToggleDesktop = document.getElementById("dark-mode-toggle-desktop");
+      const darkModeToggleMobile = document.getElementById("dark-mode-toggle-mobile");
+
+      function setDarkMode(isDark) {
+        if (isDark) {
+          document.body.classList.add("dark");
+          localStorage.setItem("theme", "dark");
+        } else {
+          document.body.classList.remove("dark");
+          localStorage.setItem("theme", "light");
+        }
+        // Re-apply active tab styling for correct colors in dark mode
+        const activeTabButton = document.querySelector(".tab-button.active");
+        if (activeTabButton) {
+          activeTabButton.style.background = isDark ? "var(--btn-main-bg-dark)" : "var(--btn-main-bg-light)";
+          activeTabButton.style.color = isDark ? "var(--btn-main-text-dark)" : "var(--btn-main-text-light)";
+        }
+
+        // Update input border colors based on new theme
+        document.querySelectorAll("#contact input, #contact textarea").forEach((input) => {
+          input.style.borderColor = isDark ? "var(--border-color-dark)" : "var(--border-color-light)";
+          input.style.backgroundColor = isDark ? "rgba(31, 41, 55, 0.7)" : "rgba(255, 255, 255, 0.7)";
+          input.style.color = isDark ? "var(--text-color-dark)" : "var(--text-color-light)";
+        });
+      }
+
+      darkModeToggleDesktop.addEventListener("click", () => {
+        setDarkMode(!document.body.classList.contains("dark"));
+      });
+      darkModeToggleMobile.addEventListener("click", () => {
+        setDarkMode(!document.body.classList.contains("dark"));
+      });
+
+      // Check for saved theme preference
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "dark") {
+        setDarkMode(true);
+      } else {
+        setDarkMode(false); // Default to light mode if no preference or 'light'
+      }
+
+      // Success message for form submission
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get("success") === "true") {
+        // Show success notification
+        const notification = document.createElement("div");
+        notification.innerHTML = `
+      <div class="fixed top-20 right-4 bg-green-500 text-white px-6 py-4 rounded-lg shadow-lg z-50 animate-bounce">
+          <div class="flex items-center space-x-2">
+            <span>✅</span>
+            <span>Pesan berhasil dikirim! Terima kasih.</span>
+          </div>
+        </div>
+        `;
+        document.body.appendChild(notification);
+
+        // Remove notification after 5 seconds
+        setTimeout(() => {
+          notification.remove();
+        }, 5000);
+      }
+
+      // Apply initial styling for tab buttons based on current theme
+      tabButtons.forEach((button) => {
+        if (!button.classList.contains("active")) {
+          button.style.color = document.body.classList.contains("dark") ? "var(--navbar-initial-text-dark)" : "var(--navbar-initial-text-light)";
+          button.style.background = "transparent";
+        }
+      });
+
+      // Smooth scroll enhancement
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "-20% 0px -20% 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-in");
+          }
+        });
+      }, observerOptions);
+
+      // Observe all sections for animations
+      document.querySelectorAll("section").forEach((section) => {
+        observer.observe(section);
+      });
+    </script>
   </body>
 </html>
