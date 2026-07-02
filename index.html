@@ -243,6 +243,31 @@
         height: 1.4rem;
         display: block;
       }
+      /* Portfolio lock / coming soon styles */
+      #portfolio .skill-card {
+        position: relative;
+        overflow: hidden;
+      }
+      /* By default, hide/blur unpublished items; add class `published` to exempt */
+      #portfolio .skill-card:not(.published) {
+        filter: blur(3px) saturate(0.9);
+        pointer-events: none;
+      }
+      #portfolio .skill-card:not(.published)::after {
+        content: "COMING SOON";
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        color: rgba(255,255,255,0.95);
+        background: linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.45));
+        backdrop-filter: blur(2px);
+        font-size: 0.95rem;
+        text-transform: uppercase;
+      }
       .btn-main {
         background: var(--btn-main-bg-light);
         color: var(--btn-main-text-light) !important;
