@@ -224,6 +224,25 @@
         color: #bfdbfe;
         border: 1px solid rgba(96, 165, 250, 0.2);
       }
+      .icon-shape {
+        width: 3rem;
+        height: 3rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 1rem;
+        background: rgba(255, 255, 255, 0.16);
+        color: #1687a7;
+      }
+      body.dark .icon-shape {
+        background: rgba(255, 255, 255, 0.08);
+        color: #60a5fa;
+      }
+      .icon-symbol {
+        width: 1.4rem;
+        height: 1.4rem;
+        display: block;
+      }
       .btn-main {
         background: var(--btn-main-bg-light);
         color: var(--btn-main-text-light) !important;
@@ -616,6 +635,55 @@
     </style>
   </head>
   <body>
+    <svg aria-hidden="true" class="hidden">
+      <symbol id="icon-mortarboard" viewBox="0 0 24 24">
+        <path d="M12 2 1 7l11 5 11-5-11-5z" />
+        <path d="M2 11v6l10 4 10-4v-6" />
+      </symbol>
+      <symbol id="icon-briefcase" viewBox="0 0 24 24">
+        <path d="M5 7h14v2H5V7zm0 4h14v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7zm6-6h2v2h-2V5z" />
+      </symbol>
+      <symbol id="icon-award" viewBox="0 0 24 24">
+        <path d="M12 2l3 6 6 .9-4.5 4.4 1 6.1L12 15.4 7.5 19.4l1-6.1L4 8.9 10 8l2-6z" />
+      </symbol>
+      <symbol id="icon-folder" viewBox="0 0 24 24">
+        <path d="M3 7h7l2 2h9v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z" />
+        <path d="M3 7V5a2 2 0 0 1 2-2h5l2 2h7" />
+      </symbol>
+      <symbol id="icon-laptop" viewBox="0 0 24 24">
+        <path d="M4 5h16v10H4V5zm0 12h16v2H4v-2z" />
+      </symbol>
+      <symbol id="icon-team" viewBox="0 0 24 24">
+        <path d="M7 7a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm10 0a3 3 0 1 1 0 6 3 3 0 0 1 0-6zM4 17c0-2 2.5-3 4-3s4 1 4 3v1H4v-1zm10 0c0-1.5 2-2 3-2s3 .5 3 2v1h-6v-1z" />
+      </symbol>
+      <symbol id="icon-chart" viewBox="0 0 24 24">
+        <path d="M5 21h14v-2H5v2zm4-10h2v8H9v-8zm4-4h2v12h-2V7zm4 6h2v6h-2v-6z" />
+      </symbol>
+      <symbol id="icon-browser" viewBox="0 0 24 24">
+        <path d="M3 5h18v14H3V5zm2 2v2h14V7H5zm0 4v6h14v-6H5z" />
+      </symbol>
+      <symbol id="icon-network" viewBox="0 0 24 24">
+        <path d="M4 11h4v2H4v-2zm12 0h4v2h-4v-2zM9 5h6v2H9V5zm0 12h6v2H9v-2zM7 9h10v6H7V9z" />
+      </symbol>
+      <symbol id="icon-wrench" viewBox="0 0 24 24">
+        <path d="M14.7 2.3l1 1a3 3 0 0 1 0 4.2l-2 2a1 1 0 0 0-.3.7v2.4l-1.7 1.7a5 5 0 0 1-6.4 0l-1-1 4.2-4.2 1 1 2-2a3 3 0 0 1 4.2 0z" />
+      </symbol>
+      <symbol id="icon-school" viewBox="0 0 24 24">
+        <path d="M12 3 2 8l10 5 10-5-10-5zm0 6.5L4.5 8 12 4.5 19.5 8 12 9.5zM5 10.5v9h14v-9L12 15 5 10.5z" />
+      </symbol>
+      <symbol id="icon-shield" viewBox="0 0 24 24">
+        <path d="M12 2 4 5v6c0 5.5 3.8 10.7 8 11 4.2-.3 8-5.5 8-11V5l-8-3zM9.5 12.5l1.8 1.8 4.2-4.2 1.4 1.4-5.6 5.6-3.4-3.4 1.6-1.8z" />
+      </symbol>
+      <symbol id="icon-target" viewBox="0 0 24 24">
+        <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 4a6 6 0 1 1 0 12 6 6 0 0 1 0-12zm0 2a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm.5 1.5v2.5h2.5v1.5H12.5V15H11v-2.5H8.5V9H11V6.5h1.5z" />
+      </symbol>
+      <symbol id="icon-bulb" viewBox="0 0 24 24">
+        <path d="M11 2a7 7 0 0 0-4 11.9c.4.4.6.9.6 1.5V17a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-1.6c0-.6.2-1.1.6-1.5A7 7 0 0 0 11 2zm-1 17h2v2h-2v-2z" />
+      </symbol>
+      <symbol id="icon-star" viewBox="0 0 24 24">
+        <path d="M12 2l3 7h7l-5.5 4.2 2 7L12 16.5 6.5 20.2l2-7L3 9h7l2-7z" />
+      </symbol>
+    </svg>
     <header class="fixed w-full z-50">
       <nav class="glassmorphism flex justify-between items-center max-w-[1200px] w-full mx-auto px-4 sm:px-6 lg:px-8 h-[65px] transition-all duration-300">
         <div class="logo">
@@ -729,22 +797,22 @@
           <div class="lg:w-1/2 flex justify-center" data-aos="fade-left" data-aos-duration="1500">
             <div class="grid grid-cols-2 gap-6">
               <div class="glassmorphism p-6 rounded-2xl text-center skill-card">
-                <div class="text-3xl mb-2">🎓</div>
+                <div class="icon-shape mb-4"><svg class="icon-symbol"><use href="#icon-mortarboard" /></svg></div>
                 <h4 class="font-semibold text-contrast mb-2">Education</h4>
                 <p class="text-sm text-contrast">S1 Teknik Informatika</p>
               </div>
               <div class="glassmorphism p-6 rounded-2xl text-center skill-card">
-                <div class="text-3xl mb-2">💼</div>
+                <div class="icon-shape mb-4"><svg class="icon-symbol"><use href="#icon-briefcase" /></svg></div>
                 <h4 class="font-semibold text-contrast mb-2">Experience</h4>
                 <p class="text-sm text-contrast">3+ Years</p>
               </div>
               <div class="glassmorphism p-6 rounded-2xl text-center skill-card">
-                <div class="text-3xl mb-2">🏆</div>
+                <div class="icon-shape mb-4"><svg class="icon-symbol"><use href="#icon-award" /></svg></div>
                 <h4 class="font-semibold text-contrast mb-2">Certifications</h4>
                 <p class="text-sm text-contrast">5+ Professional</p>
               </div>
               <div class="glassmorphism p-6 rounded-2xl text-center skill-card">
-                <div class="text-3xl mb-2">🚀</div>
+                <div class="icon-shape mb-4"><svg class="icon-symbol"><use href="#icon-folder" /></svg></div>
                 <h4 class="font-semibold text-contrast mb-2">Projects</h4>
                 <p class="text-sm text-contrast">10+ Completed</p>
               </div>
@@ -769,7 +837,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
           <div class="skill-card rounded-2xl p-8" data-aos="fade-up" data-aos-delay="100">
             <div class="text-center mb-6">
-              <div class="text-5xl mb-4">💻</div>
+              <div class="icon-shape mb-4"><svg class="icon-symbol"><use href="#icon-laptop" /></svg></div>
               <h3 class="text-2xl font-bold gradient-text mb-4">Hard Skills</h3>
             </div>
             <ul class="space-y-3">
@@ -788,7 +856,7 @@
 
           <div class="skill-card rounded-2xl p-8" data-aos="fade-up" data-aos-delay="200">
             <div class="text-center mb-6">
-              <div class="text-5xl mb-4">🧠</div>
+              <div class="icon-shape mb-4"><svg class="icon-symbol"><use href="#icon-team" /></svg></div>
               <h3 class="text-2xl font-bold gradient-text mb-4">Soft Skills</h3>
             </div>
             <ul class="space-y-3">
@@ -804,7 +872,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div class="skill-card rounded-2xl p-6 text-center" data-aos="fade-up" data-aos-delay="300">
-            <div class="text-4xl mb-3">📊</div>
+            <div class="icon-shape mb-3"><svg class="icon-symbol"><use href="#icon-chart" /></svg></div>
             <h4 class="text-lg font-bold gradient-text mb-3">Data & Analytics</h4>
             <div class="flex flex-wrap gap-2 justify-center">
               <span class="badge px-2 py-1 text-xs rounded-full">Tableau</span>
@@ -815,7 +883,7 @@
           </div>
 
           <div class="skill-card rounded-2xl p-6 text-center" data-aos="fade-up" data-aos-delay="400">
-            <div class="text-4xl mb-3">🌐</div>
+            <div class="icon-shape mb-3"><svg class="icon-symbol"><use href="#icon-browser" /></svg></div>
             <h4 class="text-lg font-bold gradient-text mb-3">Web Development</h4>
             <div class="flex flex-wrap gap-2 justify-center">
               <span class="badge px-2 py-1 text-xs rounded-full">Laravel</span>
@@ -827,7 +895,7 @@
           </div>
 
           <div class="skill-card rounded-2xl p-6 text-center" data-aos="fade-up" data-aos-delay="500">
-            <div class="text-4xl mb-3">🛠️</div>
+            <div class="icon-shape mb-3"><svg class="icon-symbol"><use href="#icon-wrench" /></svg></div>
             <h4 class="text-lg font-bold gradient-text mb-3">Database & Network</h4>
             <div class="flex flex-wrap gap-2 justify-center">
               <span class="badge px-2 py-1 text-xs rounded-full">SQL Server</span>
@@ -868,7 +936,7 @@
             </div>
             <div class="timeline-dot absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full border-4 border-white" style="background: linear-gradient(90deg, #1687a7, #276678)"></div>
             <div class="timeline-emoji w-full md:w-1/2 pl-0 md:pl-8">
-              <div class="text-6xl">💼</div>
+              <div class="icon-shape"><svg class="icon-symbol"><use href="#icon-briefcase" /></svg></div>
             </div>
           </div>
 
@@ -886,13 +954,13 @@
             </div>
             <div class="timeline-dot absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full border-4 border-white" style="background: linear-gradient(90deg, #1687a7, #276678)"></div>
             <div class="timeline-emoji w-full md:w-1/2 pl-0 md:pl-8">
-              <div class="text-6xl">💼</div>
+              <div class="icon-shape"><svg class="icon-symbol"><use href="#icon-briefcase" /></svg></div>
             </div>
           </div>
 
           <div class="timeline-item relative flex flex-col md:flex-row items-start md:items-center mb-16" data-aos="fade-left">
             <div class="timeline-emoji w-full md:w-1/2 pr-0 md:pr-8 text-left md:text-right mb-4 md:mb-0">
-              <div class="text-6xl">👨‍🏫</div>
+              <div class="icon-shape"><svg class="icon-symbol"><use href="#icon-school" /></svg></div>
             </div>
             <div class="timeline-dot absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full border-4 border-white" style="background: linear-gradient(90deg, #276678, #1687a7)"></div>
             <div class="w-full md:w-1/2 pl-0 md:pl-8">
@@ -921,7 +989,7 @@
             </div>
             <div class="timeline-dot absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-r from-green-500 to-teal-500 rounded-full border-4 border-white" style="background: linear-gradient(90deg, #d3e0ea, #1687a7)"></div>
             <div class="timeline-emoji w-full md:w-1/2 pl-0 md:pl-8">
-              <div class="text-6xl">🛠️</div>
+              <div class="icon-shape"><svg class="icon-symbol"><use href="#icon-wrench" /></svg></div>
             </div>
           </div>
         </div>
@@ -943,31 +1011,31 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div class="glassmorphism p-8 rounded-3xl skill-card" data-aos="zoom-in" data-aos-delay="100">
             <div class="text-center mb-6">
-              <div class="text-6xl mb-4">🎓</div>
+              <div class="icon-shape mb-4"><svg class="icon-symbol"><use href="#icon-mortarboard" /></svg></div>
               <h3 class="text-2xl font-bold mb-2">Sarjana Teknik Informatika</h3>
               <h4 class="text-xl mb-4">Universitas Trunojoyo Madura</h4>
               <span class="px-4 py-2 rounded-full font-semibold">2021 - 2025</span>
             </div>
             <div class="space-y-3">
-              <p>✨ IPK: 3.51</p>
-              <p>✨ Spesialisasi: Ilmu Data, Pengembangan Web, Infrastruktur Jaringan</p>
-              <p>✨ Focus Area: Machine Learning, Database Systems, Transformasi Digital</p>
-              <p>✨ Relevant Skills: Data Analysis, Web Development, Network Management</p>
+              <p><strong>IPK:</strong> 3.51</p>
+              <p><strong>Spesialisasi:</strong> Ilmu Data, Pengembangan Web, Infrastruktur Jaringan</p>
+              <p><strong>Focus Area:</strong> Machine Learning, Database Systems, Transformasi Digital</p>
+              <p><strong>Skills:</strong> Data Analysis, Web Development, Network Management</p>
             </div>
           </div>
 
           <div class="glassmorphism p-8 rounded-3xl skill-card" data-aos="zoom-in" data-aos-delay="200">
             <div class="text-center mb-6">
-              <div class="text-6xl mb-4">🏫</div>
+              <div class="icon-shape mb-4"><svg class="icon-symbol"><use href="#icon-school" /></svg></div>
               <h3 class="text-2xl font-bold mb-2">Teknik Komputer & Jaringan</h3>
               <h4 class="text-xl mb-4">SMKN 1 CERME GRESIK</h4>
               <span class="px-4 py-2 rounded-full font-semibold">2018 - Jun 2021</span>
             </div>
             <div class="space-y-3">
-              <p>⚡ Nilai Rata-rata: 84</p>
-              <p>⚡ Network Configuration & Management</p>
-              <p>⚡ Computer Hardware & Software</p>
-              <p>⚡ Network Security Fundamentals</p>
+              <p><strong>Nilai Rata-rata:</strong> 84</p>
+              <p><strong>Besarnya:</strong> Network Configuration & Management</p>
+              <p><strong>Teknologi:</strong> Computer Hardware & Software</p>
+              <p><strong>Keamanan:</strong> Network Security Fundamentals</p>
             </div>
           </div>
         </div>
@@ -1095,19 +1163,16 @@
         <div class="flex justify-center mb-12" data-aos="fade-up">
           <div class="glassmorphism rounded-full p-2">
             <div class="flex space-x-2">
-              <button class="tab-button active px-6 py-3 rounded-full font-semibold transition-all" data-tab="data-science">📊 Data Science</button>
-              <button class="tab-button px-6 py-3 rounded-full font-semibold hover:bg-white/10 transition-all" data-tab="web-dev">💻 Web Development</button>
-              <button class="tab-button px-6 py-3 rounded-full font-semibold hover:bg-white/10 transition-all" data-tab="networking">🌐 Networking</button>
-            </div>
-          </div>
-        </div>
+                <button class="tab-button active px-6 py-3 rounded-full font-semibold transition-all" data-tab="data-science">Data Science</button>
+                <button class="tab-button px-6 py-3 rounded-full font-semibold hover:bg-white/10 transition-all" data-tab="web-dev">Web Development</button>
+                <button class="tab-button px-6 py-3 rounded-full font-semibold hover:bg-white/10 transition-all" data-tab="networking">Networking</button>
 
         <div class="tab-content" id="data-science">
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div class="glassmorphism rounded-2xl p-6 hover:scale-105 transition-transform skill-card" data-aos="zoom-in" data-aos-delay="100">
               <div class="text-center mb-4">
                 <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <span class="text-white text-2xl">💰</span>
+                  <svg class="icon-symbol text-white w-8 h-8"><use href="#icon-chart" /></svg>
                 </div>
                 <h3 class="text-xl font-bold card-title mb-2">Bitcoin Price Prediction</h3>
                 <p class="card-desc text-sm mb-4">Multivariate LSTM dengan integrasi indikator makroekonomi untuk prediksi harga Bitcoin</p>
@@ -1123,7 +1188,7 @@
             <div class="glassmorphism rounded-2xl p-6 hover:scale-105 transition-transform skill-card" data-aos="zoom-in" data-aos-delay="200">
               <div class="text-center mb-4">
                 <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-teal-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <span class="text-white text-2xl">📊</span>
+                  <svg class="icon-symbol text-white w-8 h-8"><use href="#icon-chart" /></svg>
                 </div>
                 <h3 class="text-xl font-bold card-title mb-2">Data Visualization Dashboard</h3>
                 <p class="card-desc text-sm mb-4">Interactive dashboard untuk analisis data bisnis menggunakan Plotly dan Dash</p>
@@ -1139,7 +1204,7 @@
             <div class="glassmorphism rounded-2xl p-6 hover:scale-105 transition-transform skill-card" data-aos="zoom-in" data-aos-delay="300">
               <div class="text-center mb-4">
                 <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <span class="text-white text-2xl">🌐</span>
+                  <svg class="icon-symbol text-white w-8 h-8"><use href="#icon-browser" /></svg>
                 </div>
                 <h3 class="text-xl font-bold card-title mb-2">Web Scraping & Data Crawling</h3>
                 <p class="card-desc text-sm mb-4">Sistem otomatis untuk pengumpulan dan ekstraksi data dari berbagai sumber web</p>
@@ -1157,7 +1222,7 @@
             <div class="glassmorphism rounded-2xl p-8 max-w-2xl mx-auto skill-card">
               <h3 class="text-2xl font-bold text-contrast mb-4">Lihat Semua Proyek Data Science</h3>
               <p class="text-contrast mb-6">Kunjungi blog saya untuk melihat proyek-proyek data science lainnya dengan penjelasan detail dan implementasi lengkap</p>
-              <a href="#" class="inline-block px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl btn-main"> 📝 Kunjungi Blog Data Science → </a>
+              <a href="#" class="inline-block px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl btn-main">Kunjungi Blog Data Science →</a>
               <p class="text-sm text-red-300 mt-3 italic">(Blog sedang dalam pengembangan)</p>
             </div>
           </div>
@@ -1206,7 +1271,7 @@
 
             <div class="glassmorphism rounded-2xl overflow-hidden hover:scale-105 transition-transform skill-card" data-aos="zoom-in" data-aos-delay="400">
               <div class="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                <span class="text-white text-6xl">🏠</span>
+                <svg class="icon-symbol text-white w-12 h-12"><use href="#icon-browser" /></svg>
               </div>
               <div class="p-6">
                 <h3 class="text-xl font-bold card-title mb-2">Sistem Manajemen Asrama UTM</h3>
@@ -1226,7 +1291,7 @@
             <div class="glassmorphism rounded-2xl p-8 hover:scale-105 transition-transform skill-card" data-aos="zoom-in" data-aos-delay="100">
               <div class="flex items-start space-x-6">
                 <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-2xl flex items-center justify-center flex-shrink-0">
-                  <span class="text-white text-2xl">🔧</span>
+                  <svg class="icon-symbol text-white w-8 h-8"><use href="#icon-wrench" /></svg>
                 </div>
                 <div>
                   <h3 class="text-2xl font-bold mb-3">Network Configuration & Management</h3>
@@ -1248,7 +1313,7 @@
             <div class="glassmorphism rounded-2xl p-8 hover:scale-105 transition-transform skill-card" data-aos="zoom-in" data-aos-delay="200">
               <div class="flex items-start space-x-6">
                 <div class="w-16 h-16 bg-gradient-to-r from-red-500 to-orange-600 rounded-2xl flex items-center justify-center flex-shrink-0">
-                  <span class="text-white text-2xl">🛡️</span>
+                  <svg class="icon-symbol text-white w-8 h-8"><use href="#icon-shield" /></svg>
                 </div>
                 <div>
                   <h3 class="text-2xl font-bold mb-3">Linux System Administration</h3>
@@ -1369,7 +1434,7 @@
                 ></textarea>
               </div>
 
-              <button type="submit" class="w-full py-4 rounded-xl hover:shadow-2xl transform hover:scale-[1.02] transition-all duration-300 btn-main">Kirim Pesan 🚀</button>
+              <button type="submit" class="w-full py-4 rounded-xl hover:shadow-2xl transform hover:scale-[1.02] transition-all duration-300 btn-main">Kirim Pesan</button>
             </form>
           </div>
         </div>
@@ -1394,19 +1459,19 @@
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           <div class="glassmorphism rounded-2xl p-6 text-center hover:scale-105 transition-all duration-300">
-            <div class="text-3xl mb-4">🎯</div>
+            <div class="icon-shape mb-4"><svg class="icon-symbol"><use href="#icon-target" /></svg></div>
             <h3 class="text-lg font-bold text-contrast mb-2">Spesialisasi</h3>
             <p class="text-contrast text-sm">Data Science, Web Development, Network Infrastructure</p>
           </div>
 
           <div class="glassmorphism rounded-2xl p-6 text-center hover:scale-105 transition-all duration-300">
-            <div class="text-3xl mb-4">💡</div>
+            <div class="icon-shape mb-4"><svg class="icon-symbol"><use href="#icon-bulb" /></svg></div>
             <h3 class="text-lg font-bold text-contrast mb-2">Misi</h3>
             <p class="text-contrast text-sm">Menguasai logika dan ilmu baru setiap hari untuk menjadi versi diri terbaik</p>
           </div>
 
           <div class="glassmorphism rounded-2xl p-6 text-center hover:scale-105 transition-all duration-300">
-            <div class="text-3xl mb-4">🌟</div>
+            <div class="icon-shape mb-4"><svg class="icon-symbol"><use href="#icon-star" /></svg></div>
             <h3 class="text-lg font-bold text-contrast mb-2">Visi</h3>
             <p class="text-contrast text-sm">Menjadi pribadi pembelajar yang terus bertumbuh melalui tantangan</p>
           </div>
