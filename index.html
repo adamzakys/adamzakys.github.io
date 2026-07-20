@@ -3304,16 +3304,7 @@
       });
     }
 
-    // Dynamic Scroll Orbs
-    const orb1 = document.getElementById('orb1');
-    const orb2 = document.getElementById('orb2');
-    const orb3 = document.getElementById('orb3');
-    window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      if (orb1) orb1.style.transform = `translateY(${scrollY * 0.2}px) scale(${1 + scrollY * 0.0005})`;
-      if (orb2) orb2.style.transform = `translateY(${scrollY * -0.15}px)`;
-      if (orb3) orb3.style.transform = `translateY(${scrollY * 0.1}px)`;
-    });
+    // JS fix: removed duplicate orb consts that caused Syntax Error
 
     // Parallax 3D Hover & Glass Shimmer Effect
     const parallaxCards = document.querySelectorAll('.project-card, .skill-card-v2, .contact-terminal');
