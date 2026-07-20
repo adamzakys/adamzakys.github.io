@@ -286,21 +286,81 @@
       box-shadow: 0 8px 24px rgba(99, 102, 241, 0.15);
     }
 
+    
     /* ===================== PLAYABLE INTERACTIONS ===================== */
     .click-ripple {
       position: fixed;
       border-radius: 50%;
       border: 2px solid var(--accent-1);
       pointer-events: none;
-      animation: ripple 0.6s ease-out forwards;
+      animation: ripple 0.6s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
       z-index: 9999;
+      box-shadow: 0 0 10px var(--accent-1);
     }
     @keyframes ripple {
-      0% { width: 0; height: 0; opacity: 1; transform: translate(-50%, -50%); }
-      100% { width: 100px; height: 100px; opacity: 0; transform: translate(-50%, -50%); }
+      0% { width: 0; height: 0; opacity: 1; transform: translate(-50%, -50%); border-width: 4px; }
+      100% { width: 120px; height: 120px; opacity: 0; transform: translate(-50%, -50%); border-width: 0px; }
     }
     
-    .project-card.spin {
+    .interactive-impact {
+      transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+    .interactive-impact:active {
+      transform: scale(0.92) !important;
+    }
+    
+    .project-slice-cover {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 5;
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(10px);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      transition: opacity 0.5s;
+      border-radius: inherit;
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .project-slice-cover::after {
+      content: '';
+      position: absolute;
+      width: 200%; height: 2px;
+      background: var(--accent-1);
+      transform: rotate(-30deg) translateY(-50px);
+      box-shadow: 0 0 10px var(--accent-1);
+      opacity: 0;
+      transition: opacity 0.2s, transform 0.4s ease-out;
+    }
+    .project-slice-cover.sliced::after {
+      opacity: 1;
+      transform: rotate(-30deg) translateY(0);
+    }
+    .project-slice-cover.sliced {
+      animation: shatter 0.8s forwards;
+      pointer-events: none;
+    }
+    @keyframes shatter {
+      0% { opacity: 1; transform: scale(1); }
+      40% { opacity: 1; transform: scale(1.05) rotate(2deg); filter: brightness(1.5); }
+      100% { opacity: 0; transform: scale(1.2) rotate(5deg) translateY(20px); filter: blur(5px); }
+    }
+    
+    .nav-active-indicator {
+      position: absolute;
+      bottom: -4px;
+      height: 3px;
+      background: var(--gradient-main);
+      border-radius: 4px;
+      transition: left 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 0 10px rgba(124, 58, 237, 0.6);
+      pointer-events: none;
+    }
+.project-card.spin {
       animation: spin3d 0.8s ease-in-out;
     }
     @keyframes spin3d {
@@ -322,19 +382,45 @@
       opacity: 0;
     }
     
-    .scratch-wrapper {
-      position: relative;
-      width: 100%; height: 100%;
-      overflow: hidden;
-      border-radius: inherit;
-    }
-    .scratch-canvas {
+    .project-slice-cover {
       position: absolute;
       top: 0; left: 0; width: 100%; height: 100%;
       z-index: 5;
-      touch-action: none;
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(10px);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      transition: opacity 0.5s;
       border-radius: inherit;
-      transition: opacity 0.5s ease;
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      overflow: hidden;
+    }
+    .project-slice-cover::after {
+      content: '';
+      position: absolute;
+      width: 200%; height: 2px;
+      background: var(--accent-1);
+      transform: rotate(-30deg) translateY(-50px);
+      box-shadow: 0 0 10px var(--accent-1);
+      opacity: 0;
+      transition: opacity 0.2s, transform 0.4s ease-out;
+    }
+    .project-slice-cover.sliced::after {
+      opacity: 1;
+      transform: rotate(-30deg) translateY(0);
+    }
+    
+    .project-slice-cover.sliced {
+      animation: shatter 0.8s forwards;
+      pointer-events: none;
+    }
+    @keyframes shatter {
+      0% { opacity: 1; transform: scale(1); }
+      40% { opacity: 1; transform: scale(1.05) rotate(2deg); filter: brightness(1.5); }
+      100% { opacity: 0; transform: scale(1.2) rotate(5deg) translateY(20px); filter: blur(5px); }
     }
 
     .typing-text::after {
@@ -457,24 +543,6 @@
     }
 
     .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    #dark-mode-toggle-desktop,
-    #dark-mode-toggle-mobile {
-      width: 38px;
-      height: 38px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid var(--glass-border);
-      border-radius: var(--radius-full);
-      background: var(--glass-bg);
-      color: var(--text-secondary);
-      cursor: pointer;
-      transition: var(--transition-base);
     }
 
     #dark-mode-toggle-desktop:hover,
@@ -2199,7 +2267,7 @@
     <!-- ========== NAVBAR ========== -->
     <header id="navbar">
       <div class="nav-inner">
-        <a href="#hero" class="nav-logo">Adam Zaky's</a>
+        <a href="#hero" class="nav-logo interactive-impact">Adam Zaky's</a>
         <ul id="nav-menu">
           <li><a href="#hero">Home</a></li>
           <li><a href="#about">About</a></li>
@@ -2240,7 +2308,7 @@
               <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
             </svg>
           </button>
-          <a href="#contact" class="btn-primary" style="padding:10px 22px;font-size:14px;">Let's Talk</a>
+          <a href="#contact" class="btn-primary interactive-impact" style="padding:10px 22px;font-size:14px;">Let's Talk</a>
           <button id="menu-hamburger" aria-label="Open menu">
             <span></span><span></span><span></span>
           </button>
@@ -2270,14 +2338,14 @@
             </p>
           </div>
           <div class="hero-cta-left">
-            <a href="#contact" class="btn-primary">
+            <a href="#contact" class="btn-primary interactive-impact">
               Let's Connect
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
                 stroke-linecap="round" stroke-linejoin="round">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </a>
-            <a href="other/asset/CV_Muhammad Adam Zaky Jiddyansah vbumn.pdf" download class="btn-outline">
+            <a href="other/asset/CV_Muhammad Adam Zaky Jiddyansah vbumn.pdf" download class="btn-outline interactive-impact">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
                 stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -2352,7 +2420,7 @@
         <!-- RIGHT: Social Links & Description -->
         <div class="hero-right" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
           <div class="hero-social">
-            <a href="https://github.com/adamzakys" target="_blank" class="social-pill" aria-label="GitHub">
+            <a href="https://github.com/adamzakys" target="_blank" class="social-pill interactive-impact" aria-label="GitHub">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round">
                 <path
@@ -2361,7 +2429,7 @@
               </svg>
               <span>GitHub</span>
             </a>
-            <a href="https://www.linkedin.com/in/adamzaky/" target="_blank" class="social-pill" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/in/adamzaky/" target="_blank" class="social-pill interactive-impact" aria-label="LinkedIn">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round">
                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
@@ -2370,7 +2438,7 @@
               </svg>
               <span>LinkedIn</span>
             </a>
-            <a href="mailto:adamzaky.dy@gmail.com" class="social-pill" aria-label="Email">
+            <a href="mailto:adamzaky.dy@gmail.com" class="social-pill interactive-impact" aria-label="Email">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
@@ -2378,7 +2446,7 @@
               </svg>
               <span>Email Me</span>
             </a>
-            <a href="http://wa.me/6283129939682" target="_blank" class="social-pill" aria-label="WhatsApp">
+            <a href="http://wa.me/6283129939682" target="_blank" class="social-pill interactive-impact" aria-label="WhatsApp">
               <img src="other/asset/whatsapp-white.png" alt="" />
               <span>WhatsApp</span>
             </a>
@@ -2787,9 +2855,9 @@
         </div>
         <div data-aos="fade-up" data-aos-delay="100">
           <div class="tab-nav glass">
-            <button class="tab-btn active" data-tab="data-science" id="tab-ds">Data Science</button>
-            <button class="tab-btn" data-tab="web-dev" id="tab-web">Web Development</button>
-            <button class="tab-btn" data-tab="networking" id="tab-net">Networking</button>
+            <button class="tab-btn active interactive-impact" data-tab="data-science" id="tab-ds">Data Science</button>
+            <button class="tab-btn interactive-impact" data-tab="web-dev" id="tab-web">Web Development</button>
+            <button class="tab-btn interactive-impact" data-tab="networking" id="tab-net">Networking</button>
           </div>
         </div>
 
@@ -2808,7 +2876,7 @@
                 </div>
                 <div class="art-line"></div>
                 <div class="project-banner-overlay">
-                  <a href="#" class="banner-overlay-link">
+                  <a href="#" class="banner-overlay-link interactive-impact">
                     View Project
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                       stroke-width="2.5">
@@ -2822,7 +2890,7 @@
                 <p class="project-desc">Multivariate LSTM with macroeconomic indicator integration for accurate Bitcoin price prediction.</p>
                 <div class="project-tags"><span class="badge-v2">LSTM</span><span class="badge-v2">Python</span><span
                     class="badge-v2">TensorFlow</span></div>
-                <a href="#" class="project-link">View Project <svg width="13" height="13" viewBox="0 0 24 24"
+                <a href="#" class="project-link interactive-impact">View Project <svg width="13" height="13" viewBox="0 0 24 24"
                     fill="none" stroke="currentColor" stroke-width="2.5">
                     <path d="M5 12h14M12 5l7 7-7 7" />
                   </svg></a>
@@ -2841,7 +2909,7 @@
                   <div class="art-bar" style="height:40%;"></div>
                 </div>
                 <div class="project-banner-overlay">
-                  <a href="#" class="banner-overlay-link">
+                  <a href="#" class="banner-overlay-link interactive-impact">
                     View Project
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                       stroke-width="2.5">
@@ -2856,7 +2924,7 @@
                 </p>
                 <div class="project-tags"><span class="badge-v2">Plotly</span><span class="badge-v2">Dash</span><span
                     class="badge-v2">Analytics</span></div>
-                <a href="#" class="project-link">View Project <svg width="13" height="13" viewBox="0 0 24 24"
+                <a href="#" class="project-link interactive-impact">View Project <svg width="13" height="13" viewBox="0 0 24 24"
                     fill="none" stroke="currentColor" stroke-width="2.5">
                     <path d="M5 12h14M12 5l7 7-7 7" />
                   </svg></a>
@@ -2872,7 +2940,7 @@
                   <div class="art-dot-scatter" style="width:9px;height:9px;top:20%;left:80%;"></div>
                 </div>
                 <div class="project-banner-overlay">
-                  <a href="#" class="banner-overlay-link">
+                  <a href="#" class="banner-overlay-link interactive-impact">
                     View Project
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                       stroke-width="2.5">
@@ -2887,7 +2955,7 @@
                 </p>
                 <div class="project-tags"><span class="badge-v2">Python</span><span
                     class="badge-v2">BeautifulSoup</span><span class="badge-v2">Selenium</span></div>
-                <a href="#" class="project-link">View Project <svg width="13" height="13" viewBox="0 0 24 24"
+                <a href="#" class="project-link interactive-impact">View Project <svg width="13" height="13" viewBox="0 0 24 24"
                     fill="none" stroke="currentColor" stroke-width="2.5">
                     <path d="M5 12h14M12 5l7 7-7 7" />
                   </svg></a>
@@ -2899,7 +2967,7 @@
               <h3 style="font-size:20px;font-weight:800;color:var(--text-primary);margin-bottom:8px;">View All Projects
               </h3>
               <p style="color:var(--text-secondary);font-size:14px;margin-bottom:20px;">Visit my blog to see more data science projects</p>
-              <a href="#" class="btn-primary">Visit Data Science Blog <svg width="14" height="14" viewBox="0 0 24 24"
+              <a href="#" class="btn-primary interactive-impact">Visit Data Science Blog <svg width="14" height="14" viewBox="0 0 24 24"
                   fill="none" stroke="currentColor" stroke-width="2.5">
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg></a>
@@ -2915,7 +2983,7 @@
               <div class="project-banner">
                 <img src="other/asset/antero.png" alt="Digital Banking Platform" />
                 <div class="project-banner-overlay">
-                  <a href="#" class="banner-overlay-link">
+                  <a href="#" class="banner-overlay-link interactive-impact">
                     View Project
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                       stroke-width="2.5">
@@ -2935,7 +3003,7 @@
               <div class="project-banner">
                 <img src="other/asset/wisata.png" alt="Wisata Website" />
                 <div class="project-banner-overlay">
-                  <a href="#" class="banner-overlay-link">
+                  <a href="#" class="banner-overlay-link interactive-impact">
                     View Project
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                       stroke-width="2.5">
@@ -2955,7 +3023,7 @@
               <div class="project-banner">
                 <img src="other/asset/itechhire.png" alt="iTechHire" />
                 <div class="project-banner-overlay">
-                  <a href="#" class="banner-overlay-link">
+                  <a href="#" class="banner-overlay-link interactive-impact">
                     View Project
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                       stroke-width="2.5">
@@ -3086,7 +3154,7 @@
               </div>
 
               <div class="contact-links-grid">
-                <a href="http://wa.me/6283129939682" class="c-link-btn" data-color="#25d366" target="_blank">
+                <a href="http://wa.me/6283129939682" class="c-link-btn interactive-impact" data-color="#25d366" target="_blank">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round" style="color: #25d366;">
                     <path
@@ -3094,7 +3162,7 @@
                   </svg>
                   WhatsApp
                 </a>
-                <a href="mailto:adamzaky.dy@gmail.com" class="c-link-btn" data-color="#ea4335">
+                <a href="mailto:adamzaky.dy@gmail.com" class="c-link-btn interactive-impact" data-color="#ea4335">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round" style="color: #ea4335;">
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
@@ -3102,7 +3170,7 @@
                   </svg>
                   Email
                 </a>
-                <a href="https://linkedin.com/in/adamzaky" class="c-link-btn" data-color="#0077b5" target="_blank">
+                <a href="https://linkedin.com/in/adamzaky" class="c-link-btn interactive-impact" data-color="#0077b5" target="_blank">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round" style="color: #0077b5;">
                     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
@@ -3136,7 +3204,7 @@
                 <textarea name="message" id="c-msg" placeholder=" " required rows="4"></textarea>
                 <label for="c-msg">Write a Message...</label>
               </div>
-              <button type="submit" class="btn-send">
+              <button type="submit" class="btn-send interactive-impact">
                 <span>Send Message</span>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                   stroke-linecap="round" stroke-linejoin="round">
@@ -3160,7 +3228,7 @@
               Full-Stack
               Developer &middot; Network Infrastructure Specialist</p>
             <div class="footer-social">
-              <a href="https://github.com/adamzakys" target="_blank" class="footer-social-pill" aria-label="GitHub">
+              <a href="https://github.com/adamzakys" target="_blank" class="footer-social-pill interactive-impact" aria-label="GitHub">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                   stroke-linecap="round" stroke-linejoin="round">
                   <path
@@ -3168,7 +3236,7 @@
                   </path>
                 </svg>
               </a>
-              <a href="https://www.linkedin.com/in/adamzaky/" target="_blank" class="footer-social-pill"
+              <a href="https://www.linkedin.com/in/adamzaky/" target="_blank" class="footer-social-pill interactive-impact"
                 aria-label="LinkedIn">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                   stroke-linecap="round" stroke-linejoin="round">
@@ -3177,7 +3245,7 @@
                   <circle cx="4" cy="4" r="2"></circle>
                 </svg>
               </a>
-              <a href="https://www.instagram.com/adamzaky_j/" target="_blank" class="footer-social-pill"
+              <a href="https://www.instagram.com/adamzaky_j/" target="_blank" class="footer-social-pill interactive-impact"
                 aria-label="Instagram">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                   stroke-linecap="round" stroke-linejoin="round">
@@ -3186,7 +3254,7 @@
                   <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                 </svg>
               </a>
-              <a href="http://wa.me/6283129939682" target="_blank" class="footer-social-pill" aria-label="WhatsApp">
+              <a href="http://wa.me/6283129939682" target="_blank" class="footer-social-pill interactive-impact" aria-label="WhatsApp">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                   stroke-linecap="round" stroke-linejoin="round">
                   <path
@@ -3194,7 +3262,7 @@
                   </path>
                 </svg>
               </a>
-              <a href="mailto:adamzaky.dy@gmail.com" class="footer-social-pill" aria-label="Email">
+              <a href="mailto:adamzaky.dy@gmail.com" class="footer-social-pill interactive-impact" aria-label="Email">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                   stroke-linecap="round" stroke-linejoin="round">
                   <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
@@ -3205,19 +3273,19 @@
           </div>
           <div>
             <div class="footer-col-title">Navigation</div>
-            <a href="#hero" class="footer-link">Home</a>
-            <a href="#about" class="footer-link">About</a>
-            <a href="#skills-section" class="footer-link">Skills</a>
-            <a href="#experience" class="footer-link">Experience</a>
-            <a href="#portfolio" class="footer-link">Portfolio</a>
-            <a href="#contact" class="footer-link">Contact</a>
+            <a href="#hero" class="footer-link interactive-impact">Home</a>
+            <a href="#about" class="footer-link interactive-impact">About</a>
+            <a href="#skills-section" class="footer-link interactive-impact">Skills</a>
+            <a href="#experience" class="footer-link interactive-impact">Experience</a>
+            <a href="#portfolio" class="footer-link interactive-impact">Portfolio</a>
+            <a href="#contact" class="footer-link interactive-impact">Contact</a>
           </div>
           <div>
             <div class="footer-col-title">Specializations</div>
-            <a href="#skills-section" class="footer-link">Data Science</a>
-            <a href="#skills-section" class="footer-link">Web Development</a>
-            <a href="#skills-section" class="footer-link">Network Infrastructure</a>
-            <a href="#certifications" class="footer-link">Certifications</a>
+            <a href="#skills-section" class="footer-link interactive-impact">Data Science</a>
+            <a href="#skills-section" class="footer-link interactive-impact">Web Development</a>
+            <a href="#skills-section" class="footer-link interactive-impact">Network Infrastructure</a>
+            <a href="#certifications" class="footer-link interactive-impact">Certifications</a>
           </div>
         </div>
         <div class="footer-bottom">
@@ -3687,201 +3755,93 @@
        }, 3000);
     }
 
-    // 6. Scratch-to-Reveal (Portfolio)
-    const scratchWrappers = document.querySelectorAll('.scratch-wrapper');
-    scratchWrappers.forEach(wrapper => {
-       const canvas = wrapper.querySelector('.scratch-canvas');
-       if(!canvas) return;
-       const ctx = canvas.getContext('2d');
-       
-       function initScratch() {
-          canvas.width = wrapper.offsetWidth;
-          canvas.height = wrapper.offsetHeight;
-          
-          const gradient = ctx.createLinearGradient(0,0, canvas.width, canvas.height);
-          gradient.addColorStop(0, '#1e293b');
-          gradient.addColorStop(0.5, '#475569');
-          gradient.addColorStop(1, '#1e293b');
-          ctx.fillStyle = gradient;
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
-          
-          ctx.font = "bold 20px Inter, sans-serif";
-          ctx.fillStyle = "rgba(255,255,255,0.7)";
-          ctx.textAlign = "center";
-          ctx.fillText("Scratch to Reveal", canvas.width/2, canvas.height/2);
-       }
-       
-       setTimeout(initScratch, 500);
-       window.addEventListener('resize', initScratch);
-       
-       let isDrawing = false;
-       let scratchedArea = 0;
-       let revealed = false;
-       
-       function getPos(e) {
-          const rect = canvas.getBoundingClientRect();
-          if(e.touches) {
-             return {x: e.touches[0].clientX - rect.left, y: e.touches[0].clientY - rect.top};
+    
+    // 6. Project Slicer (Portfolio)
+    const covers = document.querySelectorAll('.project-slice-cover');
+    covers.forEach(cover => {
+       cover.addEventListener('click', () => {
+          cover.classList.add('sliced');
+          setTimeout(() => cover.remove(), 800);
+       });
+       let startX = 0;
+       cover.addEventListener('touchstart', (e) => {
+          startX = e.touches[0].clientX;
+       }, {passive: true});
+       cover.addEventListener('touchmove', (e) => {
+          if(Math.abs(e.touches[0].clientX - startX) > 40) {
+             cover.classList.add('sliced');
+             setTimeout(() => cover.remove(), 800);
           }
-          return {x: e.clientX - rect.left, y: e.clientY - rect.top};
-       }
-       
-       function scratch(e) {
-          if(!isDrawing || revealed) return;
-          if(e.cancelable) e.preventDefault();
-          const pos = getPos(e);
-          ctx.globalCompositeOperation = 'destination-out';
-          ctx.beginPath();
-          ctx.arc(pos.x, pos.y, 35, 0, Math.PI*2);
-          ctx.fill();
-          
-          scratchedArea++; 
-          if(scratchedArea > 25) {
-             revealed = true;
-             canvas.style.opacity = '0';
-             setTimeout(()=> canvas.remove(), 500);
-          }
-       }
-       
-       canvas.addEventListener('mousedown', (e)=>{ isDrawing = true; scratch(e); });
-       canvas.addEventListener('mousemove', scratch);
-       canvas.addEventListener('mouseup', ()=> isDrawing = false);
-       canvas.addEventListener('mouseleave', ()=> isDrawing = false);
-       
-       canvas.addEventListener('touchstart', (e)=>{ isDrawing = true; scratch(e); }, {passive: false});
-       canvas.addEventListener('touchmove', scratch, {passive: false});
-       canvas.addEventListener('touchend', ()=> isDrawing = false);
+       }, {passive: true});
     });
 
-    // 7. Gravity Box (Skills)
-    const skillsGrid = document.querySelector('.skills-grid');
+    // 7. Jello Elastic Skills
     const skillCards = document.querySelectorAll('.skill-card-v2');
-    if(skillsGrid && skillCards.length > 0) {
-       skillsGrid.style.position = 'relative';
-       const observer = new IntersectionObserver((entries) => {
-          if(entries[0].isIntersecting) {
-             observer.disconnect();
-             startGravity();
-          }
-       }, {threshold: 0.3});
-       observer.observe(skillsGrid);
+    skillCards.forEach(card => {
+       let isDragging = false;
+       let startX, startY;
+       card.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
        
-       let physicsEntities = [];
-       
-       function startGravity() {
-          skillsGrid.style.minHeight = skillsGrid.offsetHeight + 'px';
-          
-          skillCards.forEach((card, i) => {
-             const rect = card.getBoundingClientRect();
-             const gridRect = skillsGrid.getBoundingClientRect();
-             const initialX = rect.left - gridRect.left;
-             const initialY = rect.top - gridRect.top;
-             
-             card.style.position = 'absolute';
-             card.style.margin = '0';
-             card.style.left = initialX + 'px';
-             card.style.top = '0px';
-             card.style.width = card.offsetWidth + 'px';
-             
-             physicsEntities.push({
-                el: card,
-                x: initialX,
-                y: -300 - (i*150),
-                vx: (Math.random() - 0.5) * 8,
-                vy: 0,
-                width: card.offsetWidth,
-                height: card.offsetHeight,
-                isDragging: false,
-                initialLeft: initialX,
-                initialTop: initialY
-             });
-             
-             let dragStartX, dragStartY;
-             
-             function startDrag(e) {
-                const entity = physicsEntities[i];
-                entity.isDragging = true;
-                const pos = e.touches ? e.touches[0] : e;
-                dragStartX = pos.clientX - entity.x;
-                dragStartY = pos.clientY - entity.y;
-                card.style.zIndex = '100';
-             }
-             function drag(e) {
-                const entity = physicsEntities[i];
-                if(!entity.isDragging) return;
-                if(e.cancelable) e.preventDefault();
-                const pos = e.touches ? e.touches[0] : e;
-                
-                const newX = pos.clientX - dragStartX;
-                const newY = pos.clientY - dragStartY;
-                entity.vx = newX - entity.x;
-                entity.vy = newY - entity.y;
-                
-                entity.x = newX;
-                entity.y = newY;
-             }
-             function endDrag() {
-                physicsEntities[i].isDragging = false;
-                card.style.zIndex = '';
-             }
-             
-             card.addEventListener('mousedown', startDrag);
-             window.addEventListener('mousemove', drag);
-             window.addEventListener('mouseup', endDrag);
-             
-             card.addEventListener('touchstart', startDrag, {passive: false});
-             window.addEventListener('touchmove', drag, {passive: false});
-             window.addEventListener('touchend', endDrag);
-          });
-          
-          function physicsLoop() {
-             const bounds = { w: skillsGrid.offsetWidth, h: skillsGrid.offsetHeight };
-             
-             physicsEntities.forEach(entity => {
-                if(entity.isDragging) {
-                   entity.el.style.transform = `translate(${entity.x - entity.initialLeft}px, ${entity.y - entity.initialTop}px) rotate(${entity.vx * 0.5}deg) scale(1.05)`;
-                   return;
-                }
-                
-                // Magnetic grid force (spring to original position)
-                const springK = 0.05;
-                const damp = 0.85;
-                
-                entity.vx += (entity.initialLeft - entity.x) * springK;
-                entity.vy += (entity.initialTop - entity.y) * springK;
-                
-                entity.vx *= damp;
-                entity.vy *= damp;
-                
-                entity.x += entity.vx;
-                entity.y += entity.vy;
-                
-                // Keep inside bounds
-                if(entity.x < 0) { entity.x = 0; entity.vx *= -0.5; }
-                if(entity.x + entity.width > bounds.w) { entity.x = bounds.w - entity.width; entity.vx *= -0.5; }
-                
-                // Basic repulsion from other cards if they overlap too much
-                physicsEntities.forEach(other => {
-                   if(other === entity) return;
-                   const dx = (entity.x + entity.width/2) - (other.x + other.width/2);
-                   const dy = (entity.y + entity.height/2) - (other.y + other.height/2);
-                   const dist = Math.sqrt(dx*dx + dy*dy);
-                   const minDist = (entity.width + other.width) / 2.2;
-                   if(dist < minDist && dist > 0) {
-                      const angle = Math.atan2(dy, dx);
-                      const push = (minDist - dist) * 0.05;
-                      entity.vx += Math.cos(angle) * push;
-                      entity.vy += Math.sin(angle) * push;
-                   }
-                });
-                
-                entity.el.style.transform = `translate(${entity.x - entity.initialLeft}px, ${entity.y - entity.initialTop}px) rotate(${entity.vx * 0.2}deg)`;
-             });
-             
-             requestAnimationFrame(physicsLoop);
-          }
-          physicsLoop();
+       function startDrag(e) {
+          isDragging = true;
+          const pos = e.touches ? e.touches[0] : e;
+          startX = pos.clientX;
+          startY = pos.clientY;
+          card.style.transition = 'none';
+          card.style.zIndex = '100';
        }
+       function drag(e) {
+          if(!isDragging) return;
+          // Don't prevent default, allow scroll. Just stretch slightly.
+          const pos = e.touches ? e.touches[0] : e;
+          const dx = pos.clientX - startX;
+          const dy = pos.clientY - startY;
+          
+          // Constrain the stretch (rubber band effect)
+          const stretchX = dx * 0.2;
+          const stretchY = dy * 0.2;
+          
+          card.style.transform = `translate(${stretchX}px, ${stretchY}px) scale(1.05) rotate(${stretchX * 0.1}deg)`;
+       }
+       function endDrag() {
+          if(!isDragging) return;
+          isDragging = false;
+          card.style.transition = 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
+          card.style.transform = 'translate(0px, 0px) scale(1) rotate(0deg)';
+          card.style.zIndex = '';
+       }
+       
+       card.addEventListener('mousedown', startDrag);
+       window.addEventListener('mousemove', drag);
+       window.addEventListener('mouseup', endDrag);
+       
+       card.addEventListener('touchstart', startDrag, {passive: true});
+       window.addEventListener('touchmove', drag, {passive: true});
+       window.addEventListener('touchend', endDrag);
+    });
+    
+    // Navbar Interaction (Indicator and warp)
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const indicator = document.getElementById('nav-indicator');
+    function updateIndicator(link) {
+       if(!link || !indicator) return;
+       const rect = link.getBoundingClientRect();
+       const parentRect = link.parentElement.getBoundingClientRect();
+       indicator.style.left = (rect.left - parentRect.left) + 'px';
+       indicator.style.width = rect.width + 'px';
+    }
+    
+    navLinks.forEach(link => {
+       link.addEventListener('mouseenter', () => updateIndicator(link));
+       link.addEventListener('click', (e) => {
+          updateIndicator(link);
+          document.body.style.filter = 'blur(3px)';
+          setTimeout(() => document.body.style.filter = 'none', 300);
+       });
+    });
+    const activeLink = document.querySelector('.nav-links a.active') || navLinks[0];
+    if(activeLink) {
+       setTimeout(() => updateIndicator(activeLink), 500);
     }
 
     // 8. Hacker Typer Mode (Terminal)
@@ -3955,32 +3915,6 @@
         }
       });
     }
-    // 9. Playable Magnetic Navbar
-    const navLinks = document.querySelectorAll('#nav-menu a');
-    navLinks.forEach(link => {
-       link.style.display = 'inline-block';
-       link.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.3s';
-       
-       let isHovered = false;
-       link.addEventListener('mousemove', (e) => {
-          isHovered = true;
-          const rect = link.getBoundingClientRect();
-          const x = e.clientX - rect.left - rect.width/2;
-          const y = e.clientY - rect.top - rect.height/2;
-          // Magnetic pull towards cursor
-          link.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px) scale(1.1)`;
-       });
-       link.addEventListener('mouseleave', () => {
-          isHovered = false;
-          link.style.transform = 'translate(0px, 0px) scale(1)';
-       });
-       link.addEventListener('touchstart', () => {
-          link.style.transform = 'scale(1.1) translateY(-4px)';
-       }, {passive:true});
-       link.addEventListener('touchend', () => {
-          link.style.transform = 'translate(0px, 0px) scale(1)';
-       });
-    });
   </script>
 </body>
 
