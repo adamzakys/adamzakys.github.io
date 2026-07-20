@@ -67,7 +67,8 @@
       padding: 0;
     }
 
-    html, body {
+    html,
+    body {
       overflow-x: hidden;
       width: 100%;
       max-width: 100vw;
@@ -216,12 +217,25 @@
       border-color: rgba(99, 102, 241, 0.3);
     }
 
+    .glass-shimmer {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.08), transparent 40%);
+      z-index: 10;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .project-card:hover .glass-shimmer,
+    .skill-card-v2:hover .glass-shimmer,
+    .contact-terminal:hover .glass-shimmer {
+      opacity: 1;
+    }
+
     /* ===================== GRADIENT TEXT ===================== */
     .gradient-text {
-      background: var(--gradient-text);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: var(--accent-1);
+      text-shadow: 0 0 16px rgba(99, 102, 241, 0.3);
     }
 
     /* ===================== BUTTONS ===================== */
@@ -310,10 +324,8 @@
       font-family: 'Outfit', sans-serif;
       font-size: 20px;
       font-weight: 800;
-      background: var(--gradient-main);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: var(--accent-1);
+      text-shadow: 0 0 10px rgba(99, 102, 241, 0.2);
       text-decoration: none;
       letter-spacing: -0.5px;
     }
@@ -429,14 +441,15 @@
         display: flex;
       }
 
-      #dark-mode-toggle-desktop, .nav-actions .btn-primary {
+      #dark-mode-toggle-desktop,
+      .nav-actions .btn-primary {
         display: none !important;
       }
 
       #navbar {
         padding: 12px 16px;
       }
-      
+
       .nav-inner {
         padding: 8px 16px;
       }
@@ -536,10 +549,8 @@
     }
 
     .hero-title .name-highlight {
-      background: var(--gradient-main);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: var(--accent-1);
+      text-shadow: 0 0 24px rgba(99, 102, 241, 0.3);
     }
 
     .hero-role {
@@ -1580,51 +1591,59 @@
       flex-direction: row;
       border-radius: 24px;
       overflow: hidden;
-      box-shadow: 0 40px 100px rgba(0,0,0,0.1);
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.1);
       border: 1px solid var(--glass-border);
       position: relative;
     }
+
     .terminal-left {
       flex: 1;
       padding: 40px;
-      background: linear-gradient(135deg, rgba(99,102,241,0.05), rgba(124,58,237,0.02));
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(124, 58, 237, 0.02));
       border-right: 1px solid var(--glass-border-subtle);
     }
+
     .terminal-right {
       flex: 1;
       padding: 40px;
       display: flex;
       align-items: center;
     }
+
     .terminal-header {
       display: flex;
       align-items: center;
       gap: 6px;
       margin-bottom: 32px;
     }
+
     .terminal-dot {
       width: 12px;
       height: 12px;
       border-radius: 50%;
     }
+
     .terminal-title {
       font-size: 32px;
       font-weight: 800;
       color: var(--text-primary);
       margin-bottom: 12px;
     }
+
     .terminal-desc {
       color: var(--text-secondary);
       font-size: 15px;
       line-height: 1.7;
       margin-bottom: 32px;
     }
+
     .contact-links-grid {
       display: flex;
       flex-direction: column;
       gap: 12px;
       margin-bottom: 32px;
     }
+
     .c-link-btn {
       display: flex;
       align-items: center;
@@ -1639,10 +1658,12 @@
       position: relative;
       overflow: hidden;
     }
+
     .c-link-btn:hover {
       transform: translateX(8px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     }
+
     .c-location {
       display: flex;
       align-items: center;
@@ -1650,16 +1671,20 @@
       color: var(--text-muted);
       font-size: 14px;
     }
+
     .c-form {
       width: 100%;
       display: flex;
       flex-direction: column;
       gap: 24px;
     }
+
     .input-float {
       position: relative;
     }
-    .input-float input, .input-float textarea {
+
+    .input-float input,
+    .input-float textarea {
       width: 100%;
       background: transparent;
       border: none;
@@ -1671,9 +1696,11 @@
       outline: none;
       transition: border-color 0.3s;
     }
+
     .input-float textarea {
       resize: none;
     }
+
     .input-float label {
       position: absolute;
       top: 12px;
@@ -1682,17 +1709,21 @@
       pointer-events: none;
       transition: all 0.3s ease;
     }
-    .input-float input:focus, .input-float textarea:focus {
+
+    .input-float input:focus,
+    .input-float textarea:focus {
       border-bottom-color: var(--accent-1);
     }
-    .input-float input:focus ~ label,
-    .input-float input:not(:placeholder-shown) ~ label,
-    .input-float textarea:focus ~ label,
-    .input-float textarea:not(:placeholder-shown) ~ label {
+
+    .input-float input:focus~label,
+    .input-float input:not(:placeholder-shown)~label,
+    .input-float textarea:focus~label,
+    .input-float textarea:not(:placeholder-shown)~label {
       top: -12px;
       font-size: 12px;
       color: var(--accent-1);
     }
+
     .btn-send {
       margin-top: 12px;
       display: flex;
@@ -1708,10 +1739,12 @@
       cursor: pointer;
       transition: transform 0.3s ease;
     }
+
     .btn-send:hover {
       transform: translateY(-4px);
-      box-shadow: 0 12px 30px rgba(99,102,241,0.25);
+      box-shadow: 0 12px 30px rgba(99, 102, 241, 0.25);
     }
+
     body.dark .btn-send {
       background: white;
       color: #080b1a;
@@ -1876,13 +1909,16 @@
         height: 320px;
       }
 
-      .glass-panel-1, .glass-panel-2 {
+      .glass-panel-1,
+      .glass-panel-2 {
         width: 300px;
         height: 420px;
       }
+
       .glass-panel-1 {
         transform: rotate(-3deg) translateX(-10px) translateY(5px);
       }
+
       .glass-panel-2 {
         transform: rotate(5deg) translateX(10px) translateY(10px);
       }
@@ -1989,6 +2025,7 @@
     .icon-svg {
       flex-shrink: 0;
     }
+
     /* ===================== CUSTOM CURSOR ===================== */
     .custom-cursor {
       position: fixed;
@@ -2001,6 +2038,7 @@
       transform: translate(-50%, -50%);
       transition: width 0.2s, height 0.2s, background-color 0.2s;
     }
+
     .custom-cursor-follower {
       position: fixed;
       width: 40px;
@@ -2012,54 +2050,78 @@
       transform: translate(-50%, -50%);
       transition: width 0.2s, height 0.2s, border-color 0.2s;
     }
+
     .custom-cursor.hover {
       width: 12px;
       height: 12px;
       background-color: var(--accent-2);
     }
+
     .custom-cursor-follower.hover {
       width: 60px;
       height: 60px;
       border-color: var(--accent-2);
       background-color: rgba(14, 165, 233, 0.1);
     }
+
     @media (max-width: 768px) {
-      .custom-cursor, .custom-cursor-follower { display: none !important; }
+
+      .custom-cursor,
+      .custom-cursor-follower {
+        display: none !important;
+      }
     }
   </style>
 </head>
 
 <body class="dark">
   <div class="page-wrapper">
-  <!-- Custom Interactive Cursor -->
-  <div class="custom-cursor" id="custom-cursor"></div>
-  <div class="custom-cursor-follower" id="custom-cursor-follower"></div>
+    <!-- Custom Interactive Cursor -->
+    <div class="custom-cursor" id="custom-cursor"></div>
+    <div class="custom-cursor-follower" id="custom-cursor-follower"></div>
 
-  <!-- Background Orbs (morphing on scroll) -->
-  <div class="bg-orb bg-orb-1" id="orb1"></div>
-  <div class="bg-orb bg-orb-2" id="orb2"></div>
-  <div class="bg-orb bg-orb-3" id="orb3"></div>
+    <!-- Background Orbs (morphing on scroll) -->
+    <div class="bg-orb bg-orb-1" id="orb1"></div>
+    <div class="bg-orb bg-orb-2" id="orb2"></div>
+    <div class="bg-orb bg-orb-3" id="orb3"></div>
 
-  <!-- Scroll Progress Bar -->
-  <div id="scroll-progress-track" aria-hidden="true">
-    <div id="scroll-progress-fill"></div>
-    <div id="scroll-progress-dot"></div>
-  </div>
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress-track" aria-hidden="true">
+      <div id="scroll-progress-fill"></div>
+      <div id="scroll-progress-dot"></div>
+    </div>
 
-  <!-- ========== NAVBAR ========== -->
-  <header id="navbar">
-    <div class="nav-inner">
-      <a href="#hero" class="nav-logo">Adam Zaky's</a>
-      <ul id="nav-menu">
-        <li><a href="#hero">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills-section">Skills</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#portfolio">Portfolio</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li style="display:flex;align-items:center;justify-content:center;padding:16px 0;">
-          <button id="dark-mode-toggle-mobile" aria-label="Toggle dark mode">
+    <!-- ========== NAVBAR ========== -->
+    <header id="navbar">
+      <div class="nav-inner">
+        <a href="#hero" class="nav-logo">Adam Zaky's</a>
+        <ul id="nav-menu">
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills-section">Skills</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li style="display:flex;align-items:center;justify-content:center;padding:16px 0;">
+            <button id="dark-mode-toggle-mobile" aria-label="Toggle dark mode">
+              <svg class="dark-toggle-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5" />
+                <line x1="12" y1="1" x2="12" y2="3" />
+                <line x1="12" y1="21" x2="12" y2="23" />
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                <line x1="1" y1="12" x2="3" y2="12" />
+                <line x1="21" y1="12" x2="23" y2="12" />
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+              </svg>
+            </button>
+          </li>
+        </ul>
+        <div class="nav-actions">
+          <button id="dark-mode-toggle-desktop" aria-label="Toggle dark mode">
             <svg class="dark-toggle-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
               stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="5" />
@@ -2073,933 +2135,978 @@
               <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
             </svg>
           </button>
-        </li>
-      </ul>
-      <div class="nav-actions">
-        <button id="dark-mode-toggle-desktop" aria-label="Toggle dark mode">
-          <svg class="dark-toggle-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="5" />
-            <line x1="12" y1="1" x2="12" y2="3" />
-            <line x1="12" y1="21" x2="12" y2="23" />
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-            <line x1="1" y1="12" x2="3" y2="12" />
-            <line x1="21" y1="12" x2="23" y2="12" />
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-          </svg>
-        </button>
-        <a href="#contact" class="btn-primary" style="padding:10px 22px;font-size:14px;">Let's Talk</a>
-        <button id="menu-hamburger" aria-label="Open menu">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <!-- ========== HERO ========== -->
-  <section id="hero">
-    <div class="hero-container">
-
-      <!-- LEFT: Name & CTA -->
-      <div class="hero-left" data-aos="fade-right" data-aos-duration="1000">
-        <div class="hero-badge">
-          <span class="dot"></span>
-          Available for opportunities
+          <a href="#contact" class="btn-primary" style="padding:10px 22px;font-size:14px;">Let's Talk</a>
+          <button id="menu-hamburger" aria-label="Open menu">
+            <span></span><span></span><span></span>
+          </button>
         </div>
-        <div class="hero-name-block">
-          <p class="hero-eyebrow">Portfolio</p>
-          <h1 class="hero-title">
-            Muhammad<br>
-            <span class="name-highlight">Adam Zaky</span><br>
-            Jiddyansah
-          </h1>
-          <p class="hero-role">
-            Computer Science Graduate &mdash; Data Science, Full-Stack Web Development & Network Infrastructure
+      </div>
+    </header>
+
+    <!-- ========== HERO ========== -->
+    <section id="hero">
+      <div class="hero-container">
+
+        <!-- LEFT: Name & CTA -->
+        <div class="hero-left" data-aos="fade-right" data-aos-duration="1000">
+          <div class="hero-badge">
+            <span class="dot"></span>
+            Available for opportunities
+          </div>
+          <div class="hero-name-block">
+            <p class="hero-eyebrow">Portfolio</p>
+            <h1 class="hero-title">
+              Muhammad<br>
+              <span class="name-highlight">Adam Zaky</span><br>
+              Jiddyansah
+            </h1>
+            <p class="hero-role">
+              Computer Science Graduate &mdash; Data Science, Full-Stack Web Development & Network Infrastructure
+            </p>
+          </div>
+          <div class="hero-cta-left">
+            <a href="#contact" class="btn-primary">
+              Let's Connect
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+            <a href="other/asset/CV_Muhammad Adam Zaky Jiddyansah vbumn.pdf" download class="btn-outline">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              Download CV
+            </a>
+          </div>
+          <div class="hero-stats-mini">
+            <div class="stat-mini">
+              <div class="s-num">3+</div>
+              <div class="s-label">Years Exp.</div>
+            </div>
+            <div class="stat-mini">
+              <div class="s-num">10+</div>
+              <div class="s-label">Projects</div>
+            </div>
+            <div class="stat-mini">
+              <div class="s-num">5+</div>
+              <div class="s-label">Certs</div>
+            </div>
+            <div class="stat-mini">
+              <div class="s-num">3.51</div>
+              <div class="s-label">GPA</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CENTER: Portrait Photo Card -->
+        <div class="hero-photo-wrap" data-aos="fade-up" data-aos-duration="1100" data-aos-delay="100">
+          <!-- Reflective glass panels behind card -->
+          <div class="glass-panel-behind glass-panel-1"></div>
+          <div class="glass-panel-behind glass-panel-2"></div>
+
+          <!-- Abstract sphere (background element) -->
+          <div class="hero-sphere-bg">
+            <div class="hero-sphere-shimmer"></div>
+          </div>
+
+          <!-- Main portrait card -->
+          <div class="portrait-card">
+            <div class="portrait-img-wrap">
+              <img src="other/asset/DSC04079-edd.jpg" alt="Muhammad Adam Zaky Jiddyansah" />
+              <div class="portrait-sheen"></div>
+            </div>
+            <div class="portrait-footer">
+              <div class="pf-name">Adam Zaky</div>
+              <div class="pf-role">CS Graduate &bull; Data Science &bull; Full-Stack</div>
+            </div>
+          </div>
+
+          <!-- Floating info chips -->
+          <div class="hero-chip chip-1">
+            <span class="chip-label">Core Focus</span>
+            <span class="chip-value gradient-text">Web Development</span>
+          </div>
+          <div class="hero-chip chip-2">
+            <span class="chip-label">Spesialisasi</span>
+            <span class="chip-value">Data Science</span>
+          </div>
+          <div class="hero-chip chip-3">
+            <span class="chip-label">Status</span>
+            <span class="chip-value" style="color:#22c55e;">Open to Work</span>
+          </div>
+          <div class="hero-chip chip-4">
+            <span class="chip-label">Experience</span>
+            <span class="chip-value gradient-text">1+ Tahun</span>
+          </div>
+        </div>
+
+        <!-- RIGHT: Social Links & Description -->
+        <div class="hero-right" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+          <div class="hero-social">
+            <a href="https://github.com/adamzakys" target="_blank" class="social-pill" aria-label="GitHub">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                </path>
+              </svg>
+              <span>GitHub</span>
+            </a>
+            <a href="https://www.linkedin.com/in/adamzaky/" target="_blank" class="social-pill" aria-label="LinkedIn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+              <span>LinkedIn</span>
+            </a>
+            <a href="mailto:adamzaky.dy@gmail.com" class="social-pill" aria-label="Email">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              <span>Email Me</span>
+            </a>
+            <a href="http://wa.me/6283129939682" target="_blank" class="social-pill" aria-label="WhatsApp">
+              <img src="other/asset/whatsapp-white.png" alt="" />
+              <span>WhatsApp</span>
+            </a>
+          </div>
+          <p class="hero-desc-right">
+            Passionate about creating innovative technology solutions. Combining analytical thinking with engineering
+            precision to build impactful digital products.
           </p>
         </div>
-        <div class="hero-cta-left">
-          <a href="#contact" class="btn-primary">
-            Let's Connect
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-          </a>
-          <a href="other/asset/CV_Muhammad Adam Zaky Jiddyansah vbumn.pdf" download class="btn-outline">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-              <polyline points="7 10 12 15 17 10" />
-              <line x1="12" y1="15" x2="12" y2="3" />
-            </svg>
-            Download CV
-          </a>
+
+      </div>
+    </section>
+
+    <!-- ========== ABOUT ========== -->
+    <section id="about">
+      <div class="section-wrapper">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Who I Am</span>
+          <h2 class="section-title">About Me</h2>
+          <div class="section-divider"></div>
         </div>
-        <div class="hero-stats-mini">
-          <div class="stat-mini">
-            <div class="s-num">3+</div>
-            <div class="s-label">Years Exp.</div>
+        <div class="about-grid">
+          <div data-aos="fade-right" data-aos-duration="1000">
+            <blockquote class="about-quote">
+              "The most difficult thing in life is to know yourself."
+              <footer style="font-style:normal;font-size:14px;color:var(--accent-2);margin-top:8px;font-weight:600;">
+                &mdash; Thales of Melitus</footer>
+            </blockquote>
+            <p class="about-text">
+            My educational journey from Vocational High School in Computer Networking to a Bachelor's Degree in Informatics Engineering has equipped me with expertise in multiple technology domains. In Network Infrastructure, I have a fundamental understanding built since vocational school. During college, I expanded my competencies in Data Science, focusing on data analysis using machine learning. I also possess Web Development skills for building modern applications.
+            </p>
           </div>
-          <div class="stat-mini">
-            <div class="s-num">10+</div>
-            <div class="s-label">Projects</div>
-          </div>
-          <div class="stat-mini">
-            <div class="s-num">5+</div>
-            <div class="s-label">Certs</div>
-          </div>
-          <div class="stat-mini">
-            <div class="s-num">3.51</div>
-            <div class="s-label">GPA</div>
+          <div class="about-cards" data-aos="fade-left" data-aos-duration="1000">
+            <div class="about-stat-card glass">
+              <div class="icon-wrap"
+                style="background:linear-gradient(135deg,rgba(124,58,237,0.15),rgba(99,102,241,0.1));">
+                <!-- Graduation cap SVG -->
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                  <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                </svg>
+              </div>
+              <h4>Education</h4>
+              <p>S1 Teknik Informatika</p>
+            </div>
+            <div class="about-stat-card glass">
+              <div class="icon-wrap"
+                style="background:linear-gradient(135deg,rgba(14,165,233,0.15),rgba(20,184,166,0.1));">
+                <!-- Briefcase SVG -->
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="7" width="20" height="14" rx="2" />
+                  <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+                  <line x1="12" y1="12" x2="12" y2="12.01" />
+                </svg>
+              </div>
+              <h4>Experience</h4>
+              <p>3+ Years</p>
+            </div>
+            <div class="about-stat-card glass">
+              <div class="icon-wrap"
+                style="background:linear-gradient(135deg,rgba(236,72,153,0.15),rgba(124,58,237,0.1));">
+                <!-- Award/Certificate SVG -->
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="8" r="6" />
+                  <path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11" />
+                </svg>
+              </div>
+              <h4>Certifications</h4>
+              <p>5+ Professional</p>
+            </div>
+            <div class="about-stat-card glass">
+              <div class="icon-wrap"
+                style="background:linear-gradient(135deg,rgba(20,184,166,0.15),rgba(14,165,233,0.1));">
+                <!-- Folder/Code SVG -->
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#14b8a6" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="16 18 22 12 16 6" />
+                  <polyline points="8 6 2 12 8 18" />
+                </svg>
+              </div>
+              <h4>Projects</h4>
+              <p>10+ Completed</p>
+            </div>
           </div>
         </div>
       </div>
+    </section>
 
-      <!-- CENTER: Portrait Photo Card -->
-      <div class="hero-photo-wrap" data-aos="fade-up" data-aos-duration="1100" data-aos-delay="100">
-        <!-- Reflective glass panels behind card -->
-        <div class="glass-panel-behind glass-panel-1"></div>
-        <div class="glass-panel-behind glass-panel-2"></div>
-
-        <!-- Abstract sphere (background element) -->
-        <div class="hero-sphere-bg">
-          <div class="hero-sphere-shimmer"></div>
+    <!-- ========== SKILLS ========== -->
+    <section id="skills-section"
+      style="background:linear-gradient(135deg,rgba(124,58,237,0.04),rgba(14,165,233,0.04));border-top:1px solid var(--glass-border-subtle);border-bottom:1px solid var(--glass-border-subtle);">
+      <div class="section-wrapper">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">What I Do</span>
+          <h2 class="section-title">Skills &amp; Expertise</h2>
+          <p class="section-subtitle">Technical skills I have mastered across various technology domains</p>
+          <div class="section-divider"></div>
         </div>
-
-        <!-- Main portrait card -->
-        <div class="portrait-card">
-          <div class="portrait-img-wrap">
-            <img src="other/asset/DSC04079-edd.jpg" alt="Muhammad Adam Zaky Jiddyansah" />
-            <div class="portrait-sheen"></div>
-          </div>
-          <div class="portrait-footer">
-            <div class="pf-name">Adam Zaky</div>
-            <div class="pf-role">CS Graduate &bull; Data Science &bull; Full-Stack</div>
-          </div>
-        </div>
-
-        <!-- Floating info chips -->
-        <div class="hero-chip chip-1">
-          <span class="chip-label">Fokus Utama</span>
-          <span class="chip-value gradient-text">Web Development</span>
-        </div>
-        <div class="hero-chip chip-2">
-          <span class="chip-label">Spesialisasi</span>
-          <span class="chip-value">Data Science</span>
-        </div>
-        <div class="hero-chip chip-3">
-          <span class="chip-label">Status</span>
-          <span class="chip-value" style="color:#22c55e;">Open to Work</span>
-        </div>
-        <div class="hero-chip chip-4">
-          <span class="chip-label">Pengalaman</span>
-          <span class="chip-value gradient-text">1+ Tahun</span>
-        </div>
-      </div>
-
-      <!-- RIGHT: Social Links & Description -->
-      <div class="hero-right" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
-        <div class="hero-social">
-          <a href="https://github.com/adamzakys" target="_blank" class="social-pill" aria-label="GitHub">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-            <span>GitHub</span>
-          </a>
-          <a href="https://www.linkedin.com/in/adamzaky/" target="_blank" class="social-pill" aria-label="LinkedIn">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-            <span>LinkedIn</span>
-          </a>
-          <a href="mailto:adamzaky.dy@gmail.com" class="social-pill" aria-label="Email">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-            <span>Email Me</span>
-          </a>
-          <a href="http://wa.me/6283129939682" target="_blank" class="social-pill" aria-label="WhatsApp">
-            <img src="other/asset/whatsapp-white.png" alt="" />
-            <span>WhatsApp</span>
-          </a>
-        </div>
-        <p class="hero-desc-right">
-          Passionate about creating innovative technology solutions. Combining analytical thinking with engineering
-          precision to build impactful digital products.
-        </p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ========== ABOUT ========== -->
-  <section id="about">
-    <div class="section-wrapper">
-      <div class="section-header" data-aos="fade-up">
-        <span class="section-tag">Who I Am</span>
-        <h2 class="section-title">About Me</h2>
-        <div class="section-divider"></div>
-      </div>
-      <div class="about-grid">
-        <div data-aos="fade-right" data-aos-duration="1000">
-          <blockquote class="about-quote">
-            "The most difficult thing in life is to know yourself."
-            <footer style="font-style:normal;font-size:14px;color:var(--accent-2);margin-top:8px;font-weight:600;">
-              &mdash; Thales of Melitus</footer>
-          </blockquote>
-          <p class="about-text">
-            Perjalanan pendidikan saya dari Sekolah Kejuruan TKJ hingga Sarjana Teknik Informatika telah membekali saya
-            dengan keahlian di beberapa bidang teknologi. Di bidang Infrastruktur Jaringan, saya memiliki pemahaman
-            mendasar yang saya bangun sejak SMK. Selama kuliah, saya memperluas kompetensi di bidang Data Science,
-            dengan fokus pada analisis data menggunakan machine learning. Saya juga memiliki keterampilan dalam Web
-            Development untuk membangun aplikasi modern.
-          </p>
-        </div>
-        <div class="about-cards" data-aos="fade-left" data-aos-duration="1000">
-          <div class="about-stat-card glass">
-            <div class="icon-wrap"
+        <div class="skills-grid">
+          <div class="skill-card-v2 glass" data-aos="fade-up" data-aos-delay="100">
+            <div class="skill-icon-wrap"
               style="background:linear-gradient(135deg,rgba(124,58,237,0.15),rgba(99,102,241,0.1));">
-              <!-- Graduation cap SVG -->
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-                <path d="M6 12v5c3 3 9 3 12 0v-5" />
-              </svg>
-            </div>
-            <h4>Education</h4>
-            <p>S1 Teknik Informatika</p>
-          </div>
-          <div class="about-stat-card glass">
-            <div class="icon-wrap"
-              style="background:linear-gradient(135deg,rgba(14,165,233,0.15),rgba(20,184,166,0.1));">
-              <!-- Briefcase SVG -->
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="7" width="20" height="14" rx="2" />
-                <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
-                <line x1="12" y1="12" x2="12" y2="12.01" />
-              </svg>
-            </div>
-            <h4>Experience</h4>
-            <p>3+ Years</p>
-          </div>
-          <div class="about-stat-card glass">
-            <div class="icon-wrap"
-              style="background:linear-gradient(135deg,rgba(236,72,153,0.15),rgba(124,58,237,0.1));">
-              <!-- Award/Certificate SVG -->
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="8" r="6" />
-                <path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11" />
-              </svg>
-            </div>
-            <h4>Certifications</h4>
-            <p>5+ Professional</p>
-          </div>
-          <div class="about-stat-card glass">
-            <div class="icon-wrap"
-              style="background:linear-gradient(135deg,rgba(20,184,166,0.15),rgba(14,165,233,0.1));">
-              <!-- Folder/Code SVG -->
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#14b8a6" stroke-width="2"
+              <!-- Monitor/Code SVG -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="16 18 22 12 16 6" />
                 <polyline points="8 6 2 12 8 18" />
               </svg>
             </div>
-            <h4>Projects</h4>
-            <p>10+ Completed</p>
+            <h3
+              style="font-size:20px;font-weight:800;color:var(--text-primary);margin-bottom:20px;letter-spacing:-0.5px;">
+              Hard Skills</h3>
+            <div class="skill-item"><span class="skill-dot" style="background:var(--accent-1);"></span>Data Analysis
+              &amp;
+              Visualization</div>
+            <div class="skill-item"><span class="skill-dot" style="background:var(--accent-1);"></span>ML/DL
+              (Forecasting,
+              Clustering, Classification)</div>
+            <div class="skill-item"><span class="skill-dot" style="background:var(--accent-1);"></span>Python
+              Programming
+            </div>
+            <div class="skill-item"><span class="skill-dot" style="background:var(--accent-1);"></span>Excel &amp; Data
+              Analysis Tools</div>
+            <div class="skill-item"><span class="skill-dot" style="background:var(--accent-1);"></span>Database
+              Administrator</div>
+            <div class="skill-item"><span class="skill-dot" style="background:var(--accent-1);"></span>Data Mining</div>
+            <div class="skill-item"><span class="skill-dot" style="background:var(--accent-1);"></span>IT Project
+              Management</div>
+            <div class="skill-item"><span class="skill-dot" style="background:var(--accent-1);"></span>Network
+              Fundamentals</div>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== SKILLS ========== -->
-  <section id="skills-section"
-    style="background:linear-gradient(135deg,rgba(124,58,237,0.04),rgba(14,165,233,0.04));border-top:1px solid var(--glass-border-subtle);border-bottom:1px solid var(--glass-border-subtle);">
-    <div class="section-wrapper">
-      <div class="section-header" data-aos="fade-up">
-        <span class="section-tag">What I Do</span>
-        <h2 class="section-title">Skills &amp; Expertise</h2>
-        <p class="section-subtitle">Kemampuan teknis yang saya kuasai dalam berbagai bidang teknologi</p>
-        <div class="section-divider"></div>
-      </div>
-      <div class="skills-grid">
-        <div class="skill-card-v2 glass" data-aos="fade-up" data-aos-delay="100">
-          <div class="skill-icon-wrap"
-            style="background:linear-gradient(135deg,rgba(124,58,237,0.15),rgba(99,102,241,0.1));">
-            <!-- Monitor/Code SVG -->
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="16 18 22 12 16 6" />
-              <polyline points="8 6 2 12 8 18" />
-            </svg>
-          </div>
-          <h3
-            style="font-size:20px;font-weight:800;color:var(--text-primary);margin-bottom:20px;letter-spacing:-0.5px;">
-            Hard Skills</h3>
-          <div class="skill-item"><span class="skill-dot" style="background:var(--accent-1);"></span>Data Analysis &amp;
-            Visualization</div>
-          <div class="skill-item"><span class="skill-dot" style="background:var(--accent-1);"></span>ML/DL (Forecasting,
-            Clustering, Classification)</div>
-          <div class="skill-item"><span class="skill-dot" style="background:var(--accent-1);"></span>Python Programming
-          </div>
-          <div class="skill-item"><span class="skill-dot" style="background:var(--accent-1);"></span>Excel &amp; Data
-            Analysis Tools</div>
-          <div class="skill-item"><span class="skill-dot" style="background:var(--accent-1);"></span>Database
-            Administrator</div>
-          <div class="skill-item"><span class="skill-dot" style="background:var(--accent-1);"></span>Data Mining</div>
-          <div class="skill-item"><span class="skill-dot" style="background:var(--accent-1);"></span>IT Project
-            Management</div>
-          <div class="skill-item"><span class="skill-dot" style="background:var(--accent-1);"></span>Network
-            Fundamentals</div>
-        </div>
-        <div class="skill-card-v2 glass" data-aos="fade-up" data-aos-delay="200">
-          <div class="skill-icon-wrap"
-            style="background:linear-gradient(135deg,rgba(14,165,233,0.15),rgba(20,184,166,0.1));">
-            <!-- Users/People SVG -->
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-              <circle cx="9" cy="7" r="4" />
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-            </svg>
-          </div>
-          <h3
-            style="font-size:20px;font-weight:800;color:var(--text-primary);margin-bottom:20px;letter-spacing:-0.5px;">
-            Soft Skills</h3>
-          <div class="skill-item"><span class="skill-dot" style="background:var(--accent-5);"></span>Adaptabilitas</div>
-          <div class="skill-item"><span class="skill-dot" style="background:var(--accent-5);"></span>Problem-solving
-          </div>
-          <div class="skill-item"><span class="skill-dot" style="background:var(--accent-5);"></span>Decision-making
-          </div>
-          <div class="skill-item"><span class="skill-dot" style="background:var(--accent-5);"></span>Komunikasi Visual
-          </div>
-          <div class="skill-item"><span class="skill-dot" style="background:var(--accent-5);"></span>Kemampuan
-            Interpersonal</div>
-          <div class="skill-item"><span class="skill-dot" style="background:var(--accent-5);"></span>Multitasking</div>
-        </div>
-      </div>
-      <div class="skills-grid-3">
-        <div class="skill-card-v2 glass" data-aos="fade-up" data-aos-delay="300">
-          <div class="skill-icon-wrap"
-            style="background:linear-gradient(135deg,rgba(124,58,237,0.15),rgba(236,72,153,0.1));">
-            <!-- Bar chart SVG -->
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <line x1="18" y1="20" x2="18" y2="10" />
-              <line x1="12" y1="20" x2="12" y2="4" />
-              <line x1="6" y1="20" x2="6" y2="14" />
-              <line x1="2" y1="20" x2="22" y2="20" />
-            </svg>
-          </div>
-          <h4 style="font-size:16px;font-weight:800;color:var(--text-primary);margin-bottom:14px;">Data &amp; Analytics
-          </h4>
-          <div style="display:flex;flex-wrap:wrap;gap:8px;"><span class="badge-v2">Tableau</span><span
-              class="badge-v2">Power BI</span><span class="badge-v2">Excel</span><span class="badge-v2">SQL</span></div>
-        </div>
-        <div class="skill-card-v2 glass" data-aos="fade-up" data-aos-delay="400">
-          <div class="skill-icon-wrap"
-            style="background:linear-gradient(135deg,rgba(14,165,233,0.15),rgba(20,184,166,0.1));">
-            <!-- Globe SVG -->
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10" />
-              <line x1="2" y1="12" x2="22" y2="12" />
-              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-            </svg>
-          </div>
-          <h4 style="font-size:16px;font-weight:800;color:var(--text-primary);margin-bottom:14px;">Web Development</h4>
-          <div style="display:flex;flex-wrap:wrap;gap:8px;"><span class="badge-v2">Laravel</span><span
-              class="badge-v2">PHP</span><span class="badge-v2">HTML5</span><span class="badge-v2">CSS</span><span
-              class="badge-v2">JavaScript</span></div>
-        </div>
-        <div class="skill-card-v2 glass" data-aos="fade-up" data-aos-delay="500">
-          <div class="skill-icon-wrap"
-            style="background:linear-gradient(135deg,rgba(236,72,153,0.15),rgba(124,58,237,0.1));">
-            <!-- Server/Database SVG -->
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <ellipse cx="12" cy="5" rx="9" ry="3" />
-              <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
-              <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
-            </svg>
-          </div>
-          <h4 style="font-size:16px;font-weight:800;color:var(--text-primary);margin-bottom:14px;">Database &amp;
-            Network</h4>
-          <div style="display:flex;flex-wrap:wrap;gap:8px;"><span class="badge-v2">SQL Server</span><span
-              class="badge-v2">Azure</span><span class="badge-v2">Mikrotik</span><span class="badge-v2">Cisco</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== EXPERIENCE ========== -->
-  <section id="experience">
-    <div class="section-wrapper">
-      <div class="section-header" data-aos="fade-up">
-        <span class="section-tag">My Journey</span>
-        <h2 class="section-title">Work Experience</h2>
-        <p class="section-subtitle">Perjalanan karir profesional saya</p>
-        <div class="section-divider"></div>
-      </div>
-      <div class="timeline">
-        <div class="timeline-item glass" data-aos="fade-up" data-aos-delay="100">
-          <div class="timeline-dot"></div>
-          <span class="timeline-date">Nov 2025 &mdash; Present</span>
-          <h3 class="timeline-title">IT Support for Autogate System</h3>
-          <p class="timeline-company">PT. Berlian Manyar Sejahtera (JIIPE Port)</p>
-          <p class="timeline-desc">Memberikan dukungan teknis untuk sistem autogate pelabuhan, memastikan operasional
-            sistem berjalan lancar dan efisien di lingkungan port industri.</p>
-        </div>
-        <div class="timeline-item glass" data-aos="fade-up" data-aos-delay="150">
-          <div class="timeline-dot"></div>
-          <span class="timeline-date">Des 2023 &mdash; Mei 2024</span>
-          <h3 class="timeline-title">Web Developer</h3>
-          <p class="timeline-company">PT. Mitra Alam Persada &middot; Internship</p>
-          <p class="timeline-desc">Merancang dan mengembangkan halaman arahan dinamis serta membuat kerangka kerja untuk
-            laporan produksi real-time menggunakan Laravel 11, PHP 8, SQL Server 2022, dan Azure Data Studio.</p>
-        </div>
-        <div class="timeline-item glass" data-aos="fade-up" data-aos-delay="200">
-          <div class="timeline-dot"></div>
-          <span class="timeline-date">Feb 2022 &mdash; Jun 2024</span>
-          <h3 class="timeline-title">Asisten Praktikum</h3>
-          <p class="timeline-company">Universitas Trunojoyo Madura &middot; Part Time</p>
-          <p class="timeline-desc">Mengajar dan mengawasi praktikum berdasarkan materi dosen, memastikan mahasiswa
-            memahami materi sepenuhnya, dan menciptakan lingkungan belajar yang kondusif.</p>
-        </div>
-        <div class="timeline-item glass" data-aos="fade-up" data-aos-delay="250">
-          <div class="timeline-dot" style="background:linear-gradient(135deg,#14b8a6,#0ea5e9);"></div>
-          <span class="timeline-date"
-            style="color:var(--accent-5);border-color:rgba(20,184,166,0.3);background:rgba(20,184,166,0.08);">Apr
-            &mdash; Jul 2019</span>
-          <h3 class="timeline-title">IT Staff</h3>
-          <p class="timeline-company">Dinas Pendidikan &middot; Internship</p>
-          <p class="timeline-desc">Bertugas sebagai dukungan TI, membantu entri data, menangani perangkat komputer, dan
-            memberikan dukungan teknis di Dinas Pendidikan Kabupaten Gresik.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== EDUCATION ========== -->
-  <section id="education"
-    style="background:linear-gradient(135deg,rgba(124,58,237,0.03),rgba(14,165,233,0.03));border-top:1px solid var(--glass-border-subtle);border-bottom:1px solid var(--glass-border-subtle);">
-    <div class="section-wrapper">
-      <div class="section-header" data-aos="fade-up">
-        <span class="section-tag">Academic Background</span>
-        <h2 class="section-title">Education</h2>
-        <p class="section-subtitle">Perjalanan pendidikan formal saya</p>
-        <div class="section-divider"></div>
-      </div>
-      <div class="edu-grid">
-        <div class="edu-card glass" data-aos="zoom-in" data-aos-delay="100">
-          <!-- Graduation SVG -->
-          <div style="margin-bottom:16px;">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.8"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-              <path d="M6 12v5c3 3 9 3 12 0v-5" />
-            </svg>
-          </div>
-          <div class="edu-level">Bachelor's Degree</div>
-          <h3 class="edu-degree">Sarjana Teknik Informatika</h3>
-          <p class="edu-school">Universitas Trunojoyo Madura</p>
-          <p class="edu-year">2021 &mdash; 2025</p>
-          <div style="margin-bottom:12px;"><strong
-              style="font-size:13px;color:var(--text-secondary);">IPK:</strong><span
-              style="font-size:22px;font-weight:800;" class="gradient-text"> 3.51</span></div>
-          <div class="edu-detail"><span class="badge-v2">Data Science</span><span class="badge-v2">Web Dev</span><span
-              class="badge-v2">Machine Learning</span><span class="badge-v2">Database Systems</span></div>
-        </div>
-        <div class="edu-card glass" data-aos="zoom-in" data-aos-delay="200">
-          <!-- School building SVG -->
-          <div style="margin-bottom:16px;">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#14b8a6" stroke-width="1.8"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-              <polyline points="9 22 9 12 15 12 15 22" />
-            </svg>
-          </div>
-          <div class="edu-level" style="color:var(--accent-5);">Vocational School</div>
-          <h3 class="edu-degree">Teknik Komputer &amp; Jaringan</h3>
-          <p class="edu-school">SMKN 1 Cerme Gresik</p>
-          <p class="edu-year">2018 &mdash; 2021</p>
-          <div style="margin-bottom:12px;"><strong style="font-size:13px;color:var(--text-secondary);">Nilai
-              Rata-rata:</strong><span style="font-size:22px;font-weight:800;" class="gradient-text"> 84</span></div>
-          <div class="edu-detail"><span class="badge-v2">Network Config</span><span class="badge-v2">Hardware &amp;
-              Software</span><span class="badge-v2">Network Security</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== CERTIFICATIONS ========== -->
-  <section id="certifications">
-    <div class="section-wrapper">
-      <div class="section-header" data-aos="fade-up">
-        <span class="section-tag">Credentials</span>
-        <h2 class="section-title">Certifications &amp; Training</h2>
-        <p class="section-subtitle">Sertifikasi profesional yang telah saya raih</p>
-        <div class="section-divider"></div>
-      </div>
-      <div class="cert-grid">
-        <div class="cert-card glass" data-aos="fade-up" data-aos-delay="100">
-          <div class="cert-img"><img src="other/asset/Sertifikat/Google Cloud Computing Foundations Certificate.png"
-              alt="Google Cloud Certificate" /></div>
-          <div class="cert-body">
-            <div class="cert-issuer">Google</div>
-            <div class="cert-title">Google Cloud Computing Foundations Certificate</div><span class="cert-date">Juni
-              2024</span>
-          </div>
-        </div>
-        <div class="cert-card glass" data-aos="fade-up" data-aos-delay="150">
-          <div class="cert-img"><img src="other/asset/Sertifikat/Certificate of Competence.jpeg"
-              alt="BNSP Certificate" /></div>
-          <div class="cert-body">
-            <div class="cert-issuer">BNSP</div>
-            <div class="cert-title">Certificate of Competence</div><span class="cert-date">Agustus 2023</span>
-          </div>
-        </div>
-        <div class="cert-card glass" data-aos="fade-up" data-aos-delay="200">
-          <div class="cert-img" style="padding:24px;align-items:center;justify-content:center;">
-            <div class="cert-icon-fallback">
-              <!-- Terminal/Linux SVG -->
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2"
+          <div class="skill-card-v2 glass" data-aos="fade-up" data-aos-delay="200">
+            <div class="skill-icon-wrap"
+              style="background:linear-gradient(135deg,rgba(14,165,233,0.15),rgba(20,184,166,0.1));">
+              <!-- Users/People SVG -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="4 17 10 11 4 5" />
-                <line x1="12" y1="19" x2="20" y2="19" />
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
               </svg>
             </div>
-          </div>
-          <div class="cert-body">
-            <div class="cert-issuer">Cisco Networking Academy</div>
-            <div class="cert-title">NDG Linux Essentials</div><span class="cert-date">Juli 2023</span>
-          </div>
-        </div>
-        <div class="cert-card glass" data-aos="fade-up" data-aos-delay="250">
-          <div class="cert-img"><img src="other/asset/Sertifikat/Networking Essentials.jpeg"
-              alt="Networking Essentials" /></div>
-          <div class="cert-body">
-            <div class="cert-issuer">Cisco Networking Academy</div>
-            <div class="cert-title">Networking Essentials</div><span class="cert-date">Desember 2022</span>
-          </div>
-        </div>
-        <div class="cert-card glass" data-aos="fade-up" data-aos-delay="300">
-          <div class="cert-img"><img src="other/asset/Sertifikat/CERTIFICATE OF COMPETENCY ASSESSMENT.jpg"
-              alt="Competency Assessment" /></div>
-          <div class="cert-body">
-            <div class="cert-issuer">LSP</div>
-            <div class="cert-title">Certificate of Competency Assessment</div><span class="cert-date">Juni 2021</span>
-          </div>
-        </div>
-        <div class="cert-card glass" data-aos="fade-up" data-aos-delay="350">
-          <div class="cert-img"><img
-              src="other/asset/Sertifikat/Pelatihan Coding Daring Ready, Set Code! Angkatan II.jpg"
-              alt="Coding Certificate" /></div>
-          <div class="cert-body">
-            <div class="cert-issuer">BAKTI KOMDIGI</div>
-            <div class="cert-title">Pelatihan Coding Daring Ready, Set Code!</div><span class="cert-date">November
-              2020</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== PORTFOLIO ========== -->
-  <section id="portfolio"
-    style="background:linear-gradient(135deg,rgba(124,58,237,0.04),rgba(14,165,233,0.04));border-top:1px solid var(--glass-border-subtle);">
-    <div class="section-wrapper">
-      <div class="section-header" data-aos="fade-up">
-        <span class="section-tag">My Work</span>
-        <h2 class="section-title">Portfolio</h2>
-        <p class="section-subtitle">Project dan karya yang telah saya kerjakan</p>
-        <div class="section-divider"></div>
-      </div>
-      <div data-aos="fade-up" data-aos-delay="100">
-        <div class="tab-nav glass">
-          <button class="tab-btn active" data-tab="data-science" id="tab-ds">Data Science</button>
-          <button class="tab-btn" data-tab="web-dev" id="tab-web">Web Development</button>
-          <button class="tab-btn" data-tab="networking" id="tab-net">Networking</button>
-        </div>
-      </div>
-
-      <!-- Data Science -->
-      <div class="tab-section active" id="data-science">
-        <div class="project-grid">
-          <div class="project-card glass" data-aos="zoom-in" data-aos-delay="100">
-            <div class="project-banner project-banner-art art-bitcoin">
-              <div class="art-content">
-                <div class="art-bar" style="height:55%;"></div>
-                <div class="art-bar" style="height:80%;"></div>
-                <div class="art-bar" style="height:45%;"></div>
-                <div class="art-bar" style="height:90%;"></div>
-                <div class="art-bar" style="height:65%;"></div>
-                <div class="art-bar" style="height:70%;"></div>
-              </div>
-              <div class="art-line"></div>
-              <div class="project-banner-overlay">
-                <a href="#" class="banner-overlay-link">
-                  View Project
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </a>
-              </div>
+            <h3
+              style="font-size:20px;font-weight:800;color:var(--text-primary);margin-bottom:20px;letter-spacing:-0.5px;">
+              Soft Skills</h3>
+            <div class="skill-item"><span class="skill-dot" style="background:var(--accent-5);"></span>Adaptabilitas
             </div>
-            <div class="project-body">
-              <h3 class="project-title">Bitcoin Price Prediction</h3>
-              <p class="project-desc">Multivariate LSTM dengan integrasi indikator makroekonomi untuk prediksi harga
-                Bitcoin yang akurat.</p>
-              <div class="project-tags"><span class="badge-v2">LSTM</span><span class="badge-v2">Python</span><span
-                  class="badge-v2">TensorFlow</span></div>
-              <a href="#" class="project-link">View Project <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2.5">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg></a>
+            <div class="skill-item"><span class="skill-dot" style="background:var(--accent-5);"></span>Problem-solving
             </div>
-          </div>
-          <div class="project-card glass" data-aos="zoom-in" data-aos-delay="200">
-            <div class="project-banner project-banner-art art-dashboard">
-              <div class="art-content">
-                <div class="art-dot-scatter" style="width:10px;height:10px;top:30%;left:25%;"></div>
-                <div class="art-dot-scatter" style="width:7px;height:7px;top:55%;left:40%;"></div>
-                <div class="art-dot-scatter" style="width:12px;height:12px;top:40%;left:60%;"></div>
-                <div class="art-dot-scatter" style="width:6px;height:6px;top:65%;left:75%;"></div>
-                <div class="art-dot-scatter" style="width:9px;height:9px;top:25%;left:80%;"></div>
-                <div class="art-bar" style="height:60%;"></div>
-                <div class="art-bar" style="height:85%;"></div>
-                <div class="art-bar" style="height:40%;"></div>
-              </div>
-              <div class="project-banner-overlay">
-                <a href="#" class="banner-overlay-link">
-                  View Project
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </a>
-              </div>
+            <div class="skill-item"><span class="skill-dot" style="background:var(--accent-5);"></span>Decision-making
             </div>
-            <div class="project-body">
-              <h3 class="project-title">Data Visualization Dashboard</h3>
-              <p class="project-desc">Interactive dashboard untuk analisis data bisnis menggunakan Plotly dan Dash.</p>
-              <div class="project-tags"><span class="badge-v2">Plotly</span><span class="badge-v2">Dash</span><span
-                  class="badge-v2">Analytics</span></div>
-              <a href="#" class="project-link">View Project <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2.5">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg></a>
+            <div class="skill-item"><span class="skill-dot" style="background:var(--accent-5);"></span>Komunikasi Visual
             </div>
-          </div>
-          <div class="project-card glass" data-aos="zoom-in" data-aos-delay="300">
-            <div class="project-banner project-banner-art art-scraping">
-              <div class="art-content">
-                <div class="art-dot-scatter" style="width:14px;height:14px;top:25%;left:20%;"></div>
-                <div class="art-dot-scatter" style="width:8px;height:8px;top:50%;left:45%;"></div>
-                <div class="art-dot-scatter" style="width:11px;height:11px;top:35%;left:70%;"></div>
-                <div class="art-dot-scatter" style="width:6px;height:6px;top:70%;left:30%;"></div>
-                <div class="art-dot-scatter" style="width:9px;height:9px;top:20%;left:80%;"></div>
-              </div>
-              <div class="project-banner-overlay">
-                <a href="#" class="banner-overlay-link">
-                  View Project
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            <div class="project-body">
-              <h3 class="project-title">Web Scraping &amp; Data Crawling</h3>
-              <p class="project-desc">Sistem otomatis untuk pengumpulan dan ekstraksi data dari berbagai sumber web.</p>
-              <div class="project-tags"><span class="badge-v2">Python</span><span
-                  class="badge-v2">BeautifulSoup</span><span class="badge-v2">Selenium</span></div>
-              <a href="#" class="project-link">View Project <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2.5">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg></a>
+            <div class="skill-item"><span class="skill-dot" style="background:var(--accent-5);"></span>Kemampuan
+              Interpersonal</div>
+            <div class="skill-item"><span class="skill-dot" style="background:var(--accent-5);"></span>Multitasking
             </div>
           </div>
         </div>
-        <div style="text-align:center;margin-top:48px;" data-aos="fade-up">
-          <div class="glass" style="display:inline-block;padding:32px 48px;border-radius:var(--radius-xl);">
-            <h3 style="font-size:20px;font-weight:800;color:var(--text-primary);margin-bottom:8px;">Lihat Semua Proyek
-            </h3>
-            <p style="color:var(--text-secondary);font-size:14px;margin-bottom:20px;">Kunjungi blog saya untuk melihat
-              lebih banyak proyek data science</p>
-            <a href="#" class="btn-primary">Kunjungi Blog Data Science <svg width="14" height="14" viewBox="0 0 24 24"
-                fill="none" stroke="currentColor" stroke-width="2.5">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg></a>
-            <p style="font-size:12px;color:var(--text-muted);margin-top:12px;font-style:italic;">(Blog sedang dalam
-              pengembangan)</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Web Dev -->
-      <div class="tab-section" id="web-dev">
-        <div class="project-grid">
-          <div class="project-card glass" data-aos="zoom-in" data-aos-delay="100">
-            <div class="project-banner">
-              <img src="other/asset/antero.png" alt="Digital Banking Platform" />
-              <div class="project-banner-overlay">
-                <a href="#" class="banner-overlay-link">
-                  View Project
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            <div class="project-body">
-              <h3 class="project-title">Digital Banking Platform</h3>
-              <p class="project-desc">Platform perbankan digital modern dengan fitur transaksi, monitoring, dan
-                dashboard analitik.</p>
-              <div class="project-tags"><span class="badge-v2">Laravel</span><span class="badge-v2">PHP</span><span
-                  class="badge-v2">SQL Server</span></div>
-            </div>
-          </div>
-          <div class="project-card glass" data-aos="zoom-in" data-aos-delay="200">
-            <div class="project-banner">
-              <img src="other/asset/wisata.png" alt="Wisata Website" />
-              <div class="project-banner-overlay">
-                <a href="#" class="banner-overlay-link">
-                  View Project
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            <div class="project-body">
-              <h3 class="project-title">Website Wisata Tretan</h3>
-              <p class="project-desc">Website promosi wisata dengan design modern dan responsive untuk meningkatkan
-                visibilitas.</p>
-              <div class="project-tags"><span class="badge-v2">HTML5</span><span class="badge-v2">CSS3</span><span
-                  class="badge-v2">JavaScript</span></div>
-            </div>
-          </div>
-          <div class="project-card glass" data-aos="zoom-in" data-aos-delay="300">
-            <div class="project-banner">
-              <img src="other/asset/itechhire.png" alt="iTechHire" />
-              <div class="project-banner-overlay">
-                <a href="#" class="banner-overlay-link">
-                  View Project
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            <div class="project-body">
-              <h3 class="project-title">iTechHire Platform</h3>
-              <p class="project-desc">Platform recruitment untuk IT professionals dengan fitur lengkap dan modern.</p>
-              <div class="project-tags"><span class="badge-v2">React</span><span class="badge-v2">Node.js</span><span
-                  class="badge-v2">Database</span></div>
-            </div>
-          </div>
-          <div class="project-card glass" style="position:relative;overflow:hidden;" data-aos="zoom-in"
-            data-aos-delay="400">
-            <div class="project-banner project-banner-art"
-              style="background:linear-gradient(135deg,#0f2044 0%,#1e3a8a 40%,#3b82f6 75%,#0ea5e9 100%);">
-              <div class="art-content">
-                <div class="art-bar" style="height:50%;"></div>
-                <div class="art-bar" style="height:75%;"></div>
-                <div class="art-bar" style="height:55%;"></div>
-                <div class="art-bar" style="height:85%;"></div>
-              </div>
-            </div>
-            <div class="project-body">
-              <h3 class="project-title">Sistem Manajemen Asrama UTM</h3>
-              <p class="project-desc">Platform digital pengelolaan asrama mahasiswa dengan booking dan administrasi.</p>
-              <div class="project-tags"><span class="badge-v2">PHP</span><span class="badge-v2">MySQL</span><span
-                  class="badge-v2">Bootstrap</span></div>
-            </div>
-            <div class="lock-overlay">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+        <div class="skills-grid-3">
+          <div class="skill-card-v2 glass" data-aos="fade-up" data-aos-delay="300">
+            <div class="skill-icon-wrap"
+              style="background:linear-gradient(135deg,rgba(124,58,237,0.15),rgba(236,72,153,0.1));">
+              <!-- Bar chart SVG -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="11" width="18" height="11" rx="2" />
-                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                <line x1="18" y1="20" x2="18" y2="10" />
+                <line x1="12" y1="20" x2="12" y2="4" />
+                <line x1="6" y1="20" x2="6" y2="14" />
+                <line x1="2" y1="20" x2="22" y2="20" />
               </svg>
-              COMING SOON
+            </div>
+            <h4 style="font-size:16px;font-weight:800;color:var(--text-primary);margin-bottom:14px;">Data &amp;
+              Analytics
+            </h4>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;"><span class="badge-v2">Tableau</span><span
+                class="badge-v2">Power BI</span><span class="badge-v2">Excel</span><span class="badge-v2">SQL</span>
+            </div>
+          </div>
+          <div class="skill-card-v2 glass" data-aos="fade-up" data-aos-delay="400">
+            <div class="skill-icon-wrap"
+              style="background:linear-gradient(135deg,rgba(14,165,233,0.15),rgba(20,184,166,0.1));">
+              <!-- Globe SVG -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="2" y1="12" x2="22" y2="12" />
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+              </svg>
+            </div>
+            <h4 style="font-size:16px;font-weight:800;color:var(--text-primary);margin-bottom:14px;">Web Development
+            </h4>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;"><span class="badge-v2">Laravel</span><span
+                class="badge-v2">PHP</span><span class="badge-v2">HTML5</span><span class="badge-v2">CSS</span><span
+                class="badge-v2">JavaScript</span></div>
+          </div>
+          <div class="skill-card-v2 glass" data-aos="fade-up" data-aos-delay="500">
+            <div class="skill-icon-wrap"
+              style="background:linear-gradient(135deg,rgba(236,72,153,0.15),rgba(124,58,237,0.1));">
+              <!-- Server/Database SVG -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <ellipse cx="12" cy="5" rx="9" ry="3" />
+                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+              </svg>
+            </div>
+            <h4 style="font-size:16px;font-weight:800;color:var(--text-primary);margin-bottom:14px;">Database &amp;
+              Network</h4>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;"><span class="badge-v2">SQL Server</span><span
+                class="badge-v2">Azure</span><span class="badge-v2">Mikrotik</span><span class="badge-v2">Cisco</span>
             </div>
           </div>
         </div>
       </div>
+    </section>
 
-      <!-- Networking -->
-      <div class="tab-section" id="networking">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
-          <div class="project-card glass" data-aos="zoom-in" data-aos-delay="100" style="padding:0;">
-            <div class="project-body" style="padding:32px;">
-              <div
-                style="width:52px;height:52px;border-radius:var(--radius-md);background:linear-gradient(135deg,rgba(14,165,233,0.15),rgba(20,184,166,0.1));display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
-                <!-- WiFi/Network SVG -->
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M5 12.55a11 11 0 0 1 14.08 0" />
-                  <path d="M1.42 9a16 16 0 0 1 21.16 0" />
-                  <path d="M8.53 16.11a6 6 0 0 1 6.95 0" />
-                  <line x1="12" y1="20" x2="12.01" y2="20" />
-                </svg>
-              </div>
-              <h3 class="project-title">Network Configuration &amp; Management</h3>
-              <p class="project-desc">Implementasi konfigurasi jaringan enterprise dengan focus pada troubleshooting
-                keamanan jaringan WAN, VLAN management, dan network optimization sesuai sertifikat BNSP.</p>
-              <div class="project-tags" style="margin-top:16px;"><span class="badge-v2">BNSP Certified</span><span
-                  class="badge-v2">Mikrotik</span><span class="badge-v2">WAN Security</span></div>
-              <ul
-                style="margin-top:16px;color:var(--text-secondary);font-size:13px;line-height:2;list-style:none;padding:0;">
-                <li>&bull; WAN network troubleshooting dan security implementation</li>
-                <li>&bull; Mikrotik router configuration dan management</li>
-                <li>&bull; Network performance optimization</li>
-              </ul>
+    <!-- ========== EXPERIENCE ========== -->
+    <section id="experience">
+      <div class="section-wrapper">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">My Journey</span>
+          <h2 class="section-title">Work Experience</h2>
+          <p class="section-subtitle">My professional career journey</p>
+          <div class="section-divider"></div>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item glass" data-aos="fade-up" data-aos-delay="100">
+            <div class="timeline-dot"></div>
+            <span class="timeline-date">Nov 2025 &mdash; Present</span>
+            <h3 class="timeline-title">IT Support for Autogate System</h3>
+            <p class="timeline-company">PT. Berlian Manyar Sejahtera (JIIPE Port)</p>
+            <p class="timeline-desc">Provided technical support for the port's autogate system, ensuring smooth and efficient system operations in an industrial port environment.</p>
+          </div>
+          <div class="timeline-item glass" data-aos="fade-up" data-aos-delay="150">
+            <div class="timeline-dot"></div>
+            <span class="timeline-date">Des 2023 &mdash; Mei 2024</span>
+            <h3 class="timeline-title">Web Developer</h3>
+            <p class="timeline-company">PT. Mitra Alam Persada &middot; Internship</p>
+            <p class="timeline-desc">Designed and developed dynamic landing pages and created a framework for real-time production reports using Laravel 11, PHP 8, SQL Server 2022, and Azure Data Studio.</p>
+          </div>
+          <div class="timeline-item glass" data-aos="fade-up" data-aos-delay="200">
+            <div class="timeline-dot"></div>
+            <span class="timeline-date">Feb 2022 &mdash; Jun 2024</span>
+            <h3 class="timeline-title">Practicum Assistant</h3>
+            <p class="timeline-company">Universitas Trunojoyo Madura &middot; Part Time</p>
+            <p class="timeline-desc">Taught and supervised practicums based on lecturer materials, ensuring students fully understand the concepts while creating a conducive learning environment.</p>
+          </div>
+          <div class="timeline-item glass" data-aos="fade-up" data-aos-delay="250">
+            <div class="timeline-dot" style="background:linear-gradient(135deg,#14b8a6,#0ea5e9);"></div>
+            <span class="timeline-date"
+              style="color:var(--accent-5);border-color:rgba(20,184,166,0.3);background:rgba(20,184,166,0.08);">Apr
+              &mdash; Jul 2019</span>
+            <h3 class="timeline-title">IT Staff</h3>
+            <p class="timeline-company">Dinas Pendidikan &middot; Internship</p>
+            <p class="timeline-desc">Served as IT support, assisting with data entry, handling computer hardware, and providing technical support at the Gresik District Education Office.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== EDUCATION ========== -->
+    <section id="education"
+      style="background:linear-gradient(135deg,rgba(124,58,237,0.03),rgba(14,165,233,0.03));border-top:1px solid var(--glass-border-subtle);border-bottom:1px solid var(--glass-border-subtle);">
+      <div class="section-wrapper">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Academic Background</span>
+          <h2 class="section-title">Education</h2>
+          <p class="section-subtitle">My formal education journey</p>
+          <div class="section-divider"></div>
+        </div>
+        <div class="edu-grid">
+          <div class="edu-card glass" data-aos="zoom-in" data-aos-delay="100">
+            <!-- Graduation SVG -->
+            <div style="margin-bottom:16px;">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                <path d="M6 12v5c3 3 9 3 12 0v-5" />
+              </svg>
+            </div>
+            <div class="edu-level">Bachelor's Degree</div>
+            <h3 class="edu-degree">Bachelor of Informatics Engineering</h3>
+            <p class="edu-school">Universitas Trunojoyo Madura</p>
+            <p class="edu-year">2021 &mdash; 2025</p>
+            <div style="margin-bottom:12px;"><strong
+                style="font-size:13px;color:var(--text-secondary);">IPK:</strong><span
+                style="font-size:22px;font-weight:800;" class="gradient-text"> 3.51</span></div>
+            <div class="edu-detail"><span class="badge-v2">Data Science</span><span class="badge-v2">Web Dev</span><span
+                class="badge-v2">Machine Learning</span><span class="badge-v2">Database Systems</span></div>
+          </div>
+          <div class="edu-card glass" data-aos="zoom-in" data-aos-delay="200">
+            <!-- School building SVG -->
+            <div style="margin-bottom:16px;">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#14b8a6" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+              </svg>
+            </div>
+            <div class="edu-level" style="color:var(--accent-5);">Vocational School</div>
+            <h3 class="edu-degree">Computer &amp; Network Engineering</h3>
+            <p class="edu-school">SMKN 1 Cerme Gresik</p>
+            <p class="edu-year">2018 &mdash; 2021</p>
+            <div style="margin-bottom:12px;"><strong style="font-size:13px;color:var(--text-secondary);">Average Score:</strong><span style="font-size:22px;font-weight:800;" class="gradient-text"> 84</span></div>
+            <div class="edu-detail"><span class="badge-v2">Network Config</span><span class="badge-v2">Hardware &amp;
+                Software</span><span class="badge-v2">Network Security</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CERTIFICATIONS ========== -->
+    <section id="certifications">
+      <div class="section-wrapper">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Credentials</span>
+          <h2 class="section-title">Certifications &amp; Training</h2>
+          <p class="section-subtitle">Professional certifications I have achieved</p>
+          <div class="section-divider"></div>
+        </div>
+        <div class="cert-grid">
+          <div class="cert-card glass" data-aos="fade-up" data-aos-delay="100">
+            <div class="cert-img"><img src="other/asset/Sertifikat/Google Cloud Computing Foundations Certificate.png"
+                alt="Google Cloud Certificate" /></div>
+            <div class="cert-body">
+              <div class="cert-issuer">Google</div>
+              <div class="cert-title">Google Cloud Computing Foundations Certificate</div><span class="cert-date">June
+                2024</span>
             </div>
           </div>
-          <div class="project-card glass" data-aos="zoom-in" data-aos-delay="200" style="padding:0;">
-            <div class="project-body" style="padding:32px;">
-              <div
-                style="width:52px;height:52px;border-radius:var(--radius-md);background:linear-gradient(135deg,rgba(236,72,153,0.15),rgba(124,58,237,0.1));display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
-                <!-- Terminal SVG -->
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2"
+          <div class="cert-card glass" data-aos="fade-up" data-aos-delay="150">
+            <div class="cert-img"><img src="other/asset/Sertifikat/Certificate of Competence.jpeg"
+                alt="BNSP Certificate" /></div>
+            <div class="cert-body">
+              <div class="cert-issuer">BNSP</div>
+              <div class="cert-title">Certificate of Competence</div><span class="cert-date">August 2023</span>
+            </div>
+          </div>
+          <div class="cert-card glass" data-aos="fade-up" data-aos-delay="200">
+            <div class="cert-img" style="padding:24px;align-items:center;justify-content:center;">
+              <div class="cert-icon-fallback">
+                <!-- Terminal/Linux SVG -->
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2"
                   stroke-linecap="round" stroke-linejoin="round">
                   <polyline points="4 17 10 11 4 5" />
                   <line x1="12" y1="19" x2="20" y2="19" />
                 </svg>
               </div>
-              <h3 class="project-title">Linux System Administration</h3>
-              <p class="project-desc">Administrasi sistem Linux dengan focus pada network services, system security, dan
-                server management berdasarkan sertifikat Cisco NDG Linux Essentials.</p>
-              <div class="project-tags" style="margin-top:16px;"><span class="badge-v2">Linux</span><span
-                  class="badge-v2">Cisco NDG</span><span class="badge-v2">Open Source</span></div>
-              <ul
-                style="margin-top:16px;color:var(--text-secondary);font-size:13px;line-height:2;list-style:none;padding:0;">
-                <li>&bull; Linux system installation dan configuration</li>
-                <li>&bull; Network services management (DNS, DHCP, Web)</li>
-                <li>&bull; System security hardening dan monitoring</li>
-              </ul>
+            </div>
+            <div class="cert-body">
+              <div class="cert-issuer">Cisco Networking Academy</div>
+              <div class="cert-title">NDG Linux Essentials</div><span class="cert-date">July 2023</span>
+            </div>
+          </div>
+          <div class="cert-card glass" data-aos="fade-up" data-aos-delay="250">
+            <div class="cert-img"><img src="other/asset/Sertifikat/Networking Essentials.jpeg"
+                alt="Networking Essentials" /></div>
+            <div class="cert-body">
+              <div class="cert-issuer">Cisco Networking Academy</div>
+              <div class="cert-title">Networking Essentials</div><span class="cert-date">December 2022</span>
+            </div>
+          </div>
+          <div class="cert-card glass" data-aos="fade-up" data-aos-delay="300">
+            <div class="cert-img"><img src="other/asset/Sertifikat/CERTIFICATE OF COMPETENCY ASSESSMENT.jpg"
+                alt="Competency Assessment" /></div>
+            <div class="cert-body">
+              <div class="cert-issuer">LSP</div>
+              <div class="cert-title">Certificate of Competency Assessment</div><span class="cert-date">June 2021</span>
+            </div>
+          </div>
+          <div class="cert-card glass" data-aos="fade-up" data-aos-delay="350">
+            <div class="cert-img"><img
+                src="other/asset/Sertifikat/Pelatihan Coding Daring Ready, Set Code! Angkatan II.jpg"
+                alt="Coding Certificate" /></div>
+            <div class="cert-body">
+              <div class="cert-issuer">BAKTI KOMDIGI</div>
+              <div class="cert-title">Pelatihan Coding Daring Ready, Set Code!</div><span class="cert-date">November
+                2020</span>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ========== CONTACT ========== -->
-  <section id="contact">
-    <div class="section-wrapper">
-      <div class="section-header" data-aos="fade-up">
-        <span class="section-tag">Get In Touch</span>
-        <h2 class="section-title">Let's Work Together</h2>
-        <p class="section-subtitle">Mari berdiskusi tentang proyek atau peluang kolaborasi yang menarik</p>
-        <div class="section-divider"></div>
-      </div>
-      <div class="contact-terminal glass-strong" data-aos="fade-up">
-        <div class="terminal-left">
-          <div class="terminal-header">
-            <span class="terminal-dot" style="background:#ff5f56;"></span>
-            <span class="terminal-dot" style="background:#ffbd2e;"></span>
-            <span class="terminal-dot" style="background:#27c93f;"></span>
-            <span style="margin-left: 10px; font-family: monospace; color: var(--text-muted); font-size: 12px;">~/contact/init</span>
-          </div>
-          <div class="terminal-body">
-            <h3 class="terminal-title">Mari Berkolaborasi.</h3>
-            <p class="terminal-desc">Tinggalkan pesan Anda atau hubungi saya langsung melalui platform di bawah ini. Saya akan merespons secepatnya.</p>
-            
-            <div class="contact-links-grid">
-               <a href="http://wa.me/6283129939682" class="c-link-btn" data-color="#25d366" target="_blank">
-                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #25d366;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91A16 16 0 0 0 15.09 15.91l.81-.81a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
-                 WhatsApp
-               </a>
-               <a href="mailto:adamzaky.dy@gmail.com" class="c-link-btn" data-color="#ea4335">
-                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #ea4335;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>
-                 Email
-               </a>
-               <a href="https://linkedin.com/in/adamzaky" class="c-link-btn" data-color="#0077b5" target="_blank">
-                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #0077b5;"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" /></svg>
-                 LinkedIn
-               </a>
-            </div>
-            <div class="c-location">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
-              Cerme, Gresik, Jawa Timur
-            </div>
+    <!-- ========== PORTFOLIO ========== -->
+    <section id="portfolio"
+      style="background:linear-gradient(135deg,rgba(124,58,237,0.04),rgba(14,165,233,0.04));border-top:1px solid var(--glass-border-subtle);">
+      <div class="section-wrapper">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">My Work</span>
+          <h2 class="section-title">Portfolio</h2>
+          <p class="section-subtitle">Projects and works I have completed</p>
+          <div class="section-divider"></div>
+        </div>
+        <div data-aos="fade-up" data-aos-delay="100">
+          <div class="tab-nav glass">
+            <button class="tab-btn active" data-tab="data-science" id="tab-ds">Data Science</button>
+            <button class="tab-btn" data-tab="web-dev" id="tab-web">Web Development</button>
+            <button class="tab-btn" data-tab="networking" id="tab-net">Networking</button>
           </div>
         </div>
-        <div class="terminal-right">
-          <form class="c-form" action="https://formsubmit.co/adamzaky.dy@gmail.com" method="POST">
-            <div class="input-float">
-              <input type="text" name="name" id="c-name" placeholder=" " required />
-              <label for="c-name">Nama Lengkap</label>
-            </div>
-            <div class="input-float">
-              <input type="email" name="email" id="c-email" placeholder=" " required />
-              <label for="c-email">Alamat Email</label>
-            </div>
-            <div class="input-float">
-              <textarea name="message" id="c-msg" placeholder=" " required rows="4"></textarea>
-              <label for="c-msg">Tulis Pesan...</label>
-            </div>
-            <button type="submit" class="btn-send">
-              <span>Kirim Pesan</span>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ========== FOOTER ========== -->
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-grid">
-        <div>
-          <div class="footer-name">Muhammad Adam Zaky</div>
-          <p class="footer-tagline">Fresh Graduate Computer Science &middot; Data Science Enthusiast &middot; Full-Stack
-            Developer &middot; Network Infrastructure Specialist</p>
-          <div class="footer-social">
-            <a href="https://github.com/adamzakys" target="_blank" class="footer-social-pill" aria-label="GitHub">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-            </a>
-            <a href="https://www.linkedin.com/in/adamzaky/" target="_blank" class="footer-social-pill" aria-label="LinkedIn">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-            </a>
-            <a href="https://www.instagram.com/adamzaky_j/" target="_blank" class="footer-social-pill" aria-label="Instagram">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-            </a>
-            <a href="http://wa.me/6283129939682" target="_blank" class="footer-social-pill" aria-label="WhatsApp">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-            </a>
-            <a href="mailto:adamzaky.dy@gmail.com" class="footer-social-pill" aria-label="Email">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-            </a>
+        <!-- Data Science -->
+        <div class="tab-section active" id="data-science">
+          <div class="project-grid">
+            <div class="project-card glass" data-aos="zoom-in" data-aos-delay="100">
+              <div class="project-banner project-banner-art art-bitcoin">
+                <div class="art-content">
+                  <div class="art-bar" style="height:55%;"></div>
+                  <div class="art-bar" style="height:80%;"></div>
+                  <div class="art-bar" style="height:45%;"></div>
+                  <div class="art-bar" style="height:90%;"></div>
+                  <div class="art-bar" style="height:65%;"></div>
+                  <div class="art-bar" style="height:70%;"></div>
+                </div>
+                <div class="art-line"></div>
+                <div class="project-banner-overlay">
+                  <a href="#" class="banner-overlay-link">
+                    View Project
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2.5">
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <div class="project-body">
+                <h3 class="project-title">Bitcoin Price Prediction</h3>
+                <p class="project-desc">Multivariate LSTM with macroeconomic indicator integration for accurate Bitcoin price prediction.</p>
+                <div class="project-tags"><span class="badge-v2">LSTM</span><span class="badge-v2">Python</span><span
+                    class="badge-v2">TensorFlow</span></div>
+                <a href="#" class="project-link">View Project <svg width="13" height="13" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg></a>
+              </div>
+            </div>
+            <div class="project-card glass" data-aos="zoom-in" data-aos-delay="200">
+              <div class="project-banner project-banner-art art-dashboard">
+                <div class="art-content">
+                  <div class="art-dot-scatter" style="width:10px;height:10px;top:30%;left:25%;"></div>
+                  <div class="art-dot-scatter" style="width:7px;height:7px;top:55%;left:40%;"></div>
+                  <div class="art-dot-scatter" style="width:12px;height:12px;top:40%;left:60%;"></div>
+                  <div class="art-dot-scatter" style="width:6px;height:6px;top:65%;left:75%;"></div>
+                  <div class="art-dot-scatter" style="width:9px;height:9px;top:25%;left:80%;"></div>
+                  <div class="art-bar" style="height:60%;"></div>
+                  <div class="art-bar" style="height:85%;"></div>
+                  <div class="art-bar" style="height:40%;"></div>
+                </div>
+                <div class="project-banner-overlay">
+                  <a href="#" class="banner-overlay-link">
+                    View Project
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2.5">
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <div class="project-body">
+                <h3 class="project-title">Data Visualization Dashboard</h3>
+                <p class="project-desc">Interactive dashboard for business data analysis using Plotly and Dash.
+                </p>
+                <div class="project-tags"><span class="badge-v2">Plotly</span><span class="badge-v2">Dash</span><span
+                    class="badge-v2">Analytics</span></div>
+                <a href="#" class="project-link">View Project <svg width="13" height="13" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg></a>
+              </div>
+            </div>
+            <div class="project-card glass" data-aos="zoom-in" data-aos-delay="300">
+              <div class="project-banner project-banner-art art-scraping">
+                <div class="art-content">
+                  <div class="art-dot-scatter" style="width:14px;height:14px;top:25%;left:20%;"></div>
+                  <div class="art-dot-scatter" style="width:8px;height:8px;top:50%;left:45%;"></div>
+                  <div class="art-dot-scatter" style="width:11px;height:11px;top:35%;left:70%;"></div>
+                  <div class="art-dot-scatter" style="width:6px;height:6px;top:70%;left:30%;"></div>
+                  <div class="art-dot-scatter" style="width:9px;height:9px;top:20%;left:80%;"></div>
+                </div>
+                <div class="project-banner-overlay">
+                  <a href="#" class="banner-overlay-link">
+                    View Project
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2.5">
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <div class="project-body">
+                <h3 class="project-title">Web Scraping &amp; Data Crawling</h3>
+                <p class="project-desc">Automated system for data collection and extraction from various web sources.
+                </p>
+                <div class="project-tags"><span class="badge-v2">Python</span><span
+                    class="badge-v2">BeautifulSoup</span><span class="badge-v2">Selenium</span></div>
+                <a href="#" class="project-link">View Project <svg width="13" height="13" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg></a>
+              </div>
+            </div>
+          </div>
+          <div style="text-align:center;margin-top:48px;" data-aos="fade-up">
+            <div class="glass" style="display:inline-block;padding:32px 48px;border-radius:var(--radius-xl);">
+              <h3 style="font-size:20px;font-weight:800;color:var(--text-primary);margin-bottom:8px;">View All Projects
+              </h3>
+              <p style="color:var(--text-secondary);font-size:14px;margin-bottom:20px;">Visit my blog to see more data science projects</p>
+              <a href="#" class="btn-primary">Visit Data Science Blog <svg width="14" height="14" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg></a>
+              <p style="font-size:12px;color:var(--text-muted);margin-top:12px;font-style:italic;">(Blog is in development)</p>
+            </div>
           </div>
         </div>
-        <div>
-          <div class="footer-col-title">Navigation</div>
-          <a href="#hero" class="footer-link">Home</a>
-          <a href="#about" class="footer-link">About</a>
-          <a href="#skills-section" class="footer-link">Skills</a>
-          <a href="#experience" class="footer-link">Experience</a>
-          <a href="#portfolio" class="footer-link">Portfolio</a>
-          <a href="#contact" class="footer-link">Contact</a>
+
+        <!-- Web Dev -->
+        <div class="tab-section" id="web-dev">
+          <div class="project-grid">
+            <div class="project-card glass" data-aos="zoom-in" data-aos-delay="100">
+              <div class="project-banner">
+                <img src="other/asset/antero.png" alt="Digital Banking Platform" />
+                <div class="project-banner-overlay">
+                  <a href="#" class="banner-overlay-link">
+                    View Project
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2.5">
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <div class="project-body">
+                <h3 class="project-title">Digital Banking Platform</h3>
+                <p class="project-desc">Modern digital banking platform with features for transactions, monitoring, and analytical dashboard.</p>
+                <div class="project-tags"><span class="badge-v2">Laravel</span><span class="badge-v2">PHP</span><span
+                    class="badge-v2">SQL Server</span></div>
+              </div>
+            </div>
+            <div class="project-card glass" data-aos="zoom-in" data-aos-delay="200">
+              <div class="project-banner">
+                <img src="other/asset/wisata.png" alt="Wisata Website" />
+                <div class="project-banner-overlay">
+                  <a href="#" class="banner-overlay-link">
+                    View Project
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2.5">
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <div class="project-body">
+                <h3 class="project-title">Tretan Tourism Website</h3>
+                <p class="project-desc">Tourism promotion website with a modern and responsive design to enhance visibility.</p>
+                <div class="project-tags"><span class="badge-v2">HTML5</span><span class="badge-v2">CSS3</span><span
+                    class="badge-v2">JavaScript</span></div>
+              </div>
+            </div>
+            <div class="project-card glass" data-aos="zoom-in" data-aos-delay="300">
+              <div class="project-banner">
+                <img src="other/asset/itechhire.png" alt="iTechHire" />
+                <div class="project-banner-overlay">
+                  <a href="#" class="banner-overlay-link">
+                    View Project
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                      stroke-width="2.5">
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+              <div class="project-body">
+                <h3 class="project-title">iTechHire Platform</h3>
+                <p class="project-desc">Recruitment platform for IT professionals with complete and modern features.</p>
+                <div class="project-tags"><span class="badge-v2">React</span><span class="badge-v2">Node.js</span><span
+                    class="badge-v2">Database</span></div>
+              </div>
+            </div>
+            <div class="project-card glass" style="position:relative;overflow:hidden;" data-aos="zoom-in"
+              data-aos-delay="400">
+              <div class="project-banner project-banner-art"
+                style="background:linear-gradient(135deg,#0f2044 0%,#1e3a8a 40%,#3b82f6 75%,#0ea5e9 100%);">
+                <div class="art-content">
+                  <div class="art-bar" style="height:50%;"></div>
+                  <div class="art-bar" style="height:75%;"></div>
+                  <div class="art-bar" style="height:55%;"></div>
+                  <div class="art-bar" style="height:85%;"></div>
+                </div>
+              </div>
+              <div class="project-body">
+                <h3 class="project-title">UTM Dormitory Management System</h3>
+                <p class="project-desc">Digital platform for student dormitory management with booking and administrative features.
+                </p>
+                <div class="project-tags"><span class="badge-v2">PHP</span><span class="badge-v2">MySQL</span><span
+                    class="badge-v2">Bootstrap</span></div>
+              </div>
+              <div class="lock-overlay">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="11" width="18" height="11" rx="2" />
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                </svg>
+                COMING SOON
+              </div>
+            </div>
+          </div>
         </div>
-        <div>
-          <div class="footer-col-title">Specializations</div>
-          <a href="#skills-section" class="footer-link">Data Science</a>
-          <a href="#skills-section" class="footer-link">Web Development</a>
-          <a href="#skills-section" class="footer-link">Network Infrastructure</a>
-          <a href="#certifications" class="footer-link">Certifications</a>
+
+        <!-- Networking -->
+        <div class="tab-section" id="networking">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+            <div class="project-card glass" data-aos="zoom-in" data-aos-delay="100" style="padding:0;">
+              <div class="project-body" style="padding:32px;">
+                <div
+                  style="width:52px;height:52px;border-radius:var(--radius-md);background:linear-gradient(135deg,rgba(14,165,233,0.15),rgba(20,184,166,0.1));display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+                  <!-- WiFi/Network SVG -->
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12.55a11 11 0 0 1 14.08 0" />
+                    <path d="M1.42 9a16 16 0 0 1 21.16 0" />
+                    <path d="M8.53 16.11a6 6 0 0 1 6.95 0" />
+                    <line x1="12" y1="20" x2="12.01" y2="20" />
+                  </svg>
+                </div>
+                <h3 class="project-title">Network Configuration &amp; Management</h3>
+                <p class="project-desc">Implementation of enterprise network configuration with a focus on WAN network troubleshooting, VLAN management, and network optimization according to BNSP certification.</p>
+                <div class="project-tags" style="margin-top:16px;"><span class="badge-v2">BNSP Certified</span><span
+                    class="badge-v2">Mikrotik</span><span class="badge-v2">WAN Security</span></div>
+                <ul
+                  style="margin-top:16px;color:var(--text-secondary);font-size:13px;line-height:2;list-style:none;padding:0;">
+                  <li>&bull; WAN network troubleshooting and security implementation</li>
+                  <li>&bull; Mikrotik router configuration and management</li>
+                  <li>&bull; Network performance optimization</li>
+                </ul>
+              </div>
+            </div>
+            <div class="project-card glass" data-aos="zoom-in" data-aos-delay="200" style="padding:0;">
+              <div class="project-body" style="padding:32px;">
+                <div
+                  style="width:52px;height:52px;border-radius:var(--radius-md);background:linear-gradient(135deg,rgba(236,72,153,0.15),rgba(124,58,237,0.1));display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+                  <!-- Terminal SVG -->
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="4 17 10 11 4 5" />
+                    <line x1="12" y1="19" x2="20" y2="19" />
+                  </svg>
+                </div>
+                <h3 class="project-title">Linux System Administration</h3>
+                <p class="project-desc">Linux system administration focusing on network services, system security, and server management based on Cisco NDG Linux Essentials certification.</p>
+                <div class="project-tags" style="margin-top:16px;"><span class="badge-v2">Linux</span><span
+                    class="badge-v2">Cisco NDG</span><span class="badge-v2">Open Source</span></div>
+                <ul
+                  style="margin-top:16px;color:var(--text-secondary);font-size:13px;line-height:2;list-style:none;padding:0;">
+                  <li>&bull; Linux system installation and configuration</li>
+                  <li>&bull; Network services management (DNS, DHCP, Web)</li>
+                  <li>&bull; System security hardening and monitoring</li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p class="footer-copy">&copy; 2025 Muhammad Adam Zaky Jiddyansah. All rights reserved.</p>
-        <p class="footer-copy" style="color:var(--accent-2);font-weight:600;">Built with precision &amp; modern web tech
-        </p>
+    </section>
+
+    <!-- ========== CONTACT ========== -->
+    <section id="contact">
+      <div class="section-wrapper">
+        <div class="section-header" data-aos="fade-up">
+          <span class="section-tag">Get In Touch</span>
+          <h2 class="section-title">Let's Work Together</h2>
+          <p class="section-subtitle">Let's discuss interesting projects or collaboration opportunities</p>
+          <div class="section-divider"></div>
+        </div>
+        <div class="contact-terminal glass-strong" data-aos="fade-up">
+          <div class="terminal-left">
+            <div class="terminal-header">
+              <span class="terminal-dot" style="background:#ff5f56;"></span>
+              <span class="terminal-dot" style="background:#ffbd2e;"></span>
+              <span class="terminal-dot" style="background:#27c93f;"></span>
+              <span
+                style="margin-left: 10px; font-family: monospace; color: var(--text-muted); font-size: 12px;">~/contact/init</span>
+            </div>
+            <div class="terminal-body">
+              <h3 class="terminal-title">Let's Collaborate.</h3>
+              <p class="terminal-desc">Leave a message or contact me directly through the platforms below. I will respond as soon as possible.</p>
+
+              <div class="contact-links-grid">
+                <a href="http://wa.me/6283129939682" class="c-link-btn" data-color="#25d366" target="_blank">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" style="color: #25d366;">
+                    <path
+                      d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91A16 16 0 0 0 15.09 15.91l.81-.81a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                  </svg>
+                  WhatsApp
+                </a>
+                <a href="mailto:adamzaky.dy@gmail.com" class="c-link-btn" data-color="#ea4335">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" style="color: #ea4335;">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                    <polyline points="22,6 12,13 2,6" />
+                  </svg>
+                  Email
+                </a>
+                <a href="https://linkedin.com/in/adamzaky" class="c-link-btn" data-color="#0077b5" target="_blank">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" style="color: #0077b5;">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                    <rect x="2" y="9" width="4" height="12" />
+                    <circle cx="4" cy="4" r="2" />
+                  </svg>
+                  LinkedIn
+                </a>
+              </div>
+              <div class="c-location">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                Cerme, Gresik, East Java
+              </div>
+            </div>
+          </div>
+          <div class="terminal-right">
+            <form class="c-form" action="https://formsubmit.co/adamzaky.dy@gmail.com" method="POST">
+              <div class="input-float">
+                <input type="text" name="name" id="c-name" placeholder=" " required />
+                <label for="c-name">Full Name</label>
+              </div>
+              <div class="input-float">
+                <input type="email" name="email" id="c-email" placeholder=" " required />
+                <label for="c-email">Email Address</label>
+              </div>
+              <div class="input-float">
+                <textarea name="message" id="c-msg" placeholder=" " required rows="4"></textarea>
+                <label for="c-msg">Write a Message...</label>
+              </div>
+              <button type="submit" class="btn-send">
+                <span>Send Message</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
-    </div>
-  </footer>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-grid">
+          <div>
+            <div class="footer-name">Muhammad Adam Zaky</div>
+            <p class="footer-tagline">Fresh Graduate Computer Science &middot; Data Science Enthusiast &middot;
+              Full-Stack
+              Developer &middot; Network Infrastructure Specialist</p>
+            <div class="footer-social">
+              <a href="https://github.com/adamzakys" target="_blank" class="footer-social-pill" aria-label="GitHub">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path
+                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                  </path>
+                </svg>
+              </a>
+              <a href="https://www.linkedin.com/in/adamzaky/" target="_blank" class="footer-social-pill"
+                aria-label="LinkedIn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                  <rect x="2" y="9" width="4" height="12"></rect>
+                  <circle cx="4" cy="4" r="2"></circle>
+                </svg>
+              </a>
+              <a href="https://www.instagram.com/adamzaky_j/" target="_blank" class="footer-social-pill"
+                aria-label="Instagram">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+              </a>
+              <a href="http://wa.me/6283129939682" target="_blank" class="footer-social-pill" aria-label="WhatsApp">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path
+                    d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z">
+                  </path>
+                </svg>
+              </a>
+              <a href="mailto:adamzaky.dy@gmail.com" class="footer-social-pill" aria-label="Email">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div>
+            <div class="footer-col-title">Navigation</div>
+            <a href="#hero" class="footer-link">Home</a>
+            <a href="#about" class="footer-link">About</a>
+            <a href="#skills-section" class="footer-link">Skills</a>
+            <a href="#experience" class="footer-link">Experience</a>
+            <a href="#portfolio" class="footer-link">Portfolio</a>
+            <a href="#contact" class="footer-link">Contact</a>
+          </div>
+          <div>
+            <div class="footer-col-title">Specializations</div>
+            <a href="#skills-section" class="footer-link">Data Science</a>
+            <a href="#skills-section" class="footer-link">Web Development</a>
+            <a href="#skills-section" class="footer-link">Network Infrastructure</a>
+            <a href="#certifications" class="footer-link">Certifications</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p class="footer-copy">&copy; 2025 Muhammad Adam Zaky Jiddyansah. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
   </div> <!-- /.page-wrapper -->
 
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
@@ -3152,7 +3259,7 @@
     let mouseY = window.innerHeight / 2;
     let followerX = mouseX;
     let followerY = mouseY;
-    
+
     if (window.innerWidth > 768) {
       document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
@@ -3169,7 +3276,7 @@
         requestAnimationFrame(animateFollower);
       }
       animateFollower();
-      
+
       const hoverElements = document.querySelectorAll('a, button, .c-link-btn, .project-card, .skill-card-v2, .about-stat-card, .edu-card, .cert-card, .timeline-item');
       hoverElements.forEach(el => {
         el.addEventListener('mouseenter', () => {
@@ -3181,25 +3288,60 @@
           follower.classList.remove('hover');
         });
       });
+
+      // Magnetic Buttons
+      const magneticBtns = document.querySelectorAll('.btn-primary, .btn-outline');
+      magneticBtns.forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+          const rect = btn.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px) scale(1.05)`;
+        });
+        btn.addEventListener('mouseleave', () => {
+          btn.style.transform = '';
+        });
+      });
     }
 
-    // Parallax 3D Hover Effect
+    // Dynamic Scroll Orbs
+    const orb1 = document.getElementById('orb1');
+    const orb2 = document.getElementById('orb2');
+    const orb3 = document.getElementById('orb3');
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      if (orb1) orb1.style.transform = `translateY(${scrollY * 0.2}px) scale(${1 + scrollY * 0.0005})`;
+      if (orb2) orb2.style.transform = `translateY(${scrollY * -0.15}px)`;
+      if (orb3) orb3.style.transform = `translateY(${scrollY * 0.1}px)`;
+    });
+
+    // Parallax 3D Hover & Glass Shimmer Effect
     const parallaxCards = document.querySelectorAll('.project-card, .skill-card-v2, .contact-terminal');
     parallaxCards.forEach(card => {
+      // Create shimmer element
+      const shimmer = document.createElement('div');
+      shimmer.classList.add('glass-shimmer');
+      card.appendChild(shimmer);
+
       card.addEventListener('mousemove', (e) => {
         if (window.innerWidth <= 768) return;
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
+        
+        // Update shimmer position
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
         const rotateX = ((y - centerY) / centerY) * -5;
         const rotateY = ((x - centerX) / centerX) * 5;
-        
+
         card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
         card.style.transition = 'transform 0.1s ease';
       });
-      
+
       card.addEventListener('mouseleave', () => {
         if (window.innerWidth <= 768) return;
         card.style.transform = '';
