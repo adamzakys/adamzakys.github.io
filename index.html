@@ -3736,7 +3736,7 @@
           ctx.fill();
           
           scratchedArea++; 
-          if(scratchedArea > 60) {
+          if(scratchedArea > 25) {
              revealed = true;
              canvas.style.opacity = '0';
              setTimeout(()=> canvas.remove(), 500);
@@ -3792,7 +3792,8 @@
                 width: card.offsetWidth,
                 height: card.offsetHeight,
                 isDragging: false,
-                initialLeft: initialX
+                initialLeft: initialX,
+                initialTop: initialY
              });
              
              let dragStartX, dragStartY;
@@ -3838,48 +3839,43 @@
              
              physicsEntities.forEach(entity => {
                 if(entity.isDragging) {
-                   entity.el.style.transform = `translate(${entity.x - entity.initialLeft}px, ${entity.y}px) rotate(${entity.vx * 0.5}deg) scale(1.05)`;
+                   entity.el.style.transform = `translate(${entity.x - entity.initialLeft}px, ${entity.y - entity.initialTop}px) rotate(${entity.vx * 0.5}deg) scale(1.05)`;
                    return;
                 }
                 
-                entity.vy += 0.8;
-                entity.vx *= 0.98;
-                entity.vy *= 0.98;
+                // Magnetic grid force (spring to original position)
+                const springK = 0.05;
+                const damp = 0.85;
+                
+                entity.vx += (entity.initialLeft - entity.x) * springK;
+                entity.vy += (entity.initialTop - entity.y) * springK;
+                
+                entity.vx *= damp;
+                entity.vy *= damp;
                 
                 entity.x += entity.vx;
                 entity.y += entity.vy;
                 
-                if(entity.y + entity.height > bounds.h) {
-                   entity.y = bounds.h - entity.height;
-                   entity.vy *= -0.5;
-                   entity.vx *= 0.8;
-                }
+                // Keep inside bounds
+                if(entity.x < 0) { entity.x = 0; entity.vx *= -0.5; }
+                if(entity.x + entity.width > bounds.w) { entity.x = bounds.w - entity.width; entity.vx *= -0.5; }
                 
-                if(entity.x < 0) {
-                   entity.x = 0;
-                   entity.vx *= -0.7;
-                } else if (entity.x + entity.width > bounds.w) {
-                   entity.x = bounds.w - entity.width;
-                   entity.vx *= -0.7;
-                }
-                
+                // Basic repulsion from other cards if they overlap too much
                 physicsEntities.forEach(other => {
                    if(other === entity) return;
                    const dx = (entity.x + entity.width/2) - (other.x + other.width/2);
                    const dy = (entity.y + entity.height/2) - (other.y + other.height/2);
                    const dist = Math.sqrt(dx*dx + dy*dy);
                    const minDist = (entity.width + other.width) / 2.2;
-                   if(dist < minDist) {
+                   if(dist < minDist && dist > 0) {
                       const angle = Math.atan2(dy, dx);
-                      const push = (minDist - dist) * 0.1;
-                      entity.x += Math.cos(angle) * push;
-                      entity.y += Math.sin(angle) * push;
-                      entity.vx += Math.cos(angle) * push * 0.5;
-                      entity.vy += Math.sin(angle) * push * 0.5;
+                      const push = (minDist - dist) * 0.05;
+                      entity.vx += Math.cos(angle) * push;
+                      entity.vy += Math.sin(angle) * push;
                    }
                 });
                 
-                entity.el.style.transform = `translate(${entity.x - entity.initialLeft}px, ${entity.y}px) rotate(${entity.vx * 0.5}deg)`;
+                entity.el.style.transform = `translate(${entity.x - entity.initialLeft}px, ${entity.y - entity.initialTop}px) rotate(${entity.vx * 0.2}deg)`;
              });
              
              requestAnimationFrame(physicsLoop);
@@ -3959,6 +3955,32 @@
         }
       });
     }
+    // 9. Playable Magnetic Navbar
+    const navLinks = document.querySelectorAll('#nav-menu a');
+    navLinks.forEach(link => {
+       link.style.display = 'inline-block';
+       link.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.3s';
+       
+       let isHovered = false;
+       link.addEventListener('mousemove', (e) => {
+          isHovered = true;
+          const rect = link.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width/2;
+          const y = e.clientY - rect.top - rect.height/2;
+          // Magnetic pull towards cursor
+          link.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px) scale(1.1)`;
+       });
+       link.addEventListener('mouseleave', () => {
+          isHovered = false;
+          link.style.transform = 'translate(0px, 0px) scale(1)';
+       });
+       link.addEventListener('touchstart', () => {
+          link.style.transform = 'scale(1.1) translateY(-4px)';
+       }, {passive:true});
+       link.addEventListener('touchend', () => {
+          link.style.transform = 'translate(0px, 0px) scale(1)';
+       });
+    });
   </script>
 </body>
 
