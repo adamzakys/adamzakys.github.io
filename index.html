@@ -370,6 +370,8 @@
       background: var(--glass-bg);
       cursor: pointer;
       transition: var(--transition-base);
+      position: relative;
+      z-index: 100;
     }
 
     #menu-hamburger span {
@@ -1550,101 +1552,147 @@
     }
 
     /* ===================== CONTACT ===================== */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 48px;
-      align-items: start;
+    /* ===================== CONTACT TERMINAL ===================== */
+    .contact-terminal {
+      display: flex;
+      flex-direction: row;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.1);
+      border: 1px solid var(--glass-border);
+      position: relative;
     }
-
-    .contact-info-item {
+    .terminal-left {
+      flex: 1;
+      padding: 40px;
+      background: linear-gradient(135deg, rgba(99,102,241,0.05), rgba(124,58,237,0.02));
+      border-right: 1px solid var(--glass-border-subtle);
+    }
+    .terminal-right {
+      flex: 1;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+    }
+    .terminal-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 32px;
+    }
+    .terminal-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    .terminal-title {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+    .terminal-desc {
+      color: var(--text-secondary);
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+    .contact-links-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .c-link-btn {
       display: flex;
       align-items: center;
       gap: 16px;
-      padding: 20px;
-      border-radius: var(--radius-md);
-      transition: var(--transition-base);
-      margin-bottom: 12px;
+      padding: 16px 20px;
+      border-radius: 16px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      color: var(--text-primary);
+      font-weight: 600;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
     }
-
-    .contact-info-item:hover {
-      transform: translateX(4px);
+    .c-link-btn:hover {
+      transform: translateX(8px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     }
-
-    .contact-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: var(--radius-md);
+    .c-location {
       display: flex;
       align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .contact-label {
-      font-size: 12px;
-      font-weight: 700;
+      gap: 10px;
       color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
-    .contact-value {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-top: 2px;
-    }
-
-    .form-wrap {
-      padding: 40px;
-      border-radius: var(--radius-xl);
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    .form-label {
-      display: block;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text-secondary);
-      margin-bottom: 8px;
-      letter-spacing: 0.02em;
-    }
-
-    .form-input {
-      width: 100%;
-      padding: 14px 18px;
-      background: rgba(255, 255, 255, 0.5);
-      border: 1.5px solid var(--glass-border);
-      border-radius: var(--radius-md);
-      font-family: 'Inter', sans-serif;
       font-size: 14px;
+    }
+    .c-form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .input-float {
+      position: relative;
+    }
+    .input-float input, .input-float textarea {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid var(--glass-border);
+      padding: 12px 0;
       color: var(--text-primary);
-      transition: var(--transition-base);
+      font-family: inherit;
+      font-size: 16px;
       outline: none;
-      backdrop-filter: blur(12px);
+      transition: border-color 0.3s;
     }
-
-    body.dark .form-input {
-      background: rgba(15, 23, 42, 0.5);
-      border-color: rgba(99, 102, 241, 0.15);
-    }
-
-    .form-input:focus {
-      border-color: var(--accent-2);
-      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
-    }
-
-    .form-input::placeholder {
-      color: var(--text-muted);
-    }
-
-    textarea.form-input {
+    .input-float textarea {
       resize: none;
-      min-height: 140px;
+    }
+    .input-float label {
+      position: absolute;
+      top: 12px;
+      left: 0;
+      color: var(--text-muted);
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+    .input-float input:focus, .input-float textarea:focus {
+      border-bottom-color: var(--accent-1);
+    }
+    .input-float input:focus ~ label,
+    .input-float input:not(:placeholder-shown) ~ label,
+    .input-float textarea:focus ~ label,
+    .input-float textarea:not(:placeholder-shown) ~ label {
+      top: -12px;
+      font-size: 12px;
+      color: var(--accent-1);
+    }
+    .btn-send {
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      border-radius: 12px;
+      background: var(--text-primary);
+      color: var(--bg-body);
+      border: none;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .btn-send:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(99,102,241,0.25);
+    }
+    body.dark .btn-send {
+      background: white;
+      color: #080b1a;
     }
 
     /* ===================== FOOTER ===================== */
@@ -1758,6 +1806,8 @@
         grid-template-rows: auto auto auto;
         gap: 40px;
         text-align: center;
+        justify-content: center;
+        justify-items: center;
       }
 
       .hero-left {
@@ -1836,8 +1886,18 @@
         grid-template-columns: 1fr;
       }
 
-      .contact-grid {
-        grid-template-columns: 1fr;
+      .contact-terminal {
+        flex-direction: column;
+      }
+
+      .terminal-left {
+        border-right: none;
+        border-bottom: 1px solid var(--glass-border-subtle);
+        padding: 30px 20px;
+      }
+
+      .terminal-right {
+        padding: 30px 20px;
       }
 
       .footer-grid {
@@ -1896,10 +1956,51 @@
     .icon-svg {
       flex-shrink: 0;
     }
+    /* ===================== CUSTOM CURSOR ===================== */
+    .custom-cursor {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--accent-1);
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s, background-color 0.2s;
+    }
+    .custom-cursor-follower {
+      position: fixed;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s, border-color 0.2s;
+    }
+    .custom-cursor.hover {
+      width: 12px;
+      height: 12px;
+      background-color: var(--accent-2);
+    }
+    .custom-cursor-follower.hover {
+      width: 60px;
+      height: 60px;
+      border-color: var(--accent-2);
+      background-color: rgba(14, 165, 233, 0.1);
+    }
+    @media (max-width: 768px) {
+      .custom-cursor, .custom-cursor-follower { display: none !important; }
+    }
   </style>
 </head>
 
-<body>
+<body class="dark">
+  <!-- Custom Interactive Cursor -->
+  <div class="custom-cursor" id="custom-cursor"></div>
+  <div class="custom-cursor-follower" id="custom-cursor-follower"></div>
+
   <!-- Background Orbs (morphing on scroll) -->
   <div class="bg-orb bg-orb-1" id="orb1"></div>
   <div class="bg-orb bg-orb-2" id="orb2"></div>
@@ -2047,20 +2148,20 @@
 
         <!-- Floating info chips -->
         <div class="hero-chip chip-1">
-          <span class="chip-label">Specialization</span>
-          <span class="chip-value gradient-text">Data Science</span>
+          <span class="chip-label">Fokus Utama</span>
+          <span class="chip-value gradient-text">Web Development</span>
         </div>
         <div class="hero-chip chip-2">
-          <span class="chip-label">University</span>
-          <span class="chip-value">Trunojoyo Madura</span>
+          <span class="chip-label">Spesialisasi</span>
+          <span class="chip-value">Data Science</span>
         </div>
         <div class="hero-chip chip-3">
           <span class="chip-label">Status</span>
           <span class="chip-value" style="color:#22c55e;">Open to Work</span>
         </div>
         <div class="hero-chip chip-4">
-          <span class="chip-label">GPA</span>
-          <span class="chip-value gradient-text">3.51 / 4.00</span>
+          <span class="chip-label">Pengalaman</span>
+          <span class="chip-value gradient-text">1+ Tahun</span>
         </div>
       </div>
 
@@ -2068,15 +2169,15 @@
       <div class="hero-right" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
         <div class="hero-social">
           <a href="https://github.com/adamzakys" target="_blank" class="social-pill" aria-label="GitHub">
-            <img src="other/asset/github-white.png" alt="" />
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
             <span>GitHub</span>
           </a>
           <a href="https://www.linkedin.com/in/adamzaky/" target="_blank" class="social-pill" aria-label="LinkedIn">
-            <img src="other/asset/linkedin-white.png" alt="" />
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
             <span>LinkedIn</span>
           </a>
           <a href="mailto:adamzaky.dy@gmail.com" class="social-pill" aria-label="Email">
-            <img src="other/asset/gmail-white.png" alt="" />
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
             <span>Email Me</span>
           </a>
           <a href="http://wa.me/6283129939682" target="_blank" class="social-pill" aria-label="WhatsApp">
@@ -2759,95 +2860,57 @@
         <p class="section-subtitle">Mari berdiskusi tentang proyek atau peluang kolaborasi yang menarik</p>
         <div class="section-divider"></div>
       </div>
-      <div class="contact-grid">
-        <div data-aos="fade-right">
-          <h3 style="font-size:22px;font-weight:800;color:var(--text-primary);margin-bottom:8px;letter-spacing:-0.5px;">
-            Hubungi Saya</h3>
-          <p style="color:var(--text-secondary);font-size:15px;line-height:1.7;margin-bottom:32px;">Saya selalu terbuka
-            untuk peluang baru, kolaborasi, atau sekadar obrolan santai tentang teknologi.</p>
-          <div class="contact-info-item glass">
-            <div class="contact-icon" style="background:linear-gradient(135deg,#25d366,#128c7e);">
-              <!-- Phone SVG -->
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path
-                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91A16 16 0 0 0 15.09 15.91l.81-.81a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-              </svg>
-            </div>
-            <div>
-              <div class="contact-label">WhatsApp</div>
-              <div class="contact-value">+62 831-2993-9682</div>
-            </div>
+      <div class="contact-terminal glass-strong" data-aos="fade-up">
+        <div class="terminal-left">
+          <div class="terminal-header">
+            <span class="terminal-dot" style="background:#ff5f56;"></span>
+            <span class="terminal-dot" style="background:#ffbd2e;"></span>
+            <span class="terminal-dot" style="background:#27c93f;"></span>
+            <span style="margin-left: 10px; font-family: monospace; color: var(--text-muted); font-size: 12px;">~/contact/init</span>
           </div>
-          <div class="contact-info-item glass">
-            <div class="contact-icon" style="background:linear-gradient(135deg,#ea4335,#c5221f);">
-              <!-- Mail SVG -->
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                <polyline points="22,6 12,13 2,6" />
-              </svg>
+          <div class="terminal-body">
+            <h3 class="terminal-title">Mari Berkolaborasi.</h3>
+            <p class="terminal-desc">Tinggalkan pesan Anda atau hubungi saya langsung melalui platform di bawah ini. Saya akan merespons secepatnya.</p>
+            
+            <div class="contact-links-grid">
+               <a href="http://wa.me/6283129939682" class="c-link-btn" data-color="#25d366" target="_blank">
+                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #25d366;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91A16 16 0 0 0 15.09 15.91l.81-.81a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
+                 WhatsApp
+               </a>
+               <a href="mailto:adamzaky.dy@gmail.com" class="c-link-btn" data-color="#ea4335">
+                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #ea4335;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>
+                 Email
+               </a>
+               <a href="https://linkedin.com/in/adamzaky" class="c-link-btn" data-color="#0077b5" target="_blank">
+                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #0077b5;"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" /></svg>
+                 LinkedIn
+               </a>
             </div>
-            <div>
-              <div class="contact-label">Email</div>
-              <div class="contact-value">adamzaky.dy@gmail.com</div>
-            </div>
-          </div>
-          <div class="contact-info-item glass">
-            <div class="contact-icon" style="background:linear-gradient(135deg,#0077b5,#005582);">
-              <!-- LinkedIn SVG -->
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                <rect x="2" y="9" width="4" height="12" />
-                <circle cx="4" cy="4" r="2" />
-              </svg>
-            </div>
-            <div>
-              <div class="contact-label">LinkedIn</div>
-              <div class="contact-value">linkedin.com/in/adamzaky</div>
-            </div>
-          </div>
-          <div class="contact-info-item glass">
-            <div class="contact-icon" style="background:linear-gradient(135deg,#7c3aed,#6366f1);">
-              <!-- Map Pin SVG -->
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                <circle cx="12" cy="10" r="3" />
-              </svg>
-            </div>
-            <div>
-              <div class="contact-label">Lokasi</div>
-              <div class="contact-value">Cerme, Gresik, Jawa Timur</div>
+            <div class="c-location">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
+              Cerme, Gresik, Jawa Timur
             </div>
           </div>
         </div>
-        <div data-aos="fade-left">
-          <div class="form-wrap glass-strong">
-            <form action="https://formsubmit.co/adamzaky.dy@gmail.com" method="POST">
-              <div class="form-group">
-                <label class="form-label">Nama Anda</label>
-                <input type="text" name="name" class="form-input" placeholder="Masukkan nama lengkap" required />
-              </div>
-              <div class="form-group">
-                <label class="form-label">Email Anda</label>
-                <input type="email" name="email" class="form-input" placeholder="nama@email.com" required />
-              </div>
-              <div class="form-group">
-                <label class="form-label">Pesan Anda</label>
-                <textarea name="message" class="form-input" placeholder="Tulis pesan Anda di sini..."
-                  required></textarea>
-              </div>
-              <button type="submit" class="btn-primary" style="width:100%;justify-content:center;padding:16px;">
-                Kirim Pesan
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M22 2L11 13M22 2L15 22 11 13 2 9l20-7z" />
-                </svg>
-              </button>
-            </form>
-          </div>
+        <div class="terminal-right">
+          <form class="c-form" action="https://formsubmit.co/adamzaky.dy@gmail.com" method="POST">
+            <div class="input-float">
+              <input type="text" name="name" id="c-name" placeholder=" " required />
+              <label for="c-name">Nama Lengkap</label>
+            </div>
+            <div class="input-float">
+              <input type="email" name="email" id="c-email" placeholder=" " required />
+              <label for="c-email">Alamat Email</label>
+            </div>
+            <div class="input-float">
+              <textarea name="message" id="c-msg" placeholder=" " required rows="4"></textarea>
+              <label for="c-msg">Tulis Pesan...</label>
+            </div>
+            <button type="submit" class="btn-send">
+              <span>Kirim Pesan</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
+          </form>
         </div>
       </div>
     </div>
@@ -2862,16 +2925,21 @@
           <p class="footer-tagline">Fresh Graduate Computer Science &middot; Data Science Enthusiast &middot; Full-Stack
             Developer &middot; Network Infrastructure Specialist</p>
           <div class="footer-social">
-            <a href="https://github.com/adamzakys" target="_blank" class="footer-social-pill" aria-label="GitHub"><img
-                src="other/asset/github-white.png" alt="GitHub" /></a>
-            <a href="https://www.linkedin.com/in/adamzaky/" target="_blank" class="footer-social-pill"
-              aria-label="LinkedIn"><img src="other/asset/linkedin-white.png" alt="LinkedIn" /></a>
-            <a href="https://www.instagram.com/adamzaky_j/" target="_blank" class="footer-social-pill"
-              aria-label="Instagram"><img src="other/asset/instagram-white.png" alt="Instagram" /></a>
-            <a href="http://wa.me/6283129939682" target="_blank" class="footer-social-pill" aria-label="WhatsApp"><img
-                src="other/asset/whatsapp-white.png" alt="WhatsApp" /></a>
-            <a href="mailto:adamzaky.dy@gmail.com" class="footer-social-pill" aria-label="Email"><img
-                src="other/asset/gmail-white.png" alt="Email" /></a>
+            <a href="https://github.com/adamzakys" target="_blank" class="footer-social-pill" aria-label="GitHub">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/adamzaky/" target="_blank" class="footer-social-pill" aria-label="LinkedIn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
+            <a href="https://www.instagram.com/adamzaky_j/" target="_blank" class="footer-social-pill" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+            <a href="http://wa.me/6283129939682" target="_blank" class="footer-social-pill" aria-label="WhatsApp">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+            </a>
+            <a href="mailto:adamzaky.dy@gmail.com" class="footer-social-pill" aria-label="Email">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </a>
           </div>
         </div>
         <div>
@@ -3042,6 +3110,67 @@
       document.body.appendChild(n);
       setTimeout(() => n.remove(), 5000);
     }
+    // --- Custom Cursor & Parallax 3D ---
+    const cursor = document.getElementById('custom-cursor');
+    const follower = document.getElementById('custom-cursor-follower');
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let followerX = mouseX;
+    let followerY = mouseY;
+    
+    if (window.innerWidth > 768) {
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        cursor.style.left = mouseX + 'px';
+        cursor.style.top = mouseY + 'px';
+      });
+
+      function animateFollower() {
+        followerX += (mouseX - followerX) * 0.15;
+        followerY += (mouseY - followerY) * 0.15;
+        follower.style.left = followerX + 'px';
+        follower.style.top = followerY + 'px';
+        requestAnimationFrame(animateFollower);
+      }
+      animateFollower();
+      
+      const hoverElements = document.querySelectorAll('a, button, .c-link-btn, .project-card, .skill-card-v2, .about-stat-card, .edu-card, .cert-card, .timeline-item');
+      hoverElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          cursor.classList.add('hover');
+          follower.classList.add('hover');
+        });
+        el.addEventListener('mouseleave', () => {
+          cursor.classList.remove('hover');
+          follower.classList.remove('hover');
+        });
+      });
+    }
+
+    // Parallax 3D Hover Effect
+    const parallaxCards = document.querySelectorAll('.project-card, .skill-card-v2, .contact-terminal');
+    parallaxCards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        if (window.innerWidth <= 768) return;
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -5;
+        const rotateY = ((x - centerX) / centerX) * 5;
+        
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        card.style.transition = 'transform 0.1s ease';
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        if (window.innerWidth <= 768) return;
+        card.style.transform = '';
+        card.style.transition = 'transform 0.5s ease';
+      });
+    });
   </script>
 </body>
 
