@@ -494,7 +494,15 @@
       padding: 16px 24px;
     }
     
-    #navbar.scrolled .nav-inner {
+    #navbar.scrolled 
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-direction: row;
+    }
+
+    .nav-inner {
       max-width: 900px;
       width: 90%;
       border-radius: 50px;
@@ -3781,37 +3789,64 @@
         tCtx.stroke();
       }
       
-            window.addEventListener('scroll', () => {
+                  const items = timeline.querySelectorAll('.timeline-item');
+      
+      let targetNodeIdx = 0;
+      let isFlying = false;
+      let isNgeden = false;
+      
+      window.addEventListener('scroll', () => {
         cancelAnimationFrame(idleAnimFrame);
         
-        const rect = timeline.getBoundingClientRect();
         const windowHeight = window.innerHeight;
-        let progress = (windowHeight/2 - rect.top) / rect.height;
+        const currentScroll = window.scrollY;
+        const timelineRect = timeline.getBoundingClientRect();
+        
+        // Find which item is mostly in view
+        let activeIdx = 0;
+        items.forEach((item, idx) => {
+           const rect = item.getBoundingClientRect();
+           // If the item dot is above the middle of the screen
+           if (rect.top < windowHeight * 0.6) {
+               activeIdx = idx;
+           }
+        });
+        
+        // Calculate progress for the glowing trail
+        let progress = (windowHeight/2 - timelineRect.top) / timelineRect.height;
         progress = Math.max(0, Math.min(1, progress));
-        currentProgress = progress;
         drawTrail(progress);
         
-        const totalH = timeline.offsetHeight;
-        const targetY = progress * totalH;
-        const centerX = timelineCanvas.width / 2;
-        const targetX = centerX + Math.sin(targetY * 0.015) * 12;
-        
-        if (!isScrolling) {
-           // Ngeden (Squash/Charge)
-           isScrolling = true;
-           explorer.style.transition = 'transform 0.2s';
-           explorer.style.transform = 'scale(1.4, 0.6) translateY(5px)';
+        // If we need to move to a new node
+        if (activeIdx !== targetNodeIdx && !isFlying) {
+           targetNodeIdx = activeIdx;
+           const targetItem = items[targetNodeIdx];
+           
+           // Calculate exactly where the dot is relative to timeline top
+           // We'll use the item's offsetTop (approximate since timeline is relative)
+           const targetY = targetItem.offsetTop + 15; // center of dot roughly
+           const centerX = timelineCanvas.width / 2;
+           const targetX = centerX + Math.sin(targetY * 0.015) * 12;
+           
+           isFlying = true;
+           isNgeden = true;
+           
+           // NGEDEN (squash and vibrate) at current position before shooting
+           explorer.style.transition = 'transform 0.3s';
+           explorer.style.transform = 'scale(1.5, 0.5) translateY(5px)';
            explorer.style.filter = 'drop-shadow(0 0 15px var(--accent-1))';
            
            setTimeout(() => {
-              // Lepas Landas (Shoot)
-              explorer.style.transition = 'top 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), left 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.3s';
+              isNgeden = false;
+              // SHOOT to new node
+              explorer.style.transition = 'top 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), left 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.4s';
               explorer.style.top = `${targetY - 16}px`;
               explorer.style.left = `${targetX - 14 - 16}px`;
-              explorer.style.transform = 'scale(0.8, 1.2)';
+              explorer.style.transform = 'scale(0.8, 1.2)'; // stretch while flying
               
               setTimeout(() => {
-                 isScrolling = false;
+                 isFlying = false;
+                 // Settle at target
                  explorer.style.transition = 'transform 0.4s';
                  explorer.style.transform = 'rotate(135deg) scale(1)';
                  explorer.style.filter = 'none';
@@ -3825,14 +3860,22 @@
                     idleAnimFrame = requestAnimationFrame(idleAnimate);
                  }
                  idleAnimFrame = requestAnimationFrame(idleAnimate);
-              }, 500);
-           }, 250);
-        } else {
-           // If already moving/charging, update target but let current animation finish shooting to new target smoothly
-           explorer.style.top = `${targetY - 16}px`;
-           explorer.style.left = `${targetX - 14 - 16}px`;
+              }, 600);
+           }, 400); // 400ms charge up delay
+        } else if (!isFlying && !isNgeden && items.length > 0) {
+           // On initial load or resize, just position it safely
+           const targetItem = items[targetNodeIdx];
+           if(targetItem) {
+               const targetY = targetItem.offsetTop + 15;
+               const centerX = timelineCanvas.width / 2;
+               const targetX = centerX + Math.sin(targetY * 0.015) * 12;
+               explorer.style.transition = 'top 0.1s, left 0.1s';
+               explorer.style.top = `${targetY - 16}px`;
+               explorer.style.left = `${targetX - 14 - 16}px`;
+           }
         }
       }, { passive: true });
+
     }
 
     // 5. Flashlight Discovery (About Me)
