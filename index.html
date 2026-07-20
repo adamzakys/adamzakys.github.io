@@ -286,6 +286,65 @@
       box-shadow: 0 8px 24px rgba(99, 102, 241, 0.15);
     }
 
+    /* ===================== PLAYABLE INTERACTIONS ===================== */
+    .click-ripple {
+      position: fixed;
+      border-radius: 50%;
+      border: 2px solid var(--accent-1);
+      pointer-events: none;
+      animation: ripple 0.6s ease-out forwards;
+      z-index: 9999;
+    }
+    @keyframes ripple {
+      0% { width: 0; height: 0; opacity: 1; transform: translate(-50%, -50%); }
+      100% { width: 100px; height: 100px; opacity: 0; transform: translate(-50%, -50%); }
+    }
+
+    .typing-text::after {
+      content: '|';
+      animation: blink 1s step-end infinite;
+      color: var(--accent-1);
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    #hero-canvas {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .timeline {
+      position: relative;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 2px;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .timeline-progress {
+      position: absolute;
+      top: 0; left: -1px;
+      width: 4px;
+      height: 0;
+      background: var(--gradient-main);
+      z-index: 1;
+      transition: height 0.1s linear;
+      border-radius: 4px;
+    }
+    
+    .badge-v2 {
+      cursor: grab;
+      user-select: none;
+    }
+    .badge-v2:active {
+      cursor: grabbing;
+      transform: scale(0.95);
+    }
+
     /* ===================== NAVBAR ===================== */
     #navbar {
       position: fixed;
@@ -2145,6 +2204,7 @@
 
     <!-- ========== HERO ========== -->
     <section id="hero">
+      <canvas id="hero-canvas"></canvas>
       <div class="hero-container">
 
         <!-- LEFT: Name & CTA -->
@@ -2160,8 +2220,7 @@
               <span class="name-highlight">Adam Zaky</span><br>
               Jiddyansah
             </h1>
-            <p class="hero-role">
-              Computer Science Graduate &mdash; Data Science, Full-Stack Web Development & Network Infrastructure
+            <p class="hero-role">Computer Science Graduate &mdash; <span id="typewriter-text" class="typing-text">Data Science, Full-Stack Web Development &amp; Network Infrastructure</span></p>
             </p>
           </div>
           <div class="hero-cta-left">
@@ -2505,6 +2564,7 @@
           <div class="section-divider"></div>
         </div>
         <div class="timeline">
+          <div class="timeline-progress" id="timeline-progress"></div>
           <div class="timeline-item glass" data-aos="fade-up" data-aos-delay="100">
             <div class="timeline-dot"></div>
             <span class="timeline-date">Nov 2025 &mdash; Present</span>
@@ -2966,6 +3026,12 @@
             <div class="terminal-body">
               <h3 class="terminal-title">Let's Collaborate.</h3>
               <p class="terminal-desc">Leave a message or contact me directly through the platforms below. I will respond as soon as possible.</p>
+              
+              <div id="terminal-output" style="margin-top:24px; font-family:monospace; font-size:13px; color:#10b981; max-height:150px; overflow-y:auto;"></div>
+              <div style="display:flex; align-items:center; margin-top:8px; font-family:monospace; margin-bottom: 24px;">
+                <span style="color:var(--accent-3);margin-right:8px;">visitor@portfolio:~$</span>
+                <input type="text" id="terminal-input" autocomplete="off" style="background:transparent; border:none; color:white; font-family:monospace; font-size:14px; outline:none; flex:1;" placeholder="type 'help' and press Enter...">
+              </div>
 
               <div class="contact-links-grid">
                 <a href="http://wa.me/6283129939682" class="c-link-btn" data-color="#25d366" target="_blank">
@@ -3337,6 +3403,191 @@
         if (window.innerWidth <= 768) return;
         card.style.transform = '';
         card.style.transition = 'transform 0.5s ease';
+      });
+    });
+
+    /* ===================== PLAYABLE INTERACTIONS ===================== */
+
+    // 1. Global Click Ripple
+    document.addEventListener('click', (e) => {
+      // Don't ripple on links/buttons if they have their own effects, but global is fine too
+      const ripple = document.createElement('div');
+      ripple.className = 'click-ripple';
+      ripple.style.left = e.clientX + 'px';
+      ripple.style.top = e.clientY + 'px';
+      document.body.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 600);
+    });
+
+    // 2. Typewriter Effect for Role
+    const roles = ["Data Science", "Full-Stack Web Development", "Network Infrastructure", "Machine Learning", "UI/UX Design"];
+    let roleIdx = 0;
+    let charIdx = 0;
+    let isDeleting = false;
+    const typeText = document.getElementById('typewriter-text');
+    
+    function typeEffect() {
+      if(!typeText) return;
+      const currentRole = roles[roleIdx];
+      
+      if (isDeleting) {
+        typeText.textContent = currentRole.substring(0, charIdx - 1);
+        charIdx--;
+      } else {
+        typeText.textContent = currentRole.substring(0, charIdx + 1);
+        charIdx++;
+      }
+      
+      let speed = isDeleting ? 40 : 100;
+      
+      if (!isDeleting && charIdx === currentRole.length) {
+        speed = 2500; // pause at end
+        isDeleting = true;
+      } else if (isDeleting && charIdx === 0) {
+        isDeleting = false;
+        roleIdx = (roleIdx + 1) % roles.length;
+        speed = 500; // pause before typing next
+      }
+      setTimeout(typeEffect, speed);
+    }
+    typeEffect();
+
+    // 3. Canvas Particle Mouse Trail (Hero)
+    const canvas = document.getElementById('hero-canvas');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      let particles = [];
+      let mouse = { x: -100, y: -100 };
+      
+      function resizeCanvas() {
+        canvas.width = canvas.parentElement.offsetWidth;
+        canvas.height = canvas.parentElement.offsetHeight;
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+      
+      class Particle {
+        constructor(x, y) {
+          this.x = x; this.y = y;
+          this.size = Math.random() * 2.5 + 0.5;
+          this.speedX = Math.random() * 2 - 1;
+          this.speedY = Math.random() * 2 - 1;
+          this.life = 1;
+        }
+        update() {
+          this.x += this.speedX; this.y += this.speedY;
+          this.life -= 0.015;
+        }
+        draw() {
+          ctx.fillStyle = `rgba(124, 58, 237, ${this.life})`;
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+      
+      const heroEl = document.getElementById('hero');
+      if(heroEl) {
+        heroEl.addEventListener('mousemove', (e) => {
+          const rect = canvas.getBoundingClientRect();
+          for(let i=0; i<2; i++) {
+            particles.push(new Particle(e.clientX - rect.left, e.clientY - rect.top));
+          }
+        });
+      }
+      
+      function animateCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for(let i = 0; i < particles.length; i++) {
+          particles[i].update();
+          particles[i].draw();
+          if (particles[i].life <= 0) {
+            particles.splice(i, 1);
+            i--;
+          }
+        }
+        requestAnimationFrame(animateCanvas);
+      }
+      animateCanvas();
+    }
+
+    // 4. Scroll-Driven Timeline
+    const timeline = document.querySelector('.timeline');
+    const timelineProgress = document.getElementById('timeline-progress');
+    if(timeline && timelineProgress) {
+      window.addEventListener('scroll', () => {
+        const rect = timeline.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        // Calculate progress based on scroll passing center of screen
+        let progress = (windowHeight/2 - rect.top) / rect.height;
+        progress = Math.max(0, Math.min(1, progress));
+        timelineProgress.style.height = `${progress * 100}%`;
+      }, { passive: true });
+    }
+
+    // 5. Interactive Mini-Terminal
+    const termInput = document.getElementById('terminal-input');
+    const termOutput = document.getElementById('terminal-output');
+    if (termInput && termOutput) {
+      termInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          const cmd = termInput.value.trim().toLowerCase();
+          termInput.value = '';
+          if (!cmd) return;
+          
+          let response = '';
+          if (cmd === 'help') {
+            response = 'Available commands:<br>- <b>about</b>: Learn about me<br>- <b>skills</b>: List technical skills<br>- <b>contact</b>: Get contact info<br>- <b>clear</b>: Clear terminal';
+          } else if (cmd === 'about') {
+            response = 'I am a CS Graduate specializing in Data Science, Full-Stack Web Development, and Network Infrastructure. Always eager to learn and build.';
+          } else if (cmd === 'skills') {
+            response = 'Python, Laravel, React, SQL Server, Machine Learning, UI/UX, Network Config (Mikrotik).';
+          } else if (cmd === 'contact') {
+            response = 'Email: adamzaky.dy@gmail.com<br>WhatsApp: +6283129939682<br>Location: Gresik, East Java';
+          } else if (cmd === 'clear') {
+            termOutput.innerHTML = '';
+            return;
+          } else {
+            response = `Command not found: <b>${cmd}</b>. Type 'help' for available commands.`;
+          }
+          
+          termOutput.innerHTML += `<div style="margin-bottom:8px;"><span style="color:var(--text-muted);">visitor@portfolio:~$ ${cmd}</span><br>${response}</div>`;
+          termOutput.scrollTop = termOutput.scrollHeight;
+        }
+      });
+    }
+
+    // 6. Draggable Badges (Spring Physics)
+    const draggableBadges = document.querySelectorAll('.badge-v2');
+    draggableBadges.forEach(badge => {
+      let isDragging = false;
+      let startX, startY;
+      let currentX = 0, currentY = 0;
+      
+      badge.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.clientX - currentX;
+        startY = e.clientY - currentY;
+        badge.style.zIndex = 1000;
+        badge.style.transition = 'none';
+      });
+      
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        currentX = e.clientX - startX;
+        currentY = e.clientY - startY;
+        // Add a slight tilt based on X position for more dynamic feel
+        badge.style.transform = `translate(${currentX}px, ${currentY}px) scale(1.1) rotate(${currentX * 0.05}deg)`;
+      });
+      
+      window.addEventListener('mouseup', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        badge.style.zIndex = '';
+        // Spring physics snap back
+        badge.style.transition = 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        currentX = 0; currentY = 0;
+        badge.style.transform = `translate(0px, 0px) scale(1) rotate(0deg)`;
       });
     });
   </script>
