@@ -477,6 +477,13 @@
     }
 
     /* ===================== NAVBAR ===================== */
+
+    #navbar {
+      border: none !important;
+      box-shadow: none !important;
+      outline: none !important;
+    }
+
     
     #navbar {
       position: fixed;
@@ -610,29 +617,27 @@
     @media (max-width: 768px) {
       
       #nav-menu {
-        position: absolute;
-        top: 100%;
-        left: 5%;
-        width: 90%;
-        max-height: 0;
-        overflow: hidden;
+        position: fixed;
+        top: 0;
+        right: -110%;
+        width: 280px;
+        height: 100vh;
+        max-height: 100vh;
         flex-direction: column;
-        gap: 8px;
-        padding: 0 24px;
+        justify-content: center;
+        gap: 20px;
+        padding: 24px;
         background: var(--glass-bg-strong);
         backdrop-filter: blur(40px);
-        border: 1px solid transparent;
-        border-radius: 24px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s, border-color 0.4s;
+        border-left: 1px solid var(--glass-border);
+        border-radius: 30px 0 0 30px;
+        box-shadow: -10px 0 40px rgba(0, 0, 0, 0.2);
+        transition: right 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         z-index: 90;
       }
       
       #nav-menu.open {
-        max-height: 400px;
-        padding: 24px;
-        border-color: var(--glass-border);
-        margin-top: 8px;
+        right: 0;
       }
 
       #nav-menu a {
