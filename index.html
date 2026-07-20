@@ -67,6 +67,12 @@
       padding: 0;
     }
 
+    html, body {
+      overflow-x: hidden;
+      width: 100%;
+      max-width: 100vw;
+    }
+
     html {
       scroll-behavior: smooth;
     }
@@ -76,10 +82,15 @@
       background: var(--bg-gradient);
       background-attachment: fixed;
       color: var(--text-primary);
-      overflow-x: hidden;
       min-height: 100vh;
       transition: background 0.5s ease, color 0.3s ease;
       -webkit-font-smoothing: antialiased;
+    }
+
+    .page-wrapper {
+      overflow-x: hidden;
+      width: 100%;
+      position: relative;
     }
 
     h1,
@@ -2019,6 +2030,7 @@
 </head>
 
 <body class="dark">
+  <div class="page-wrapper">
   <!-- Custom Interactive Cursor -->
   <div class="custom-cursor" id="custom-cursor"></div>
   <div class="custom-cursor-follower" id="custom-cursor-follower"></div>
@@ -2988,6 +3000,7 @@
       </div>
     </div>
   </footer>
+  </div> <!-- /.page-wrapper -->
 
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>
