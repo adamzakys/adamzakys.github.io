@@ -299,6 +299,43 @@
       0% { width: 0; height: 0; opacity: 1; transform: translate(-50%, -50%); }
       100% { width: 100px; height: 100px; opacity: 0; transform: translate(-50%, -50%); }
     }
+    
+    .project-card.spin {
+      animation: spin3d 0.8s ease-in-out;
+    }
+    @keyframes spin3d {
+      0% { transform: perspective(1000px) rotateY(0deg); }
+      50% { transform: perspective(1000px) rotateY(180deg) scale(1.05); }
+      100% { transform: perspective(1000px) rotateY(360deg); }
+    }
+    
+    .flashlight-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle 120px at var(--x, 50%) var(--y, 50%), transparent 0%, rgba(15, 23, 42, 0.98) 100%);
+      z-index: 50;
+      pointer-events: none;
+      transition: opacity 1.5s ease;
+      border-radius: var(--radius-xl);
+    }
+    .flashlight-overlay.revealed {
+      opacity: 0;
+    }
+    
+    .scratch-wrapper {
+      position: relative;
+      width: 100%; height: 100%;
+      overflow: hidden;
+      border-radius: inherit;
+    }
+    .scratch-canvas {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 5;
+      touch-action: none;
+      border-radius: inherit;
+      transition: opacity 0.5s ease;
+    }
 
     .typing-text::after {
       content: '|';
@@ -318,22 +355,30 @@
       position: relative;
     }
     .timeline::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 2px;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.1);
+      display: none;
     }
-    .timeline-progress {
+    .timeline-canvas {
       position: absolute;
-      top: 0; left: -1px;
-      width: 4px;
-      height: 0;
-      background: var(--gradient-main);
-      z-index: 1;
-      transition: height 0.1s linear;
-      border-radius: 4px;
+      top: 0; left: -14px;
+      width: 30px; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .timeline-explorer {
+      position: absolute;
+      left: -15px;
+      top: 0;
+      width: 32px;
+      height: 32px;
+      z-index: 10;
+      transition: top 0.1s linear, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      background: var(--glass-bg-strong);
+      border: 1px solid var(--accent-1);
+      border-radius: 50%;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 0 15px rgba(124, 58, 237, 0.6);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent-1);
     }
     
     .badge-v2 {
@@ -620,6 +665,7 @@
       text-align: right;
       max-width: 260px;
       margin-top: 12px;
+      min-height: 72px;
     }
 
     .hero-cta-left {
@@ -1169,17 +1215,17 @@
       position: relative;
       padding-left: 32px;
     }
-
     .timeline::before {
-      content: '';
-      position: absolute;
-      left: 15px;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: linear-gradient(to bottom, var(--accent-1), var(--accent-3), transparent);
-      border-radius: 2px;
+      display: none;
     }
+    .timeline-canvas {
+      position: absolute;
+      top: 0; left: -14px;
+      width: 30px; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
 
     .timeline-item {
       position: relative;
@@ -2564,7 +2610,13 @@
           <div class="section-divider"></div>
         </div>
         <div class="timeline">
-          <div class="timeline-progress" id="timeline-progress"></div>
+          <canvas id="timeline-canvas" class="timeline-canvas"></canvas>
+          <div class="timeline-explorer" id="timeline-explorer">
+            <!-- Rocket / Plane SVG -->
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+               <path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+            </svg>
+          </div>
           <div class="timeline-item glass" data-aos="fade-up" data-aos-delay="100">
             <div class="timeline-dot"></div>
             <span class="timeline-date">Nov 2025 &mdash; Present</span>
@@ -3511,21 +3563,332 @@
       animateCanvas();
     }
 
-    // 4. Scroll-Driven Timeline
+    // 4. Weaving Trailblazer (My Journey)
     const timeline = document.querySelector('.timeline');
-    const timelineProgress = document.getElementById('timeline-progress');
-    if(timeline && timelineProgress) {
+    const explorer = document.getElementById('timeline-explorer');
+    const timelineCanvas = document.getElementById('timeline-canvas');
+    if(timeline && explorer && timelineCanvas) {
+      const tCtx = timelineCanvas.getContext('2d');
+      let lastScrollY = window.scrollY;
+      let isScrolling;
+      let currentProgress = 0;
+      let idleAnimFrame;
+      let idleTime = 0;
+      
+      function resizeTCanvas() {
+        timelineCanvas.width = timelineCanvas.offsetWidth;
+        timelineCanvas.height = timelineCanvas.offsetHeight;
+        drawTrail(currentProgress);
+      }
+      window.addEventListener('resize', resizeTCanvas);
+      resizeTCanvas();
+      
+      function drawTrail(progress) {
+        tCtx.clearRect(0, 0, timelineCanvas.width, timelineCanvas.height);
+        tCtx.beginPath();
+        tCtx.strokeStyle = 'rgba(124, 58, 237, 0.6)';
+        tCtx.lineWidth = 2;
+        tCtx.lineCap = 'round';
+        
+        const totalH = timelineCanvas.height;
+        const currentH = progress * totalH;
+        const centerX = timelineCanvas.width / 2;
+        
+        tCtx.moveTo(centerX, 0);
+        for(let y = 0; y <= currentH; y += 5) {
+          const x = centerX + Math.sin(y * 0.015) * 12;
+          tCtx.lineTo(x, y);
+        }
+        
+        tCtx.shadowBlur = 8;
+        tCtx.shadowColor = 'rgba(14, 165, 233, 0.8)';
+        tCtx.stroke();
+      }
+      
       window.addEventListener('scroll', () => {
+        cancelAnimationFrame(idleAnimFrame);
+        
         const rect = timeline.getBoundingClientRect();
         const windowHeight = window.innerHeight;
-        // Calculate progress based on scroll passing center of screen
         let progress = (windowHeight/2 - rect.top) / rect.height;
         progress = Math.max(0, Math.min(1, progress));
-        timelineProgress.style.height = `${progress * 100}%`;
+        currentProgress = progress;
+        
+        const totalH = timeline.offsetHeight;
+        const currentY = progress * totalH;
+        const centerX = timelineCanvas.width / 2;
+        const currentX = centerX + Math.sin(currentY * 0.015) * 12;
+        
+        explorer.style.top = `${currentY - 16}px`;
+        explorer.style.left = `${currentX - 14 - 16}px`; 
+        
+        drawTrail(progress);
+        
+        const currentScrollY = window.scrollY;
+        const speed = Math.abs(currentScrollY - lastScrollY);
+        let scaleY = 1 + (speed * 0.005);
+        scaleY = Math.min(scaleY, 1.4);
+        const scaleX = 1 / scaleY;
+        
+        if(currentScrollY > lastScrollY) {
+          explorer.style.transform = `rotate(90deg) scale(${scaleX}, ${scaleY})`;
+        } else if (currentScrollY < lastScrollY) {
+          explorer.style.transform = `rotate(-90deg) scale(${scaleX}, ${scaleY})`;
+        }
+        lastScrollY = currentScrollY;
+        
+        clearTimeout(isScrolling);
+        isScrolling = setTimeout(() => {
+          explorer.style.transform = 'rotate(135deg) scale(1.2, 0.8)';
+          setTimeout(() => {
+             idleTime = 0;
+             function idleAnimate() {
+                idleTime += 0.05;
+                const hoverY = Math.sin(idleTime) * 3;
+                const hoverRot = 135 + Math.cos(idleTime) * 5;
+                explorer.style.transform = `translateY(${hoverY}px) rotate(${hoverRot}deg) scale(1)`;
+                idleAnimFrame = requestAnimationFrame(idleAnimate);
+             }
+             idleAnimate();
+          }, 150);
+        }, 100);
       }, { passive: true });
     }
 
-    // 5. Interactive Mini-Terminal
+    // 5. Flashlight Discovery (About Me)
+    const aboutSection = document.getElementById('about');
+    const flashlightOverlay = document.getElementById('flashlight-overlay');
+    if(aboutSection && flashlightOverlay) {
+       function updateFlashlight(e) {
+          const rect = aboutSection.getBoundingClientRect();
+          let x, y;
+          if(e.touches) {
+             x = e.touches[0].clientX - rect.left;
+             y = e.touches[0].clientY - rect.top;
+          } else {
+             x = e.clientX - rect.left;
+             y = e.clientY - rect.top;
+          }
+          flashlightOverlay.style.setProperty('--x', `${x}px`);
+          flashlightOverlay.style.setProperty('--y', `${y}px`);
+          flashlightOverlay.style.opacity = '1';
+          
+          clearTimeout(aboutSection.autoRevealTimeout);
+          aboutSection.autoRevealTimeout = setTimeout(() => {
+             flashlightOverlay.classList.add('revealed');
+          }, 2000);
+       }
+       aboutSection.addEventListener('mousemove', updateFlashlight);
+       aboutSection.addEventListener('touchmove', updateFlashlight, {passive: true});
+       
+       // Initial state
+       setTimeout(() => {
+          flashlightOverlay.classList.add('revealed');
+       }, 3000);
+    }
+
+    // 6. Scratch-to-Reveal (Portfolio)
+    const scratchWrappers = document.querySelectorAll('.scratch-wrapper');
+    scratchWrappers.forEach(wrapper => {
+       const canvas = wrapper.querySelector('.scratch-canvas');
+       if(!canvas) return;
+       const ctx = canvas.getContext('2d');
+       
+       function initScratch() {
+          canvas.width = wrapper.offsetWidth;
+          canvas.height = wrapper.offsetHeight;
+          
+          const gradient = ctx.createLinearGradient(0,0, canvas.width, canvas.height);
+          gradient.addColorStop(0, '#1e293b');
+          gradient.addColorStop(0.5, '#475569');
+          gradient.addColorStop(1, '#1e293b');
+          ctx.fillStyle = gradient;
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          
+          ctx.font = "bold 20px Inter, sans-serif";
+          ctx.fillStyle = "rgba(255,255,255,0.7)";
+          ctx.textAlign = "center";
+          ctx.fillText("Scratch to Reveal", canvas.width/2, canvas.height/2);
+       }
+       
+       setTimeout(initScratch, 500);
+       window.addEventListener('resize', initScratch);
+       
+       let isDrawing = false;
+       let scratchedArea = 0;
+       let revealed = false;
+       
+       function getPos(e) {
+          const rect = canvas.getBoundingClientRect();
+          if(e.touches) {
+             return {x: e.touches[0].clientX - rect.left, y: e.touches[0].clientY - rect.top};
+          }
+          return {x: e.clientX - rect.left, y: e.clientY - rect.top};
+       }
+       
+       function scratch(e) {
+          if(!isDrawing || revealed) return;
+          if(e.cancelable) e.preventDefault();
+          const pos = getPos(e);
+          ctx.globalCompositeOperation = 'destination-out';
+          ctx.beginPath();
+          ctx.arc(pos.x, pos.y, 35, 0, Math.PI*2);
+          ctx.fill();
+          
+          scratchedArea++; 
+          if(scratchedArea > 60) {
+             revealed = true;
+             canvas.style.opacity = '0';
+             setTimeout(()=> canvas.remove(), 500);
+          }
+       }
+       
+       canvas.addEventListener('mousedown', (e)=>{ isDrawing = true; scratch(e); });
+       canvas.addEventListener('mousemove', scratch);
+       canvas.addEventListener('mouseup', ()=> isDrawing = false);
+       canvas.addEventListener('mouseleave', ()=> isDrawing = false);
+       
+       canvas.addEventListener('touchstart', (e)=>{ isDrawing = true; scratch(e); }, {passive: false});
+       canvas.addEventListener('touchmove', scratch, {passive: false});
+       canvas.addEventListener('touchend', ()=> isDrawing = false);
+    });
+
+    // 7. Gravity Box (Skills)
+    const skillsGrid = document.querySelector('.skills-grid');
+    const skillCards = document.querySelectorAll('.skill-card-v2');
+    if(skillsGrid && skillCards.length > 0) {
+       skillsGrid.style.position = 'relative';
+       const observer = new IntersectionObserver((entries) => {
+          if(entries[0].isIntersecting) {
+             observer.disconnect();
+             startGravity();
+          }
+       }, {threshold: 0.3});
+       observer.observe(skillsGrid);
+       
+       let physicsEntities = [];
+       
+       function startGravity() {
+          skillsGrid.style.minHeight = skillsGrid.offsetHeight + 'px';
+          
+          skillCards.forEach((card, i) => {
+             const rect = card.getBoundingClientRect();
+             const gridRect = skillsGrid.getBoundingClientRect();
+             const initialX = rect.left - gridRect.left;
+             const initialY = rect.top - gridRect.top;
+             
+             card.style.position = 'absolute';
+             card.style.margin = '0';
+             card.style.left = initialX + 'px';
+             card.style.top = '0px';
+             card.style.width = card.offsetWidth + 'px';
+             
+             physicsEntities.push({
+                el: card,
+                x: initialX,
+                y: -300 - (i*150),
+                vx: (Math.random() - 0.5) * 8,
+                vy: 0,
+                width: card.offsetWidth,
+                height: card.offsetHeight,
+                isDragging: false,
+                initialLeft: initialX
+             });
+             
+             let dragStartX, dragStartY;
+             
+             function startDrag(e) {
+                const entity = physicsEntities[i];
+                entity.isDragging = true;
+                const pos = e.touches ? e.touches[0] : e;
+                dragStartX = pos.clientX - entity.x;
+                dragStartY = pos.clientY - entity.y;
+                card.style.zIndex = '100';
+             }
+             function drag(e) {
+                const entity = physicsEntities[i];
+                if(!entity.isDragging) return;
+                if(e.cancelable) e.preventDefault();
+                const pos = e.touches ? e.touches[0] : e;
+                
+                const newX = pos.clientX - dragStartX;
+                const newY = pos.clientY - dragStartY;
+                entity.vx = newX - entity.x;
+                entity.vy = newY - entity.y;
+                
+                entity.x = newX;
+                entity.y = newY;
+             }
+             function endDrag() {
+                physicsEntities[i].isDragging = false;
+                card.style.zIndex = '';
+             }
+             
+             card.addEventListener('mousedown', startDrag);
+             window.addEventListener('mousemove', drag);
+             window.addEventListener('mouseup', endDrag);
+             
+             card.addEventListener('touchstart', startDrag, {passive: false});
+             window.addEventListener('touchmove', drag, {passive: false});
+             window.addEventListener('touchend', endDrag);
+          });
+          
+          function physicsLoop() {
+             const bounds = { w: skillsGrid.offsetWidth, h: skillsGrid.offsetHeight };
+             
+             physicsEntities.forEach(entity => {
+                if(entity.isDragging) {
+                   entity.el.style.transform = `translate(${entity.x - entity.initialLeft}px, ${entity.y}px) rotate(${entity.vx * 0.5}deg) scale(1.05)`;
+                   return;
+                }
+                
+                entity.vy += 0.8;
+                entity.vx *= 0.98;
+                entity.vy *= 0.98;
+                
+                entity.x += entity.vx;
+                entity.y += entity.vy;
+                
+                if(entity.y + entity.height > bounds.h) {
+                   entity.y = bounds.h - entity.height;
+                   entity.vy *= -0.5;
+                   entity.vx *= 0.8;
+                }
+                
+                if(entity.x < 0) {
+                   entity.x = 0;
+                   entity.vx *= -0.7;
+                } else if (entity.x + entity.width > bounds.w) {
+                   entity.x = bounds.w - entity.width;
+                   entity.vx *= -0.7;
+                }
+                
+                physicsEntities.forEach(other => {
+                   if(other === entity) return;
+                   const dx = (entity.x + entity.width/2) - (other.x + other.width/2);
+                   const dy = (entity.y + entity.height/2) - (other.y + other.height/2);
+                   const dist = Math.sqrt(dx*dx + dy*dy);
+                   const minDist = (entity.width + other.width) / 2.2;
+                   if(dist < minDist) {
+                      const angle = Math.atan2(dy, dx);
+                      const push = (minDist - dist) * 0.1;
+                      entity.x += Math.cos(angle) * push;
+                      entity.y += Math.sin(angle) * push;
+                      entity.vx += Math.cos(angle) * push * 0.5;
+                      entity.vy += Math.sin(angle) * push * 0.5;
+                   }
+                });
+                
+                entity.el.style.transform = `translate(${entity.x - entity.initialLeft}px, ${entity.y}px) rotate(${entity.vx * 0.5}deg)`;
+             });
+             
+             requestAnimationFrame(physicsLoop);
+          }
+          physicsLoop();
+       }
+    }
+
+    // 8. Hacker Typer Mode (Terminal)
     const termInput = document.getElementById('terminal-input');
     const termOutput = document.getElementById('terminal-output');
     if (termInput && termOutput) {
@@ -3555,41 +3918,47 @@
           termOutput.scrollTop = termOutput.scrollHeight;
         }
       });
+      
+      const hackerModeBtn = document.createElement('button');
+      hackerModeBtn.textContent = 'HACK TO CONNECT';
+      hackerModeBtn.className = 'btn-outline';
+      hackerModeBtn.style.marginTop = '16px';
+      hackerModeBtn.style.fontSize = '12px';
+      hackerModeBtn.style.padding = '8px 16px';
+      hackerModeBtn.style.width = '100%';
+      
+      const termInputContainer = termInput.parentElement;
+      termInputContainer.parentElement.appendChild(hackerModeBtn);
+      
+      let hackProgress = 0;
+      const hackCode = [
+        "Connecting to secure server...",
+        "Bypassing firewall...",
+        "Decrypting contact payload...",
+        "Access Granted."
+      ];
+      
+      hackerModeBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if(hackProgress < hackCode.length) {
+          termOutput.innerHTML += `<div style="color:#10b981;">> ${hackCode[hackProgress]}</div>`;
+          termOutput.scrollTop = termOutput.scrollHeight;
+          hackProgress++;
+          
+          const term = document.querySelector('.contact-terminal');
+          if(term) {
+             term.style.transform = `rotate(${Math.random()*4-2}deg) scale(1.02)`;
+             setTimeout(()=> term.style.transform='', 100);
+          }
+          
+          if(hackProgress === hackCode.length) {
+            hackerModeBtn.style.display = 'none';
+            termOutput.innerHTML += `<div style="color:var(--accent-3); margin-top:8px;">[SUCCESS] Contact Unlocked!<br>Email: adamzaky.dy@gmail.com<br>WhatsApp: +6283129939682</div>`;
+            termOutput.scrollTop = termOutput.scrollHeight;
+          }
+        }
+      });
     }
-
-    // 6. Draggable Badges (Spring Physics)
-    const draggableBadges = document.querySelectorAll('.badge-v2');
-    draggableBadges.forEach(badge => {
-      let isDragging = false;
-      let startX, startY;
-      let currentX = 0, currentY = 0;
-      
-      badge.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        startX = e.clientX - currentX;
-        startY = e.clientY - currentY;
-        badge.style.zIndex = 1000;
-        badge.style.transition = 'none';
-      });
-      
-      window.addEventListener('mousemove', (e) => {
-        if (!isDragging) return;
-        currentX = e.clientX - startX;
-        currentY = e.clientY - startY;
-        // Add a slight tilt based on X position for more dynamic feel
-        badge.style.transform = `translate(${currentX}px, ${currentY}px) scale(1.1) rotate(${currentX * 0.05}deg)`;
-      });
-      
-      window.addEventListener('mouseup', () => {
-        if (!isDragging) return;
-        isDragging = false;
-        badge.style.zIndex = '';
-        // Spring physics snap back
-        badge.style.transition = 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
-        currentX = 0; currentY = 0;
-        badge.style.transform = `translate(0px, 0px) scale(1) rotate(0deg)`;
-      });
-    });
   </script>
 </body>
 
