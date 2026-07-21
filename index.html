@@ -614,30 +614,55 @@
       transition: var(--transition-base);
     }
 
+    #nav-overlay {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+      z-index: 89;
+    }
+
+    #nav-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
     @media (max-width: 768px) {
       
       #nav-menu {
         position: fixed;
         top: 0;
-        right: -110%;
+        right: 0;
         width: 280px;
+        max-width: 85vw;
         height: 100vh;
-        max-height: 100vh;
+        height: 100dvh;
+        max-height: 100dvh;
         flex-direction: column;
         justify-content: center;
         gap: 20px;
-        padding: 24px;
+        padding: 32px 24px;
         background: var(--glass-bg-strong);
         backdrop-filter: blur(40px);
+        -webkit-backdrop-filter: blur(40px);
         border-left: 1px solid var(--glass-border);
-        border-radius: 30px 0 0 30px;
-        box-shadow: -10px 0 40px rgba(0, 0, 0, 0.2);
-        transition: right 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        border-radius: 0;
+        box-shadow: -15px 0 35px rgba(0, 0, 0, 0.25);
+        transform: translateX(100%);
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: transform;
         z-index: 90;
       }
       
       #nav-menu.open {
-        right: 0;
+        transform: translateX(0);
       }
 
       #nav-menu a {
@@ -712,6 +737,20 @@
       padding: 110px 24px 60px;
       overflow: hidden;
       z-index: 1;
+    }
+
+    .interactive-hint {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0.65;
+      animation: float 3s ease-in-out infinite;
+      z-index: 5;
     }
 
     .hero-container {
@@ -1382,29 +1421,73 @@
       z-index: 0;
     }
 
+    .timeline-explorer {
+      position: absolute;
+      width: 36px;
+      height: 36px;
+      top: 0;
+      left: -17px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      z-index: 10;
+      pointer-events: none;
+      will-change: transform, top, left;
+    }
+
+    .explorer-rocket {
+      filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.95)) drop-shadow(0 0 20px rgba(99, 102, 241, 0.6));
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+    }
 
     .timeline-item {
       position: relative;
       margin-bottom: 40px;
       padding: 28px;
       border-radius: var(--radius-lg);
-      transition: var(--transition-spring);
+      transition: var(--transition-spring), border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
     }
 
-    .timeline-item:hover {
-      transform: translateX(6px);
+    .timeline-item:hover, .timeline-item.active-card {
+      transform: translateX(8px);
+    }
+
+    .timeline-item.active-card {
+      border-color: rgba(99, 102, 241, 0.5) !important;
+      box-shadow: 0 12px 35px rgba(99, 102, 241, 0.18), 0 0 20px rgba(14, 165, 233, 0.12) !important;
     }
 
     .timeline-dot {
       position: absolute;
-      left: -49px;
+      left: -40px;
       top: 36px;
-      width: 16px;
-      height: 16px;
+      width: 18px;
+      height: 18px;
       border-radius: 50%;
-      background: var(--gradient-main);
+      background: linear-gradient(135deg, #6366f1, #0ea5e9);
       border: 3px solid white;
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+      box-shadow: 0 0 10px rgba(99, 102, 241, 0.4);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease, background 0.4s ease;
+      z-index: 2;
+    }
+
+    body.dark .timeline-dot {
+      border-color: #080b1a;
+    }
+
+    .timeline-dot.active-dot {
+      transform: scale(1.4);
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.9), 0 0 0 6px rgba(56, 189, 248, 0.25);
+      animation: beaconPulse 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes beaconPulse {
+      from { box-shadow: 0 0 15px rgba(56, 189, 248, 0.8), 0 0 0 4px rgba(56, 189, 248, 0.2); }
+      to { box-shadow: 0 0 25px rgba(129, 140, 248, 1), 0 0 0 8px rgba(129, 140, 248, 0.35); }
     }
 
     body.dark .timeline-dot {
@@ -2117,6 +2200,19 @@
 
     /* ===================== RESPONSIVE ===================== */
     @media (max-width: 1024px) {
+      #hero {
+        padding-bottom: 60px;
+      }
+
+      .interactive-hint {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        transform: none;
+        margin: 24px auto 0;
+        grid-column: 1 / -1;
+      }
+
       .hero-container {
         grid-template-columns: 1fr;
         grid-template-rows: auto auto auto;
@@ -2352,6 +2448,9 @@
       <div id="scroll-progress-dot"></div>
     </div>
 
+    <!-- Navigation Overlay (Backdrop for Mobile Drawer) -->
+    <div id="nav-overlay"></div>
+
     <!-- ========== NAVBAR ========== -->
     <header id="navbar">
       <div class="nav-inner">
@@ -2546,7 +2645,7 @@
         </div>
 
 
-        <div class="interactive-hint" style="position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: 0.6; animation: float 3s ease-in-out infinite;">
+        <div class="interactive-hint">
           <span style="font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-1);">Interactive Experience</span>
           <span style="font-size: 10px; color: var(--text-muted);">Swipe, Tilt, and Drag to Play</span>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent-3);">
@@ -2775,24 +2874,31 @@
         </div>
         <div class="timeline">
           <canvas id="timeline-canvas" class="timeline-canvas"></canvas>
-          <div class="timeline-explorer" id="timeline-explorer" style="background:transparent; border:none; box-shadow:none;">
-                            <svg width="24" height="24" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                 viewBox="0 0 229.345 229.345" style="enable-background:new 0 0 229.345 229.345; transform: rotate(45deg); filter: invert(0.8) sepia(1) hue-rotate(200deg) saturate(5);" xml:space="preserve">
-              <g>
-                <g>
-                  <g>
-                    <path style="fill:currentColor;" d="M126.367,114.545h3.332l99.646,38.573v-32.72l-22.96-11.871V84.551
-                      c0-2.99-2.433-5.413-5.442-5.413c-2.999,0-5.422,2.423-5.422,5.413v18.387l-29.271-15.114V62.959c0-2.98-2.443-5.383-5.432-5.383
-                      s-5.422,2.403-5.422,5.383v19.267l-25.715-13.268h-1.378l1.798-41.699c-0.02-10.063-8.158-18.221-18.231-18.221
-                      c-10.063,0-18.231,8.148-18.231,18.221l1.798,41.699h-2.198L74.243,79.431V62.959c0-2.98-2.433-5.383-5.432-5.383
-                      c-2.999,0-5.403,2.403-5.403,5.383V85.44L39.54,98.591V80.829c0-2.99-2.443-5.422-5.422-5.422c-2.999,0-5.422,2.433-5.422,5.422
-                      v23.742L0,120.398v32.73l93.227-38.573h4.143l2.697,62.998c0,3.615,0.244,6.986,1.006,9.839l-30.366,16.727l-3.879,16.189
-                      l38.895-6.722h13.668l41.289,6.722l-3.879-16.189L122.83,186.6c0.606-2.687,0.84-5.764,0.84-9.057L126.367,114.545z"/>
-                  </g>
-                </g>
-              </g>
-              </svg>
-            </div>
+          <div class="timeline-explorer" id="timeline-explorer">
+            <svg class="explorer-rocket" width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Thruster Flame -->
+              <path d="M12 21.5C12 21.5 13.8 18.5 13.8 17.5C13.8 16.5 13 16 12 16C11 16 10.2 16.5 10.2 17.5C10.2 18.5 12 21.5 12 21.5Z" fill="url(#thruster-grad)">
+                <animate attributeName="opacity" values="0.6;1;0.6" dur="0.5s" repeatCount="indefinite" />
+              </path>
+              <!-- Rocket Body -->
+              <path d="M12 2C12 2 17.5 6 17.5 13C17.5 16.2 15.8 18.5 14.2 20L12 18.5L9.8 20C8.2 18.5 6.5 16.2 6.5 13C6.5 6 12 2 12 2Z" fill="url(#rocket-grad)" stroke="#818cf8" stroke-width="1.2" stroke-linejoin="round"/>
+              <circle cx="12" cy="9.5" r="1.8" fill="#38bdf8" stroke="#ffffff" stroke-width="1"/>
+              <path d="M5.5 13.5L3 16.5V19L5.5 17.5" stroke="#a855f7" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M18.5 13.5L21 16.5V19L18.5 17.5" stroke="#a855f7" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              <defs>
+                <linearGradient id="rocket-grad" x1="12" y1="2" x2="12" y2="20" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#38bdf8"/>
+                  <stop offset="50%" stop-color="#6366f1"/>
+                  <stop offset="100%" stop-color="#4f46e5"/>
+                </linearGradient>
+                <linearGradient id="thruster-grad" x1="12" y1="16" x2="12" y2="22" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#ff7b00"/>
+                  <stop offset="60%" stop-color="#ffae00"/>
+                  <stop offset="100%" stop-color="#ffff00" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
           <div class="timeline-item glass" data-aos="fade-up" data-aos-delay="100">
             <div class="timeline-dot"></div>
             <span class="timeline-date">Nov 2025 &mdash; Present</span>
@@ -3452,19 +3558,28 @@
       if (btn) btn.addEventListener('click', (e) => applyTheme(!document.body.classList.contains('dark'), e));
     });
 
-    /* ===================== HAMBURGER ===================== */
+    /* ===================== HAMBURGER & OVERLAY ===================== */
     const menuBtn = document.getElementById('menu-hamburger');
     const navMenu = document.getElementById('nav-menu');
-    menuBtn.addEventListener('click', () => {
-      const open = navMenu.classList.toggle('open');
-      const spans = menuBtn.querySelectorAll('span');
-      spans[0].style.transform = open ? 'rotate(45deg) translate(4px, 4px)' : '';
-      spans[1].style.opacity = open ? '0' : '1';
-      spans[2].style.transform = open ? 'rotate(-45deg) translate(4px, -4px)' : '';
-    });
+    const navOverlay = document.getElementById('nav-overlay');
+
+    const toggleNav = (isOpen) => {
+      const open = typeof isOpen === 'boolean' ? isOpen : !navMenu.classList.contains('open');
+      navMenu.classList.toggle('open', open);
+      if (navOverlay) navOverlay.classList.toggle('open', open);
+      const spans = menuBtn ? menuBtn.querySelectorAll('span') : [];
+      if (spans.length >= 3) {
+        spans[0].style.transform = open ? 'rotate(45deg) translate(4px, 4px)' : '';
+        spans[1].style.opacity = open ? '0' : '1';
+        spans[2].style.transform = open ? 'rotate(-45deg) translate(4px, -4px)' : '';
+      }
+    };
+
+    if (menuBtn) menuBtn.addEventListener('click', toggleNav);
+    if (navOverlay) navOverlay.addEventListener('click', () => toggleNav(false));
+
     document.querySelectorAll('#nav-menu a').forEach(link => link.addEventListener('click', () => {
-      navMenu.classList.remove('open');
-      menuBtn.querySelectorAll('span').forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+      toggleNav(false);
     }));
 
     /* ===================== NAVBAR SCROLL ===================== */
@@ -3764,135 +3879,128 @@
       animateCanvas();
     }
 
-    // 4. Weaving Trailblazer (My Journey)
+    // 4. Cyber Rocket Voyager (My Journey Timeline)
     const timeline = document.querySelector('.timeline');
     const explorer = document.getElementById('timeline-explorer');
     const timelineCanvas = document.getElementById('timeline-canvas');
+
     if(timeline && explorer && timelineCanvas) {
       const tCtx = timelineCanvas.getContext('2d');
-      let lastScrollY = window.scrollY;
-      let isScrolling;
-      let currentProgress = 0;
+      const items = timeline.querySelectorAll('.timeline-item');
+      let activeIdx = -1;
       let idleAnimFrame;
       let idleTime = 0;
       
       function resizeTCanvas() {
         timelineCanvas.width = timelineCanvas.offsetWidth;
         timelineCanvas.height = timelineCanvas.offsetHeight;
-        drawTrail(currentProgress);
+        updateTimelineProgress();
       }
       window.addEventListener('resize', resizeTCanvas);
-      resizeTCanvas();
       
       function drawTrail(progress) {
         tCtx.clearRect(0, 0, timelineCanvas.width, timelineCanvas.height);
-        tCtx.beginPath();
-        tCtx.strokeStyle = 'rgba(124, 58, 237, 0.6)';
-        tCtx.lineWidth = 2;
-        tCtx.lineCap = 'round';
         
         const totalH = timelineCanvas.height;
         const currentH = progress * totalH;
         const centerX = timelineCanvas.width / 2;
+        if (currentH <= 0) return;
+        
+        const grad = tCtx.createLinearGradient(centerX, 0, centerX, Math.max(1, currentH));
+        grad.addColorStop(0, '#818cf8');
+        grad.addColorStop(0.5, '#06b6d4');
+        grad.addColorStop(1, '#10b981');
+
+        tCtx.beginPath();
+        tCtx.strokeStyle = grad;
+        tCtx.lineWidth = 3.5;
+        tCtx.lineCap = 'round';
+        tCtx.shadowBlur = 12;
+        tCtx.shadowColor = 'rgba(6, 182, 212, 0.75)';
         
         tCtx.moveTo(centerX, 0);
-        for(let y = 0; y <= currentH; y += 5) {
+        for(let y = 0; y <= currentH; y += 4) {
           const x = centerX + Math.sin(y * 0.015) * 12;
           tCtx.lineTo(x, y);
         }
-        
-        tCtx.shadowBlur = 8;
-        tCtx.shadowColor = 'rgba(14, 165, 233, 0.8)';
         tCtx.stroke();
       }
-      
-                  const items = timeline.querySelectorAll('.timeline-item');
-      
-      let targetNodeIdx = 0;
-      let isFlying = false;
-      let isNgeden = false;
-      
-      window.addEventListener('scroll', () => {
-        cancelAnimationFrame(idleAnimFrame);
-        
+
+      let lastScrollY = window.scrollY;
+      let scrollDirection = 'down';
+
+      function updateTimelineProgress() {
         const windowHeight = window.innerHeight;
-        const currentScroll = window.scrollY;
         const timelineRect = timeline.getBoundingClientRect();
         
-        // Find which item is mostly in view
-        let activeIdx = 0;
+        let newActiveIdx = 0;
         items.forEach((item, idx) => {
-           const rect = item.getBoundingClientRect();
-           // If the item dot is above the middle of the screen
-           if (rect.top < windowHeight * 0.6) {
-               activeIdx = idx;
-           }
+          const rect = item.getBoundingClientRect();
+          if (rect.top < windowHeight * 0.65) {
+            newActiveIdx = idx;
+          }
         });
-        
-        // Calculate progress for the glowing trail
-        let progress = (windowHeight/2 - timelineRect.top) / timelineRect.height;
+
+        if (newActiveIdx !== activeIdx) {
+          activeIdx = newActiveIdx;
+          items.forEach((item, idx) => {
+            const dot = item.querySelector('.timeline-dot');
+            if (idx === activeIdx) {
+              item.classList.add('active-card');
+              if (dot) dot.classList.add('active-dot');
+            } else {
+              item.classList.remove('active-card');
+              if (dot) dot.classList.remove('active-dot');
+            }
+          });
+        }
+
+        let progress = (windowHeight / 2 - timelineRect.top) / timelineRect.height;
         progress = Math.max(0, Math.min(1, progress));
         drawTrail(progress);
-        
-        // If we need to move to a new node
-        if (activeIdx !== targetNodeIdx && !isFlying) {
-           targetNodeIdx = activeIdx;
-           const targetItem = items[targetNodeIdx];
-           
-           // Calculate exactly where the dot is relative to timeline top
-           // We'll use the item's offsetTop (approximate since timeline is relative)
-           const targetY = targetItem.offsetTop + 15; // center of dot roughly
-           const centerX = timelineCanvas.width / 2;
-           const targetX = centerX + Math.sin(targetY * 0.015) * 12;
-           
-           isFlying = true;
-           isNgeden = true;
-           
-           // NGEDEN (squash and vibrate) at current position before shooting
-           explorer.style.transition = 'transform 0.3s';
-           explorer.style.transform = 'scale(1.5, 0.5) translateY(5px)';
-           explorer.style.filter = 'drop-shadow(0 0 15px var(--accent-1))';
-           
-           setTimeout(() => {
-              isNgeden = false;
-              // SHOOT to new node
-              explorer.style.transition = 'top 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), left 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.4s';
-              explorer.style.top = `${targetY - 16}px`;
-              explorer.style.left = `${targetX - 14 - 16}px`;
-              explorer.style.transform = 'scale(0.8, 1.2)'; // stretch while flying
-              
-              setTimeout(() => {
-                 isFlying = false;
-                 // Settle at target
-                 explorer.style.transition = 'transform 0.4s';
-                 explorer.style.transform = 'rotate(135deg) scale(1)';
-                 explorer.style.filter = 'none';
-                 
-                 idleTime = 0;
-                 function idleAnimate() {
-                    idleTime += 0.05;
-                    const hoverY = Math.sin(idleTime) * 3;
-                    const hoverRot = 135 + Math.cos(idleTime) * 5;
-                    explorer.style.transform = `translateY(${hoverY}px) rotate(${hoverRot}deg) scale(1)`;
-                    idleAnimFrame = requestAnimationFrame(idleAnimate);
-                 }
-                 idleAnimFrame = requestAnimationFrame(idleAnimate);
-              }, 600);
-           }, 400); // 400ms charge up delay
-        } else if (!isFlying && !isNgeden && items.length > 0) {
-           // On initial load or resize, just position it safely
-           const targetItem = items[targetNodeIdx];
-           if(targetItem) {
-               const targetY = targetItem.offsetTop + 15;
-               const centerX = timelineCanvas.width / 2;
-               const targetX = centerX + Math.sin(targetY * 0.015) * 12;
-               explorer.style.transition = 'top 0.1s, left 0.1s';
-               explorer.style.top = `${targetY - 16}px`;
-               explorer.style.left = `${targetX - 14 - 16}px`;
-           }
+
+        const activeItem = items[activeIdx];
+        if (activeItem) {
+          const dot = activeItem.querySelector('.timeline-dot');
+          if (dot) {
+            const dotRect = dot.getBoundingClientRect();
+            const dotCenterX = (dotRect.left + dotRect.width / 2) - timelineRect.left;
+            const dotCenterY = (dotRect.top + dotRect.height / 2) - timelineRect.top;
+
+            const explorerW = explorer.offsetWidth || 36;
+            const explorerH = explorer.offsetHeight || 36;
+
+            explorer.style.transition = 'top 0.45s cubic-bezier(0.16, 1, 0.3, 1), left 0.45s cubic-bezier(0.16, 1, 0.3, 1)';
+            explorer.style.top = `${dotCenterY - explorerH / 2}px`;
+            explorer.style.left = `${dotCenterX - explorerW / 2}px`;
+          }
         }
+      }
+
+      function idleAnimate() {
+        idleTime += 0.04;
+        const hoverY = Math.sin(idleTime) * 2.5;
+        const rocket = explorer.querySelector('.explorer-rocket');
+        if (rocket) {
+          const baseRot = scrollDirection === 'down' ? 180 : 0;
+          rocket.style.transform = `translateY(${hoverY}px) rotate(${baseRot}deg) scale(1.04)`;
+        }
+        idleAnimFrame = requestAnimationFrame(idleAnimate);
+      }
+      idleAnimate();
+
+      window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+        if (currentScrollY > lastScrollY + 3) {
+          scrollDirection = 'down';
+        } else if (currentScrollY < lastScrollY - 3) {
+          scrollDirection = 'up';
+        }
+        lastScrollY = currentScrollY;
+        updateTimelineProgress();
       }, { passive: true });
 
+      resizeTCanvas();
     }
 
     // 5. Flashlight Discovery (About Me)
