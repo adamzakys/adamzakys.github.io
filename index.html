@@ -1582,10 +1582,34 @@
     }
 
     /* ===================== CERTS ===================== */
+    .cert-toggle-wrap {
+      display: flex;
+      justify-content: center;
+      margin: 16px 0 0;
+    }
+
     .cert-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 20px;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      margin-top: 0;
+      pointer-events: none;
+      transition: max-height 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, margin 0.4s ease;
+    }
+
+    .cert-grid.expanded {
+      max-height: 2500px;
+      opacity: 1;
+      margin-top: 32px;
+      overflow: visible;
+      pointer-events: auto;
+    }
+
+    .cert-arrow {
+      transition: transform 0.3s ease;
     }
 
     .cert-card {
@@ -1664,18 +1688,30 @@
     /* ===================== TABS ===================== */
     .tab-nav {
       display: flex;
-      gap: 4px;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
       padding: 6px;
       border-radius: var(--radius-full);
       margin: 0 auto 48px;
       width: fit-content;
+      max-width: 100%;
+      background: var(--glass-bg-strong);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
     }
 
     .tab-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       padding: 10px 24px;
+      height: 42px;
       border-radius: var(--radius-full);
       font-size: 14px;
       font-weight: 600;
+      white-space: nowrap;
       cursor: pointer;
       border: none;
       background: transparent;
@@ -1691,8 +1727,26 @@
 
     .tab-btn.active {
       background: var(--gradient-main);
-      color: white;
-      box-shadow: 0 4px 16px rgba(99, 102, 241, 0.35);
+      color: white !important;
+      box-shadow: 0 4px 18px rgba(99, 102, 241, 0.4);
+    }
+
+    @media (max-width: 640px) {
+      .tab-nav {
+        width: 100%;
+        max-width: 480px;
+        padding: 5px;
+        gap: 4px;
+      }
+      .tab-btn {
+        flex: 1 1 0;
+        padding: 8px 10px;
+        height: 40px;
+        font-size: 12px;
+      }
+      .cert-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     .tab-section {
@@ -2066,73 +2120,155 @@
       top: -12px;
       font-size: 12px;
       color: var(--accent-1);
-    }
-
-    .btn-send {
+    }    .btn-send {
       margin-top: 12px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 16px 24px;
       border-radius: 12px;
-      background: var(--text-primary);
-      color: var(--bg-body);
+      background: var(--gradient-main);
+      color: #ffffff !important;
       border: none;
       font-weight: 700;
       font-size: 16px;
       cursor: pointer;
-      transition: transform 0.3s ease;
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .btn-send span, .btn-send svg {
+      color: #ffffff !important;
+      fill: none;
     }
 
     .btn-send:hover {
       transform: translateY(-4px);
-      box-shadow: 0 12px 30px rgba(99, 102, 241, 0.25);
+      box-shadow: 0 14px 32px rgba(99, 102, 241, 0.45);
     }
 
     body.dark .btn-send {
-      background: white;
-      color: #080b1a;
+      background: var(--gradient-main);
+      color: #ffffff !important;
     }
 
     /* ===================== FOOTER ===================== */
     footer {
       position: relative;
       z-index: 1;
-      background: linear-gradient(135deg, rgba(124, 58, 237, 0.06), rgba(14, 165, 233, 0.04));
-      border-top: 1px solid var(--glass-border-subtle);
-      padding: 80px 24px 40px;
+      background: var(--glass-bg-strong);
+      border-top: 1px solid var(--glass-border);
+      padding: 60px 24px 40px;
+      overflow: hidden;
+    }
+
+    .footer-ambient-glow {
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 200px;
+      background: radial-gradient(ellipse at center, rgba(99, 102, 241, 0.15), rgba(14, 165, 233, 0.08), transparent 70%);
+      filter: blur(40px);
+      pointer-events: none;
+      z-index: 0;
     }
 
     .footer-inner {
       max-width: 1200px;
       margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
 
-    .footer-name {
-      font-size: 28px;
+    .footer-top-card {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 32px 40px;
+      border-radius: var(--radius-lg);
+      margin-bottom: 48px;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer-logo {
+      font-family: 'Outfit', sans-serif;
+      font-size: 24px;
       font-weight: 800;
-      letter-spacing: -1px;
-      color: var(--text-primary);
+      color: var(--accent-1);
       margin-bottom: 8px;
     }
 
     .footer-tagline {
-      color: var(--text-muted);
-      font-size: 15px;
-      margin-bottom: 32px;
-      max-width: 440px;
+      color: var(--text-secondary);
+      font-size: 14px;
+      max-width: 480px;
       line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .footer-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      background: rgba(34, 197, 94, 0.08);
+      border: 1px solid rgba(34, 197, 94, 0.25);
+      font-size: 12px;
+      font-weight: 600;
+      color: #22c55e;
+    }
+
+    .footer-status-pill .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 8px #22c55e;
+      animation: pulse-dot 2s infinite;
+    }
+
+    .footer-actions-side {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-back-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: var(--radius-full);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      transition: var(--transition-spring);
+    }
+
+    .footer-back-top:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent-1);
+      color: var(--accent-1);
+      box-shadow: 0 8px 20px rgba(99, 102, 241, 0.2);
     }
 
     .footer-grid {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 48px;
-      margin-bottom: 48px;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
     }
 
     .footer-col-title {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
       color: var(--text-muted);
       text-transform: uppercase;
@@ -2154,15 +2290,15 @@
       transform: translateX(4px);
     }
 
-    .footer-social {
+    .footer-social-grid {
       display: flex;
-      gap: 10px;
-      margin-top: 20px;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
     .footer-social-pill {
-      width: 38px;
-      height: 38px;
+      width: 42px;
+      height: 42px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -2170,27 +2306,25 @@
       border: 1px solid var(--glass-border);
       border-radius: var(--radius-full);
       transition: var(--transition-spring);
-      backdrop-filter: blur(16px);
+      color: var(--text-primary);
       text-decoration: none;
     }
 
     .footer-social-pill:hover {
       transform: translateY(-3px) scale(1.1);
-      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.2);
-      border-color: rgba(99, 102, 241, 0.4);
-    }
-
-    .footer-social-pill img {
-      width: 18px;
-      height: 18px;
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.25);
+      border-color: rgba(99, 102, 241, 0.5);
+      color: var(--accent-1);
     }
 
     .footer-bottom {
-      padding-top: 32px;
+      padding-top: 28px;
       border-top: 1px solid var(--glass-border-subtle);
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
     .footer-copy {
@@ -2359,6 +2493,17 @@
       .footer-grid {
         grid-template-columns: 1fr;
         gap: 32px;
+      }
+
+      .footer-top-card {
+        padding: 24px 20px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-actions-side {
+        width: 100%;
+        justify-content: space-between;
       }
 
       .footer-bottom {
@@ -2992,6 +3137,14 @@
           <h2 class="section-title">Certifications &amp; Training</h2>
           <p class="section-subtitle">Professional certifications I have achieved</p>
           <div class="section-divider"></div>
+          <div class="cert-toggle-wrap" data-aos="fade-up">
+            <button id="btn-toggle-certs" class="btn-primary interactive-impact" style="padding: 12px 28px; font-size: 14px;">
+              <span>See Certificates (6)</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="cert-arrow">
+                <path d="M6 9l6 6 6-6"/>
+              </svg>
+            </button>
+          </div>
         </div>
         <div class="cert-grid">
           <div class="cert-card glass" data-aos="fade-up" data-aos-delay="100">
@@ -3434,57 +3587,27 @@
 
     <!-- ========== FOOTER ========== -->
     <footer>
+      <div class="footer-ambient-glow"></div>
       <div class="footer-inner">
-        <div class="footer-grid">
-          <div>
-            <div class="footer-name">Muhammad Adam Zaky</div>
-            <p class="footer-tagline">Fresh Graduate Computer Science &middot; Data Science Enthusiast &middot;
-              Full-Stack
-              Developer &middot; Network Infrastructure Specialist</p>
-            <div class="footer-social">
-              <a href="https://github.com/adamzakys" target="_blank" class="footer-social-pill interactive-impact" aria-label="GitHub">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <path
-                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                  </path>
-                </svg>
-              </a>
-              <a href="https://www.linkedin.com/in/adamzaky/" target="_blank" class="footer-social-pill interactive-impact"
-                aria-label="LinkedIn">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                  <rect x="2" y="9" width="4" height="12"></rect>
-                  <circle cx="4" cy="4" r="2"></circle>
-                </svg>
-              </a>
-              <a href="https://www.instagram.com/adamzaky_j/" target="_blank" class="footer-social-pill interactive-impact"
-                aria-label="Instagram">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                </svg>
-              </a>
-              <a href="http://wa.me/6283129939682" target="_blank" class="footer-social-pill interactive-impact" aria-label="WhatsApp">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <path
-                    d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z">
-                  </path>
-                </svg>
-              </a>
-              <a href="mailto:adamzaky.dy@gmail.com" class="footer-social-pill interactive-impact" aria-label="Email">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                  <polyline points="22,6 12,13 2,6"></polyline>
-                </svg>
-              </a>
+        <div class="footer-top-card glass">
+          <div class="footer-brand-side">
+            <div class="footer-logo">Adam Zaky's</div>
+            <p class="footer-tagline">Building High-Impact Web Applications, Data Science Intelligence, &amp; Robust Network Infrastructures.</p>
+            <div class="footer-status-pill">
+              <span class="status-dot"></span>
+              <span>Available for New Roles &amp; Collaborations</span>
             </div>
           </div>
+          <div class="footer-actions-side">
+            <a href="#contact" class="btn-primary interactive-impact" style="padding:12px 28px; font-size:14px;">Get In Touch</a>
+            <a href="#hero" class="footer-back-top interactive-impact" aria-label="Back to top">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+              <span>Back to Top</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-grid">
           <div>
             <div class="footer-col-title">Navigation</div>
             <a href="#hero" class="footer-link interactive-impact">Home</a>
@@ -3494,16 +3617,55 @@
             <a href="#portfolio" class="footer-link interactive-impact">Portfolio</a>
             <a href="#contact" class="footer-link interactive-impact">Contact</a>
           </div>
+
           <div>
             <div class="footer-col-title">Specializations</div>
-            <a href="#skills-section" class="footer-link interactive-impact">Data Science</a>
-            <a href="#skills-section" class="footer-link interactive-impact">Web Development</a>
+            <a href="#skills-section" class="footer-link interactive-impact">Data Science &amp; ML</a>
+            <a href="#skills-section" class="footer-link interactive-impact">Full-Stack Web Dev</a>
             <a href="#skills-section" class="footer-link interactive-impact">Network Infrastructure</a>
             <a href="#certifications" class="footer-link interactive-impact">Certifications</a>
           </div>
+
+          <div>
+            <div class="footer-col-title">Connect With Me</div>
+            <div class="footer-social-grid">
+              <a href="https://github.com/adamzakys" target="_blank" class="footer-social-pill interactive-impact" aria-label="GitHub">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                </svg>
+              </a>
+              <a href="https://www.linkedin.com/in/adamzaky/" target="_blank" class="footer-social-pill interactive-impact" aria-label="LinkedIn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                  <rect x="2" y="9" width="4" height="12"></rect>
+                  <circle cx="4" cy="4" r="2"></circle>
+                </svg>
+              </a>
+              <a href="https://www.instagram.com/adamzaky_j/" target="_blank" class="footer-social-pill interactive-impact" aria-label="Instagram">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+              </a>
+              <a href="http://wa.me/6283129939682" target="_blank" class="footer-social-pill interactive-impact" aria-label="WhatsApp">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                </svg>
+              </a>
+              <a href="mailto:adamzaky.dy@gmail.com" class="footer-social-pill interactive-impact" aria-label="Email">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+              </a>
+            </div>
+          </div>
         </div>
+
         <div class="footer-bottom">
-          <p class="footer-copy">&copy; 2025 Muhammad Adam Zaky Jiddyansah. All rights reserved.</p>
+          <p class="footer-copy">&copy; 2025 Muhammad Adam Zaky Jiddyansah &middot; All rights reserved</p>
+          <span style="font-size:12px; color:var(--text-muted);">Gresik / Surabaya, Indonesia</span>
         </div>
       </div>
     </footer>
@@ -3600,6 +3762,19 @@
       const t = document.getElementById(btn.dataset.tab);
       if (t) t.classList.add('active');
     }));
+
+    /* ===================== CERTIFICATIONS TOGGLE ===================== */
+    const certToggleBtn = document.getElementById('btn-toggle-certs');
+    const certGrid = document.querySelector('.cert-grid');
+    if (certToggleBtn && certGrid) {
+      certToggleBtn.addEventListener('click', () => {
+        const isExpanded = certGrid.classList.toggle('expanded');
+        const spanText = certToggleBtn.querySelector('span');
+        if (spanText) spanText.textContent = isExpanded ? 'Hide Certificates' : 'See Certificates (6)';
+        const arrow = certToggleBtn.querySelector('.cert-arrow');
+        if (arrow) arrow.style.transform = isExpanded ? 'rotate(180deg)' : 'rotate(0deg)';
+      });
+    }
 
     /* ===================== SCROLL PROGRESS BAR ===================== */
     const progressFill = document.getElementById('scroll-progress-fill');
