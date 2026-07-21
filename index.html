@@ -48,12 +48,12 @@
 
     body.dark {
       --bg-gradient: linear-gradient(135deg, #080b1a 0%, #0d1130 50%, #090c1a 100%);
-      --glass-bg: rgba(15, 23, 42, 0.6);
-      --glass-bg-strong: rgba(15, 23, 42, 0.82);
-      --glass-border: rgba(99, 102, 241, 0.18);
-      --glass-border-subtle: rgba(99, 102, 241, 0.1);
-      --glass-shadow: 0 8px 40px rgba(0, 0, 0, 0.4), 0 2px 12px rgba(99, 102, 241, 0.1);
-      --glass-shadow-hover: 0 24px 60px rgba(99, 102, 241, 0.25), 0 4px 20px rgba(0, 0, 0, 0.4);
+      --glass-bg: rgba(15, 23, 42, 0.65);
+      --glass-bg-strong: rgba(15, 23, 42, 0.88);
+      --glass-border: rgba(99, 102, 241, 0.35);
+      --glass-border-subtle: rgba(99, 102, 241, 0.22);
+      --glass-shadow: 0 8px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(99, 102, 241, 0.25);
+      --glass-shadow-hover: 0 24px 60px rgba(99, 102, 241, 0.35), 0 0 0 1.5px rgba(99, 102, 241, 0.45);
       --text-primary: #f1f5f9;
       --text-secondary: #94a3b8;
       --text-muted: #64748b;
@@ -1443,10 +1443,64 @@
       80% { transform: skew(2deg); }
       100% { transform: skew(0deg); }
     }
-.about-text {
+    .about-text {
       font-size: 16px;
       line-height: 1.85;
       color: var(--text-secondary);
+      text-align: justify;
+    }
+
+    /* ===================== OVERRIDE BUTTON HIGHLIGHT ===================== */
+    .btn-override-highlight {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 20px;
+      margin-top: 16px;
+      width: 100%;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(124, 58, 237, 0.2));
+      border: 1.5px solid rgba(239, 68, 68, 0.75);
+      color: #f87171;
+      font-family: monospace;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      overflow: visible;
+      box-shadow: 0 0 16px rgba(239, 68, 68, 0.35);
+      animation: pulse-override-glow 2s infinite ease-in-out;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn-override-highlight:hover {
+      transform: translateY(-2px) scale(1.02);
+      border-color: #ef4444;
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.35), rgba(124, 58, 237, 0.3));
+      color: #ffffff;
+      box-shadow: 0 0 25px rgba(239, 68, 68, 0.65), 0 0 0 3px rgba(239, 68, 68, 0.25);
+    }
+
+    .btn-override-highlight .badge-press {
+      font-size: 10px;
+      font-weight: 800;
+      background: #ef4444;
+      color: #ffffff;
+      padding: 2px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+      box-shadow: 0 0 10px #ef4444;
+    }
+
+    @keyframes pulse-override-glow {
+      0%, 100% {
+        box-shadow: 0 0 14px rgba(239, 68, 68, 0.35), 0 0 0 1px rgba(239, 68, 68, 0.4);
+      }
+      50% {
+        box-shadow: 0 0 26px rgba(239, 68, 68, 0.7), 0 0 0 3px rgba(239, 68, 68, 0.3);
+      }
     }
 
     .about-cards {
@@ -3722,13 +3776,13 @@
 
         <!-- Networking -->
         <div class="tab-section" id="networking">
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:24px; max-width:960px; margin:0 auto;">
             <div class="project-card glass" data-aos="zoom-in" data-aos-delay="100" style="padding:0;">
-              <div class="project-body" style="padding:32px;">
+              <div class="project-body" style="padding:26px;">
                 <div
-                  style="width:52px;height:52px;border-radius:var(--radius-md);background:linear-gradient(135deg,rgba(14,165,233,0.15),rgba(20,184,166,0.1));display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+                  style="width:48px;height:48px;border-radius:var(--radius-md);background:linear-gradient(135deg,rgba(14,165,233,0.15),rgba(20,184,166,0.1));display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
                   <!-- WiFi/Network SVG -->
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2"
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round">
                     <path d="M5 12.55a11 11 0 0 1 14.08 0" />
                     <path d="M1.42 9a16 16 0 0 1 21.16 0" />
@@ -3736,38 +3790,38 @@
                     <line x1="12" y1="20" x2="12.01" y2="20" />
                   </svg>
                 </div>
-                <h3 class="project-title">Network Configuration &amp; Management</h3>
-                <p class="project-desc">Implementation of enterprise network configuration with a focus on WAN network troubleshooting, VLAN management, and network optimization according to BNSP certification.</p>
-                <div class="project-tags" style="margin-top:16px;"><span class="badge-v2">BNSP Certified</span><span
+                <h3 class="project-title" style="font-size:18px;">Network Configuration &amp; Management</h3>
+                <p class="project-desc" style="font-size:13.5px; line-height:1.6;">Implementation of enterprise network configuration focusing on WAN network troubleshooting, VLAN management, and network optimization according to BNSP certification.</p>
+                <div class="project-tags" style="margin-top:14px;"><span class="badge-v2">BNSP Certified</span><span
                     class="badge-v2">Mikrotik</span><span class="badge-v2">WAN Security</span></div>
                 <ul
-                  style="margin-top:16px;color:var(--text-secondary);font-size:13px;line-height:2;list-style:none;padding:0;">
-                  <li>&bull; WAN network troubleshooting and security implementation</li>
-                  <li>&bull; Mikrotik router configuration and management</li>
+                  style="margin-top:14px;color:var(--text-secondary);font-size:12.5px;line-height:1.8;list-style:none;padding:0;">
+                  <li>&bull; WAN network troubleshooting &amp; security</li>
+                  <li>&bull; Mikrotik router configuration &amp; management</li>
                   <li>&bull; Network performance optimization</li>
                 </ul>
               </div>
             </div>
             <div class="project-card glass" data-aos="zoom-in" data-aos-delay="200" style="padding:0;">
-              <div class="project-body" style="padding:32px;">
+              <div class="project-body" style="padding:26px;">
                 <div
-                  style="width:52px;height:52px;border-radius:var(--radius-md);background:linear-gradient(135deg,rgba(236,72,153,0.15),rgba(124,58,237,0.1));display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+                  style="width:48px;height:48px;border-radius:var(--radius-md);background:linear-gradient(135deg,rgba(236,72,153,0.15),rgba(124,58,237,0.1));display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
                   <!-- Terminal SVG -->
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2"
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="4 17 10 11 4 5" />
                     <line x1="12" y1="19" x2="20" y2="19" />
                   </svg>
                 </div>
-                <h3 class="project-title">Linux System Administration</h3>
-                <p class="project-desc">Linux system administration focusing on network services, system security, and server management based on Cisco NDG Linux Essentials certification.</p>
-                <div class="project-tags" style="margin-top:16px;"><span class="badge-v2">Linux</span><span
+                <h3 class="project-title" style="font-size:18px;">Linux System Administration</h3>
+                <p class="project-desc" style="font-size:13.5px; line-height:1.6;">Linux system administration focusing on network services, system security, and server management based on Cisco NDG Linux Essentials certification.</p>
+                <div class="project-tags" style="margin-top:14px;"><span class="badge-v2">Linux</span><span
                     class="badge-v2">Cisco NDG</span><span class="badge-v2">Open Source</span></div>
                 <ul
-                  style="margin-top:16px;color:var(--text-secondary);font-size:13px;line-height:2;list-style:none;padding:0;">
-                  <li>&bull; Linux system installation and configuration</li>
+                  style="margin-top:14px;color:var(--text-secondary);font-size:12.5px;line-height:1.8;list-style:none;padding:0;">
+                  <li>&bull; Linux system installation &amp; configuration</li>
                   <li>&bull; Network services management (DNS, DHCP, Web)</li>
-                  <li>&bull; System security hardening and monitoring</li>
+                  <li>&bull; System security hardening &amp; monitoring</li>
                 </ul>
               </div>
             </div>
@@ -3999,7 +4053,8 @@
       toggleBtns.forEach(btn => { if (btn) btn.innerHTML = isDark ? MOON_SVG : SUN_SVG; });
     }
 
-    applyTheme(localStorage.getItem('theme') === 'dark');
+    const savedTheme = localStorage.getItem('theme');
+    applyTheme(savedTheme ? savedTheme === 'dark' : true);
     toggleBtns.forEach(btn => {
       if (btn) btn.addEventListener('click', (e) => applyTheme(!document.body.classList.contains('dark'), e));
     });
@@ -4689,12 +4744,8 @@
       });
       
       const hackerModeBtn = document.createElement('button');
-      hackerModeBtn.textContent = '[ INITIATE SYSTEM OVERRIDE ]';
-      hackerModeBtn.className = 'btn-outline glitch-text';
-      hackerModeBtn.style.marginTop = '16px';
-      hackerModeBtn.style.fontSize = '12px';
-      hackerModeBtn.style.padding = '8px 16px';
-      hackerModeBtn.style.width = '100%';
+      hackerModeBtn.innerHTML = '<span>⚡ [ INITIATE SYSTEM OVERRIDE ]</span> <span class="badge-press">PRESS HERE</span>';
+      hackerModeBtn.className = 'btn-override-highlight interactive-impact';
       
       const termInputContainer = termInput.parentElement;
       termInputContainer.parentElement.appendChild(hackerModeBtn);
