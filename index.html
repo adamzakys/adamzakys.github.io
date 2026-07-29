@@ -19,7 +19,12 @@
   <link rel="icon" href="other/asset/logo-z.png" />
   <style>
     /* SEO Crawler Fallback: Ensure data-aos elements are fully visible to Googlebot / Crawlers / Print */
-    html.is-crawler [data-aos],
+    html.is-crawler [data-aos] {
+      opacity: 1 !important;
+      transform: none !important;
+      visibility: visible !important;
+    }
+
     @media print, (prefers-reduced-motion: reduce) {
       [data-aos] {
         opacity: 1 !important;
