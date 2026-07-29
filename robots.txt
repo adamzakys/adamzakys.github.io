@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://urzection-dev.online/sitemap.xml
