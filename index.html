@@ -18,6 +18,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
   <link rel="icon" href="other/asset/logo-z.png" />
   <style>
+    /* SEO Crawler Fallback: Ensure data-aos elements are fully visible to Googlebot / Crawlers / Print */
+    html.is-crawler [data-aos],
+    @media print, (prefers-reduced-motion: reduce) {
+      [data-aos] {
+        opacity: 1 !important;
+        transform: none !important;
+        visibility: visible !important;
+      }
+    }
+
     /* ===================== DESIGN TOKENS ===================== */
     :root {
       --bg-gradient: linear-gradient(135deg, #eef2ff 0%, #fdf4ff 40%, #eff6ff 100%);
@@ -4361,6 +4371,17 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script>
     AOS.init({ once: true, duration: 900, easing: 'ease-out-cubic', offset: 60, delay: 80 });
+    window.dispatchEvent(new Event('scroll'));
+
+    // SEO & Googlebot Fallback: Force reveal all AOS elements if rendered by Search Console / Crawlers
+    if (/bot|googlebot|crawler|spider|robot|crawling|lighthouse|headless/i.test(navigator.userAgent)) {
+      document.documentElement.classList.add('is-crawler');
+      document.querySelectorAll('[data-aos]').forEach(el => {
+        el.classList.add('aos-animate');
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      });
+    }
 
     /* ===================== DARK MODE (SVG icons) ===================== */
     const SUN_SVG = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
